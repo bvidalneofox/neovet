@@ -13,7 +13,7 @@ class CreateTableGeneroMascota extends Migration
      */
     public function up()
     {
-        Schema::create('table_genero_mascota', function (Blueprint $table) {
+        Schema::create('genero_mascota', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('descripcion');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateTableGeneroMascota extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_genero_mascota');
+        Schema::dropIfExists('genero_mascota');
     }
 }
