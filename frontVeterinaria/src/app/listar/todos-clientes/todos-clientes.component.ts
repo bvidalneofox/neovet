@@ -61,23 +61,4 @@ export class TodosClientesComponent implements OnInit {
     });
   }
 
-  getMascotaPorId(id){
-    this._mascotasService.getMascotaPorId(id).subscribe(response=>{
-      if(response.estado == 'success'){
-        this.mascotaSeleccionada = response.mascota;
-      }else{
-        this._snotify.error(response.mensaje, {
-          timeout: 5000,
-          showProgressBar: true,
-          closeOnClick: false,
-          pauseOnHover: true,
-          backdrop: 0.5,
-          position: 'centerCenter'
-        });
-      }
-    },error=>{
-      console.log(error);
-    });
-  }
-
 }

@@ -1,0 +1,81 @@
+<!-- MODAL DE DATOS MASCOTA -->
+<div class="modal fade modal-buscar-datos-mascotas" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">
+                    Datos Mascota</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4 my-auto">
+                        <img class="img-mascot"
+                            src="https://i.pinimg.com/736x/d4/c5/f7/d4c5f7f131d36a447c8baec15b083a32.jpg" alt=""
+                            height="200" width="200">
+                    </div>
+                    <div class="col-md-8">
+                        <ul class="list-group">
+                            <li class="list-group-item"><b>Nombre Mascota:</b>
+                                {{datosMascota?.nombre}}</li>
+                            <li class="list-group-item"><b>Fecha Nacimiento:</b>
+                                {{datosMascota?.fecha_nacimiento}}</li>
+                            <li class="list-group-item"><b>Tipo Mascota:</b> {{datosMascota?.tipoMascota}}
+                            </li>
+                            <li class="list-group-item"><b>Sexo:</b> {{datosMascota?.sexo}}</li>
+                            <li class="list-group-item"><b>Raza:</b> {{datosMascota?.raza}}</li>
+                            <li class="list-group-item"><b>Color:</b> {{datosMascota?.color}}</li>
+                            <li class="list-group-item"><b>¿Esterilizado?:</b> {{datosMascota?.estadoEsterilizacion}}
+                            </li>
+                            <li class="list-group-item"><b>¿Tiene Chip?:</b> {{datosMascota?.estadoChip}}</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-6 mt-4 mx-auto" data-toggle="modal"
+                    data-target=".modal-ficha-clinica">
+                        <div class="card but-card bg-success text-white text-center" style="cursor: pointer;">
+                            <div class="card-body">
+                                <img src="assets/medical-history.png" width="70" height="70" alt="">
+                                <h4 class="card-text">Ver Ficha Clinica</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4 mx-auto">
+                        <div class="card but-card bg-info text-white text-center" style="cursor: pointer;">
+                            <div class="card-body">
+                                <img src="assets/vacuna.png" width="70" height="70" alt="">
+                                <h4 class="card-text">Ver Hoja de Vacunas</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4 mx-auto">
+                        <div class="card but-card bg-secondary text-white text-center" style="cursor: pointer;">
+                            <div class="card-body">
+                                <img src="assets/vacuna.png" width="70" height="70" alt="">
+                                <h4 class="card-text">Dar en Adopción</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4 mx-auto">
+                        <div class="card but-card bg-danger text-white text-center" style="cursor: pointer;">
+                            <div class="card-body">
+                                <img src="assets/vacuna.png" width="70" height="70" alt="">
+                                <h4 class="card-text">Editar Datos</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-ficha-clinica></app-ficha-clinica>

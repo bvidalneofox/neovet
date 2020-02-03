@@ -23,6 +23,7 @@ import { VerHistorialConsultasComponent } from './acciones/ver-historial-consult
 import { InformacionComponent } from './perfil/informacion/informacion.component';
 import { ConfiguracionComponent } from './perfil/configuracion/configuracion.component';
 import { NuevaVacunaComponent } from './acciones/nueva-vacuna/nueva-vacuna.component';
+import { FichaMascotaComponent } from './documentos/ficha-mascota/ficha-mascota.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { NuevaVacunaComponent } from './acciones/nueva-vacuna/nueva-vacuna.compo
     VerHistorialConsultasComponent,
     InformacionComponent,
     ConfiguracionComponent,
-    NuevaVacunaComponent
+    NuevaVacunaComponent,
+    FichaMascotaComponent
   ],
   imports: [
     BrowserModule,

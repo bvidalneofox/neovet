@@ -12,8 +12,6 @@ export class TodosMascotasComponent implements OnInit {
   inputBusqueda = '';
   //resultados de la busqueda
   resultadosBusqueda = '';
-  //Datos de la mascota
-  datosMascota = '';
 
   constructor(private _snotify: SnotifyService, private _mascotasService: MascotasService) { }
 
@@ -34,26 +32,6 @@ export class TodosMascotasComponent implements OnInit {
           pauseOnHover: true,
           backdrop: 0.5,
           position: 'rightTop'
-        });
-      }
-    },error=>{
-      console.log(error);
-    });
-  }
-
-  getMascotaPorId(id){
-    this._mascotasService.getMascotaPorId(id).subscribe(response=>{
-      if(response.estado == 'success'){
-        this.datosMascota = response.mascota;
-        console.log(this.datosMascota);
-      }else{
-        this._snotify.error(response.mensaje, {
-          timeout: 5000,
-          showProgressBar: true,
-          closeOnClick: false,
-          pauseOnHover: true,
-          backdrop: 0.5,
-          position: 'centerCenter'
         });
       }
     },error=>{

@@ -14,10 +14,8 @@ export class ListarMascotasComponent implements OnInit {
   formRut = '';
   //Datos de la busqueda
   datosBusqueda = '';
-  //Datos de la mascota
-  datosMascota = '';
 
-  constructor(private _snotify: SnotifyService, private _clientesService: ClientesService, private _mascotasService: MascotasService) { }
+  constructor(private _snotify: SnotifyService, private _clientesService: ClientesService) { }
 
   ngOnInit() {
   }
@@ -38,25 +36,6 @@ export class ListarMascotasComponent implements OnInit {
         });
       }
     }, error=>{
-      console.log(error);
-    });
-  }
-
-  getMascotaPorId(id){
-    this._mascotasService.getMascotaPorId(id).subscribe(response=>{
-      if(response.estado == 'success'){
-        this.datosMascota = response.mascota;
-      }else{
-        this._snotify.error(response.mensaje, {
-          timeout: 5000,
-          showProgressBar: true,
-          closeOnClick: false,
-          pauseOnHover: true,
-          backdrop: 0.5,
-          position: 'centerCenter'
-        });
-      }
-    },error=>{
       console.log(error);
     });
   }
