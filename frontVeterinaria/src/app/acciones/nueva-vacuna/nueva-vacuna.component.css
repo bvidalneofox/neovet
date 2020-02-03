@@ -1,0 +1,37 @@
+.card{
+    background-image: linear-gradient(
+        to bottom,
+        rgba(255,69,0, 0.52),
+        rgba(255,69,0, 0.73)
+      ),
+      url("https://estag.fimagenes.com/img/2/3/b/5/3b5_900.jpg");
+  }
+  .vl {
+    border-left: 1px solid white;
+    height: 9rem;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+  }
+
+  /* // Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    
+}
+
+/* // Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+    
+}
+
+/* // Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+    .vl {
+        display: none;
+      }
+}
+
+/* // Large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
+    
+}

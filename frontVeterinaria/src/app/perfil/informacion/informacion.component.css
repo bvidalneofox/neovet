@@ -1,0 +1,17 @@
+label{
+    font-weight: bold;
+}
+
+.card{
+    background-color: #8ca1da;
+    border-radius: 50px;
+    border: 6px solid #000000;
+}
+
+.img-perfil{
+    background-color: #8ca1da;
+    border-radius: 25px 25px 25px 25px;
+    -moz-border-radius: 25px 25px 25px 25px;
+    -webkit-border-radius: 25px 25px 25px 25px;
+    border: 6px solid #000000;
+  }

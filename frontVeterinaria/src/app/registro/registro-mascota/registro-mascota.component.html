@@ -1,0 +1,107 @@
+<div class="container-fluid">
+
+    <div class="card formularios mt-4 mb-4">
+        <div class="card-body">
+            <div class="mt-4">
+                <h3 class="text-center font-weight-bold">Registro de Mascota</h3>
+            </div>
+
+            <div class="alert alert-danger mt-4" role="alert">
+                Recuerde que antes de registrar a una mascota, debe de registrar al Cliente en el sistema. Si aún no lo
+                registra haga <a routerLink="/registroCliente">click aquí</a>
+            </div>
+
+            <div class="mt-4">
+                <form #getClienteRutFormRm="ngForm" (ngSubmit)="getClientePorRutRm(getClienteRutFormRm)" autocomplete="off">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Ingrese el rut del cliente"
+                                aria-describedby="button-addon2" name="rutRm" [(ngModel)]="formRutRm" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-dark" type="submit" id="button-addon2" [disabled]="getClienteRutFormRm.invalid">Buscar
+                                    Cliente</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <form #mascotaForm="ngForm" (ngSubmit)="setMascota(mascotaForm)" autocomplete="off">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombreCliente">Nombre Cliente *</label>
+                            <input type="text" class="form-control" name="nombreCliente" [(ngModel)]="datosCliente.nombre" required disabled>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="rutCliente">Rut Cliente *</label>
+                            <input type="text" class="form-control" name="rutCliente" [(ngModel)]="datosCliente.rut" required disabled>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombreMascota">Nombre de la Mascota *</label>
+                            <input type="text" class="form-control" name="nombreMascota" placeholder="Nombre Completo" [(ngModel)]="formMascota.nombre_mascota" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="fechaNacimiento">Fecha de Nacimiento *</label>
+                            <input type="date" class="form-control" name="fechaNacimiento" [(ngModel)]="formMascota.fecha_nacimiento" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="esterilizado-select">¿Esterilizado? *</label>
+                            <select class="form-control" name="esterilizado-select" [(ngModel)]="formMascota.esterilizado" required>
+                                <option value="">--Seleccione--</option>
+                                <option value="1">Sí</option>
+                                <option value="2">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="chip-select">¿Tiene Chip? *</label>
+                            <select class="form-control" name="chip-select" [(ngModel)]="formMascota.chip" required>
+                                <option value="">--Seleccione--</option>
+                                <option value="1">Sí</option>
+                                <option value="2">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="sexo">Genero *</label>
+                            <select class="form-control" name="sexo-select" [(ngModel)]="formMascota.genero" required>
+                                <option value="">--Seleccione--</option>
+                                <option value="1">Macho</option>
+                                <option value="2">Hembra</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="tipo-select">Tipo de Mascota</label>
+                            <select class="form-control" name="tipo-select" [(ngModel)]="formMascota.tipo" required>
+                                <option value="">--Seleccione--</option>
+                                <option value="1">Perro</option>
+                                <option value="2">Gato</option>
+                                <option value="2">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="raza">Raza de la Mascota</label>
+                            <input type="text" class="form-control" id="raza" placeholder="Gato Siames, Pastor Aleman, etc..." name="raza" [(ngModel)]="formMascota.raza" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="color">Color de la Mascota</label>
+                            <input type="text" class="form-control" id="color"
+                                placeholder="Gris, Negro con Manchas, etc..." name="color" [(ngModel)]="formMascota.color" required>
+                        </div>
+                    </div>
+
+                    <p>Los campos marcados con * son obligatorios</p>
+
+                    <button type="submit" class="btn btn-block btn-success" [disabled]="mascotaForm.invalid">Ingresar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

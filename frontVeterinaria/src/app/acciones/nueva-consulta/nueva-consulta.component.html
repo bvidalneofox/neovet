@@ -1,0 +1,109 @@
+<div class="card but-card text-center" style="cursor: pointer;" data-toggle="modal"
+    data-target=".bd-example-modal-xl">
+    <div class="card-body">
+        <img src="assets/medical-history.png" width="70" height="70" alt="">
+        <h4 class="card-text font-weight-bold">Nueva Consulta</h4>
+        <p class="font-weight-bold">Atender a una Mascota ya inscrita en el sistema</p>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-xl" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Nueva Consulta</h3>
+                <button id="closeButton" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="controlSteps(0)">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <!-- PASO NUMERO 1 -->
+                    <div *ngIf="step == 0">
+                        <div class="mt-2">
+                            <h4 class="text-center font-weight-bold">Ingrese el nombre de la mascota la cual será atendida</h4>
+                        </div>
+
+                        <div class="mt-4">
+                            <form #getMascotaPorNombreNuevaConsulta="ngForm" (ngSubmit)="getMascotasPorNombre(getMascotaPorNombreNuevaConsulta)">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control"
+                                        placeholder="Ingrese el nombre de la Mascota" aria-describedby="button-addon2" name="inputBusqueda" [(ngModel)]="inputBusqueda" autocomplete="off">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-dark" type="submit"
+                                            id="button-addon2">Buscar
+                                            Mascota</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+
+                        <div class="mt-4">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover">
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th scope="col">Nombre Mascota</th>
+                                            <th scope="col">Nombre Dueño</th>
+                                            <th scope="col">Fecha Nacimiento</th>
+                                            <th scope="col">Tipo Mascota</th>
+                                            <th scope="col">Raza de la Mascota</th>
+                                            <th scope="col">Color</th>                                            
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="font-weight-bold text-center">
+                                        <tr *ngFor="let itemResultados of resultadosBusqueda">
+                                            <td>{{itemResultados?.nombre}}</td>
+                                            <td>{{itemResultados?.nombreDuenio}}</td>
+                                            <td>{{itemResultados?.fecha_nacimiento}}</td>
+                                            <td>{{itemResultados?.tipoMascota}}</td>
+                                            <td>{{itemResultados?.raza}}</td>
+                                            <td>{{itemResultados?.color}}</td>
+                                            <td><button class="btn btn-sm btn-secondary" data-dismiss="modal"
+                                                (click)="cargarMascotaSeleccionada(itemResultados); controlSteps(1)">Seleccionar</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- PASO NUMERO 2 -->
+                    <div *ngIf="step == 1">
+                        <div class="row my-4 text-center">
+                            <div class="h5 col-xl-4 form-group">
+                                <label for="nombreMascota">Nombre Mascota</label>
+                                <input type="text" name="nombreMascota" class="form-control" [(ngModel)]="datosMascota.nombre" disabled>
+                            </div>
+                            <div class="h5 col-xl-4 form-group">
+                                <label for="nombreDuenio">Dueño</label>
+                                <input type="text" name="nombreDuenio" class="form-control" [(ngModel)]="datosMascota.nombreDuenio" disabled>
+                            </div>
+                            <div class="h5 col-xl-4 form-group">
+                                <label for="fechaConsulta">Fecha Consulta (Seleccione)</label>
+                                <input type="date" name="fechaConsulta" class="form-control" [(ngModel)]="datosConsulta.fechaConsulta">
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="text-area">Indique el motivo de la consulta</label>
+                                        <textarea name="text-area" class="form-control" cols="30" rows="10" [(ngModel)]="datosConsulta.motivoTextarea"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" *ngIf="step > 0">
+                <button type="button" class="btn btn-secondary" (click)="controlSteps(2)"><i><img src="assets/arrow-back.png" width="20" height="20" alt=""></i> Regresar</button>
+                <button type="button" class="btn btn-primary" (click)="controlSteps(1)"><span *ngIf="step!=1">Continuar </span><span *ngIf="step==1">Generar </span><i><img src="assets/arrow-next.png" width="20" height="20" alt=""></i></button>
+              </div>
+        </div>
+    </div>
+</div>

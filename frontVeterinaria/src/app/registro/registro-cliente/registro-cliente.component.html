@@ -1,0 +1,43 @@
+<div class="container-fluid">
+
+    <div class="card formularios mt-4 mb-4">
+        <div class="card-body">
+            <div class="mt-4">
+                <h3 class="text-center font-weight-bold">Registro de Cliente</h3>
+            </div>
+
+            <div class="mt-4">
+                <form #registroClienteForm="ngForm" (ngSubmit)="setClienteForm(registroClienteForm)">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputNombre">Nombre de Cliente *</label>
+                            <input type="text" class="form-control" id="inputNombre" placeholder="Nombre Completo" name="nombre" autocomplete="off" [(ngModel)]="formClientes.nombre" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputRut">Rut del Cliente *</label>
+                            <input type="text" class="form-control" id="inputRut" placeholder="Rut" name="rut" autocomplete="off" [(ngModel)]="formClientes.rut" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCorreo">Correo *</label>
+                        <input type="email" class="form-control" id="inputCorreo" placeholder="Correo Electronico del cliente" name="correo" autocomplete="off" [(ngModel)]="formClientes.correo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDireccion">Dirección *</label>
+                        <input type="text" class="form-control" id="inputDireccion" placeholder="Residencia del Cliente" name="direccion" autocomplete="off" [(ngModel)]="formClientes.direccion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputNumero">Numero de Telefono/Celular *</label>
+                        <input type="text" class="form-control" id="inputNumero"
+                            placeholder="Puede ingresar uno o muchos celulares" name="numero" autocomplete="off" [(ngModel)]="formClientes.numero" required>
+                    </div>
+
+                    <p>Los campos marcados con * son obligatorios</p>
+
+                    <button type="submit" [disabled]="registroClienteForm.invalid" class="btn btn-block btn-success">Ingresar</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="container-fluid">
+
+    <div class="card formularios mt-4 mb-4">
+        <div class="card-body">
+            <div class="mt-4">
+                <h3 class="text-center font-weight-bold">Buscar Cliente Por Rut</h3>
+            </div>
+
+            <div class="mt-4">
+                <form #getClienteRutForm="ngForm" (ngSubmit)="getClientePorRut(getClienteRutForm)">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Ingrese el rut del cliente"
+                                aria-describedby="button-addon2" name="rut" [(ngModel)]="formRut" autocomplete="off">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-dark" type="submit" id="button-addon2">Buscar
+                                    Cliente</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+
+                <ul class="list-group">
+                    <li class="list-group-item"><b>Nombre Cliente:</b> {{datosCliente.nombre}}</li>
+                    <li class="list-group-item"><b>rut:</b> {{datosCliente.rut}}</li>
+                    <li class="list-group-item"><b>correo:</b> {{datosCliente.correo}}</li>
+                    <li class="list-group-item"><b>dirección:</b> {{datosCliente.direccion}}</li>
+                    <li class="list-group-item"><b>número de contacto:</b> {{datosCliente.numero}}</li>
+                    <li class="list-group-item"><b>Registrado el:</b> {{datosCliente.fecha_ingreso}}</li>
+                </ul>
+
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6 mt-4 mx-auto">
+                    <div class="card bg-success text-white text-center" style="cursor: pointer;">
+                        <div class="card-body">
+                            <img src="assets/dogget.png" width="70" height="70" alt="">
+                            <h4 class="card-text">Mascotas Registradas</h4>
+                            <h4>3</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4 mx-auto">
+                    <div class="card bg-info text-white text-center" style="cursor: pointer;">
+                        <div class="card-body">
+                            <img src="assets/calendar.png" width="70" height="70" alt="">
+                            <h4 class="card-text">Fecha Incorporación</h4>
+                            <h4>14/14/20</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
