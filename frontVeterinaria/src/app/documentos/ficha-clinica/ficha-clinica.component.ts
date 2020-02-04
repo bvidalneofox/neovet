@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as jsPDF from 'jspdf';
-import * as html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-ficha-clinica',
