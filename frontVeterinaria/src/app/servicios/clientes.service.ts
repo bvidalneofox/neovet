@@ -17,22 +17,22 @@ export class ClientesService {
     form.append("direccion", formCliente.direccion);
     form.append("numero", formCliente.numero);
     form.append("fecha_ingreso", formCliente.fecha_ingreso);
-    return this._http.post("http://127.0.0.1:8000/api/setCliente", form);
+    return this._http.post("https://neovet.neofox.cl/api/setCliente", form);
   }
 
   getMascotasPorRut(rut): Observable<any>{
-    return this._http.get("http://127.0.0.1:8000/api/getMascotasClientePorRut/" + rut);
+    return this._http.get("https://neovet.neofox.cl/api/getMascotasClientePorRut/" + rut);
   }
 
   getClientePorRut(rut): Observable<any> {
-    return this._http.get("http://127.0.0.1:8000/api/getClientePorRut/" + rut);
+    return this._http.get("https://neovet.neofox.cl/api/getClientePorRut/" + rut);
   }
 
   getClientesPorNombre(nombre): Observable<any>{
-    return this._http.get("http://127.0.0.1:8000/api/getClientesPorNombre/" + nombre);
+    return this._http.get("https://neovet.neofox.cl/api/getClientesPorNombre/" + nombre);
   }
 
   getMascotasPorIdCliente(id): Observable<any>{
-    return this._http.get("http://127.0.0.1:8000/api/getMascotasPorIdCliente/" + id);
+    return this._http.get("https://neovet.neofox.cl/api/getMascotasPorIdCliente/" + id);
   }
 }
