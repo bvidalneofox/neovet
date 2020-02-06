@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MascotasService } from 'src/app/servicios/mascotas.service';
 import { ConsultasServiceService } from 'src/app/servicios/consultas-service.service';
 import { SnotifyService } from 'ng-snotify';
+import { LocationStrategy } from "@angular/common";
 
 @Component({
   selector: 'app-nueva-consulta',
@@ -23,7 +24,13 @@ export class NuevaConsultaComponent implements OnInit {
   //Variable para los steps del Modal
   step = 0;
 
-  constructor(private _snotify: SnotifyService, private _mascotasService: MascotasService, private _consultasService: ConsultasServiceService) { }
+  constructor(private _snotify: SnotifyService, private _mascotasService: MascotasService, private _consultasService: ConsultasServiceService, location: LocationStrategy) {
+    location.onPopState(() => {
+      if (document.getElementById('closeButton') != null) {
+        document.getElementById("closeButton").click();
+      }
+    });
+  }
 
   ngOnInit() {
   }

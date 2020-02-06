@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MascotasService } from 'src/app/servicios/mascotas.service';
 import { SnotifyService } from 'ng-snotify';
+import { LocationStrategy } from "@angular/common";
 
 @Component({
   selector: 'app-ficha-mascota',
@@ -8,19 +9,24 @@ import { SnotifyService } from 'ng-snotify';
   styleUrls: ['./ficha-mascota.component.css']
 })
 export class FichaMascotaComponent implements OnInit {
-
   datosMascota = '';
 
-  constructor(private _mascotasService: MascotasService, private _snotify: SnotifyService) { }
+  constructor(private _mascotasService: MascotasService, private _snotify: SnotifyService, location: LocationStrategy) {
+    location.onPopState(() => {
+      if (document.getElementById('close') != null) {
+        document.getElementById('close').click();
+      }
+    });
+  }
 
   ngOnInit() {
   }
 
-  getMascotaPorId(id){
-    this._mascotasService.getMascotaPorId(id).subscribe(response=>{
-      if(response.estado == 'success'){
+  getMascotaPorId(id) {
+    this._mascotasService.getMascotaPorId(id).subscribe(response => {
+      if (response.estado == 'success') {
         this.datosMascota = response.mascota;
-      }else{
+      } else {
         this._snotify.error(response.mensaje, {
           timeout: 5000,
           showProgressBar: true,
@@ -30,7 +36,7 @@ export class FichaMascotaComponent implements OnInit {
           position: 'centerCenter'
         });
       }
-    },error=>{
+    }, error => {
       console.log(error);
     });
   }

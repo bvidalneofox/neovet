@@ -6,7 +6,7 @@
             <div class="modal-header">
                 <h5 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">
                     Ficha Clinica Mascota</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" id="close2" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -16,9 +16,9 @@
                         <img src="assets/neofox-nav.png" style="width: 10rem;">
                     </div>
                     <div class="col-11">
-                        <p>Clinica Veterinaria NeoVet</p>
-                        <p>Calle Rio Yaqui #1094, Los Ángeles</p>
-                        <p>+569 7850 4418</p>
+                        <p class="h4 font-weight-bold mr-5">Clinica Veterinaria NeoVet</p>
+                        <p class="h5 font-weight-bold mr-5">Calle Rio Yaqui #1094, Los Ángeles</p>
+                        <p class="font-weight-bold mr-5">+569 7850 4418</p>
                     </div>
                 </div>
                 <!-- DATOS CLIENTE -->
@@ -28,16 +28,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-2"></div>
-                    <div class="col-5">
-                        <p><b>Nombre:</b> Bryan Vidal Díaz</p>
-                        <p><b>Dirección:</b> Villa Todos Los Santos, Calle Sta Ana #336, Los Ángeles</p>
-                        <p><b>Telefonos:</b> +569 7850 4418</p>
-                        <p><b>Correo:</b> bvidalneofox@gmail.com</p>
+                    <div class="col-6">
+                        <div class="ml-5"><p><b>Nombre:</b> {{datosBasicos?.nombreDuenio}}</p>
+                        <p><b>Dirección:</b> {{datosBasicos?.direccion}}</p>
+                        <p><b>Telefonos:</b> {{datosBasicos?.numero}}</p></div>
                     </div>
-                    <div class="col-5">
-                        <p><b>Rut:</b> 18.522.783-9</p>
-                        <p><b>Fecha ingreso:</b> 20-20-20</p>
+                    <div class="col-6">
+                        <div class="test"><p><b>Correo:</b> {{datosBasicos?.correo}}</p>
+                        <p><b>Rut:</b> {{datosBasicos?.rut}}</p>
+                        <p><b>Fecha ingreso:</b> {{datosBasicos?.fechaIngresoDuenio}}</p></div>
                     </div>
                 </div>
                 <!-- DATOS MASCOTA -->
@@ -52,16 +51,16 @@
                         <img src="assets/cat-profile-pic.jpeg" style="width: 5rem;">
                     </div>
                     <div class="col-md-4">
-                        <p><b>Nombre:</b> Yokosita</p>
-                        <p><b>Especie:</b> Felino</p>
-                        <p><b>Fecha Nacimiento:</b> 20-20-20</p>
-                        <p><b>Edad:</b> 2 Años</p>
+                        <p><b>Nombre:</b> {{datosBasicos?.nombreMascota}}</p>
+                        <p><b>Especie:</b> {{datosBasicos?.tipoMascota}}</p>
+                        <p><b>Fecha Nacimiento:</b> {{datosBasicos?.fechaNacimientoMascota}}</p>
+                        <p><b>Edad:</b> {{edadMascota}}</p>
                     </div>
                     <div class="col-md-4">
-                        <p><b>Raza:</b> Mestiza</p>
-                        <p><b>Sexo:</b> Felino</p>
-                        <p><b>Color:</b> Cafe con Blanco</p>
-                        <p><b>Fecha Ingreso:</b> 20-20-20</p>
+                        <p><b>Raza:</b> {{datosBasicos?.raza}}</p>
+                        <p><b>Sexo:</b> {{datosBasicos?.generoMascota}}</p>
+                        <p><b>Color:</b> {{datosBasicos?.color}}o</p>
+                        <p><b>Fecha Ingreso:</b> {{datosBasicos?.fechaIngresoMascota}}</p>
                     </div>
                 </div>
                 <!-- HISTORIAL CLINICO -->
@@ -70,64 +69,16 @@
                         <p class="font-weight-bold">Historial Clinico</p>
                     </div>
                 </div>
-                <div class="row consulta">
+                <div class="row consulta" *ngFor="let itemConsultas of consultasMascota">
                     <div class="col-2">
-                        <p class="font-weight-bold">20 de Enero 2020</p>
+                        <p class="font-weight-bold">{{itemConsultas?.created_at}}</p>
                     </div>
                     <div class="col-3">
-                        <p><b>Atendido Por:</b> Emiliana Hernandez Rebolledo</p>
+                        <p><b>Atendido Por:</b> {{itemConsultas?.id_usuario}}</p>
                     </div>
                     <div class="col-7">
-                        <p> <b>Motivo:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>
-                        <p> <b>Procedimiento:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>
-                    </div>
-                </div>
-                <div class="row consulta">
-                    <div class="col-2">
-                        <p class="font-weight-bold">20 de Enero 2020</p>
-                    </div>
-                    <div class="col-3">
-                        <p><b>Atendido Por:</b> Emiliana Hernandez Rebolledo</p>
-                    </div>
-                    <div class="col-7">
-                        <p> <b>Motivo:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>
-                        <p> <b>Procedimiento:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>
-                    </div>
-                </div>
-                <div class="row consulta">
-                    <div class="col-2">
-                        <p class="font-weight-bold">20 de Enero 2020</p>
-                    </div>
-                    <div class="col-3">
-                        <p><b>Atendido Por:</b> Emiliana Hernandez Rebolledo</p>
-                    </div>
-                    <div class="col-7">
-                        <p> <b>Motivo:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>
-                        <p> <b>Procedimiento:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>
-                    </div>
-                </div>
-                <div class="row consulta">
-                    <div class="col-2">
-                        <p class="font-weight-bold">20 de Enero 2020</p>
-                    </div>
-                    <div class="col-3">
-                        <p><b>Atendido Por:</b> Emiliana Hernandez Rebolledo</p>
-                    </div>
-                    <div class="col-7">
-                        <p> <b>Motivo:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>
-                        <p> <b>Procedimiento:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>
-                    </div>
-                </div>
-                <div class="row consulta">
-                    <div class="col-2">
-                        <p class="font-weight-bold">20 de Enero 2020</p>
-                    </div>
-                    <div class="col-3">
-                        <p><b>Atendido Por:</b> Emiliana Hernandez Rebolledo</p>
-                    </div>
-                    <div class="col-7">
-                        <p> <b>Motivo:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>
-                        <p> <b>Procedimiento:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>
+                        <p> <b>Motivo:</b> {{itemConsultas?.motivo}}</p>
+                        <p> <b>Procedimiento:</b> {{itemConsultas?.procedimiento}}</p>
                     </div>
                 </div>
             </div>

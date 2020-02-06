@@ -37,6 +37,7 @@ Route::get('getConsultasInactivas', 'ConsultaController@getConsultasInactivas');
 Route::post('setProcedimientoConsulta', 'ConsultaController@setProcedimientoConsulta');
 Route::get('getProcedimientoConsulta/{id}', 'ConsultaController@getProcedimientoConsulta');
 Route::post('setConsultaFinalizada', 'ConsultaController@setConsultaFinalizada');
+Route::get('getConsultasInactivaPorIdMascota/{id}', 'ConsultaController@getConsultasInactivaPorIdMascota');
 
 //Ruta para las vacunas
 Route::post('setVacuna', 'HistorialVacunaController@setVacuna');

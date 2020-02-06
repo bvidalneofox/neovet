@@ -13,3 +13,11 @@ p {
 .consulta{
   border-bottom: 1px solid rgba(66, 135, 245, 0.52);
 }
+
+.test{
+  margin-left: 10rem;
+}
+
+/* div{
+  border: 1px solid black;
+} */

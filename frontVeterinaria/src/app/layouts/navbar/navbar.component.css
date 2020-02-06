@@ -20,12 +20,6 @@
   transition: 0.5s;
 }
 
-.dot:hover {
-  transform: scale(1.1);
-  transform: rotateZ(30deg);
-  transition: 0.5s;
-}
-
 .dot-sidebar {
     height: 38px;
     width: 38px;
@@ -40,9 +34,18 @@
     transform: rotateZ(90deg);
     transition: 0.5s;
   }
-  
+
+/* // Large devices (desktops, less than 1200px) */
+@media (min-width: 1199.98px) {
+  .dot:hover {
+    transform: scale(1.1);
+    transform: rotateZ(30deg);
+    transition: 0.5s;
+  }
+
   .dot-sidebar:hover {
     transform: scale(1.1);
     transform: rotateZ(60deg);
     transition: 0.5s;
   }
+}

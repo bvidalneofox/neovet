@@ -21,14 +21,14 @@ export class MascotasService {
     form.append("color", formMascota.color);
     form.append("fecha_ingreso", formCliente.fecha_ingreso);
     form.append("id_cliente", formCliente.id);
-    return this._http.post("https://neovet.neofox.cl/api/setMascota", form);
+    return this._http.post("http://127.0.0.1:8000/api/setMascota", form);
   }
 
   getMascotaPorId(id): Observable<any>{
-    return this._http.get("https://neovet.neofox.cl/api/getMascotaPorId/" + id);
+    return this._http.get("http://127.0.0.1:8000/api/getMascotaPorId/" + id);
   }
 
   getMascotaPorNombre(nombre): Observable<any>{
-    return this._http.get("https://neovet.neofox.cl/api/getMascotasPorNombre/" + nombre);
+    return this._http.get("http://127.0.0.1:8000/api/getMascotasPorNombre/" + nombre);
   }
 }

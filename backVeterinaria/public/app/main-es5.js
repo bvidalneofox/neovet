@@ -2122,19 +2122,19 @@ var ClientesService = /** @class */ (function () {
         form.append("direccion", formCliente.direccion);
         form.append("numero", formCliente.numero);
         form.append("fecha_ingreso", formCliente.fecha_ingreso);
-        return this._http.post("https://neovet.neofox.cl/api/setCliente", form);
+        return this._http.post("http://127.0.0.1:8000/api/setCliente", form);
     };
     ClientesService.prototype.getMascotasPorRut = function (rut) {
-        return this._http.get("https://neovet.neofox.cl/api/getMascotasClientePorRut/" + rut);
+        return this._http.get("http://127.0.0.1:8000/api/getMascotasClientePorRut/" + rut);
     };
     ClientesService.prototype.getClientePorRut = function (rut) {
-        return this._http.get("https://neovet.neofox.cl/api/getClientePorRut/" + rut);
+        return this._http.get("http://127.0.0.1:8000/api/getClientePorRut/" + rut);
     };
     ClientesService.prototype.getClientesPorNombre = function (nombre) {
-        return this._http.get("https://neovet.neofox.cl/api/getClientesPorNombre/" + nombre);
+        return this._http.get("http://127.0.0.1:8000/api/getClientesPorNombre/" + nombre);
     };
     ClientesService.prototype.getMascotasPorIdCliente = function (id) {
-        return this._http.get("https://neovet.neofox.cl/api/getMascotasPorIdCliente/" + id);
+        return this._http.get("http://127.0.0.1:8000/api/getMascotasPorIdCliente/" + id);
     };
     ClientesService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -2177,24 +2177,24 @@ var ConsultasServiceService = /** @class */ (function () {
         form.append("motivo", datosConsulta.motivoTextarea);
         form.append("fecha_consulta", datosConsulta.fechaConsulta);
         form.append("id_mascota", datosMascota.id);
-        return this._http.post("https://neovet.neofox.cl/api/setConsulta", form);
+        return this._http.post("http://127.0.0.1:8000/api/setConsulta", form);
     };
     ConsultasServiceService.prototype.getConsultasActivas = function () {
-        return this._http.get("https://neovet.neofox.cl/api/getConsultasActivas/");
+        return this._http.get("http://127.0.0.1:8000/api/getConsultasActivas/");
     };
     ConsultasServiceService.prototype.getConsultasInactivas = function () {
-        return this._http.get("https://neovet.neofox.cl/api/getConsultasInactivas/");
+        return this._http.get("http://127.0.0.1:8000/api/getConsultasInactivas/");
     };
     ConsultasServiceService.prototype.setProcedimientoConsulta = function (idConsulta, procedimientoConsulta) {
         var form = new FormData();
         form.append("id", idConsulta);
         form.append("procedimiento", procedimientoConsulta);
-        return this._http.post("https://neovet.neofox.cl/api/setProcedimientoConsulta", form);
+        return this._http.post("http://127.0.0.1:8000/api/setProcedimientoConsulta", form);
     };
     ConsultasServiceService.prototype.setConsultaFinalizada = function (idConsulta) {
         var form = new FormData();
         form.append("id", idConsulta);
-        return this._http.post("https://neovet.neofox.cl/api/setConsultaFinalizada", form);
+        return this._http.post("http://127.0.0.1:8000/api/setConsultaFinalizada", form);
     };
     ConsultasServiceService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -2244,13 +2244,13 @@ var MascotasService = /** @class */ (function () {
         form.append("color", formMascota.color);
         form.append("fecha_ingreso", formCliente.fecha_ingreso);
         form.append("id_cliente", formCliente.id);
-        return this._http.post("https://neovet.neofox.cl/api/setMascota", form);
+        return this._http.post("http://127.0.0.1:8000/api/setMascota", form);
     };
     MascotasService.prototype.getMascotaPorId = function (id) {
-        return this._http.get("https://neovet.neofox.cl/api/getMascotaPorId/" + id);
+        return this._http.get("http://127.0.0.1:8000/api/getMascotaPorId/" + id);
     };
     MascotasService.prototype.getMascotaPorNombre = function (nombre) {
-        return this._http.get("https://neovet.neofox.cl/api/getMascotasPorNombre/" + nombre);
+        return this._http.get("http://127.0.0.1:8000/api/getMascotasPorNombre/" + nombre);
     };
     MascotasService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -2293,10 +2293,10 @@ var VacunasService = /** @class */ (function () {
         form.append("id_mascota", datosMascota.id);
         form.append("id_vacuna", formVacuna.tipoVacuna);
         form.append("fecha", formVacuna.fechaVacuna);
-        return this._http.post("https://neovet.neofox.cl/api/setVacuna", form);
+        return this._http.post("http://127.0.0.1:8000/api/setVacuna", form);
     };
     VacunasService.prototype.getVacunasPorIdMascota = function (id) {
-        return this._http.get("https://neovet.neofox.cl/api/getVacunasPorIdMascota/" + id);
+        return this._http.get("http://127.0.0.1:8000/api/getVacunasPorIdMascota/" + id);
     };
     VacunasService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }

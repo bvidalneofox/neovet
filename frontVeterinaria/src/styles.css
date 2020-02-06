@@ -87,3 +87,8 @@ label {
 .table > thead > tr > th {
   vertical-align: middle;
 }
+
+/* FIX MODAL ERROR DENTRO DE OTRO MODAL */
+.modal {
+  overflow-y:auto !important;
+}

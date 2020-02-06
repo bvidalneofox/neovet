@@ -14,11 +14,11 @@ export class VacunasService {
     form.append("id_mascota", datosMascota.id);
     form.append("id_vacuna", formVacuna.tipoVacuna);
     form.append("fecha", formVacuna.fechaVacuna);
-    return this._http.post("https://neovet.neofox.cl/api/setVacuna", form);
+    return this._http.post("http://127.0.0.1:8000/api/setVacuna", form);
   }
 
   getVacunasPorIdMascota(id): Observable<any>{
-    return this._http.get("https://neovet.neofox.cl/api/getVacunasPorIdMascota/" + id);
+    return this._http.get("http://127.0.0.1:8000/api/getVacunasPorIdMascota/" + id);
   }
 
 }
