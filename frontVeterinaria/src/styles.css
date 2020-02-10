@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~ng-snotify/styles/material.css";
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '~@fullcalendar/list/main.css';
+@import '~@fullcalendar/timegrid/main.css';
 
 html, body {
   overflow-x: hidden;

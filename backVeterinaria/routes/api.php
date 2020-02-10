@@ -42,3 +42,8 @@ Route::get('getConsultasInactivaPorIdMascota/{id}', 'ConsultaController@getConsu
 //Ruta para las vacunas
 Route::post('setVacuna', 'HistorialVacunaController@setVacuna');
 Route::get('getVacunasPorIdMascota/{id}', 'HistorialVacunaController@getVacunasPorIdMascota');
+
+//Ruta para los eventos
+Route::post('setEvento', 'EventoController@setEvento');
+Route::get('getEventos', 'EventoController@getEventos');
+Route::post('updateEvento', 'EventoController@updateEvento');

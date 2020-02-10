@@ -24,6 +24,7 @@ class CreateTableUsuarios extends Migration
             $table->string('cargo');
             $table->string('password');
             $table->integer('tipo_usuario');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -16,6 +16,7 @@ class CreateTableEstadoEsterilizacion extends Migration
         Schema::create('estado_esterilizacion', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('descripcion');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

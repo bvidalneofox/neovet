@@ -16,6 +16,7 @@ class CreateTableTipoVacunas extends Migration
         Schema::create('tipo_vacunas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('descripcion');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -25,6 +25,7 @@ class CreateTableMascotas extends Migration
             $table->string('estado_esterilizado');
             $table->integer('id_tipo_mascota');
             $table->integer('id_cliente');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

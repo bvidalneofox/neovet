@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -52,7 +53,8 @@ import { FichaMascotaComponent } from './documentos/ficha-mascota/ficha-mascota.
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    SnotifyModule
+    SnotifyModule,
+    FullCalendarModule
   ],
   providers: [
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},

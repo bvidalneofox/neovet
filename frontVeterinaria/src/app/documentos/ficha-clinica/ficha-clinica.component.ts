@@ -56,7 +56,7 @@ export class FichaClinicaComponent implements OnInit {
       allowTaint: true,
       useCORS: false,
       // Calidad del PDF
-      scale: 2
+      scale: 1
     }).then(function (canvas) {
       var imgData = canvas.toDataURL('image/png');
       var imgWidth = 200;

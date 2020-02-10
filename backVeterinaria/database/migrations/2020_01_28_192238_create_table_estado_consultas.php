@@ -16,6 +16,7 @@ class CreateTableEstadoConsultas extends Migration
         Schema::create('estado_consulta', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('descripcion');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

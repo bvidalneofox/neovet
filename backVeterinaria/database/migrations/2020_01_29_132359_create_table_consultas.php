@@ -15,12 +15,14 @@ class CreateTableConsultas extends Migration
     {
         Schema::create('consultas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('peso');
             $table->string('motivo');
             $table->string('procedimiento');
             $table->date('fecha_consulta');
             $table->integer('id_estado');
             $table->integer('id_mascota');
             $table->integer('id_usuario');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

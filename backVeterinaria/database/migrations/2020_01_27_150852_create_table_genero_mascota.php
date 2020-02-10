@@ -16,6 +16,7 @@ class CreateTableGeneroMascota extends Migration
         Schema::create('genero_mascota', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('descripcion');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

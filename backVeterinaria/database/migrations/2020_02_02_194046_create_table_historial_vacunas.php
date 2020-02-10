@@ -18,6 +18,7 @@ class CreateTableHistorialVacunas extends Migration
             $table->date('fecha');
             $table->integer('id_mascota');
             $table->integer('id_vacuna');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

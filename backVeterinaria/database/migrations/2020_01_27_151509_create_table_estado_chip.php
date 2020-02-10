@@ -16,6 +16,7 @@ class CreateTableEstadoChip extends Migration
         Schema::create('estado_chip', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('descripcion');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

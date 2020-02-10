@@ -1,128 +1,163 @@
-<div class="container py-5">
-    <!-- Calendar -->
-    <div class="calendar bg-white p-5">
-      <div class="d-flex align-items-center"><i class="fa fa-calendar fa-3x mr-3"></i>
-        <h2 class="month font-weight-bold mb-0 text-uppercase">Enero 2020</h2>
-      </div>
-      <p class="font-italic text-muted mb-5">No hay eventos para hoy.</p>
-      <ol class="day-names list-unstyled">
-        <li class="font-weight-bold text-uppercase">Lun</li>
-        <li class="font-weight-bold text-uppercase">Ma</li>
-        <li class="font-weight-bold text-uppercase">Mx</li>
-        <li class="font-weight-bold text-uppercase">Jue</li>
-        <li class="font-weight-bold text-uppercase">Vie</li>
-        <li class="font-weight-bold text-uppercase">Sab</li>
-        <li class="font-weight-bold text-uppercase">Dom</li>
-      </ol>
-  
-      <ol class="days list-unstyled">
-        <li class="background-day">
-          <div class="date">1</div>
-          <div class="event bg-success">Horas Disponibles</div>
-        </li>
-        <li class="background-day">
-          <div class="date">2</div>
-          <div class="event bg-danger">Agenga Ocupada</div>
-        </li>
-        <li class="background-day">
-          <div class="date">3</div>
-        </li>
-        <li class="background-day">
-          <div class="date">4</div>
-        </li>
-        <li class="background-day">
-          <div class="date">5</div>
-        </li>
-        <li class="background-day">
-          <div class="date">6</div>
-        </li>
-        <li class="background-day">
-          <div class="date">7</div>
-        </li>
-        <li class="background-day">
-          <div class="date">8</div>
-        </li>
-        <li class="background-day">
-          <div class="date">9</div>
-        </li>
-        <li class="background-day">
-          <div class="date">10</div>
-        </li>
-        <li class="background-day">
-          <div class="date">11</div>
-        </li>
-        <li class="background-day">
-          <div class="date">12</div>
-        </li>
-        <li class="background-day">
-          <div class="date">13</div>
-        </li>
-        <li class="background-day">
-          <div class="date">14</div>
-        </li>
-        <li class="background-day">
-          <div class="date">15</div>
-        </li>
-        <li class="background-day">
-          <div class="date">16</div>
-        </li>
-        <li class="background-day">
-          <div class="date">17</div>
-        </li>
-        <li class="background-day">
-          <div class="date">18</div>
-        </li>
-        <li class="background-day">
-          <div class="date">19</div>
-        </li>
-        <li class="background-day">
-          <div class="date">20</div>
-        </li>
-        <li class="background-day">
-          <div class="date">21</div>
-        </li>
-        <li class="background-day">
-          <div class="date">22</div>
-        </li>
-        <li class="background-day">
-          <div class="date">23</div>
-        </li>
-        <li class="background-day">
-          <div class="date">24</div>
-        </li>
-        <li class="background-day">
-          <div class="date">25</div>
-        </li>
-        <li class="background-day">
-          <div class="date">26</div>
-        </li>
-        <li class="background-day">
-          <div class="date">27</div>
-        </li>
-        <li class="background-day">
-          <div class="date">28</div>
-        </li>
-        <li class="background-day">
-          <div class="date">29</div>
-        </li>
-        <li class="background-day">
-          <div class="date">30</div>
-        </li>
-        <li class="background-day">
-          <div class="date">31</div>
-        </li>
-        <li class="outside">
-          <div class="date">1</div>
-        </li>
-        <li class="outside">
-          <div class="date">2</div>
-        </li>
-        <li class="outside">
-          <div class="date">3</div>
-        </li>
-        <li class="outside">
-          <div class="date">4</div>
-        </li>
-      </ol>
+<div class="container" style="margin-top: 1rem; margin-bottom: 1rem;">
+    <full-calendar defaultView="dayGridMonth" 
+    [locales]="locales" 
+    [plugins]="calendarPlugins" 
+    [header]="header"
+    [events]="data" 
+    [eventLimit]="3"
+    (eventClick)="eventoClick($event)" 
+    (dateClick)="diaClick($event)"
+    (eventRender)="eventRender($event)">
+    </full-calendar>
+</div>
+
+<button hidden id="open-modal-nueva-cita" data-toggle="modal" data-target=".modal-nueva-cita"></button>
+
+<div class="modal fade modal-nueva-cita" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true" id="modal-nueva-cita">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Programar Nueva Cita
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #formNuevoEvento="ngForm" (ngSubmit)="setNuevoEvento(formNuevoEvento)">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Titulo</label>
+                                <input type="text" class="form-control" placeholder="Ingrese Titulo" name="titulo"
+                                    [(ngModel)]="nuevoEventoForm.titulo">
+                            </div>
+                            <div class="form-group">
+                                <label>Descripcion</label>
+                                <textarea name="textAreaNuevaConsulta" cols="30" rows="10" class="form-control"
+                                    name="descripcion" [(ngModel)]="nuevoEventoForm.descripcion"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Hora Inicio</label>
+                                <input type="datetime-local" class="form-control" name="horaInicio"
+                                    [(ngModel)]="nuevoEventoForm.horaInicio">
+                            </div>
+                            <div class="form-group">
+                                <label>Hora Termino</label>
+                                <input type="datetime-local" class="form-control" name="horaTermino"
+                                    [(ngModel)]="nuevoEventoForm.horaTermino">
+                            </div>
+                            <div class="form-group">
+                                <label>Color Etiqueta</label>
+                                <input type="color" class="form-control" name="colorFondo"
+                                    [(ngModel)]="nuevoEventoForm.colorFondo">
+                            </div>
+                            <div class="form-group">
+                                <label>Color Texto</label>
+                                <input type="color" class="form-control" name="colorTexto"
+                                    [(ngModel)]="nuevoEventoForm.colorTexto">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block">Ingresar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
+
+<button hidden id="open-modal-ver-cita" data-toggle="modal" data-target=".modal-ver-cita"></button>
+
+<div class="modal fade modal-ver-cita" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true" id="modal-nueva-cita">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">{{nuevoEventoForm.titulo}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="step == 0">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <h5 class="font-weight-bold">Descripcion</h5>
+                            <p>{{nuevoEventoForm.descripcion}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <h5 class="font-weight-bold">Hora Inicio</h5>
+                            <p>{{labelHoraInicio}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <h5 class="font-weight-bold">Hora Termino</h5>
+                            <p>{{labelHoraTermino}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="step == 1">
+                <form #formEditarEvento="ngForm" (ngSubmit)="updateEvento(formEditarEvento)">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Titulo</label>
+                                <input type="text" class="form-control" placeholder="Ingrese Titulo" name="titulo"
+                                    [(ngModel)]="nuevoEventoForm.titulo">
+                            </div>
+                            <div class="form-group">
+                                <label>Descripcion</label>
+                                <textarea name="textAreaNuevaConsulta" cols="30" rows="10" class="form-control"
+                                    name="descripcion" [(ngModel)]="nuevoEventoForm.descripcion"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Hora Inicio</label>
+                                <input type="datetime-local" class="form-control" name="horaInicio"
+                                    [(ngModel)]="nuevoEventoForm.horaInicio">
+                            </div>
+                            <div class="form-group">
+                                <label>Hora Termino</label>
+                                <input type="datetime-local" class="form-control" name="horaTermino"
+                                    [(ngModel)]="nuevoEventoForm.horaTermino">
+                            </div>
+                            <div class="form-group">
+                                <label>Color Etiqueta</label>
+                                <input type="color" class="form-control" name="colorFondo"
+                                    [(ngModel)]="nuevoEventoForm.colorFondo">
+                            </div>
+                            <div class="form-group">
+                                <label>Color Texto</label>
+                                <input type="color" class="form-control" name="colorTexto"
+                                    [(ngModel)]="nuevoEventoForm.colorTexto">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block">Actualizar</button>
+                </form>
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="controlSteps(1)" *ngIf="step==0">Editar</button>
+                <button type="button" class="btn btn-danger" *ngIf="step==0">Eliminar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="controlSteps(0)">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
