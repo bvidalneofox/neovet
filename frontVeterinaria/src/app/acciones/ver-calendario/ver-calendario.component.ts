@@ -120,6 +120,20 @@ export class VerCalendarioComponent implements OnInit {
     });
   }
 
+  deleteEvento(){
+    this._eventosService.deleteEvento(this.nuevoEventoForm.id).subscribe(response=>{
+      if(response.estado == 'success'){
+        alert(response.mensaje);
+        document.getElementById('closeModalEventInfo').click();
+        this.getEventos();
+      }else{
+        alert(response.mensaje);
+      }
+    },error=>{
+      console.log(error);
+    });
+  }
+
   controlSteps(accion) {
     switch (accion) {
       case 0:

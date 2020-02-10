@@ -47,3 +47,4 @@ Route::get('getVacunasPorIdMascota/{id}', 'HistorialVacunaController@getVacunasP
 Route::post('setEvento', 'EventoController@setEvento');
 Route::get('getEventos', 'EventoController@getEventos');
 Route::post('updateEvento', 'EventoController@updateEvento');
+Route::post('deleteEvento', 'EventoController@deleteEvento');

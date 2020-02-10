@@ -15,7 +15,7 @@ class CreateTableConsultas extends Migration
     {
         Schema::create('consultas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('peso');
+            $table->string('peso')->nullable();
             $table->string('motivo');
             $table->string('procedimiento');
             $table->date('fecha_consulta');

@@ -47,4 +47,13 @@ class EventoController extends Controller
     {
         return Evento::all();
     }
+
+    public function deleteEvento(Request $request){
+        $evento = Evento::find($request->id)->delete();
+        if ($evento) {
+            return ['estado' => 'success', 'mensaje' => 'Evento Eliminado Correctamente.'];
+        } else {
+            return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al eliminar el evento.'];
+        }
+    }
 }

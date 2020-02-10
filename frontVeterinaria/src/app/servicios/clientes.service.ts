@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { global } from './global';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientesService {
+  url = '';
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {
+    this.url = global.url;
+  }
 
   setCliente(formCliente): Observable<any> {
     let form = new FormData();
@@ -17,22 +21,22 @@ export class ClientesService {
     form.append("direccion", formCliente.direccion);
     form.append("numero", formCliente.numero);
     form.append("fecha_ingreso", formCliente.fecha_ingreso);
-    return this._http.post("http://127.0.0.1:8000/api/setCliente", form);
+    return this._http.post(this.url + "setCliente", form);
   }
 
   getMascotasPorRut(rut): Observable<any>{
-    return this._http.get("http://127.0.0.1:8000/api/getMascotasClientePorRut/" + rut);
+    return this._http.get(this.url + "getMascotasClientePorRut/" + rut);
   }
 
   getClientePorRut(rut): Observable<any> {
-    return this._http.get("http://127.0.0.1:8000/api/getClientePorRut/" + rut);
+    return this._http.get(this.url + "getClientePorRut/" + rut);
   }
 
   getClientesPorNombre(nombre): Observable<any>{
-    return this._http.get("http://127.0.0.1:8000/api/getClientesPorNombre/" + nombre);
+    return this._http.get(this.url + "getClientesPorNombre/" + nombre);
   }
 
   getMascotasPorIdCliente(id): Observable<any>{
-    return this._http.get("http://127.0.0.1:8000/api/getMascotasPorIdCliente/" + id);
+    return this._http.get(this.url + "getMascotasPorIdCliente/" + id);
   }
 }

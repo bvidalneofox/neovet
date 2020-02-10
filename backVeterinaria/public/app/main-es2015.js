@@ -52,7 +52,7 @@ module.exports = "<div class=\"card but-card text-center\" style=\"cursor: point
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container py-5\">\n    <!-- Calendar -->\n    <div class=\"calendar bg-white p-5\">\n      <div class=\"d-flex align-items-center\"><i class=\"fa fa-calendar fa-3x mr-3\"></i>\n        <h2 class=\"month font-weight-bold mb-0 text-uppercase\">Enero 2020</h2>\n      </div>\n      <p class=\"font-italic text-muted mb-5\">No hay eventos para hoy.</p>\n      <ol class=\"day-names list-unstyled\">\n        <li class=\"font-weight-bold text-uppercase\">Lun</li>\n        <li class=\"font-weight-bold text-uppercase\">Ma</li>\n        <li class=\"font-weight-bold text-uppercase\">Mx</li>\n        <li class=\"font-weight-bold text-uppercase\">Jue</li>\n        <li class=\"font-weight-bold text-uppercase\">Vie</li>\n        <li class=\"font-weight-bold text-uppercase\">Sab</li>\n        <li class=\"font-weight-bold text-uppercase\">Dom</li>\n      </ol>\n  \n      <ol class=\"days list-unstyled\">\n        <li class=\"background-day\">\n          <div class=\"date\">1</div>\n          <div class=\"event bg-success\">Horas Disponibles</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">2</div>\n          <div class=\"event bg-danger\">Agenga Ocupada</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">3</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">4</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">5</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">6</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">7</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">8</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">9</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">10</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">11</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">12</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">13</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">14</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">15</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">16</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">17</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">18</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">19</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">20</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">21</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">22</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">23</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">24</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">25</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">26</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">27</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">28</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">29</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">30</div>\n        </li>\n        <li class=\"background-day\">\n          <div class=\"date\">31</div>\n        </li>\n        <li class=\"outside\">\n          <div class=\"date\">1</div>\n        </li>\n        <li class=\"outside\">\n          <div class=\"date\">2</div>\n        </li>\n        <li class=\"outside\">\n          <div class=\"date\">3</div>\n        </li>\n        <li class=\"outside\">\n          <div class=\"date\">4</div>\n        </li>\n      </ol>\n    </div>\n  </div>"
+module.exports = "<div class=\"container\" style=\"margin-top: 1rem; margin-bottom: 1rem;\">\n    <full-calendar defaultView=\"dayGridMonth\" \n    [locales]=\"locales\" \n    [plugins]=\"calendarPlugins\" \n    [header]=\"header\"\n    [events]=\"data\" \n    [eventLimit]=\"3\"\n    (eventClick)=\"eventoClick($event)\" \n    (dateClick)=\"diaClick($event)\"\n    (eventRender)=\"eventRender($event)\">\n    </full-calendar>\n</div>\n\n<button hidden id=\"open-modal-nueva-cita\" data-toggle=\"modal\" data-target=\".modal-nueva-cita\"></button>\n\n<div class=\"modal fade modal-nueva-cita\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\" id=\"modal-nueva-cita\">\n    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Programar Nueva Cita\n                </h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <form #formNuevoEvento=\"ngForm\" (ngSubmit)=\"setNuevoEvento(formNuevoEvento)\">\n                    <div class=\"row\">\n                        <div class=\"col-6\">\n                            <div class=\"form-group\">\n                                <label>Titulo</label>\n                                <input type=\"text\" class=\"form-control\" placeholder=\"Ingrese Titulo\" name=\"titulo\"\n                                    [(ngModel)]=\"nuevoEventoForm.titulo\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label>Descripcion</label>\n                                <textarea name=\"textAreaNuevaConsulta\" cols=\"30\" rows=\"10\" class=\"form-control\"\n                                    name=\"descripcion\" [(ngModel)]=\"nuevoEventoForm.descripcion\"></textarea>\n                            </div>\n                        </div>\n                        <div class=\"col-6\">\n                            <div class=\"form-group\">\n                                <label>Hora Inicio</label>\n                                <input type=\"datetime-local\" class=\"form-control\" name=\"horaInicio\"\n                                    [(ngModel)]=\"nuevoEventoForm.horaInicio\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label>Hora Termino</label>\n                                <input type=\"datetime-local\" class=\"form-control\" name=\"horaTermino\"\n                                    [(ngModel)]=\"nuevoEventoForm.horaTermino\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label>Color Etiqueta</label>\n                                <input type=\"color\" class=\"form-control\" name=\"colorFondo\"\n                                    [(ngModel)]=\"nuevoEventoForm.colorFondo\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label>Color Texto</label>\n                                <input type=\"color\" class=\"form-control\" name=\"colorTexto\"\n                                    [(ngModel)]=\"nuevoEventoForm.colorTexto\">\n                            </div>\n                        </div>\n                    </div>\n                    <button type=\"submit\" class=\"btn btn-success btn-block\">Ingresar</button>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Cerrar</button>\n            </div>\n        </div>\n    </div>\n</div>\n\n<button hidden id=\"open-modal-ver-cita\" data-toggle=\"modal\" data-target=\".modal-ver-cita\"></button>\n\n<div class=\"modal fade modal-ver-cita\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\" id=\"modal-nueva-cita\">\n    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">{{nuevoEventoForm.titulo}}</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" id=\"closeModalEventInfo\" (click)=\"controlSteps(0)\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <div *ngIf=\"step == 0\">\n                <div class=\"row\">\n                    <div class=\"col-md-12\">\n                        <div class=\"form-group\">\n                            <h5 class=\"font-weight-bold\">Descripcion</h5>\n                            <p>{{nuevoEventoForm.descripcion}}</p>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-md-12\">\n                        <div class=\"form-group\">\n                            <h5 class=\"font-weight-bold\">Hora Inicio</h5>\n                            <p>{{labelHoraInicio}}</p>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-md-12\">\n                        <div class=\"form-group\">\n                            <h5 class=\"font-weight-bold\">Hora Termino</h5>\n                            <p>{{labelHoraTermino}}</p>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div *ngIf=\"step == 1\">\n                <form #formEditarEvento=\"ngForm\" (ngSubmit)=\"updateEvento(formEditarEvento)\">\n                    <div class=\"row\">\n                        <div class=\"col-6\">\n                            <div class=\"form-group\">\n                                <label>Titulo</label>\n                                <input type=\"text\" class=\"form-control\" placeholder=\"Ingrese Titulo\" name=\"titulo\"\n                                    [(ngModel)]=\"nuevoEventoForm.titulo\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label>Descripcion</label>\n                                <textarea name=\"textAreaNuevaConsulta\" cols=\"30\" rows=\"10\" class=\"form-control\"\n                                    name=\"descripcion\" [(ngModel)]=\"nuevoEventoForm.descripcion\"></textarea>\n                            </div>\n                        </div>\n                        <div class=\"col-6\">\n                            <div class=\"form-group\">\n                                <label>Hora Inicio</label>\n                                <input type=\"datetime-local\" class=\"form-control\" name=\"horaInicio\"\n                                    [(ngModel)]=\"nuevoEventoForm.horaInicio\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label>Hora Termino</label>\n                                <input type=\"datetime-local\" class=\"form-control\" name=\"horaTermino\"\n                                    [(ngModel)]=\"nuevoEventoForm.horaTermino\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label>Color Etiqueta</label>\n                                <input type=\"color\" class=\"form-control\" name=\"colorFondo\"\n                                    [(ngModel)]=\"nuevoEventoForm.colorFondo\">\n                            </div>\n                            <div class=\"form-group\">\n                                <label>Color Texto</label>\n                                <input type=\"color\" class=\"form-control\" name=\"colorTexto\"\n                                    [(ngModel)]=\"nuevoEventoForm.colorTexto\">\n                            </div>\n                        </div>\n                    </div>\n                    <button type=\"submit\" class=\"btn btn-success btn-block\">Actualizar</button>\n                </form>\n            </div>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"controlSteps(1)\" *ngIf=\"step==0\">Editar</button>\n                <button type=\"button\" class=\"btn btn-danger\" *ngIf=\"step==0\" data-toggle=\"modal\" data-target=\".modal-confirmacion-borrar-evento\">Eliminar</button>\n                <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"controlSteps(0)\">Cerrar</button>\n            </div>\n        </div>\n    </div>\n</div>\n\n<!-- MODAL CONFIRMAR -->\n<div class=\"modal fade modal-confirmacion-borrar-evento\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Confirmar</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <div class=\"row my-4\">\n                    <div class=\"col-md-12 text-center\">\n                        <p class=\"h4\">¿Esta Seguro?</p>\n                        <p class=\"h5\">Confirme solo si esta seguro</p>\n                    </div>\n                </div>\n                <div class=\"row my-4\">\n                    <div class=\"col-md-6 text-center\">\n                        <div class=\"btn btn-success btn-block btn-rounded\" data-dismiss=\"modal\"\n                            (click)=\"deleteEvento()\">\n                            Sí, deseo borrar\n                        </div>\n                    </div>\n                    <div class=\"col-md-6 text-center\">\n                        <div class=\"btn btn-danger btn-block\" data-dismiss=\"modal\">\n                            No, no borrar\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -85,7 +85,7 @@ module.exports = "<!-- BOTON MENU INICIO -->\n<div class=\"card but-card text-ce
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"wrapper\">\n    <!-- Sidebar  -->\n    <nav id=\"sidebar\" class=\"{{variabletest}}\">\n        <div class=\"sidebar-header\">\n            <h3 class=\"text-center\">NeoVet</h3>\n        </div>\n\n        <ul class=\"list-unstyled components\">\n            <!-- <p class=\"font-weight-bold\">Panel Administrativo</p> -->\n            <li>\n                <a href=\"#\">Inicio</a>\n            </li>\n            <li>\n                <a href=\"#mascotaSubmenu\" data-toggle=\"collapse\" aria-expanded=\"false\" class=\"dropdown-toggle\">Mascotas</a>\n                <ul class=\"collapse list-unstyled\" id=\"mascotaSubmenu\">\n                    <li>\n                        <a routerLink=\"/registroMascota\">Registrar Mascota</a>\n                    </li>\n                    <li>\n                        <a routerLink=\"/buscarMascota\">Buscar Mascota por Rut Dueño</a>\n                    </li>\n                    <li>\n                        <a routerLink=\"/mostrarMascotas\">Buscar Mascota por Nombre</a>\n                    </li>\n                </ul>\n            </li>\n            <li>\n                <a href=\"#pageSubmenu\" data-toggle=\"collapse\" aria-expanded=\"false\" class=\"dropdown-toggle\">Clientes</a>\n                <ul class=\"collapse list-unstyled\" id=\"pageSubmenu\">\n                    <li>\n                        <a routerLink=\"/registroCliente\">Registrar Cliente</a>\n                    </li>\n                    <li>\n                        <a routerLink=\"/buscarCliente\">Buscar Cliente por Rut</a>\n                    </li>\n                    <li>\n                        <a routerLink=\"/mostrarClientes\">Buscar Cliente por Nombre</a>\n                    </li>\n                </ul>\n            </li>\n            <li>\n                <a routerLink=\"/verCalendario\" class=\"font-weight-light\">Agenda</a>\n            </li>\n        </ul>\n\n        <!-- <ul class=\"list-unstyled CTAs\">\n            <li>\n                <a href=\"#\" class=\"download\">Contacto NeoFox</a>\n            </li>\n            <li>\n                <a href=\"#\" class=\"article\">Sección Clientes</a>\n            </li>\n        </ul> -->\n    </nav>\n    <div id=\"content\">\n\n        <app-navbar (abrirSidebarParent)=\"abrirSidebar()\"></app-navbar>\n        <!-- <button type=\"button\" id=\"sidebarCollapse\" class=\"btn btn-info\" (click)=\"test()\">\n            <span>Toggle Sidebar</span>\n        </button> -->\n        <router-outlet></router-outlet>\n\n    </div>\n\n</div>\n\n<ng-snotify>{{style}}</ng-snotify>"
+module.exports = "<div class=\"wrapper\">\n    <!-- Sidebar  -->\n    <nav id=\"sidebar\" class=\"{{variabletest}}\">\n        <div class=\"sidebar-header\">\n            <h3 class=\"text-center\">NeoVet</h3>\n        </div>\n\n        <ul class=\"list-unstyled components\">\n            <!-- <p class=\"font-weight-bold\">Panel Administrativo</p> -->\n            <li>\n                <a routerLink=\"/\">Inicio</a>\n            </li>\n            <li>\n                <a href=\"#mascotaSubmenu\" data-toggle=\"collapse\" aria-expanded=\"false\" class=\"dropdown-toggle\">Mascotas</a>\n                <ul class=\"collapse list-unstyled\" id=\"mascotaSubmenu\">\n                    <li>\n                        <a routerLink=\"/registroMascota\">Registrar Mascota</a>\n                    </li>\n                    <li>\n                        <a routerLink=\"/buscarMascota\">Buscar Mascota por Rut Dueño</a>\n                    </li>\n                    <li>\n                        <a routerLink=\"/mostrarMascotas\">Buscar Mascota por Nombre</a>\n                    </li>\n                </ul>\n            </li>\n            <li>\n                <a href=\"#pageSubmenu\" data-toggle=\"collapse\" aria-expanded=\"false\" class=\"dropdown-toggle\">Clientes</a>\n                <ul class=\"collapse list-unstyled\" id=\"pageSubmenu\">\n                    <li>\n                        <a routerLink=\"/registroCliente\">Registrar Cliente</a>\n                    </li>\n                    <li>\n                        <a routerLink=\"/buscarCliente\">Buscar Cliente por Rut</a>\n                    </li>\n                    <li>\n                        <a routerLink=\"/mostrarClientes\">Buscar Cliente por Nombre</a>\n                    </li>\n                </ul>\n            </li>\n            <li>\n                <a routerLink=\"/verCalendario\" class=\"font-weight-light\">Agenda</a>\n            </li>\n        </ul>\n\n        <!-- <ul class=\"list-unstyled CTAs\">\n            <li>\n                <a href=\"#\" class=\"download\">Contacto NeoFox</a>\n            </li>\n            <li>\n                <a href=\"#\" class=\"article\">Sección Clientes</a>\n            </li>\n        </ul> -->\n    </nav>\n    <div id=\"content\">\n\n        <app-navbar (abrirSidebarParent)=\"abrirSidebar()\"></app-navbar>\n        <!-- <button type=\"button\" id=\"sidebarCollapse\" class=\"btn btn-info\" (click)=\"test()\">\n            <span>Toggle Sidebar</span>\n        </button> -->\n        <router-outlet></router-outlet>\n\n    </div>\n\n</div>\n\n<ng-snotify>{{style}}</ng-snotify>"
 
 /***/ }),
 
@@ -96,7 +96,7 @@ module.exports = "<div class=\"wrapper\">\n    <!-- Sidebar  -->\n    <nav id=\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- MODAL DE DATOS MASCOTA -->\n<div class=\"modal fade modal-ficha-clinica\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-xl modal-dialog-centered\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">\n                    Ficha Clinica Mascota</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\" id=\"contenido\">\n                <div class=\"row text-center\">\n                    <div class=\"col-1\">\n                        <img src=\"assets/neofox-nav.png\" style=\"width: 10rem;\">\n                    </div>\n                    <div class=\"col-11\">\n                        <p>Clinica Veterinaria NeoVet</p>\n                        <p>Calle Rio Yaqui #1094, Los Ángeles</p>\n                        <p>+569 7850 4418</p>\n                    </div>\n                </div>\n                <!-- DATOS CLIENTE -->\n                <div class=\"row\">\n                    <div class=\"col-12 text-center header-test\">\n                        <p class=\"font-weight-bold\">Datos del Cliente</p>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-2\"></div>\n                    <div class=\"col-5\">\n                        <p><b>Nombre:</b> Bryan Vidal Díaz</p>\n                        <p><b>Dirección:</b> Villa Todos Los Santos, Calle Sta Ana #336, Los Ángeles</p>\n                        <p><b>Telefonos:</b> +569 7850 4418</p>\n                        <p><b>Correo:</b> bvidalneofox@gmail.com</p>\n                    </div>\n                    <div class=\"col-5\">\n                        <p><b>Rut:</b> 18.522.783-9</p>\n                        <p><b>Fecha ingreso:</b> 20-20-20</p>\n                    </div>\n                </div>\n                <!-- DATOS MASCOTA -->\n                <div class=\"row\">\n                    <div class=\"col-12 text-center header-test\">\n                        <p class=\"font-weight-bold\">Datos del Paciente</p>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-md-4 text-center\">\n                        <p class=\"font-weight-bold\">Fotografia Mascota</p>\n                        <img src=\"assets/cat-profile-pic.jpeg\" style=\"width: 5rem;\">\n                    </div>\n                    <div class=\"col-md-4\">\n                        <p><b>Nombre:</b> Yokosita</p>\n                        <p><b>Especie:</b> Felino</p>\n                        <p><b>Fecha Nacimiento:</b> 20-20-20</p>\n                        <p><b>Edad:</b> 2 Años</p>\n                    </div>\n                    <div class=\"col-md-4\">\n                        <p><b>Raza:</b> Mestiza</p>\n                        <p><b>Sexo:</b> Felino</p>\n                        <p><b>Color:</b> Cafe con Blanco</p>\n                        <p><b>Fecha Ingreso:</b> 20-20-20</p>\n                    </div>\n                </div>\n                <!-- HISTORIAL CLINICO -->\n                <div class=\"row\">\n                    <div class=\"col-12 text-center header-test\">\n                        <p class=\"font-weight-bold\">Historial Clinico</p>\n                    </div>\n                </div>\n                <div class=\"row consulta\">\n                    <div class=\"col-2\">\n                        <p class=\"font-weight-bold\">20 de Enero 2020</p>\n                    </div>\n                    <div class=\"col-3\">\n                        <p><b>Atendido Por:</b> Emiliana Hernandez Rebolledo</p>\n                    </div>\n                    <div class=\"col-7\">\n                        <p> <b>Motivo:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>\n                        <p> <b>Procedimiento:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>\n                    </div>\n                </div>\n                <div class=\"row consulta\">\n                    <div class=\"col-2\">\n                        <p class=\"font-weight-bold\">20 de Enero 2020</p>\n                    </div>\n                    <div class=\"col-3\">\n                        <p><b>Atendido Por:</b> Emiliana Hernandez Rebolledo</p>\n                    </div>\n                    <div class=\"col-7\">\n                        <p> <b>Motivo:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>\n                        <p> <b>Procedimiento:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>\n                    </div>\n                </div>\n                <div class=\"row consulta\">\n                    <div class=\"col-2\">\n                        <p class=\"font-weight-bold\">20 de Enero 2020</p>\n                    </div>\n                    <div class=\"col-3\">\n                        <p><b>Atendido Por:</b> Emiliana Hernandez Rebolledo</p>\n                    </div>\n                    <div class=\"col-7\">\n                        <p> <b>Motivo:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>\n                        <p> <b>Procedimiento:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>\n                    </div>\n                </div>\n                <div class=\"row consulta\">\n                    <div class=\"col-2\">\n                        <p class=\"font-weight-bold\">20 de Enero 2020</p>\n                    </div>\n                    <div class=\"col-3\">\n                        <p><b>Atendido Por:</b> Emiliana Hernandez Rebolledo</p>\n                    </div>\n                    <div class=\"col-7\">\n                        <p> <b>Motivo:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>\n                        <p> <b>Procedimiento:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>\n                    </div>\n                </div>\n                <div class=\"row consulta\">\n                    <div class=\"col-2\">\n                        <p class=\"font-weight-bold\">20 de Enero 2020</p>\n                    </div>\n                    <div class=\"col-3\">\n                        <p><b>Atendido Por:</b> Emiliana Hernandez Rebolledo</p>\n                    </div>\n                    <div class=\"col-7\">\n                        <p> <b>Motivo:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>\n                        <p> <b>Procedimiento:</b> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem eius quia inventore sequi optio, blanditiis ullam, ipsa a hic, veniam nobis exercitationem qui ratione non fugiat commodi quibusdam explicabo tempora!</p>\n                    </div>\n                </div>\n            </div>\n            <div class=\"modal-footer\">\n                <button (click)=\"generarPDF()\" class=\"btn btn-info\">Crear PDF</button>\n                <button type=\"button\" class=\"btn btn-primary btn-block\" data-dismiss=\"modal\">Ok</button>\n            </div>\n        </div>\n    </div>\n</div>"
+module.exports = "<!-- MODAL DE DATOS MASCOTA -->\n<div class=\"modal fade modal-ficha-clinica\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-xl modal-dialog-centered\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">\n                    Ficha Clinica Mascota</h5>\n                <button type=\"button\" id=\"close2\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\" id=\"contenido\">\n                <div class=\"row text-center\">\n                    <div class=\"col-1\">\n                        <img src=\"assets/neofox-nav.png\" style=\"width: 10rem;\">\n                    </div>\n                    <div class=\"col-11\">\n                        <p class=\"h4 font-weight-bold mr-5\">Clinica Veterinaria NeoVet</p>\n                        <p class=\"h5 font-weight-bold mr-5\">Calle Rio Yaqui #1094, Los Ángeles</p>\n                        <p class=\"font-weight-bold mr-5\">+569 7850 4418</p>\n                    </div>\n                </div>\n                <!-- DATOS CLIENTE -->\n                <div class=\"row\">\n                    <div class=\"col-12 text-center header-test\">\n                        <p class=\"font-weight-bold\">Datos del Cliente</p>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-6\">\n                        <div class=\"ml-5\"><p><b>Nombre:</b> {{datosBasicos?.nombreDuenio}}</p>\n                        <p><b>Dirección:</b> {{datosBasicos?.direccion}}</p>\n                        <p><b>Telefonos:</b> {{datosBasicos?.numero}}</p></div>\n                    </div>\n                    <div class=\"col-6\">\n                        <div class=\"test\"><p><b>Correo:</b> {{datosBasicos?.correo}}</p>\n                        <p><b>Rut:</b> {{datosBasicos?.rut}}</p>\n                        <p><b>Fecha ingreso:</b> {{datosBasicos?.fechaIngresoDuenio}}</p></div>\n                    </div>\n                </div>\n                <!-- DATOS MASCOTA -->\n                <div class=\"row\">\n                    <div class=\"col-12 text-center header-test\">\n                        <p class=\"font-weight-bold\">Datos del Paciente</p>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-md-4 text-center\">\n                        <p class=\"font-weight-bold\">Fotografia Mascota</p>\n                        <img src=\"assets/cat-profile-pic.jpeg\" style=\"width: 5rem;\">\n                    </div>\n                    <div class=\"col-md-4\">\n                        <p><b>Nombre:</b> {{datosBasicos?.nombreMascota}}</p>\n                        <p><b>Especie:</b> {{datosBasicos?.tipoMascota}}</p>\n                        <p><b>Fecha Nacimiento:</b> {{datosBasicos?.fechaNacimientoMascota}}</p>\n                        <p><b>Edad:</b> {{edadMascota}}</p>\n                    </div>\n                    <div class=\"col-md-4\">\n                        <p><b>Raza:</b> {{datosBasicos?.raza}}</p>\n                        <p><b>Sexo:</b> {{datosBasicos?.generoMascota}}</p>\n                        <p><b>Color:</b> {{datosBasicos?.color}}o</p>\n                        <p><b>Fecha Ingreso:</b> {{datosBasicos?.fechaIngresoMascota}}</p>\n                    </div>\n                </div>\n                <!-- HISTORIAL CLINICO -->\n                <div class=\"row\">\n                    <div class=\"col-12 text-center header-test\">\n                        <p class=\"font-weight-bold\">Historial Clinico</p>\n                    </div>\n                </div>\n                <div class=\"row consulta\" *ngFor=\"let itemConsultas of consultasMascota\">\n                    <div class=\"col-2\">\n                        <p class=\"font-weight-bold\">{{itemConsultas?.created_at}}</p>\n                    </div>\n                    <div class=\"col-3\">\n                        <p><b>Atendido Por:</b> {{itemConsultas?.id_usuario}}</p>\n                    </div>\n                    <div class=\"col-7\">\n                        <p> <b>Motivo:</b> {{itemConsultas?.motivo}}</p>\n                        <p> <b>Procedimiento:</b> {{itemConsultas?.procedimiento}}</p>\n                    </div>\n                </div>\n            </div>\n            <div class=\"modal-footer\">\n                <button (click)=\"generarPDF()\" class=\"btn btn-info\">Crear PDF</button>\n                <button type=\"button\" class=\"btn btn-primary btn-block\" data-dismiss=\"modal\">Ok</button>\n            </div>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -107,7 +107,7 @@ module.exports = "<!-- MODAL DE DATOS MASCOTA -->\n<div class=\"modal fade modal
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- MODAL DE DATOS MASCOTA -->\n<div class=\"modal fade modal-buscar-datos-mascotas\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">\n                    Datos Mascota</h5>\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <div class=\"row\">\n                    <div class=\"col-md-4 my-auto\">\n                        <img class=\"img-mascot\"\n                            src=\"https://i.pinimg.com/736x/d4/c5/f7/d4c5f7f131d36a447c8baec15b083a32.jpg\" alt=\"\"\n                            height=\"200\" width=\"200\">\n                    </div>\n                    <div class=\"col-md-8\">\n                        <ul class=\"list-group\">\n                            <li class=\"list-group-item\"><b>Nombre Mascota:</b>\n                                {{datosMascota?.nombre}}</li>\n                            <li class=\"list-group-item\"><b>Fecha Nacimiento:</b>\n                                {{datosMascota?.fecha_nacimiento}}</li>\n                            <li class=\"list-group-item\"><b>Tipo Mascota:</b> {{datosMascota?.tipoMascota}}\n                            </li>\n                            <li class=\"list-group-item\"><b>Sexo:</b> {{datosMascota?.sexo}}</li>\n                            <li class=\"list-group-item\"><b>Raza:</b> {{datosMascota?.raza}}</li>\n                            <li class=\"list-group-item\"><b>Color:</b> {{datosMascota?.color}}</li>\n                            <li class=\"list-group-item\"><b>¿Esterilizado?:</b> {{datosMascota?.estadoEsterilizacion}}\n                            </li>\n                            <li class=\"list-group-item\"><b>¿Tiene Chip?:</b> {{datosMascota?.estadoChip}}</li>\n                        </ul>\n                    </div>\n                </div>\n\n                <div class=\"row mt-4\">\n                    <div class=\"col-md-6 mt-4 mx-auto\" data-toggle=\"modal\"\n                    data-target=\".modal-ficha-clinica\">\n                        <div class=\"card but-card bg-success text-white text-center\" style=\"cursor: pointer;\">\n                            <div class=\"card-body\">\n                                <img src=\"assets/medical-history.png\" width=\"70\" height=\"70\" alt=\"\">\n                                <h4 class=\"card-text\">Ver Ficha Clinica</h4>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-md-6 mt-4 mx-auto\">\n                        <div class=\"card but-card bg-info text-white text-center\" style=\"cursor: pointer;\">\n                            <div class=\"card-body\">\n                                <img src=\"assets/vacuna.png\" width=\"70\" height=\"70\" alt=\"\">\n                                <h4 class=\"card-text\">Ver Hoja de Vacunas</h4>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-md-6 mt-4 mx-auto\">\n                        <div class=\"card but-card bg-secondary text-white text-center\" style=\"cursor: pointer;\">\n                            <div class=\"card-body\">\n                                <img src=\"assets/vacuna.png\" width=\"70\" height=\"70\" alt=\"\">\n                                <h4 class=\"card-text\">Dar en Adopción</h4>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-md-6 mt-4 mx-auto\">\n                        <div class=\"card but-card bg-danger text-white text-center\" style=\"cursor: pointer;\">\n                            <div class=\"card-body\">\n                                <img src=\"assets/vacuna.png\" width=\"70\" height=\"70\" alt=\"\">\n                                <h4 class=\"card-text\">Editar Datos</h4>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-primary btn-block\" data-dismiss=\"modal\">Ok</button>\n            </div>\n        </div>\n    </div>\n</div>\n\n<app-ficha-clinica></app-ficha-clinica>"
+module.exports = "<!-- MODAL DE DATOS MASCOTA -->\n<div class=\"modal fade modal-buscar-datos-mascotas\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-xl modal-dialog-centered\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">\n                    Datos Mascota</h5>\n                <button type=\"button\" id=\"close\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                    <span aria-hidden=\"true\">&times;</span>\n                </button>\n            </div>\n            <div class=\"modal-body\">\n                <div class=\"row\">\n                    <div class=\"col-xl-6\">\n                        <div class=\"row\">\n                            <!-- <div class=\"col-md-4 my-auto text-center\">\n                                <img class=\"img-mascot\"\n                                    src=\"https://i.pinimg.com/736x/d4/c5/f7/d4c5f7f131d36a447c8baec15b083a32.jpg\" alt=\"\"\n                                    height=\"200\" width=\"200\">\n                            </div> -->\n                            <div class=\"col-md-12\">\n                                <ul class=\"list-group\">\n                                    <li class=\"list-group-item\"><b>Nombre Mascota:</b>\n                                        {{datosMascota?.nombre}}</li>\n                                    <li class=\"list-group-item\"><b>Fecha Nacimiento:</b>\n                                        {{datosMascota?.fecha_nacimiento}}</li>\n                                    <li class=\"list-group-item\"><b>Tipo Mascota:</b> {{datosMascota?.tipoMascota}}\n                                    </li>\n                                    <li class=\"list-group-item\"><b>Sexo:</b> {{datosMascota?.sexo}}</li>\n                                    <li class=\"list-group-item\"><b>Raza:</b> {{datosMascota?.raza}}</li>\n                                    <li class=\"list-group-item\"><b>Color:</b> {{datosMascota?.color}}</li>\n                                    <li class=\"list-group-item\"><b>¿Esterilizado?:</b>\n                                        {{datosMascota?.estadoEsterilizacion}}\n                                    </li>\n                                    <li class=\"list-group-item\"><b>¿Tiene Chip?:</b> {{datosMascota?.estadoChip}}</li>\n                                </ul>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-xl-6\">\n                        <div class=\"row mt-4\">\n                            <div class=\"col-lg-6 mt-4 mx-auto\" data-toggle=\"modal\" data-target=\".modal-ficha-clinica\"\n                                (click)=\"referenciaFichaClinica.getFichaClinica(datosMascota.id)\">\n                                <div class=\"card but-card bg-success text-white text-center\" style=\"cursor: pointer;\">\n                                    <div class=\"card-body\">\n                                        <img src=\"assets/medical-history.png\" width=\"70\" height=\"70\" alt=\"\">\n                                        <h4 class=\"card-text\">Ver Ficha Clinica</h4>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-lg-6 mt-4 mx-auto\">\n                                <div class=\"card but-card bg-info text-white text-center\" style=\"cursor: pointer;\">\n                                    <div class=\"card-body\">\n                                        <img src=\"assets/vacuna.png\" width=\"70\" height=\"70\" alt=\"\">\n                                        <h4 class=\"card-text\">Hoja de Vacunas</h4>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-lg-6 mt-4 mx-auto\">\n                                <div class=\"card but-card bg-secondary text-white text-center\" style=\"cursor: pointer;\">\n                                    <div class=\"card-body\">\n                                        <img src=\"assets/vacuna.png\" width=\"70\" height=\"70\" alt=\"\">\n                                        <h4 class=\"card-text\">Dar en Adopción</h4>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"col-lg-6 mt-4 mx-auto\">\n                                <div class=\"card but-card bg-danger text-white text-center\" style=\"cursor: pointer;\">\n                                    <div class=\"card-body\">\n                                        <img src=\"assets/vacuna.png\" width=\"70\" height=\"70\" alt=\"\">\n                                        <h4 class=\"card-text\">Editar Datos</h4>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-primary btn-block\" data-dismiss=\"modal\">Ok</button>\n            </div>\n        </div>\n    </div>\n</div>\n\n<app-ficha-clinica #referenciaFichaClinica></app-ficha-clinica>"
 
 /***/ }),
 
@@ -258,13 +258,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_servicios_mascotas_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/servicios/mascotas.service */ "./src/app/servicios/mascotas.service.ts");
 /* harmony import */ var src_app_servicios_consultas_service_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/servicios/consultas-service.service */ "./src/app/servicios/consultas-service.service.ts");
 /* harmony import */ var ng_snotify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ng-snotify */ "./node_modules/ng-snotify/index.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+
 
 
 
 
 
 let NuevaConsultaComponent = class NuevaConsultaComponent {
-    constructor(_snotify, _mascotasService, _consultasService) {
+    constructor(_snotify, _mascotasService, _consultasService, location) {
         this._snotify = _snotify;
         this._mascotasService = _mascotasService;
         this._consultasService = _consultasService;
@@ -281,6 +283,11 @@ let NuevaConsultaComponent = class NuevaConsultaComponent {
         };
         //Variable para los steps del Modal
         this.step = 0;
+        location.onPopState(() => {
+            if (document.getElementById('closeButton') != null) {
+                document.getElementById("closeButton").click();
+            }
+        });
     }
     ngOnInit() {
     }
@@ -361,7 +368,8 @@ let NuevaConsultaComponent = class NuevaConsultaComponent {
 NuevaConsultaComponent.ctorParameters = () => [
     { type: ng_snotify__WEBPACK_IMPORTED_MODULE_4__["SnotifyService"] },
     { type: src_app_servicios_mascotas_service__WEBPACK_IMPORTED_MODULE_2__["MascotasService"] },
-    { type: src_app_servicios_consultas_service_service__WEBPACK_IMPORTED_MODULE_3__["ConsultasServiceService"] }
+    { type: src_app_servicios_consultas_service_service__WEBPACK_IMPORTED_MODULE_3__["ConsultasServiceService"] },
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_5__["LocationStrategy"] }
 ];
 NuevaConsultaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -369,7 +377,7 @@ NuevaConsultaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./nueva-consulta.component.html */ "./node_modules/raw-loader/index.js!./src/app/acciones/nueva-consulta/nueva-consulta.component.html"),
         styles: [__webpack_require__(/*! ./nueva-consulta.component.css */ "./src/app/acciones/nueva-consulta/nueva-consulta.component.css")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_snotify__WEBPACK_IMPORTED_MODULE_4__["SnotifyService"], src_app_servicios_mascotas_service__WEBPACK_IMPORTED_MODULE_2__["MascotasService"], src_app_servicios_consultas_service_service__WEBPACK_IMPORTED_MODULE_3__["ConsultasServiceService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_snotify__WEBPACK_IMPORTED_MODULE_4__["SnotifyService"], src_app_servicios_mascotas_service__WEBPACK_IMPORTED_MODULE_2__["MascotasService"], src_app_servicios_consultas_service_service__WEBPACK_IMPORTED_MODULE_3__["ConsultasServiceService"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["LocationStrategy"]])
 ], NuevaConsultaComponent);
 
 
@@ -575,7 +583,7 @@ NuevaVacunaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".background-day:hover {\r\n  background-color: #d1ded4;\r\n  border-radius: 10px 10px 10px 10px;\r\n  cursor: pointer;\r\n}\r\n  \r\n.clearfix::after,\r\n.calendar ol::after {\r\n  content: \".\";\r\n  display: block;\r\n  height: 0;\r\n  clear: both;\r\n  visibility: hidden;\r\n}\r\n  \r\n/* ================\r\nCalendar Styling */\r\n  \r\n.calendar {\r\n  border-radius: 10px;\r\nborder: 6px solid #000000;\r\n}\r\n  \r\n.month {\r\n  font-size: 2rem;\r\n}\r\n  \r\n@media (min-width: 992px) {\r\n  .month {\r\n    font-size: 3.5rem;\r\n  }\r\n}\r\n  \r\n.calendar ol li {\r\n  float: left;\r\n  width: 14.28571%;\r\n}\r\n  \r\n.calendar .day-names {\r\n  border-bottom: 1px solid #eee;\r\n}\r\n  \r\n.calendar .day-names li {\r\n  text-transform: uppercase;\r\n  margin-bottom: 0.5rem;\r\n}\r\n  \r\n.calendar .days li {\r\n  border-bottom: 1px solid #eee;\r\n  min-height: 8rem;\r\n}\r\n  \r\n.calendar .days li .date {\r\n  margin: 0.5rem 0;\r\n}\r\n  \r\n.calendar .days li .event {\r\n  font-size: 0.75rem;\r\n  padding: 0.4rem;\r\n  color: white;\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n  border-radius: 4rem;\r\n  margin-bottom: 1px;\r\n}\r\n  \r\n.calendar .days li .event.span-2 {\r\n  width: 200%;\r\n}\r\n  \r\n.calendar .days li .event.begin {\r\n  border-radius: 1rem 0 0 1rem;\r\n}\r\n  \r\n.calendar .days li .event.end {\r\n  border-radius: 0 1rem 1rem 0;\r\n}\r\n  \r\n.calendar .days li .event.clear {\r\n  background: none;\r\n}\r\n  \r\n.calendar .days li:nth-child(n + 29) {\r\n  border-bottom: none;\r\n}\r\n  \r\n.calendar .days li.outside .date {\r\n  color: #ddd;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYWNjaW9uZXMvdmVyLWNhbGVuZGFyaW8vdmVyLWNhbGVuZGFyaW8uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHlCQUF5QjtFQUN6QixrQ0FBa0M7RUFDbEMsZUFBZTtBQUNqQjs7QUFFQTs7RUFFRSxZQUFZO0VBQ1osY0FBYztFQUNkLFNBQVM7RUFDVCxXQUFXO0VBQ1gsa0JBQWtCO0FBQ3BCOztBQUVBO2tCQUNrQjs7QUFDbEI7RUFDRSxtQkFBbUI7QUFDckIseUJBQXlCO0FBQ3pCOztBQUVBO0VBQ0UsZUFBZTtBQUNqQjs7QUFFQTtFQUNFO0lBQ0UsaUJBQWlCO0VBQ25CO0FBQ0Y7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsZ0JBQWdCO0FBQ2xCOztBQUVBO0VBQ0UsNkJBQTZCO0FBQy9COztBQUVBO0VBQ0UseUJBQXlCO0VBQ3pCLHFCQUFxQjtBQUN2Qjs7QUFFQTtFQUNFLDZCQUE2QjtFQUM3QixnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsZUFBZTtFQUNmLFlBQVk7RUFDWixtQkFBbUI7RUFDbkIsZ0JBQWdCO0VBQ2hCLHVCQUF1QjtFQUN2QixtQkFBbUI7RUFDbkIsa0JBQWtCO0FBQ3BCOztBQUVBO0VBQ0UsV0FBVztBQUNiOztBQUVBO0VBQ0UsNEJBQTRCO0FBQzlCOztBQUVBO0VBQ0UsNEJBQTRCO0FBQzlCOztBQUVBO0VBQ0UsZ0JBQWdCO0FBQ2xCOztBQUVBO0VBQ0UsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsV0FBVztBQUNiIiwiZmlsZSI6InNyYy9hcHAvYWNjaW9uZXMvdmVyLWNhbGVuZGFyaW8vdmVyLWNhbGVuZGFyaW8uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5iYWNrZ3JvdW5kLWRheTpob3ZlciB7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogI2QxZGVkNDtcclxuICBib3JkZXItcmFkaXVzOiAxMHB4IDEwcHggMTBweCAxMHB4O1xyXG4gIGN1cnNvcjogcG9pbnRlcjtcclxufVxyXG4gIFxyXG4uY2xlYXJmaXg6OmFmdGVyLFxyXG4uY2FsZW5kYXIgb2w6OmFmdGVyIHtcclxuICBjb250ZW50OiBcIi5cIjtcclxuICBkaXNwbGF5OiBibG9jaztcclxuICBoZWlnaHQ6IDA7XHJcbiAgY2xlYXI6IGJvdGg7XHJcbiAgdmlzaWJpbGl0eTogaGlkZGVuO1xyXG59XHJcblxyXG4vKiA9PT09PT09PT09PT09PT09XHJcbkNhbGVuZGFyIFN0eWxpbmcgKi9cclxuLmNhbGVuZGFyIHtcclxuICBib3JkZXItcmFkaXVzOiAxMHB4O1xyXG5ib3JkZXI6IDZweCBzb2xpZCAjMDAwMDAwO1xyXG59XHJcblxyXG4ubW9udGgge1xyXG4gIGZvbnQtc2l6ZTogMnJlbTtcclxufVxyXG5cclxuQG1lZGlhIChtaW4td2lkdGg6IDk5MnB4KSB7XHJcbiAgLm1vbnRoIHtcclxuICAgIGZvbnQtc2l6ZTogMy41cmVtO1xyXG4gIH1cclxufVxyXG5cclxuLmNhbGVuZGFyIG9sIGxpIHtcclxuICBmbG9hdDogbGVmdDtcclxuICB3aWR0aDogMTQuMjg1NzElO1xyXG59XHJcblxyXG4uY2FsZW5kYXIgLmRheS1uYW1lcyB7XHJcbiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICNlZWU7XHJcbn1cclxuXHJcbi5jYWxlbmRhciAuZGF5LW5hbWVzIGxpIHtcclxuICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlO1xyXG4gIG1hcmdpbi1ib3R0b206IDAuNXJlbTtcclxufVxyXG5cclxuLmNhbGVuZGFyIC5kYXlzIGxpIHtcclxuICBib3JkZXItYm90dG9tOiAxcHggc29saWQgI2VlZTtcclxuICBtaW4taGVpZ2h0OiA4cmVtO1xyXG59XHJcblxyXG4uY2FsZW5kYXIgLmRheXMgbGkgLmRhdGUge1xyXG4gIG1hcmdpbjogMC41cmVtIDA7XHJcbn1cclxuXHJcbi5jYWxlbmRhciAuZGF5cyBsaSAuZXZlbnQge1xyXG4gIGZvbnQtc2l6ZTogMC43NXJlbTtcclxuICBwYWRkaW5nOiAwLjRyZW07XHJcbiAgY29sb3I6IHdoaXRlO1xyXG4gIHdoaXRlLXNwYWNlOiBub3dyYXA7XHJcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcclxuICB0ZXh0LW92ZXJmbG93OiBlbGxpcHNpcztcclxuICBib3JkZXItcmFkaXVzOiA0cmVtO1xyXG4gIG1hcmdpbi1ib3R0b206IDFweDtcclxufVxyXG5cclxuLmNhbGVuZGFyIC5kYXlzIGxpIC5ldmVudC5zcGFuLTIge1xyXG4gIHdpZHRoOiAyMDAlO1xyXG59XHJcblxyXG4uY2FsZW5kYXIgLmRheXMgbGkgLmV2ZW50LmJlZ2luIHtcclxuICBib3JkZXItcmFkaXVzOiAxcmVtIDAgMCAxcmVtO1xyXG59XHJcblxyXG4uY2FsZW5kYXIgLmRheXMgbGkgLmV2ZW50LmVuZCB7XHJcbiAgYm9yZGVyLXJhZGl1czogMCAxcmVtIDFyZW0gMDtcclxufVxyXG5cclxuLmNhbGVuZGFyIC5kYXlzIGxpIC5ldmVudC5jbGVhciB7XHJcbiAgYmFja2dyb3VuZDogbm9uZTtcclxufVxyXG5cclxuLmNhbGVuZGFyIC5kYXlzIGxpOm50aC1jaGlsZChuICsgMjkpIHtcclxuICBib3JkZXItYm90dG9tOiBub25lO1xyXG59XHJcblxyXG4uY2FsZW5kYXIgLmRheXMgbGkub3V0c2lkZSAuZGF0ZSB7XHJcbiAgY29sb3I6ICNkZGQ7XHJcbn1cclxuIl19 */"
+module.exports = ".modal{\r\n   background-image: none;\r\n }\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYWNjaW9uZXMvdmVyLWNhbGVuZGFyaW8vdmVyLWNhbGVuZGFyaW8uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtHQUNHLHNCQUFzQjtDQUN4QiIsImZpbGUiOiJzcmMvYXBwL2FjY2lvbmVzL3Zlci1jYWxlbmRhcmlvL3Zlci1jYWxlbmRhcmlvLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubW9kYWx7XHJcbiAgIGJhY2tncm91bmQtaW1hZ2U6IG5vbmU7XHJcbiB9Il19 */"
 
 /***/ }),
 
@@ -591,20 +599,169 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VerCalendarioComponent", function() { return VerCalendarioComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fullcalendar/daygrid */ "./node_modules/@fullcalendar/daygrid/main.esm.js");
+/* harmony import */ var _fullcalendar_list__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fullcalendar/list */ "./node_modules/@fullcalendar/list/main.esm.js");
+/* harmony import */ var _fullcalendar_timegrid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fullcalendar/timegrid */ "./node_modules/@fullcalendar/timegrid/main.esm.js");
+/* harmony import */ var _fullcalendar_interaction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fullcalendar/interaction */ "./node_modules/@fullcalendar/interaction/main.esm.js");
+/* harmony import */ var _fullcalendar_core_locales_es__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fullcalendar/core/locales/es */ "./node_modules/@fullcalendar/core/locales/es.js");
+/* harmony import */ var _fullcalendar_core_locales_es__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_fullcalendar_core_locales_es__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var src_app_servicios_eventos_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/servicios/eventos.service */ "./src/app/servicios/eventos.service.ts");
+
+
+
+
+
+
 
 
 let VerCalendarioComponent = class VerCalendarioComponent {
-    constructor() { }
+    constructor(_eventosService) {
+        this._eventosService = _eventosService;
+        //Control de set
+        this.step = 0;
+        //Variables ngModel del form nuevo evento
+        this.nuevoEventoForm = {
+            id: '',
+            titulo: '',
+            descripcion: '',
+            colorFondo: '#7aa9eb',
+            colorTexto: '#000000',
+            horaInicio: '',
+            horaTermino: ''
+        };
+        //variables de horas para los label
+        this.labelHoraInicio = '';
+        this.labelHoraTermino = '';
+        //Idioma del Calendario
+        this.locales = [_fullcalendar_core_locales_es__WEBPACK_IMPORTED_MODULE_6___default.a];
+        //Plugins a soportar por el calendario
+        this.calendarPlugins = [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_2__["default"], _fullcalendar_list__WEBPACK_IMPORTED_MODULE_3__["default"], _fullcalendar_timegrid__WEBPACK_IMPORTED_MODULE_4__["default"], _fullcalendar_interaction__WEBPACK_IMPORTED_MODULE_5__["default"]];
+        //Eventos a mostrar en el calendario
+        this.data = [];
+        //Datos del Header
+        this.header = {
+            left: 'today,prev,next',
+            center: 'title',
+            right: 'dayGridMonth,listWeek,dayGridWeek,timeGridWeek'
+        };
+    }
     ngOnInit() {
+        this.getEventos();
+    }
+    //detectar click en el dia
+    diaClick(test) {
+        this.limpiarVariable();
+        this.nuevoEventoForm.horaInicio = test.dateStr + 'T00:00';
+        this.nuevoEventoForm.horaTermino = test.dateStr + 'T00:00';
+        document.getElementById('open-modal-nueva-cita').click();
+    }
+    //detectar click en un evento
+    eventoClick(evento) {
+        this.limpiarVariable();
+        this.nuevoEventoForm.id = evento.event.id;
+        this.nuevoEventoForm.titulo = evento.event.title;
+        this.nuevoEventoForm.descripcion = evento.event.extendedProps.descripcion;
+        this.nuevoEventoForm.colorFondo = evento.event.backgroundColor;
+        this.nuevoEventoForm.colorTexto = evento.event.textColor;
+        this.nuevoEventoForm.horaInicio = evento.event.start.getFullYear() + "-" + ("0" + (evento.event.start.getMonth() + 1)).slice(-2) + "-" + ("0" + evento.event.start.getDate()).slice(-2) + "T" + ("0" + evento.event.start.getHours()).slice(-2) + ":" + ("0" + evento.event.start.getMinutes()).slice(-2);
+        this.labelHoraInicio = evento.event.start.getFullYear() + "-" + ("0" + (evento.event.start.getMonth() + 1)).slice(-2) + "-" + ("0" + evento.event.start.getDate()).slice(-2) + " " + ("0" + evento.event.start.getHours()).slice(-2) + ":" + ("0" + evento.event.start.getMinutes()).slice(-2);
+        if (evento.event.end != null) {
+            this.nuevoEventoForm.horaTermino = evento.event.end.getFullYear() + "-" + ("0" + (evento.event.end.getMonth() + 1)).slice(-2) + "-" + ("0" + evento.event.end.getDate()).slice(-2) + "T" + ("0" + evento.event.end.getHours()).slice(-2) + ":" + ("0" + evento.event.end.getMinutes()).slice(-2);
+            this.labelHoraTermino = evento.event.end.getFullYear() + "-" + ("0" + (evento.event.end.getMonth() + 1)).slice(-2) + "-" + ("0" + evento.event.end.getDate()).slice(-2) + " " + ("0" + evento.event.end.getHours()).slice(-2) + ":" + ("0" + evento.event.end.getMinutes()).slice(-2);
+        }
+        document.getElementById('open-modal-ver-cita').click();
+    }
+    eventRender(info) {
+        console.log('hola');
+    }
+    limpiarVariable() {
+        this.nuevoEventoForm.titulo = '';
+        this.nuevoEventoForm.descripcion = '';
+        //this.nuevoEventoForm.colorFondo = '';
+        //this.nuevoEventoForm.colorTexto = '';
+        this.nuevoEventoForm.horaInicio = '';
+        this.nuevoEventoForm.horaTermino = '';
+    }
+    setNuevoEvento(form) {
+        let datos = form.value;
+        this._eventosService.setEvento(datos).subscribe(response => {
+            if (response.estado == 'success') {
+                alert(response.mensaje);
+                this.getEventos();
+            }
+            else {
+                alert(response.mensaje);
+            }
+        }, error => {
+            console.log(error);
+        });
+    }
+    getEventos() {
+        this._eventosService.getEventos().subscribe(response => {
+            this.data = response;
+            console.log(response);
+        }, error => {
+            console.log(error);
+        });
+    }
+    updateEvento() {
+        this._eventosService.updateEvento(this.nuevoEventoForm).subscribe(response => {
+            if (response.estado == 'success') {
+                alert(response.mensaje);
+                this.getEventos();
+            }
+            else {
+                alert(response.mensaje);
+            }
+        }, error => {
+            console.log(error);
+        });
+    }
+    deleteEvento() {
+        this._eventosService.deleteEvento(this.nuevoEventoForm.id).subscribe(response => {
+            if (response.estado == 'success') {
+                alert(response.mensaje);
+                document.getElementById('closeModalEventInfo').click();
+                this.getEventos();
+            }
+            else {
+                alert(response.mensaje);
+            }
+        }, error => {
+            console.log(error);
+        });
+    }
+    controlSteps(accion) {
+        switch (accion) {
+            case 0:
+                this.step = 0;
+                break;
+            case 1:
+                if (this.step == 1) {
+                    this.step = 0;
+                }
+                else {
+                    this.step++;
+                }
+                break;
+            case 2:
+                this.step--;
+                break;
+            default:
+                break;
+        }
     }
 };
+VerCalendarioComponent.ctorParameters = () => [
+    { type: src_app_servicios_eventos_service__WEBPACK_IMPORTED_MODULE_7__["EventosService"] }
+];
 VerCalendarioComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-ver-calendario',
         template: __webpack_require__(/*! raw-loader!./ver-calendario.component.html */ "./node_modules/raw-loader/index.js!./src/app/acciones/ver-calendario/ver-calendario.component.html"),
         styles: [__webpack_require__(/*! ./ver-calendario.component.css */ "./src/app/acciones/ver-calendario/ver-calendario.component.css")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_servicios_eventos_service__WEBPACK_IMPORTED_MODULE_7__["EventosService"]])
 ], VerCalendarioComponent);
 
 
@@ -1033,26 +1190,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var ng_snotify__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ng-snotify */ "./node_modules/ng-snotify/index.js");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _layouts_inicio_inicio_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./layouts/inicio/inicio.component */ "./src/app/layouts/inicio/inicio.component.ts");
-/* harmony import */ var _layouts_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./layouts/navbar/navbar.component */ "./src/app/layouts/navbar/navbar.component.ts");
-/* harmony import */ var _registro_registro_cliente_registro_cliente_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./registro/registro-cliente/registro-cliente.component */ "./src/app/registro/registro-cliente/registro-cliente.component.ts");
-/* harmony import */ var _listar_listar_clientes_listar_clientes_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./listar/listar-clientes/listar-clientes.component */ "./src/app/listar/listar-clientes/listar-clientes.component.ts");
-/* harmony import */ var _registro_registro_mascota_registro_mascota_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./registro/registro-mascota/registro-mascota.component */ "./src/app/registro/registro-mascota/registro-mascota.component.ts");
-/* harmony import */ var _listar_todos_clientes_todos_clientes_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./listar/todos-clientes/todos-clientes.component */ "./src/app/listar/todos-clientes/todos-clientes.component.ts");
-/* harmony import */ var _listar_listar_mascotas_listar_mascotas_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./listar/listar-mascotas/listar-mascotas.component */ "./src/app/listar/listar-mascotas/listar-mascotas.component.ts");
-/* harmony import */ var _listar_todos_mascotas_todos_mascotas_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./listar/todos-mascotas/todos-mascotas.component */ "./src/app/listar/todos-mascotas/todos-mascotas.component.ts");
-/* harmony import */ var _documentos_ficha_clinica_ficha_clinica_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./documentos/ficha-clinica/ficha-clinica.component */ "./src/app/documentos/ficha-clinica/ficha-clinica.component.ts");
-/* harmony import */ var _documentos_hoja_vacunas_hoja_vacunas_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./documentos/hoja-vacunas/hoja-vacunas.component */ "./src/app/documentos/hoja-vacunas/hoja-vacunas.component.ts");
-/* harmony import */ var _acciones_nueva_consulta_nueva_consulta_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./acciones/nueva-consulta/nueva-consulta.component */ "./src/app/acciones/nueva-consulta/nueva-consulta.component.ts");
-/* harmony import */ var _acciones_ver_consultas_activas_ver_consultas_activas_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./acciones/ver-consultas-activas/ver-consultas-activas.component */ "./src/app/acciones/ver-consultas-activas/ver-consultas-activas.component.ts");
-/* harmony import */ var _acciones_ver_calendario_ver_calendario_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./acciones/ver-calendario/ver-calendario.component */ "./src/app/acciones/ver-calendario/ver-calendario.component.ts");
-/* harmony import */ var _acciones_ver_historial_consultas_ver_historial_consultas_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./acciones/ver-historial-consultas/ver-historial-consultas.component */ "./src/app/acciones/ver-historial-consultas/ver-historial-consultas.component.ts");
-/* harmony import */ var _perfil_informacion_informacion_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./perfil/informacion/informacion.component */ "./src/app/perfil/informacion/informacion.component.ts");
-/* harmony import */ var _perfil_configuracion_configuracion_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./perfil/configuracion/configuracion.component */ "./src/app/perfil/configuracion/configuracion.component.ts");
-/* harmony import */ var _acciones_nueva_vacuna_nueva_vacuna_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./acciones/nueva-vacuna/nueva-vacuna.component */ "./src/app/acciones/nueva-vacuna/nueva-vacuna.component.ts");
-/* harmony import */ var _documentos_ficha_mascota_ficha_mascota_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./documentos/ficha-mascota/ficha-mascota.component */ "./src/app/documentos/ficha-mascota/ficha-mascota.component.ts");
+/* harmony import */ var _fullcalendar_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fullcalendar/angular */ "./node_modules/@fullcalendar/angular/fesm2015/fullcalendar-angular.js");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _layouts_inicio_inicio_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./layouts/inicio/inicio.component */ "./src/app/layouts/inicio/inicio.component.ts");
+/* harmony import */ var _layouts_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./layouts/navbar/navbar.component */ "./src/app/layouts/navbar/navbar.component.ts");
+/* harmony import */ var _registro_registro_cliente_registro_cliente_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./registro/registro-cliente/registro-cliente.component */ "./src/app/registro/registro-cliente/registro-cliente.component.ts");
+/* harmony import */ var _listar_listar_clientes_listar_clientes_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./listar/listar-clientes/listar-clientes.component */ "./src/app/listar/listar-clientes/listar-clientes.component.ts");
+/* harmony import */ var _registro_registro_mascota_registro_mascota_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./registro/registro-mascota/registro-mascota.component */ "./src/app/registro/registro-mascota/registro-mascota.component.ts");
+/* harmony import */ var _listar_todos_clientes_todos_clientes_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./listar/todos-clientes/todos-clientes.component */ "./src/app/listar/todos-clientes/todos-clientes.component.ts");
+/* harmony import */ var _listar_listar_mascotas_listar_mascotas_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./listar/listar-mascotas/listar-mascotas.component */ "./src/app/listar/listar-mascotas/listar-mascotas.component.ts");
+/* harmony import */ var _listar_todos_mascotas_todos_mascotas_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./listar/todos-mascotas/todos-mascotas.component */ "./src/app/listar/todos-mascotas/todos-mascotas.component.ts");
+/* harmony import */ var _documentos_ficha_clinica_ficha_clinica_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./documentos/ficha-clinica/ficha-clinica.component */ "./src/app/documentos/ficha-clinica/ficha-clinica.component.ts");
+/* harmony import */ var _documentos_hoja_vacunas_hoja_vacunas_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./documentos/hoja-vacunas/hoja-vacunas.component */ "./src/app/documentos/hoja-vacunas/hoja-vacunas.component.ts");
+/* harmony import */ var _acciones_nueva_consulta_nueva_consulta_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./acciones/nueva-consulta/nueva-consulta.component */ "./src/app/acciones/nueva-consulta/nueva-consulta.component.ts");
+/* harmony import */ var _acciones_ver_consultas_activas_ver_consultas_activas_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./acciones/ver-consultas-activas/ver-consultas-activas.component */ "./src/app/acciones/ver-consultas-activas/ver-consultas-activas.component.ts");
+/* harmony import */ var _acciones_ver_calendario_ver_calendario_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./acciones/ver-calendario/ver-calendario.component */ "./src/app/acciones/ver-calendario/ver-calendario.component.ts");
+/* harmony import */ var _acciones_ver_historial_consultas_ver_historial_consultas_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./acciones/ver-historial-consultas/ver-historial-consultas.component */ "./src/app/acciones/ver-historial-consultas/ver-historial-consultas.component.ts");
+/* harmony import */ var _perfil_informacion_informacion_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./perfil/informacion/informacion.component */ "./src/app/perfil/informacion/informacion.component.ts");
+/* harmony import */ var _perfil_configuracion_configuracion_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./perfil/configuracion/configuracion.component */ "./src/app/perfil/configuracion/configuracion.component.ts");
+/* harmony import */ var _acciones_nueva_vacuna_nueva_vacuna_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./acciones/nueva-vacuna/nueva-vacuna.component */ "./src/app/acciones/nueva-vacuna/nueva-vacuna.component.ts");
+/* harmony import */ var _documentos_ficha_mascota_ficha_mascota_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./documentos/ficha-mascota/ficha-mascota.component */ "./src/app/documentos/ficha-mascota/ficha-mascota.component.ts");
+
 
 
 
@@ -1084,38 +1243,39 @@ let AppModule = class AppModule {
 AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
         declarations: [
-            _app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"],
-            _layouts_inicio_inicio_component__WEBPACK_IMPORTED_MODULE_8__["InicioComponent"],
-            _layouts_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_9__["NavbarComponent"],
-            _registro_registro_cliente_registro_cliente_component__WEBPACK_IMPORTED_MODULE_10__["RegistroClienteComponent"],
-            _listar_listar_clientes_listar_clientes_component__WEBPACK_IMPORTED_MODULE_11__["ListarClientesComponent"],
-            _registro_registro_mascota_registro_mascota_component__WEBPACK_IMPORTED_MODULE_12__["RegistroMascotaComponent"],
-            _listar_todos_clientes_todos_clientes_component__WEBPACK_IMPORTED_MODULE_13__["TodosClientesComponent"],
-            _listar_listar_mascotas_listar_mascotas_component__WEBPACK_IMPORTED_MODULE_14__["ListarMascotasComponent"],
-            _listar_todos_mascotas_todos_mascotas_component__WEBPACK_IMPORTED_MODULE_15__["TodosMascotasComponent"],
-            _documentos_ficha_clinica_ficha_clinica_component__WEBPACK_IMPORTED_MODULE_16__["FichaClinicaComponent"],
-            _documentos_hoja_vacunas_hoja_vacunas_component__WEBPACK_IMPORTED_MODULE_17__["HojaVacunasComponent"],
-            _acciones_nueva_consulta_nueva_consulta_component__WEBPACK_IMPORTED_MODULE_18__["NuevaConsultaComponent"],
-            _acciones_ver_consultas_activas_ver_consultas_activas_component__WEBPACK_IMPORTED_MODULE_19__["VerConsultasActivasComponent"],
-            _acciones_ver_calendario_ver_calendario_component__WEBPACK_IMPORTED_MODULE_20__["VerCalendarioComponent"],
-            _acciones_ver_historial_consultas_ver_historial_consultas_component__WEBPACK_IMPORTED_MODULE_21__["VerHistorialConsultasComponent"],
-            _perfil_informacion_informacion_component__WEBPACK_IMPORTED_MODULE_22__["InformacionComponent"],
-            _perfil_configuracion_configuracion_component__WEBPACK_IMPORTED_MODULE_23__["ConfiguracionComponent"],
-            _acciones_nueva_vacuna_nueva_vacuna_component__WEBPACK_IMPORTED_MODULE_24__["NuevaVacunaComponent"],
-            _documentos_ficha_mascota_ficha_mascota_component__WEBPACK_IMPORTED_MODULE_25__["FichaMascotaComponent"]
+            _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"],
+            _layouts_inicio_inicio_component__WEBPACK_IMPORTED_MODULE_9__["InicioComponent"],
+            _layouts_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_10__["NavbarComponent"],
+            _registro_registro_cliente_registro_cliente_component__WEBPACK_IMPORTED_MODULE_11__["RegistroClienteComponent"],
+            _listar_listar_clientes_listar_clientes_component__WEBPACK_IMPORTED_MODULE_12__["ListarClientesComponent"],
+            _registro_registro_mascota_registro_mascota_component__WEBPACK_IMPORTED_MODULE_13__["RegistroMascotaComponent"],
+            _listar_todos_clientes_todos_clientes_component__WEBPACK_IMPORTED_MODULE_14__["TodosClientesComponent"],
+            _listar_listar_mascotas_listar_mascotas_component__WEBPACK_IMPORTED_MODULE_15__["ListarMascotasComponent"],
+            _listar_todos_mascotas_todos_mascotas_component__WEBPACK_IMPORTED_MODULE_16__["TodosMascotasComponent"],
+            _documentos_ficha_clinica_ficha_clinica_component__WEBPACK_IMPORTED_MODULE_17__["FichaClinicaComponent"],
+            _documentos_hoja_vacunas_hoja_vacunas_component__WEBPACK_IMPORTED_MODULE_18__["HojaVacunasComponent"],
+            _acciones_nueva_consulta_nueva_consulta_component__WEBPACK_IMPORTED_MODULE_19__["NuevaConsultaComponent"],
+            _acciones_ver_consultas_activas_ver_consultas_activas_component__WEBPACK_IMPORTED_MODULE_20__["VerConsultasActivasComponent"],
+            _acciones_ver_calendario_ver_calendario_component__WEBPACK_IMPORTED_MODULE_21__["VerCalendarioComponent"],
+            _acciones_ver_historial_consultas_ver_historial_consultas_component__WEBPACK_IMPORTED_MODULE_22__["VerHistorialConsultasComponent"],
+            _perfil_informacion_informacion_component__WEBPACK_IMPORTED_MODULE_23__["InformacionComponent"],
+            _perfil_configuracion_configuracion_component__WEBPACK_IMPORTED_MODULE_24__["ConfiguracionComponent"],
+            _acciones_nueva_vacuna_nueva_vacuna_component__WEBPACK_IMPORTED_MODULE_25__["NuevaVacunaComponent"],
+            _documentos_ficha_mascota_ficha_mascota_component__WEBPACK_IMPORTED_MODULE_26__["FichaMascotaComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
-            _app_routing_module__WEBPACK_IMPORTED_MODULE_6__["AppRoutingModule"],
+            _app_routing_module__WEBPACK_IMPORTED_MODULE_7__["AppRoutingModule"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
-            ng_snotify__WEBPACK_IMPORTED_MODULE_5__["SnotifyModule"]
+            ng_snotify__WEBPACK_IMPORTED_MODULE_5__["SnotifyModule"],
+            _fullcalendar_angular__WEBPACK_IMPORTED_MODULE_6__["FullCalendarModule"]
         ],
         providers: [
             { provide: 'SnotifyToastConfig', useValue: ng_snotify__WEBPACK_IMPORTED_MODULE_5__["ToastDefaults"] },
             ng_snotify__WEBPACK_IMPORTED_MODULE_5__["SnotifyService"]
         ],
-        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
+        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]]
     })
 ], AppModule);
 
@@ -1130,7 +1290,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "p {\r\n    display: block;\r\n    margin-top: 0em;\r\n    margin-bottom: 0em;\r\n    margin-left: 0;\r\n    margin-right: 0;\r\n  }\r\n\r\n.header-test{\r\n  background: rgba(66, 135, 245, 0.52);\r\n}\r\n\r\n.consulta{\r\n  border-bottom: 1px solid rgba(66, 135, 245, 0.52);\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZG9jdW1lbnRvcy9maWNoYS1jbGluaWNhL2ZpY2hhLWNsaW5pY2EuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGNBQWM7SUFDZCxlQUFlO0lBQ2Ysa0JBQWtCO0lBQ2xCLGNBQWM7SUFDZCxlQUFlO0VBQ2pCOztBQUVGO0VBQ0Usb0NBQW9DO0FBQ3RDOztBQUVBO0VBQ0UsaURBQWlEO0FBQ25EIiwiZmlsZSI6InNyYy9hcHAvZG9jdW1lbnRvcy9maWNoYS1jbGluaWNhL2ZpY2hhLWNsaW5pY2EuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbInAge1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICBtYXJnaW4tdG9wOiAwZW07XHJcbiAgICBtYXJnaW4tYm90dG9tOiAwZW07XHJcbiAgICBtYXJnaW4tbGVmdDogMDtcclxuICAgIG1hcmdpbi1yaWdodDogMDtcclxuICB9XHJcblxyXG4uaGVhZGVyLXRlc3R7XHJcbiAgYmFja2dyb3VuZDogcmdiYSg2NiwgMTM1LCAyNDUsIDAuNTIpO1xyXG59XHJcblxyXG4uY29uc3VsdGF7XHJcbiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHJnYmEoNjYsIDEzNSwgMjQ1LCAwLjUyKTtcclxufSJdfQ== */"
+module.exports = "p {\r\n    display: block;\r\n    margin-top: 0em;\r\n    margin-bottom: 0em;\r\n    margin-left: 0;\r\n    margin-right: 0;\r\n  }\r\n\r\n.header-test{\r\n  background: rgba(66, 135, 245, 0.52);\r\n}\r\n\r\n.consulta{\r\n  border-bottom: 1px solid rgba(66, 135, 245, 0.52);\r\n}\r\n\r\n.test{\r\n  margin-left: 10rem;\r\n}\r\n\r\n/* div{\r\n  border: 1px solid black;\r\n} */\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZG9jdW1lbnRvcy9maWNoYS1jbGluaWNhL2ZpY2hhLWNsaW5pY2EuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGNBQWM7SUFDZCxlQUFlO0lBQ2Ysa0JBQWtCO0lBQ2xCLGNBQWM7SUFDZCxlQUFlO0VBQ2pCOztBQUVGO0VBQ0Usb0NBQW9DO0FBQ3RDOztBQUVBO0VBQ0UsaURBQWlEO0FBQ25EOztBQUVBO0VBQ0Usa0JBQWtCO0FBQ3BCOztBQUVBOztHQUVHIiwiZmlsZSI6InNyYy9hcHAvZG9jdW1lbnRvcy9maWNoYS1jbGluaWNhL2ZpY2hhLWNsaW5pY2EuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbInAge1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICBtYXJnaW4tdG9wOiAwZW07XHJcbiAgICBtYXJnaW4tYm90dG9tOiAwZW07XHJcbiAgICBtYXJnaW4tbGVmdDogMDtcclxuICAgIG1hcmdpbi1yaWdodDogMDtcclxuICB9XHJcblxyXG4uaGVhZGVyLXRlc3R7XHJcbiAgYmFja2dyb3VuZDogcmdiYSg2NiwgMTM1LCAyNDUsIDAuNTIpO1xyXG59XHJcblxyXG4uY29uc3VsdGF7XHJcbiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHJnYmEoNjYsIDEzNSwgMjQ1LCAwLjUyKTtcclxufVxyXG5cclxuLnRlc3R7XHJcbiAgbWFyZ2luLWxlZnQ6IDEwcmVtO1xyXG59XHJcblxyXG4vKiBkaXZ7XHJcbiAgYm9yZGVyOiAxcHggc29saWQgYmxhY2s7XHJcbn0gKi8iXX0= */"
 
 /***/ }),
 
@@ -1150,13 +1310,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jspdf__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! html2canvas */ "./node_modules/html2canvas/dist/html2canvas.js");
 /* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(html2canvas__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var src_app_servicios_consultas_service_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/servicios/consultas-service.service */ "./src/app/servicios/consultas-service.service.ts");
+/* harmony import */ var ng_snotify__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ng-snotify */ "./node_modules/ng-snotify/index.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+
+
+
 
 
 
 
 let FichaClinicaComponent = class FichaClinicaComponent {
-    constructor() { }
+    constructor(_snotify, _consultasService, location) {
+        this._snotify = _snotify;
+        this._consultasService = _consultasService;
+        //Variable para los datos basicos
+        this.datosBasicos = '';
+        //Variable para las consultas
+        this.consultasMascota = '';
+        //edad mascota
+        this.edadMascota = '';
+        location.onPopState(() => {
+            if (document.getElementById('close2') != null) {
+                document.getElementById('close2').click();
+            }
+        });
+    }
     ngOnInit() {
+    }
+    getFichaClinica(id) {
+        this._consultasService.getFichaClinica(id).subscribe(response => {
+            if (response.estado == 'success') {
+                this.datosBasicos = response.datosBasicos;
+                this.consultasMascota = response.consultas;
+                this.edadMascota = response.edad;
+            }
+            else {
+                this._snotify.error(response.mensaje, {
+                    timeout: 5000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    backdrop: 0.5,
+                    position: 'centerCenter'
+                });
+            }
+        }, error => {
+            console.log(error);
+        });
     }
     generarPDF() {
         html2canvas__WEBPACK_IMPORTED_MODULE_3___default()(document.getElementById('contenido'), {
@@ -1166,20 +1367,37 @@ let FichaClinicaComponent = class FichaClinicaComponent {
             // Calidad del PDF
             scale: 1
         }).then(function (canvas) {
-            var img = canvas.toDataURL("image/png");
-            var doc = new jspdf__WEBPACK_IMPORTED_MODULE_2___default.a();
-            doc.addImage(img, 'PNG', 7, 20, 195, 205);
-            doc.save('postres.pdf');
+            var imgData = canvas.toDataURL('image/png');
+            var imgWidth = 200;
+            var pageHeight = 295;
+            var imgHeight = canvas.height * imgWidth / canvas.width;
+            var heightLeft = imgHeight;
+            var doc = new jspdf__WEBPACK_IMPORTED_MODULE_2___default.a('p', 'mm');
+            var position = 10; // give some top padding to first page
+            doc.addImage(imgData, 'PNG', 5, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+            while (heightLeft >= 0) {
+                position += heightLeft - imgHeight; // top padding for other pages
+                doc.addPage();
+                doc.addImage(imgData, 'PNG', 5, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+            doc.save('file.pdf');
         });
     }
 };
+FichaClinicaComponent.ctorParameters = () => [
+    { type: ng_snotify__WEBPACK_IMPORTED_MODULE_5__["SnotifyService"] },
+    { type: src_app_servicios_consultas_service_service__WEBPACK_IMPORTED_MODULE_4__["ConsultasServiceService"] },
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_6__["LocationStrategy"] }
+];
 FichaClinicaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-ficha-clinica',
         template: __webpack_require__(/*! raw-loader!./ficha-clinica.component.html */ "./node_modules/raw-loader/index.js!./src/app/documentos/ficha-clinica/ficha-clinica.component.html"),
         styles: [__webpack_require__(/*! ./ficha-clinica.component.css */ "./src/app/documentos/ficha-clinica/ficha-clinica.component.css")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_snotify__WEBPACK_IMPORTED_MODULE_5__["SnotifyService"], src_app_servicios_consultas_service_service__WEBPACK_IMPORTED_MODULE_4__["ConsultasServiceService"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["LocationStrategy"]])
 ], FichaClinicaComponent);
 
 
@@ -1193,7 +1411,7 @@ FichaClinicaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2RvY3VtZW50b3MvZmljaGEtbWFzY290YS9maWNoYS1tYXNjb3RhLmNvbXBvbmVudC5jc3MifQ== */"
+module.exports = "/* div{\r\n    border: 1px solid black;\r\n} */\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZG9jdW1lbnRvcy9maWNoYS1tYXNjb3RhL2ZpY2hhLW1hc2NvdGEuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7R0FFRyIsImZpbGUiOiJzcmMvYXBwL2RvY3VtZW50b3MvZmljaGEtbWFzY290YS9maWNoYS1tYXNjb3RhLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiBkaXZ7XHJcbiAgICBib3JkZXI6IDFweCBzb2xpZCBibGFjaztcclxufSAqL1xyXG4iXX0= */"
 
 /***/ }),
 
@@ -1211,15 +1429,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var src_app_servicios_mascotas_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/servicios/mascotas.service */ "./src/app/servicios/mascotas.service.ts");
 /* harmony import */ var ng_snotify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ng-snotify */ "./node_modules/ng-snotify/index.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+
 
 
 
 
 let FichaMascotaComponent = class FichaMascotaComponent {
-    constructor(_mascotasService, _snotify) {
+    constructor(_mascotasService, _snotify, location) {
         this._mascotasService = _mascotasService;
         this._snotify = _snotify;
         this.datosMascota = '';
+        location.onPopState(() => {
+            if (document.getElementById('close') != null) {
+                document.getElementById('close').click();
+            }
+        });
     }
     ngOnInit() {
     }
@@ -1245,7 +1470,8 @@ let FichaMascotaComponent = class FichaMascotaComponent {
 };
 FichaMascotaComponent.ctorParameters = () => [
     { type: src_app_servicios_mascotas_service__WEBPACK_IMPORTED_MODULE_2__["MascotasService"] },
-    { type: ng_snotify__WEBPACK_IMPORTED_MODULE_3__["SnotifyService"] }
+    { type: ng_snotify__WEBPACK_IMPORTED_MODULE_3__["SnotifyService"] },
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_4__["LocationStrategy"] }
 ];
 FichaMascotaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1253,7 +1479,7 @@ FichaMascotaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./ficha-mascota.component.html */ "./node_modules/raw-loader/index.js!./src/app/documentos/ficha-mascota/ficha-mascota.component.html"),
         styles: [__webpack_require__(/*! ./ficha-mascota.component.css */ "./src/app/documentos/ficha-mascota/ficha-mascota.component.css")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_servicios_mascotas_service__WEBPACK_IMPORTED_MODULE_2__["MascotasService"], ng_snotify__WEBPACK_IMPORTED_MODULE_3__["SnotifyService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_servicios_mascotas_service__WEBPACK_IMPORTED_MODULE_2__["MascotasService"], ng_snotify__WEBPACK_IMPORTED_MODULE_3__["SnotifyService"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["LocationStrategy"]])
 ], FichaMascotaComponent);
 
 
@@ -1353,7 +1579,7 @@ InicioComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".navbar {\r\n  border-bottom: 1px solid #e0e0e0;\r\n  background-color: #fff;\r\n  box-shadow: 0px 4px 8px -3px rgba(0, 0, 0, 0.62);\r\n}\r\n\r\n/* FUNCIONES PARA ANIMAR EL BOTON DE LA BARRA */\r\n\r\n.dot {\r\n  height: 38px;\r\n  width: 38px;\r\n  box-shadow: 0px 4px 8px -3px rgba(0, 0, 0, 0.82);\r\n  background-color: rgba(66, 135, 245, 0.52);\r\n  background-image: url(\"https://image.flaticon.com/icons/png/128/64/64576.png\");\r\n  background-size: 1rem;\r\n  background-repeat: no-repeat;\r\n  background-position: center;\r\n  border-radius: 50%;\r\n  display: inline-block;\r\n  transition: 0.5s;\r\n}\r\n\r\n.dot:hover {\r\n  -webkit-transform: scale(1.1);\r\n          transform: scale(1.1);\r\n  -webkit-transform: rotateZ(30deg);\r\n          transform: rotateZ(30deg);\r\n  transition: 0.5s;\r\n}\r\n\r\n.dot-sidebar {\r\n    height: 38px;\r\n    width: 38px;\r\n    box-shadow: 0px 4px 8px -3px rgba(0, 0, 0, 0.82);\r\n    /* background-color: rgba(66, 135, 245, 0.52); */\r\n    background-image: url(\"https://image.flaticon.com/icons/png/128/64/64576.png\");\r\n    background-size: 1rem;\r\n    background-repeat: no-repeat;\r\n    background-position: center;\r\n    border-radius: 50%;\r\n    display: inline-block;\r\n    -webkit-transform: rotateZ(90deg);\r\n            transform: rotateZ(90deg);\r\n    transition: 0.5s;\r\n  }\r\n\r\n.dot-sidebar:hover {\r\n    -webkit-transform: scale(1.1);\r\n            transform: scale(1.1);\r\n    -webkit-transform: rotateZ(60deg);\r\n            transform: rotateZ(60deg);\r\n    transition: 0.5s;\r\n  }\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbGF5b3V0cy9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxnQ0FBZ0M7RUFDaEMsc0JBQXNCO0VBQ3RCLGdEQUFnRDtBQUNsRDs7QUFFQSwrQ0FBK0M7O0FBRS9DO0VBQ0UsWUFBWTtFQUNaLFdBQVc7RUFDWCxnREFBZ0Q7RUFDaEQsMENBQTBDO0VBQzFDLDhFQUE4RTtFQUM5RSxxQkFBcUI7RUFDckIsNEJBQTRCO0VBQzVCLDJCQUEyQjtFQUMzQixrQkFBa0I7RUFDbEIscUJBQXFCO0VBQ3JCLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLDZCQUFxQjtVQUFyQixxQkFBcUI7RUFDckIsaUNBQXlCO1VBQXpCLHlCQUF5QjtFQUN6QixnQkFBZ0I7QUFDbEI7O0FBRUE7SUFDSSxZQUFZO0lBQ1osV0FBVztJQUNYLGdEQUFnRDtJQUNoRCxnREFBZ0Q7SUFDaEQsOEVBQThFO0lBQzlFLHFCQUFxQjtJQUNyQiw0QkFBNEI7SUFDNUIsMkJBQTJCO0lBQzNCLGtCQUFrQjtJQUNsQixxQkFBcUI7SUFDckIsaUNBQXlCO1lBQXpCLHlCQUF5QjtJQUN6QixnQkFBZ0I7RUFDbEI7O0FBRUE7SUFDRSw2QkFBcUI7WUFBckIscUJBQXFCO0lBQ3JCLGlDQUF5QjtZQUF6Qix5QkFBeUI7SUFDekIsZ0JBQWdCO0VBQ2xCIiwiZmlsZSI6InNyYy9hcHAvbGF5b3V0cy9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubmF2YmFyIHtcclxuICBib3JkZXItYm90dG9tOiAxcHggc29saWQgI2UwZTBlMDtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmO1xyXG4gIGJveC1zaGFkb3c6IDBweCA0cHggOHB4IC0zcHggcmdiYSgwLCAwLCAwLCAwLjYyKTtcclxufVxyXG5cclxuLyogRlVOQ0lPTkVTIFBBUkEgQU5JTUFSIEVMIEJPVE9OIERFIExBIEJBUlJBICovXHJcblxyXG4uZG90IHtcclxuICBoZWlnaHQ6IDM4cHg7XHJcbiAgd2lkdGg6IDM4cHg7XHJcbiAgYm94LXNoYWRvdzogMHB4IDRweCA4cHggLTNweCByZ2JhKDAsIDAsIDAsIDAuODIpO1xyXG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoNjYsIDEzNSwgMjQ1LCAwLjUyKTtcclxuICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoXCJodHRwczovL2ltYWdlLmZsYXRpY29uLmNvbS9pY29ucy9wbmcvMTI4LzY0LzY0NTc2LnBuZ1wiKTtcclxuICBiYWNrZ3JvdW5kLXNpemU6IDFyZW07XHJcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcclxuICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBjZW50ZXI7XHJcbiAgYm9yZGVyLXJhZGl1czogNTAlO1xyXG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICB0cmFuc2l0aW9uOiAwLjVzO1xyXG59XHJcblxyXG4uZG90OmhvdmVyIHtcclxuICB0cmFuc2Zvcm06IHNjYWxlKDEuMSk7XHJcbiAgdHJhbnNmb3JtOiByb3RhdGVaKDMwZGVnKTtcclxuICB0cmFuc2l0aW9uOiAwLjVzO1xyXG59XHJcblxyXG4uZG90LXNpZGViYXIge1xyXG4gICAgaGVpZ2h0OiAzOHB4O1xyXG4gICAgd2lkdGg6IDM4cHg7XHJcbiAgICBib3gtc2hhZG93OiAwcHggNHB4IDhweCAtM3B4IHJnYmEoMCwgMCwgMCwgMC44Mik7XHJcbiAgICAvKiBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDY2LCAxMzUsIDI0NSwgMC41Mik7ICovXHJcbiAgICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoXCJodHRwczovL2ltYWdlLmZsYXRpY29uLmNvbS9pY29ucy9wbmcvMTI4LzY0LzY0NTc2LnBuZ1wiKTtcclxuICAgIGJhY2tncm91bmQtc2l6ZTogMXJlbTtcclxuICAgIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XHJcbiAgICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBjZW50ZXI7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbiAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgICB0cmFuc2Zvcm06IHJvdGF0ZVooOTBkZWcpO1xyXG4gICAgdHJhbnNpdGlvbjogMC41cztcclxuICB9XHJcbiAgXHJcbiAgLmRvdC1zaWRlYmFyOmhvdmVyIHtcclxuICAgIHRyYW5zZm9ybTogc2NhbGUoMS4xKTtcclxuICAgIHRyYW5zZm9ybTogcm90YXRlWig2MGRlZyk7XHJcbiAgICB0cmFuc2l0aW9uOiAwLjVzO1xyXG4gIH0iXX0= */"
+module.exports = ".navbar {\r\n  border-bottom: 1px solid #e0e0e0;\r\n  background-color: #fff;\r\n  box-shadow: 0px 4px 8px -3px rgba(0, 0, 0, 0.62);\r\n}\r\n\r\n/* FUNCIONES PARA ANIMAR EL BOTON DE LA BARRA */\r\n\r\n.dot {\r\n  height: 38px;\r\n  width: 38px;\r\n  box-shadow: 0px 4px 8px -3px rgba(0, 0, 0, 0.82);\r\n  background-color: rgba(66, 135, 245, 0.52);\r\n  background-image: url(\"https://image.flaticon.com/icons/png/128/64/64576.png\");\r\n  background-size: 1rem;\r\n  background-repeat: no-repeat;\r\n  background-position: center;\r\n  border-radius: 50%;\r\n  display: inline-block;\r\n  transition: 0.5s;\r\n}\r\n\r\n.dot-sidebar {\r\n    height: 38px;\r\n    width: 38px;\r\n    box-shadow: 0px 4px 8px -3px rgba(0, 0, 0, 0.82);\r\n    /* background-color: rgba(66, 135, 245, 0.52); */\r\n    background-image: url(\"https://image.flaticon.com/icons/png/128/64/64576.png\");\r\n    background-size: 1rem;\r\n    background-repeat: no-repeat;\r\n    background-position: center;\r\n    border-radius: 50%;\r\n    display: inline-block;\r\n    -webkit-transform: rotateZ(90deg);\r\n            transform: rotateZ(90deg);\r\n    transition: 0.5s;\r\n  }\r\n\r\n/* // Large devices (desktops, less than 1200px) */\r\n\r\n@media (min-width: 1199.98px) {\r\n  .dot:hover {\r\n    -webkit-transform: scale(1.1);\r\n            transform: scale(1.1);\r\n    -webkit-transform: rotateZ(30deg);\r\n            transform: rotateZ(30deg);\r\n    transition: 0.5s;\r\n  }\r\n\r\n  .dot-sidebar:hover {\r\n    -webkit-transform: scale(1.1);\r\n            transform: scale(1.1);\r\n    -webkit-transform: rotateZ(60deg);\r\n            transform: rotateZ(60deg);\r\n    transition: 0.5s;\r\n  }\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbGF5b3V0cy9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxnQ0FBZ0M7RUFDaEMsc0JBQXNCO0VBQ3RCLGdEQUFnRDtBQUNsRDs7QUFFQSwrQ0FBK0M7O0FBRS9DO0VBQ0UsWUFBWTtFQUNaLFdBQVc7RUFDWCxnREFBZ0Q7RUFDaEQsMENBQTBDO0VBQzFDLDhFQUE4RTtFQUM5RSxxQkFBcUI7RUFDckIsNEJBQTRCO0VBQzVCLDJCQUEyQjtFQUMzQixrQkFBa0I7RUFDbEIscUJBQXFCO0VBQ3JCLGdCQUFnQjtBQUNsQjs7QUFFQTtJQUNJLFlBQVk7SUFDWixXQUFXO0lBQ1gsZ0RBQWdEO0lBQ2hELGdEQUFnRDtJQUNoRCw4RUFBOEU7SUFDOUUscUJBQXFCO0lBQ3JCLDRCQUE0QjtJQUM1QiwyQkFBMkI7SUFDM0Isa0JBQWtCO0lBQ2xCLHFCQUFxQjtJQUNyQixpQ0FBeUI7WUFBekIseUJBQXlCO0lBQ3pCLGdCQUFnQjtFQUNsQjs7QUFFRixrREFBa0Q7O0FBQ2xEO0VBQ0U7SUFDRSw2QkFBcUI7WUFBckIscUJBQXFCO0lBQ3JCLGlDQUF5QjtZQUF6Qix5QkFBeUI7SUFDekIsZ0JBQWdCO0VBQ2xCOztFQUVBO0lBQ0UsNkJBQXFCO1lBQXJCLHFCQUFxQjtJQUNyQixpQ0FBeUI7WUFBekIseUJBQXlCO0lBQ3pCLGdCQUFnQjtFQUNsQjtBQUNGIiwiZmlsZSI6InNyYy9hcHAvbGF5b3V0cy9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubmF2YmFyIHtcclxuICBib3JkZXItYm90dG9tOiAxcHggc29saWQgI2UwZTBlMDtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmO1xyXG4gIGJveC1zaGFkb3c6IDBweCA0cHggOHB4IC0zcHggcmdiYSgwLCAwLCAwLCAwLjYyKTtcclxufVxyXG5cclxuLyogRlVOQ0lPTkVTIFBBUkEgQU5JTUFSIEVMIEJPVE9OIERFIExBIEJBUlJBICovXHJcblxyXG4uZG90IHtcclxuICBoZWlnaHQ6IDM4cHg7XHJcbiAgd2lkdGg6IDM4cHg7XHJcbiAgYm94LXNoYWRvdzogMHB4IDRweCA4cHggLTNweCByZ2JhKDAsIDAsIDAsIDAuODIpO1xyXG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoNjYsIDEzNSwgMjQ1LCAwLjUyKTtcclxuICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoXCJodHRwczovL2ltYWdlLmZsYXRpY29uLmNvbS9pY29ucy9wbmcvMTI4LzY0LzY0NTc2LnBuZ1wiKTtcclxuICBiYWNrZ3JvdW5kLXNpemU6IDFyZW07XHJcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcclxuICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBjZW50ZXI7XHJcbiAgYm9yZGVyLXJhZGl1czogNTAlO1xyXG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICB0cmFuc2l0aW9uOiAwLjVzO1xyXG59XHJcblxyXG4uZG90LXNpZGViYXIge1xyXG4gICAgaGVpZ2h0OiAzOHB4O1xyXG4gICAgd2lkdGg6IDM4cHg7XHJcbiAgICBib3gtc2hhZG93OiAwcHggNHB4IDhweCAtM3B4IHJnYmEoMCwgMCwgMCwgMC44Mik7XHJcbiAgICAvKiBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDY2LCAxMzUsIDI0NSwgMC41Mik7ICovXHJcbiAgICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoXCJodHRwczovL2ltYWdlLmZsYXRpY29uLmNvbS9pY29ucy9wbmcvMTI4LzY0LzY0NTc2LnBuZ1wiKTtcclxuICAgIGJhY2tncm91bmQtc2l6ZTogMXJlbTtcclxuICAgIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XHJcbiAgICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBjZW50ZXI7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbiAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgICB0cmFuc2Zvcm06IHJvdGF0ZVooOTBkZWcpO1xyXG4gICAgdHJhbnNpdGlvbjogMC41cztcclxuICB9XHJcblxyXG4vKiAvLyBMYXJnZSBkZXZpY2VzIChkZXNrdG9wcywgbGVzcyB0aGFuIDEyMDBweCkgKi9cclxuQG1lZGlhIChtaW4td2lkdGg6IDExOTkuOThweCkge1xyXG4gIC5kb3Q6aG92ZXIge1xyXG4gICAgdHJhbnNmb3JtOiBzY2FsZSgxLjEpO1xyXG4gICAgdHJhbnNmb3JtOiByb3RhdGVaKDMwZGVnKTtcclxuICAgIHRyYW5zaXRpb246IDAuNXM7XHJcbiAgfVxyXG5cclxuICAuZG90LXNpZGViYXI6aG92ZXIge1xyXG4gICAgdHJhbnNmb3JtOiBzY2FsZSgxLjEpO1xyXG4gICAgdHJhbnNmb3JtOiByb3RhdGVaKDYwZGVnKTtcclxuICAgIHRyYW5zaXRpb246IDAuNXM7XHJcbiAgfVxyXG59XHJcbiJdfQ== */"
 
 /***/ }),
 
@@ -2056,12 +2282,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./global */ "./src/app/servicios/global.ts");
+
 
 
 
 let ClientesService = class ClientesService {
     constructor(_http) {
         this._http = _http;
+        this.url = '';
+        this.url = _global__WEBPACK_IMPORTED_MODULE_3__["global"].url;
     }
     setCliente(formCliente) {
         let form = new FormData();
@@ -2071,19 +2301,19 @@ let ClientesService = class ClientesService {
         form.append("direccion", formCliente.direccion);
         form.append("numero", formCliente.numero);
         form.append("fecha_ingreso", formCliente.fecha_ingreso);
-        return this._http.post("http://127.0.0.1:8000/api/setCliente", form);
+        return this._http.post(this.url + "setCliente", form);
     }
     getMascotasPorRut(rut) {
-        return this._http.get("http://127.0.0.1:8000/api/getMascotasClientePorRut/" + rut);
+        return this._http.get(this.url + "getMascotasClientePorRut/" + rut);
     }
     getClientePorRut(rut) {
-        return this._http.get("http://127.0.0.1:8000/api/getClientePorRut/" + rut);
+        return this._http.get(this.url + "getClientePorRut/" + rut);
     }
     getClientesPorNombre(nombre) {
-        return this._http.get("http://127.0.0.1:8000/api/getClientesPorNombre/" + nombre);
+        return this._http.get(this.url + "getClientesPorNombre/" + nombre);
     }
     getMascotasPorIdCliente(id) {
-        return this._http.get("http://127.0.0.1:8000/api/getMascotasPorIdCliente/" + id);
+        return this._http.get(this.url + "getMascotasPorIdCliente/" + id);
     }
 };
 ClientesService.ctorParameters = () => [
@@ -2113,36 +2343,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./global */ "./src/app/servicios/global.ts");
+
 
 
 
 let ConsultasServiceService = class ConsultasServiceService {
     constructor(_http) {
         this._http = _http;
+        this.url = '';
+        this.url = _global__WEBPACK_IMPORTED_MODULE_3__["global"].url;
     }
     setConsulta(datosConsulta, datosMascota) {
         let form = new FormData();
         form.append("motivo", datosConsulta.motivoTextarea);
         form.append("fecha_consulta", datosConsulta.fechaConsulta);
         form.append("id_mascota", datosMascota.id);
-        return this._http.post("http://127.0.0.1:8000/api/setConsulta", form);
+        return this._http.post(this.url + "setConsulta", form);
     }
     getConsultasActivas() {
-        return this._http.get("http://127.0.0.1:8000/api/getConsultasActivas/");
+        return this._http.get(this.url + "getConsultasActivas");
     }
     getConsultasInactivas() {
-        return this._http.get("http://127.0.0.1:8000/api/getConsultasInactivas/");
+        return this._http.get(this.url + "getConsultasInactivas");
+    }
+    //OBTENER CONSULTAS PARA LA FICHA CLINICA
+    getFichaClinica(id) {
+        return this._http.get(this.url + "getConsultasInactivaPorIdMascota/" + id);
     }
     setProcedimientoConsulta(idConsulta, procedimientoConsulta) {
         let form = new FormData();
         form.append("id", idConsulta);
         form.append("procedimiento", procedimientoConsulta);
-        return this._http.post("http://127.0.0.1:8000/api/setProcedimientoConsulta", form);
+        return this._http.post(this.url + "setProcedimientoConsulta", form);
     }
     setConsultaFinalizada(idConsulta) {
         let form = new FormData();
         form.append("id", idConsulta);
-        return this._http.post("http://127.0.0.1:8000/api/setConsultaFinalizada", form);
+        return this._http.post(this.url + "setConsultaFinalizada", form);
     }
 };
 ConsultasServiceService.ctorParameters = () => [
@@ -2155,6 +2393,93 @@ ConsultasServiceService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
 ], ConsultasServiceService);
 
+
+
+/***/ }),
+
+/***/ "./src/app/servicios/eventos.service.ts":
+/*!**********************************************!*\
+  !*** ./src/app/servicios/eventos.service.ts ***!
+  \**********************************************/
+/*! exports provided: EventosService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventosService", function() { return EventosService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./global */ "./src/app/servicios/global.ts");
+
+
+
+
+let EventosService = class EventosService {
+    constructor(_http) {
+        this._http = _http;
+        this.url = '';
+        this.url = _global__WEBPACK_IMPORTED_MODULE_3__["global"].url;
+    }
+    setEvento(formEvento) {
+        let form = new FormData();
+        form.append("title", formEvento.titulo);
+        form.append("descripcion", formEvento.descripcion);
+        form.append("color", formEvento.colorFondo);
+        form.append("textColor", formEvento.colorTexto);
+        form.append("start", formEvento.horaInicio);
+        form.append("end", formEvento.horaTermino);
+        return this._http.post(this.url + "setEvento", form);
+    }
+    getEventos() {
+        return this._http.get(this.url + "getEventos");
+    }
+    updateEvento(formEvento) {
+        let form = new FormData();
+        form.append("id", formEvento.id);
+        form.append("title", formEvento.titulo);
+        form.append("descripcion", formEvento.descripcion);
+        form.append("color", formEvento.colorFondo);
+        form.append("textColor", formEvento.colorTexto);
+        form.append("start", formEvento.horaInicio);
+        form.append("end", formEvento.horaTermino);
+        return this._http.post(this.url + "updateEvento", form);
+    }
+    deleteEvento(id) {
+        let form = new FormData();
+        form.append('id', id);
+        return this._http.post(this.url + "deleteEvento", form);
+    }
+};
+EventosService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+];
+EventosService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+], EventosService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/servicios/global.ts":
+/*!*************************************!*\
+  !*** ./src/app/servicios/global.ts ***!
+  \*************************************/
+/*! exports provided: global */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "global", function() { return global; });
+var global = {
+    url: 'https://neovet.neofox.cl/api/'
+    //urlLocal:'http://127.0.0.1:8000/api/',
+    //urlProduccion:'https://neovet.neofox.cl/api/'
+};
 
 
 /***/ }),
@@ -2172,12 +2497,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./global */ "./src/app/servicios/global.ts");
+
 
 
 
 let MascotasService = class MascotasService {
     constructor(_http) {
         this._http = _http;
+        this.url = '';
+        this.url = _global__WEBPACK_IMPORTED_MODULE_3__["global"].url;
     }
     setMascota(formMascota, formCliente) {
         let form = new FormData();
@@ -2191,13 +2520,13 @@ let MascotasService = class MascotasService {
         form.append("color", formMascota.color);
         form.append("fecha_ingreso", formCliente.fecha_ingreso);
         form.append("id_cliente", formCliente.id);
-        return this._http.post("http://127.0.0.1:8000/api/setMascota", form);
+        return this._http.post(this.url + "setMascota", form);
     }
     getMascotaPorId(id) {
-        return this._http.get("http://127.0.0.1:8000/api/getMascotaPorId/" + id);
+        return this._http.get(this.url + "getMascotaPorId/" + id);
     }
     getMascotaPorNombre(nombre) {
-        return this._http.get("http://127.0.0.1:8000/api/getMascotasPorNombre/" + nombre);
+        return this._http.get(this.url + "getMascotasPorNombre/" + nombre);
     }
 };
 MascotasService.ctorParameters = () => [
@@ -2227,22 +2556,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./global */ "./src/app/servicios/global.ts");
+
 
 
 
 let VacunasService = class VacunasService {
     constructor(_http) {
         this._http = _http;
+        this.url = '';
+        this.url = _global__WEBPACK_IMPORTED_MODULE_3__["global"].url;
     }
     setVacuna(datosMascota, formVacuna) {
         let form = new FormData();
         form.append("id_mascota", datosMascota.id);
         form.append("id_vacuna", formVacuna.tipoVacuna);
         form.append("fecha", formVacuna.fechaVacuna);
-        return this._http.post("http://127.0.0.1:8000/api/setVacuna", form);
+        return this._http.post(this.url + "setVacuna", form);
     }
     getVacunasPorIdMascota(id) {
-        return this._http.get("http://127.0.0.1:8000/api/getVacunasPorIdMascota/" + id);
+        return this._http.get(this.url + "getVacunasPorIdMascota/" + id);
     }
 };
 VacunasService.ctorParameters = () => [
