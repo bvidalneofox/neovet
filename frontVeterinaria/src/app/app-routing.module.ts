@@ -9,14 +9,16 @@ import { ListarMascotasComponent } from './listar/listar-mascotas/listar-mascota
 import { TodosMascotasComponent } from './listar/todos-mascotas/todos-mascotas.component';
 import { FichaClinicaComponent } from './documentos/ficha-clinica/ficha-clinica.component';
 import { HojaVacunasComponent } from './documentos/hoja-vacunas/hoja-vacunas.component';
-import { NuevaConsultaComponent } from './acciones/nueva-consulta/nueva-consulta.component';
 import { VerCalendarioComponent } from './acciones/ver-calendario/ver-calendario.component';
 import { InformacionComponent } from './perfil/informacion/informacion.component';
 import { ConfiguracionComponent } from './perfil/configuracion/configuracion.component';
 import { FichaHospitalizacionComponent } from './documentos/ficha-hospitalizacion/ficha-hospitalizacion.component';
+import { LoginComponent } from './public/login/login.component';
 
 const routes: Routes = [
-  { path: '', component: InicioComponent },
+  { path: 'Login', component: LoginComponent },
+  { path: '', redirectTo: '/Inicio', pathMatch: 'full' },
+  { path: 'Inicio', component: InicioComponent },
   { path: 'registroCliente', component: RegistroClienteComponent },
   { path: 'registroMascota', component: RegistroMascotaComponent },
   { path: 'buscarCliente', component: ListarClientesComponent},

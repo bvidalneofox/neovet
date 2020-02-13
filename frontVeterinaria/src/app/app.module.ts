@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
@@ -27,6 +27,9 @@ import { NuevaVacunaComponent } from './acciones/nueva-vacuna/nueva-vacuna.compo
 import { FichaMascotaComponent } from './documentos/ficha-mascota/ficha-mascota.component';
 import { VerHospitalizacionesActivasComponent } from './acciones/ver-hospitalizaciones-activas/ver-hospitalizaciones-activas.component';
 import { FichaHospitalizacionComponent } from './documentos/ficha-hospitalizacion/ficha-hospitalizacion.component';
+import { AuthInterceptorService } from './servicios/auth-interceptor.service';
+import { LoginComponent } from './public/login/login.component';
+import { RegisterComponent } from './public/register/register.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import { FichaHospitalizacionComponent } from './documentos/ficha-hospitalizacio
     NuevaVacunaComponent,
     FichaMascotaComponent,
     VerHospitalizacionesActivasComponent,
-    FichaHospitalizacionComponent
+    FichaHospitalizacionComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +66,11 @@ import { FichaHospitalizacionComponent } from './documentos/ficha-hospitalizacio
     FullCalendarModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    },
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService
   ],
