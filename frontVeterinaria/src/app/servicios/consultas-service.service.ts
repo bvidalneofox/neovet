@@ -35,10 +35,14 @@ export class ConsultasServiceService {
     return this._http.get(this.url + "getConsultasInactivaPorIdMascota/" + id);
   }
 
-  setProcedimientoConsulta(idConsulta, procedimientoConsulta):Observable<any>{
+  setProcedimientoConsulta(idConsulta, procedimientoConsulta, peso, checkHosp, motivoHospitalizacion, idMascota):Observable<any>{
     let form = new FormData();
     form.append("id", idConsulta);
+    form.append("peso", peso);
     form.append("procedimiento", procedimientoConsulta);
+    form.append("checkHospitalizacion", checkHosp);
+    form.append("motivoHospitalizacion", motivoHospitalizacion);
+    form.append("idMascota", idMascota)
     return this._http.post(this.url + "setProcedimientoConsulta", form);
   }
 

@@ -48,3 +48,6 @@ Route::post('setEvento', 'EventoController@setEvento');
 Route::get('getEventos', 'EventoController@getEventos');
 Route::post('updateEvento', 'EventoController@updateEvento');
 Route::post('deleteEvento', 'EventoController@deleteEvento');
+
+//Ruta para las hospitalizaciones
+Route::get('getHospitalizacionesActivas', 'HospitalizacionController@getHospitalizacionesActivas');

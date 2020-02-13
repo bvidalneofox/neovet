@@ -47,7 +47,7 @@
                                             (click)="getMotivoConsulta(itemConsultasActivas?.motivo)">Ver
                                             Consulta</button> <button class="btn btn-sm btn-warning m-1"
                                             data-toggle="modal" data-target=".modal-procedimiento-consulta"
-                                            (click)="setIdConsultaProcedimiento(itemConsultasActivas?.id); getProcedimientoConsulta(itemConsultasActivas?.procedimiento)">
+                                            (click)="setIdConsultaProcedimiento(itemConsultasActivas?.id); getProcedimientoConsulta(itemConsultasActivas?.procedimiento, itemConsultasActivas?.peso, itemConsultasActivas?.idMascota); ">
                                             Procedimiento</button> <button class="btn btn-sm btn-danger m-1"
                                             data-toggle="modal" data-target=".modal-confirmacion-activa"
                                             (click)="setIdConsultaFinalizar(itemConsultasActivas?.id)">Dar Por
@@ -141,12 +141,23 @@
                             <div class="form-group col-md-12">
                                 <label for="peso">Ingrese peso de la mascota en Kg. al momento de realizar el
                                     procedimiento</label>
-                                <input type="text" name="peso" class="form-control" placeholder="Por ejemplo: 6kg" autocomplete="off">
+                                <input type="text" name="peso" class="form-control" placeholder="Por ejemplo: 6kg"
+                                    [(ngModel)]="pesoMascota" autocomplete="off">
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="text-area-proc">Indique los procedimientos realizados</label>
                                 <textarea name="text-area-proc" class="form-control" cols="30" rows="10"
                                     [(ngModel)]="procedimientoConsulta"></textarea>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" id="customControlValidation1" name="checkBoxH" [(ngModel)]="hospitalizacionCheckBox"
+                                    required>
+                                <label class="custom-control-label" for="customControlValidation1">Marque la casilla si
+                                    la mascota será hospitalizada</label>
+                            </div>
+                            <div class="form-group col-md-12" *ngIf="hospitalizacionCheckBox">
+                                <label for="text-area-moti-hos">Motivo de hospitalización</label>
+                                <textarea name="text-area-moti-hos" class="form-control" cols="30" rows="10" [(ngModel)]="motivoHospitalizacion"></textarea>
                             </div>
                         </div>
                     </form>

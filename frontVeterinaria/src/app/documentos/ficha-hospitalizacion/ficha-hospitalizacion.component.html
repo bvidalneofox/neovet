@@ -1,0 +1,137 @@
+<div class="container-fluid mt-4 mb-4">
+    <div class="card formularios">
+        <div class="container-fluid mt- mb-4">
+            <h3 class="text-center font-weight-bold mt-4">Estado Hospitalizacion</h3>
+            <div class="card-body card-datos">
+                <h4 class="font-weight-bold">Datos Paciente</h4>
+                <div class="row">
+                    <div class="col-6">
+                        <p><b>Nombre:</b> Morsita</p>
+                        <p><b>Especie:</b> Felino</p>
+                        <p><b>Edad:</b> 8 años</p>
+                    </div>
+                    <div class="col-6">
+                        <p><b>Dueño:</b> Bryan Vidal Díaz</p>
+                        <p><b>Rut:</b> 185227839</p>
+                        <p><b>Contacto Dueño:</b> +56978504418</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-body card-datos">
+                        <h4 class="font-weight-bold">Motivo Hospitalizacion</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione earum facilis sunt quam est
+                            assumenda ipsam nemo. Itaque omnis, quis nostrum dignissimos dolores, est perspiciatis
+                            repellat quidem minus fugit minima!</p>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <h3 class="text-center font-weight-bold mt-4">Formulario Seguimiento de la Mascota</h3>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <textarea name="obervaciones" cols="30" rows="5" class="form-control mt-4"
+                            placeholder="Ingrese el estado de la mascota" style="resize: none;"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-3 mt-3">
+                    <div class="form-group">
+                        <label *ngIf="nombreArchivo != ''">Archivo cargado: {{nombreArchivo}}</label>
+                        <label *ngIf="nombreArchivo == ''"></label>
+                        <button class="btn btn-primary btn-block" (click)="fileClick()">Adjuntar un
+                            documento</button>
+                        <input id="file-test" type="file" (change)="updateFile($event)" hidden>
+                        <button class="btn btn-success btn-block mt-4">Ingresar Seguiminento</button>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <h3 class="text-center font-weight-bold mt-4">Historial Seguimiento</h3>
+            <div class="table-responsive">
+                <table class="table table-sm">
+                    <thead>
+                        <tr class="text-center">
+                            <th style="width: 15%;">Fecha</th>
+                            <th style="width: 20%;">Encargado</th>
+                            <th style="width: 55%;">Descripcion</th>
+                            <th style="width: 10%;">Archivo Adjunto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">20 febrero del 2020</td>
+                            <td class="text-center">Mario Figueroa Alambrito</td>
+                            <td>Se revisa el estado de su pata superior derecha y se adjunta imagen de rayos X</td>
+                            <td class="text-center"><i style="cursor: pointer;"><img
+                                        src="https://img.icons8.com/pastel-glyph/2x/file.png" style="width: 2rem;"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">20 febrero del 2020</td>
+                            <td class="text-center">Mario Figueroa Alambrito</td>
+                            <td>Se revisa el estado de su pata superior derecha y se adjunta imagen de rayos X</td>
+                            <td class="text-center"><i style="cursor: pointer;"><img
+                                        src="https://img.icons8.com/pastel-glyph/2x/file.png" style="width: 2rem;"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">20 febrero del 2020</td>
+                            <td class="text-center">Mario Figueroa Alambrito</td>
+                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. In iure praesentium ipsam ut
+                                sunt distinctio, quisquam quis, sint cupiditate obcaecati quas! Laboriosam, harum nobis?
+                                Atque non voluptas voluptatum excepturi magnam.
+                                Quidem eius obcaecati, voluptatibus cupiditate non minus beatae reiciendis corrupti quo
+                                ad provident laboriosam atque consequuntur delectus praesentium maxime, sequi et
+                                consequatur, qui quasi suscipit dignissimos mollitia! Qui, molestiae maiores?
+                                Esse libero odit omnis labore error id animi commodi ex quis! Minima fugiat, esse maxime
+                                consequatur eveniet iste, nostrum quis et tenetur quasi inventore error assumenda!
+                                Laboriosam commodi ipsam corporis.
+                                Dolores velit molestias magni dolorem. Harum in vitae maxime amet nobis hic repellendus
+                                soluta fugiat similique ut dolore alias esse dolorem excepturi eius molestias quod modi,
+                                dignissimos suscipit, incidunt accusantium!</td>
+                            <td class="text-center"><i style="cursor: pointer;"><img
+                                        src="https://img.icons8.com/pastel-glyph/2x/file.png" style="width: 2rem;"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">20 febrero del 2020</td>
+                            <td class="text-center">Mario Figueroa Alambrito</td>
+                            <td>Se revisa el estado de su pata superior derecha y se adjunta imagen de rayos X</td>
+                            <td class="text-center"><i style="cursor: pointer;"><img
+                                        src="https://img.icons8.com/pastel-glyph/2x/file.png" style="width: 2rem;"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">20 febrero del 2020</td>
+                            <td class="text-center">Mario Figueroa Alambrito</td>
+                            <td>Se revisa el estado de su pata superior derecha y se adjunta imagen de rayos X</td>
+                            <td class="text-center"><i style="cursor: pointer;"><img
+                                        src="https://img.icons8.com/pastel-glyph/2x/file.png" style="width: 2rem;"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="row mt-4">
+                <div class="col-md-2">
+                    <p class="font-weight-bold">20 febrero del 2020</p>
+                </div>
+                <div class="col-md-3">
+                    <p><b>Revisado por:</b >Mario Figueroa</p>
+                </div>
+                <div class="col-md-6">
+                    <p><b>Estado:</b> Se revisa el estado de su pata superior derecha y se adjunta imagen de rayos X</p>
+                </div>
+                <div class="col-md-1">
+                    <p><i><img src="https://img.icons8.com/pastel-glyph/2x/file.png" style="width: 2rem;"></i></p>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>

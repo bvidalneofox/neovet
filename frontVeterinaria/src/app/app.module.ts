@@ -25,6 +25,8 @@ import { InformacionComponent } from './perfil/informacion/informacion.component
 import { ConfiguracionComponent } from './perfil/configuracion/configuracion.component';
 import { NuevaVacunaComponent } from './acciones/nueva-vacuna/nueva-vacuna.component';
 import { FichaMascotaComponent } from './documentos/ficha-mascota/ficha-mascota.component';
+import { VerHospitalizacionesActivasComponent } from './acciones/ver-hospitalizaciones-activas/ver-hospitalizaciones-activas.component';
+import { FichaHospitalizacionComponent } from './documentos/ficha-hospitalizacion/ficha-hospitalizacion.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { FichaMascotaComponent } from './documentos/ficha-mascota/ficha-mascota.
     InformacionComponent,
     ConfiguracionComponent,
     NuevaVacunaComponent,
-    FichaMascotaComponent
+    FichaMascotaComponent,
+    VerHospitalizacionesActivasComponent,
+    FichaHospitalizacionComponent
   ],
   imports: [
     BrowserModule,

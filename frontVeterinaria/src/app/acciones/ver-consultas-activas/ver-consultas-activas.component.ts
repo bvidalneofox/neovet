@@ -16,8 +16,16 @@ export class VerConsultasActivasComponent implements OnInit {
   motivoConsulta = '';
   //datos mascota
   datosMascota = '';
+  //variable de el peso de la mascota
+  pesoMascota = '';
   //variable del procedimiento
   procedimientoConsulta = '';
+  //checkbox hospitalizacion
+  hospitalizacionCheckBox = false;
+  //motivo hospitalizacion
+  motivoHospitalizacion = '';
+  //idMascota para la hospitalizacion
+  idMascotaHospitalizacion = '';
   //Id de la consulta seleccionada
   idConsultaProcedimiento = '';
   //ID A FINALIZAR
@@ -72,7 +80,7 @@ export class VerConsultasActivasComponent implements OnInit {
   }
 
   setProcedimientoConsulta() {
-    this._consultasService.setProcedimientoConsulta(this.idConsultaProcedimiento, this.procedimientoConsulta).subscribe(response => {
+    this._consultasService.setProcedimientoConsulta(this.idConsultaProcedimiento, this.procedimientoConsulta, this.pesoMascota, this.hospitalizacionCheckBox, this.motivoHospitalizacion, this.idMascotaHospitalizacion).subscribe(response => {
       if (response.estado == 'success') {
         this.getConsultasActivas();
         this._snotify.success(response.mensaje, {
@@ -98,8 +106,10 @@ export class VerConsultasActivasComponent implements OnInit {
     });
   }
 
-  getProcedimientoConsulta(procedimiento) {
+  getProcedimientoConsulta(procedimiento, peso, idMascota) {
     this.procedimientoConsulta = procedimiento;
+    this.pesoMascota = peso;
+    this.idMascotaHospitalizacion = idMascota;
   }
 
   setIdConsultaProcedimiento(id) {

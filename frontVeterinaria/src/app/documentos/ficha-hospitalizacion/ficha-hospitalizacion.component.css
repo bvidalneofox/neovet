@@ -1,0 +1,29 @@
+.card-datos{
+    box-shadow: none;
+    background-color: rgba(245, 245, 245, 0);
+    /* border: 1px solid black;
+    border-radius: 25px 25px 25px 25px; */
+}
+
+p {
+    display: block;
+    margin-top: 0em;
+    margin-bottom: 0em;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  hr{
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+tbody{
+  background: rgba(255, 255, 255, 0.52);
+}
+
+  /* div{
+      border: 1px solid black;
+  } */

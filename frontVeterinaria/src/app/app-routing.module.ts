@@ -13,6 +13,7 @@ import { NuevaConsultaComponent } from './acciones/nueva-consulta/nueva-consulta
 import { VerCalendarioComponent } from './acciones/ver-calendario/ver-calendario.component';
 import { InformacionComponent } from './perfil/informacion/informacion.component';
 import { ConfiguracionComponent } from './perfil/configuracion/configuracion.component';
+import { FichaHospitalizacionComponent } from './documentos/ficha-hospitalizacion/ficha-hospitalizacion.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -24,9 +25,9 @@ const routes: Routes = [
   { path: 'mostrarMascotas', component: TodosMascotasComponent },
   { path: 'fichaClinica', component: FichaClinicaComponent },
   { path: 'hojaVacunas', component: HojaVacunasComponent },
-  { path: 'nuevaConsulta/:id', component: NuevaConsultaComponent },
   { path: 'verCalendario', component: VerCalendarioComponent },
   { path: 'miPerfil', component: InformacionComponent },
+  { path: 'fichaHospitalizacion/:idHospitalizacion', component: FichaHospitalizacionComponent },
   { path: 'configuracion', component: ConfiguracionComponent }
 ];
 

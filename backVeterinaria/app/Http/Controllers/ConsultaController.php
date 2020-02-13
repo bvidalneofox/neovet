@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Consulta;
+use App\Hospitalizacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -90,9 +91,23 @@ class ConsultaController extends Controller
     {
         $consulta = Consulta::find($request->id);
         if (!is_null($consulta)) {
+            $consulta->peso = $request->peso;
             $consulta->procedimiento = $request->procedimiento;
             if ($consulta->save()) {
-                return ['estado' => 'success', 'mensaje' => 'procedimiento agregado correctamente.'];
+                if ($request->checkHospitalizacion == 'true') {
+                    $hosp = new Hospitalizacion();
+                    $hosp->motivo = $request->motivoHospitalizacion;
+                    $hosp->id_estado = '1';
+                    $hosp->id_mascota = $request->idMascota;
+                    $hosp->id_usuario = '1';
+                    if ($hosp->save()){
+                        return ['estado' => 'success', 'mensaje' => 'Procedimiento con Hospitalizacion agregado correctamente.'];
+                    }else{
+                        return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar el procedimiento con hospitalizacion.'];
+                    }
+                } else {
+                    return ['estado' => 'success', 'mensaje' => 'procedimiento agregado correctamente.'];
+                }
             } else {
                 return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar el procedimiento.'];
             }
