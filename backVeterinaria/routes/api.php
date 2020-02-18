@@ -23,6 +23,8 @@ Route::post('register', 'ApiController@register');
 
 //RUTAS PROTEGIDAS
 Route::group(['middleware' => 'auth.jwt'], function () {
+    //DESLOGUEARSE
+    Route::get('logout', 'ApiController@logout');
 
     //Rutas para los clientes
     Route::post('setCliente', 'ClienteController@setCliente');
@@ -58,8 +60,10 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
     //Ruta para las hospitalizaciones
     Route::get('getHospitalizacionesActivas', 'HospitalizacionController@getHospitalizacionesActivas');
+    Route::get('getHospitalizacionPorId/{id}', 'HospitalizacionController@getHospitalizacionPorId');
+    Route::post('setHospitalizacionFinalizada', 'HospitalizacionController@setHospitalizacionFinalizada');
 
-
-    //DESLOGUEARSE
-    Route::get('logout', 'ApiController@logout');
+    //Rutas para el seguimiento de las hospitalizaciones
+    Route::post('setSeguimiento', 'SeguimientoControlller@setSeguimiento');
+    Route::get('getSeguimientoPorId/{id}', 'SeguimientoControlller@getSeguimientoPorId');
 });

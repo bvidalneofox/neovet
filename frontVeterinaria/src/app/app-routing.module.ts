@@ -14,23 +14,39 @@ import { InformacionComponent } from './perfil/informacion/informacion.component
 import { ConfiguracionComponent } from './perfil/configuracion/configuracion.component';
 import { FichaHospitalizacionComponent } from './documentos/ficha-hospitalizacion/ficha-hospitalizacion.component';
 import { LoginComponent } from './public/login/login.component';
+import { PublicMasterComponent } from './public/public-master/public-master.component';
+import { AuthMasterComponent } from './auth/auth-master/auth-master.component';
+import { GuardianService } from './servicios/guardian.service';
 
 const routes: Routes = [
-  { path: 'Login', component: LoginComponent },
-  { path: '', redirectTo: '/Inicio', pathMatch: 'full' },
-  { path: 'Inicio', component: InicioComponent },
-  { path: 'registroCliente', component: RegistroClienteComponent },
-  { path: 'registroMascota', component: RegistroMascotaComponent },
-  { path: 'buscarCliente', component: ListarClientesComponent},
-  { path: 'mostrarClientes', component: TodosClientesComponent},
-  { path: 'buscarMascota', component: ListarMascotasComponent },
-  { path: 'mostrarMascotas', component: TodosMascotasComponent },
-  { path: 'fichaClinica', component: FichaClinicaComponent },
-  { path: 'hojaVacunas', component: HojaVacunasComponent },
-  { path: 'verCalendario', component: VerCalendarioComponent },
-  { path: 'miPerfil', component: InformacionComponent },
-  { path: 'fichaHospitalizacion/:idHospitalizacion', component: FichaHospitalizacionComponent },
-  { path: 'configuracion', component: ConfiguracionComponent }
+
+  //RUTAS PUBLICSA CON HIJOS
+  {
+    path: '', component: PublicMasterComponent, children:
+      [
+        { path: '', component: LoginComponent },
+      ]
+  },
+
+  //RUTAS PROTEGIDAS DEL SISTEMA
+  {
+    path: 'Inicio', component: AuthMasterComponent, canActivate: [GuardianService], children:
+      [
+        { path: '', component: InicioComponent },
+        { path: 'registroCliente', component: RegistroClienteComponent },
+        { path: 'registroMascota', component: RegistroMascotaComponent },
+        { path: 'buscarCliente', component: ListarClientesComponent },
+        { path: 'mostrarClientes', component: TodosClientesComponent },
+        { path: 'buscarMascota', component: ListarMascotasComponent },
+        { path: 'mostrarMascotas', component: TodosMascotasComponent },
+        { path: 'fichaClinica', component: FichaClinicaComponent },
+        { path: 'hojaVacunas', component: HojaVacunasComponent },
+        { path: 'verCalendario', component: VerCalendarioComponent },
+        { path: 'miPerfil', component: InformacionComponent },
+        { path: 'fichaHospitalizacion/:idHospitalizacion', component: FichaHospitalizacionComponent },
+        { path: 'configuracion', component: ConfiguracionComponent }
+      ]
+  }
 ];
 
 @NgModule({

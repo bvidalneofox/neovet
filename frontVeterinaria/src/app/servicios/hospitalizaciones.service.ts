@@ -18,4 +18,26 @@ export class HospitalizacionesService {
     return this._http.get(this.url + "getHospitalizacionesActivas");
   }
 
+  getHospitalizacionPorId(id): Observable<any> {
+    return this._http.get(this.url + "getHospitalizacionPorId/" + id);
+  }
+
+  setSeguimiento(descripcion, archivo, id): Observable<any> {
+    let form = new FormData();
+    form.append("descripcion", descripcion);
+    form.append("archivo", archivo);
+    form.append("id_hospitalizacion", id);
+    return this._http.post(this.url + "setSeguimiento", form);
+  }
+
+  getSeguimientoPorId(id): Observable<any> {
+    return this._http.get(this.url + "getSeguimientoPorId/" + id);
+  }
+
+  setHospitalizacionFinalizada(idConsulta):Observable<any>{
+    let form = new FormData();
+    form.append("id", idConsulta);
+    return this._http.post(this.url + "setHospitalizacionFinalizada", form);
+  }
+
 }

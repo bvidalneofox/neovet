@@ -6,24 +6,25 @@
                 <h4 class="font-weight-bold">Datos Paciente</h4>
                 <div class="row">
                     <div class="col-6">
-                        <p><b>Nombre:</b> Morsita</p>
-                        <p><b>Especie:</b> Felino</p>
-                        <p><b>Edad:</b> 8 años</p>
+                        <p><b>Nombre:</b> {{datosHospitalizacion?.nombreMascota}}</p>
+                        <p><b>Especie:</b> {{datosHospitalizacion?.tipoMascota}}</p>
+                        <p><b>Edad:</b> {{datosHospitalizacion?.fecha_nacimiento}}</p>
                     </div>
                     <div class="col-6">
-                        <p><b>Dueño:</b> Bryan Vidal Díaz</p>
-                        <p><b>Rut:</b> 185227839</p>
-                        <p><b>Contacto Dueño:</b> +56978504418</p>
+                        <p><b>Dueño:</b> {{datosHospitalizacion?.nombreDuenio}}</p>
+                        <p><b>Rut:</b> {{datosHospitalizacion?.rut}}</p>
+                        <p><b>Contacto Dueño:</b> {{datosHospitalizacion?.numero}}</p>
                     </div>
                 </div>
             </div>
+            <hr>
             <div class="row">
                 <div class="col-12">
                     <div class="card-body card-datos">
                         <h4 class="font-weight-bold">Motivo Hospitalizacion</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione earum facilis sunt quam est
-                            assumenda ipsam nemo. Itaque omnis, quis nostrum dignissimos dolores, est perspiciatis
-                            repellat quidem minus fugit minima!</p>
+                        <p>{{datosHospitalizacion?.motivo}}</p>
+                        <p><b>Derivado Por: </b>{{datosHospitalizacion?.nombreVetHosp}}</p>
+                        <p><b>Hospitalizado El: </b>{{datosHospitalizacion?.created_at}}</p>
                     </div>
                 </div>
             </div>
@@ -31,24 +32,32 @@
             <hr>
 
             <h3 class="text-center font-weight-bold mt-4">Formulario Seguimiento de la Mascota</h3>
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="form-group">
-                        <textarea name="obervaciones" cols="30" rows="5" class="form-control mt-4"
-                            placeholder="Ingrese el estado de la mascota" style="resize: none;"></textarea>
+            <form #formSeguimiento="ngForm" (ngSubmit)="setSeguimiento(formSeguimiento)" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <textarea name="obervaciones" [(ngModel)]="descripcion" cols="30" rows="5" class="form-control mt-4"
+                                placeholder="Ingrese el estado de la mascota" style="resize: none;"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-3 my-auto">
+                        <div class="form-group">
+                            <label *ngIf="nombreArchivo != ''">Archivo cargado: {{nombreArchivo}}</label>
+                            <label *ngIf="nombreArchivo == ''"></label>
+                            <button type="button" class="btn btn-primary btn-square btn-block" (click)="fileClick()">Adjuntar un
+                                documento</button>
+                            <input id="file-test" type="file" (change)="updateFile($event)" hidden>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3 mt-3">
-                    <div class="form-group">
-                        <label *ngIf="nombreArchivo != ''">Archivo cargado: {{nombreArchivo}}</label>
-                        <label *ngIf="nombreArchivo == ''"></label>
-                        <button class="btn btn-primary btn-block" (click)="fileClick()">Adjuntar un
-                            documento</button>
-                        <input id="file-test" type="file" (change)="updateFile($event)" hidden>
-                        <button class="btn btn-success btn-block mt-4">Ingresar Seguiminento</button>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block">Ingresar Seguiminento</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
 
             <hr>
 
@@ -58,80 +67,68 @@
                     <thead>
                         <tr class="text-center">
                             <th style="width: 15%;">Fecha</th>
-                            <th style="width: 20%;">Encargado</th>
+                            <th style="width: 20%;">Revisado Por</th>
                             <th style="width: 55%;">Descripcion</th>
                             <th style="width: 10%;">Archivo Adjunto</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-center">20 febrero del 2020</td>
-                            <td class="text-center">Mario Figueroa Alambrito</td>
-                            <td>Se revisa el estado de su pata superior derecha y se adjunta imagen de rayos X</td>
-                            <td class="text-center"><i style="cursor: pointer;"><img
-                                        src="https://img.icons8.com/pastel-glyph/2x/file.png" style="width: 2rem;"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">20 febrero del 2020</td>
-                            <td class="text-center">Mario Figueroa Alambrito</td>
-                            <td>Se revisa el estado de su pata superior derecha y se adjunta imagen de rayos X</td>
-                            <td class="text-center"><i style="cursor: pointer;"><img
-                                        src="https://img.icons8.com/pastel-glyph/2x/file.png" style="width: 2rem;"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">20 febrero del 2020</td>
-                            <td class="text-center">Mario Figueroa Alambrito</td>
-                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. In iure praesentium ipsam ut
-                                sunt distinctio, quisquam quis, sint cupiditate obcaecati quas! Laboriosam, harum nobis?
-                                Atque non voluptas voluptatum excepturi magnam.
-                                Quidem eius obcaecati, voluptatibus cupiditate non minus beatae reiciendis corrupti quo
-                                ad provident laboriosam atque consequuntur delectus praesentium maxime, sequi et
-                                consequatur, qui quasi suscipit dignissimos mollitia! Qui, molestiae maiores?
-                                Esse libero odit omnis labore error id animi commodi ex quis! Minima fugiat, esse maxime
-                                consequatur eveniet iste, nostrum quis et tenetur quasi inventore error assumenda!
-                                Laboriosam commodi ipsam corporis.
-                                Dolores velit molestias magni dolorem. Harum in vitae maxime amet nobis hic repellendus
-                                soluta fugiat similique ut dolore alias esse dolorem excepturi eius molestias quod modi,
-                                dignissimos suscipit, incidunt accusantium!</td>
-                            <td class="text-center"><i style="cursor: pointer;"><img
-                                        src="https://img.icons8.com/pastel-glyph/2x/file.png" style="width: 2rem;"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">20 febrero del 2020</td>
-                            <td class="text-center">Mario Figueroa Alambrito</td>
-                            <td>Se revisa el estado de su pata superior derecha y se adjunta imagen de rayos X</td>
-                            <td class="text-center"><i style="cursor: pointer;"><img
-                                        src="https://img.icons8.com/pastel-glyph/2x/file.png" style="width: 2rem;"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">20 febrero del 2020</td>
-                            <td class="text-center">Mario Figueroa Alambrito</td>
-                            <td>Se revisa el estado de su pata superior derecha y se adjunta imagen de rayos X</td>
-                            <td class="text-center"><i style="cursor: pointer;"><img
-                                        src="https://img.icons8.com/pastel-glyph/2x/file.png" style="width: 2rem;"></i>
+                        <tr *ngFor="let itemSeguimiento of datosSeguimiento">
+                            <td class="text-center">{{itemSeguimiento?.created_at}}</td>
+                            <td class="text-center">{{itemSeguimiento?.nombreVeterinario}}</td>
+                            <td>{{itemSeguimiento?.descripcion}}</td>
+                            <td class="text-center"> <a href="http://127.0.0.1:8000/{{itemSeguimiento?.ruta_archivo}}" target="_blank" *ngIf="itemSeguimiento?.ruta_archivo != 'undefined'"><img src="https://img.icons8.com/pastel-glyph/2x/file.png" style="width: 2rem;"></a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <!-- <div class="row mt-4">
-                <div class="col-md-2">
-                    <p class="font-weight-bold">20 febrero del 2020</p>
+            <hr>
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="text-center font-weight-bold mt-4">Acciones</h3>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-secondary btn-block mt-4">Imprimir Hoja de Hospitalizacion</button>
+                        <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target=".modal-confirmacion-finalizar">Dar de Alta (Dar Por Finalizada la Hospitalización)</button>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <p><b>Revisado por:</b >Mario Figueroa</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL CONFIRMAR -->
+<div class="modal fade modal-confirmacion-finalizar" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Confirmar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row my-4">
+                    <div class="col-md-12 text-center">
+                        <p class="h4">¿Esta Seguro?</p>
+                        <p class="h5">Confirme solo si ya se termino de atender a la mascota</p>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <p><b>Estado:</b> Se revisa el estado de su pata superior derecha y se adjunta imagen de rayos X</p>
+                <div class="row my-4">
+                    <div class="col-md-6 text-center">
+                        <div class="btn btn-success btn-block btn-rounded" data-dismiss="modal"
+                            (click)="finalizarHospitalizacion()">
+                            Sí, dar por finalizada
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <div class="btn btn-danger btn-block" data-dismiss="modal">
+                            No, no finalizar
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-1">
-                    <p><i><img src="https://img.icons8.com/pastel-glyph/2x/file.png" style="width: 2rem;"></i></p>
-                </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>

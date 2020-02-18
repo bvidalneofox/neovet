@@ -5,26 +5,61 @@ namespace App\Http\Controllers;
 use App\Mascota;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class MascotaController extends Controller
 {
+
+    public function validarDatos($request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'nombre' => 'required|min:1',
+                'raza' => 'required|unique:clientes,rut',
+                'fecha_nacimiento' => 'required|min:1',
+                'genero' => 'required',
+                'estado_chip' => 'required',
+                'estado_esterilizado' => 'required',
+            ],
+            [
+                'nombre.required' => 'Debe de ingresar un nombre',
+                'raza.required' => 'El rut del cliente es necesario',
+                'fecha_nacimiento.required' => 'Es necesario un numero del cliente',
+                'genero.required' => 'Debe de seleccionar genero de la mascota',
+                'estado_chip.required' => 'Debe de seleccionar si la mascota esta esterilizada o no'
+            ]
+        );
+
+
+        if ($validator->fails()) {
+            return ['estado' => 'failed_v', 'mensaje' => $validator->errors()];
+        }
+        return ['estado' => 'success', 'mensaje' => 'success'];
+    }
+
     public function setMascota(Request $request)
     {
-        $mascota = new Mascota();
-        $mascota->nombre = $request->nombre;
-        $mascota->genero = $request->genero;
-        $mascota->raza = $request->raza;
-        $mascota->color = $request->color;
-        $mascota->fecha_nacimiento = $request->fecha_nacimiento;
-        $mascota->fecha_ingreso = $request->fecha_ingreso;
-        $mascota->estado_chip = $request->estado_chip;
-        $mascota->estado_esterilizado = $request->estado_esterilizado;
-        $mascota->id_tipo_mascota = $request->id_tipo_mascota;
-        $mascota->id_cliente = $request->id_cliente;
-        if ($mascota->save()) {
-            return ['estado' => 'success', 'mensaje' => 'mascota agregada correctamente.'];
+        $validador = $this->validarDatos($request);
+        if ($validador['estado'] == 'success') {
+            $mascota = new Mascota();
+            $mascota->nombre = $request->nombre;
+            $mascota->genero = $request->genero;
+            $mascota->raza = $request->raza;
+            $mascota->color = $request->color;
+            $mascota->fecha_nacimiento = $request->fecha_nacimiento;
+            $mascota->fecha_ingreso = $request->fecha_ingreso;
+            $mascota->estado_chip = $request->estado_chip;
+            $mascota->estado_esterilizado = $request->estado_esterilizado;
+            $mascota->id_tipo_mascota = $request->id_tipo_mascota;
+            $mascota->id_cliente = $request->id_cliente;
+            if ($mascota->save()) {
+                return ['estado' => 'success', 'mensaje' => 'mascota agregada correctamente.'];
+            } else {
+                return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar la mascota.'];
+            }
         } else {
-            return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar la mascota.'];
+            return $validador;
         }
     }
 

@@ -37,7 +37,7 @@
                                 <tr *ngFor="let itemConsultasActivas of consultasActivas">
                                     <td>{{itemConsultasActivas?.nombreMascota}}</td>
                                     <td>{{itemConsultasActivas?.tipoMascota}}</td>
-                                    <td>{{itemConsultasActivas?.fecha_consulta}}</td>
+                                    <td>{{itemConsultasActivas?.created_at}}</td>
                                     <td>{{itemConsultasActivas?.nombreDuenio}}</td>
                                     <td class="text-center"><button class="btn btn-sm btn-success m-1"
                                             data-toggle="modal" data-target=".modal-datos-mascotas"
@@ -130,7 +130,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Procedimiento</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" id="close-modal-procedimiento" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -153,7 +153,7 @@
                                 <input type="checkbox" class="custom-control-input" id="customControlValidation1" name="checkBoxH" [(ngModel)]="hospitalizacionCheckBox"
                                     required>
                                 <label class="custom-control-label" for="customControlValidation1">Marque la casilla si
-                                    la mascota será hospitalizada</label>
+                                    la mascota será hospitalizada (Se finalizara la consulta y será derivado a hospitalizaciones activas)</label>
                             </div>
                             <div class="form-group col-md-12" *ngIf="hospitalizacionCheckBox">
                                 <label for="text-area-moti-hos">Motivo de hospitalización</label>
@@ -164,7 +164,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-block" data-dismiss="modal"
+                <button type="button" class="btn btn-primary btn-block"
                     (click)="setProcedimientoConsulta()">Ingresar</button>
             </div>
         </div>

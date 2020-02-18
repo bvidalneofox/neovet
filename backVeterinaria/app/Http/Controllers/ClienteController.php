@@ -5,23 +5,56 @@ namespace App\Http\Controllers;
 use App\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ClienteController extends Controller
 {
+
+    public function validarDatos($request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'nombre' => 'required|min:1',
+                'rut' => 'required|unique:clientes,rut',
+                'direccion' => 'required|min:1',
+                'numero' => 'required|min:1',
+            ],
+            [
+                'nombre.required' => 'Debe de ingresar un nombre',
+                'rut.required' => 'El rut del cliente es necesario',
+                'rut.unique' => 'El rut ingresado ya existe en nuestros registros',
+                'direccion.required' => 'Debe de ingresar la dirección del cliente',
+                'numero.required' => 'Es necesario un numero del cliente',
+            ]
+        );
+
+
+        if ($validator->fails()) {
+            return ['estado' => 'failed_v', 'mensaje' => $validator->errors()];
+        }
+        return ['estado' => 'success', 'mensaje' => 'success'];
+    }
+
     public function setCliente(Request $request)
     {
-        $cliente = new Cliente;
-        $cliente->nombre = $request->nombre;
-        $cliente->rut = $request->rut;
-        $cliente->correo = $request->correo;
-        $cliente->direccion = $request->direccion;
-        $cliente->numero = $request->numero;
-        $cliente->password = '123';
-        $cliente->fecha_ingreso = $request->fecha_ingreso;
-        if ($cliente->save()) {
-            return ['estado' => 'success', 'mensaje' => 'Cliente agregado correctamente.'];
+        $validador = $this->validarDatos($request);
+        if ($validador['estado'] == 'success') {
+            $cliente = new Cliente;
+            $cliente->nombre = $request->nombre;
+            $cliente->rut = $request->rut;
+            $cliente->correo = $request->correo;
+            $cliente->direccion = $request->direccion;
+            $cliente->numero = $request->numero;
+            $cliente->password = '123';
+            $cliente->fecha_ingreso = $request->fecha_ingreso;
+            if ($cliente->save()) {
+                return ['estado' => 'success', 'mensaje' => 'Cliente agregado correctamente.'];
+            } else {
+                return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar el nuevo cliente.'];
+            }
         } else {
-            return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar el nuevo cliente.'];
+            return $validador;
         }
     }
 

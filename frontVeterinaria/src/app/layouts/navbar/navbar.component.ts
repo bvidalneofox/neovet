@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { LoginService } from 'src/app/servicios/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,10 +12,13 @@ export class NavbarComponent implements OnInit {
   @Output() abrirSidebarParent = new EventEmitter<string>();
   //VARIABLE PARA EL CSS DEL BOTON SIDEBAR
   estilo = 'dot';
+  //Variable con nombre del usuario rescatado desde LS
+  nombreUser = '';
 
-  constructor() { }
+  constructor(private _loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
+    this.nombreUser = localStorage.getItem('nameUser');
   }
 
   abrirSidebar(){
@@ -23,6 +28,19 @@ export class NavbarComponent implements OnInit {
     }else{
       this.estilo = 'dot';
     }
+  }
+
+  logout(){
+    this._loginService.logout().subscribe(response =>{
+      if(response.status == 'success'){
+        localStorage.removeItem('token');
+        this.router.navigate(['']);
+      }else{
+        alert(response.msg);
+      }
+    }, error=>{
+      console.log(error);
+    });
   }
 
 }

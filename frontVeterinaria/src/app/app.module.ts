@@ -30,6 +30,9 @@ import { FichaHospitalizacionComponent } from './documentos/ficha-hospitalizacio
 import { AuthInterceptorService } from './servicios/auth-interceptor.service';
 import { LoginComponent } from './public/login/login.component';
 import { RegisterComponent } from './public/register/register.component';
+import { PublicMasterComponent } from './public/public-master/public-master.component';
+import { AuthMasterComponent } from './auth/auth-master/auth-master.component';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,9 @@ import { RegisterComponent } from './public/register/register.component';
     VerHospitalizacionesActivasComponent,
     FichaHospitalizacionComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PublicMasterComponent,
+    AuthMasterComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +77,9 @@ import { RegisterComponent } from './public/register/register.component';
       multi: true
     },
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
-    SnotifyService
+    SnotifyService,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
   ],
   bootstrap: [AppComponent]
 })

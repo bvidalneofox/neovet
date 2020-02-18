@@ -17,8 +17,8 @@ class CreateTableConsultas extends Migration
             $table->bigIncrements('id');
             $table->string('peso')->nullable();
             $table->string('motivo');
-            $table->string('procedimiento');
-            $table->date('fecha_consulta');
+            $table->string('procedimiento')->nullable();
+            $table->date('fecha_consulta')->nullable();
             $table->integer('id_estado');
             $table->integer('id_mascota');
             $table->integer('id_usuario');

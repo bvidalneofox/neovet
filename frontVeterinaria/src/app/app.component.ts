@@ -6,14 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  variabletest = 'lamasfacil';
-  title = 'frontVeterinaria';
-
-  abrirSidebar() {
-    if (this.variabletest != 'active') {
-      this.variabletest = 'active';
-    } else {
-      this.variabletest = 'lamasfacil';
-    }
-  }
+  
 }

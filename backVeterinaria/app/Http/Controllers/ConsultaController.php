@@ -7,22 +7,77 @@ use App\Hospitalizacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ConsultaController extends Controller
 {
+    public function validarDatos($request, $idFuncion)
+    {
+        switch ($idFuncion) {
+            case 1:
+                $validator = Validator::make(
+                    $request->all(),
+                    [
+                        'motivo' => 'required|min:1',
+                    ],
+                    [
+                        'motivo.required' => 'Debe de ingresar un motivo',
+                    ]
+                );
+                break;
+            case 2:
+                $validator = Validator::make(
+                    $request->all(),
+                    [
+                        'procedimiento' => 'required|min:1',
+                    ],
+                    [
+                        'procedimiento.required' => 'Debe de ingresar un procedimiento',
+                    ]
+                );
+                break;
+            case 3:
+                $validator = Validator::make(
+                    $request->all(),
+                    [
+                        'motivoHospitalizacion' => 'required|min:1',
+                    ],
+                    [
+                        'motivoHospitalizacion.required' => 'Debe de ingresar un motivo de hospitalización',
+                    ]
+                );
+                break;
+            default:
+                # code...
+                break;
+        }
+
+        if ($validator->fails()) {
+            return ['estado' => 'failed_v', 'mensaje' => $validator->errors()];
+        }
+        return ['estado' => 'success', 'mensaje' => 'success'];
+    }
+
     public function setConsulta(Request $request)
     {
-        $consulta = new Consulta();
-        $consulta->motivo = $request->motivo;
-        $consulta->procedimiento = '';
-        $consulta->fecha_consulta = $request->fecha_consulta;
-        $consulta->id_estado = '1';
-        $consulta->id_mascota = $request->id_mascota;
-        $consulta->id_usuario = '1';
-        if ($consulta->save()) {
-            return ['estado' => 'success', 'mensaje' => 'consulta creada correctamente.'];
+        $validador = $this->validarDatos($request, 1);
+        if ($validador['estado'] == 'success') {
+            $consulta = new Consulta();
+            $consulta->peso = '';
+            $consulta->motivo = $request->motivo;
+            $consulta->procedimiento = '';
+            $consulta->fecha_consulta = $request->fecha_consulta;
+            $consulta->id_estado = '1';
+            $consulta->id_mascota = $request->id_mascota;
+            $consulta->id_usuario = Auth::user()->id;
+            if ($consulta->save()) {
+                return ['estado' => 'success', 'mensaje' => 'consulta creada correctamente.'];
+            } else {
+                return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al crear la consulta.'];
+            }
         } else {
-            return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al crear la consulta.'];
+            return $validador;
         }
     }
 
@@ -65,7 +120,8 @@ class ConsultaController extends Controller
             ->join('clientes as cl', 'cl.id', '=', 'm.id_cliente')
             ->join('tipo_mascota as tm', 'tm.id', '=', 'm.id_tipo_mascota')
             ->join('genero_mascota as gm', 'gm.id', '=', 'm.genero')
-            ->select('c.*', 'm.nombre as nombreMascota', 'm.fecha_nacimiento as fechaNacimientoMascota', 'm.raza', 'gm.descripcion as generoMawscota', 'm.color', 'm.created_at as fechaIngresoMascota', 'm.id as idMascota', 'cl.nombre as nombreDuenio', 'cl.direccion', 'cl.numero', 'cl.correo', 'cl.rut', 'cl.created_at as fechaIngresoDuenio', 'tm.descripcion as tipoMascota')
+            ->join('users as u', 'u.id', 'c.id_usuario')
+            ->select('c.*', 'm.nombre as nombreMascota', 'm.fecha_nacimiento as fechaNacimientoMascota', 'm.raza', 'gm.descripcion as generoMawscota', 'm.color', 'm.created_at as fechaIngresoMascota', 'm.id as idMascota', 'cl.nombre as nombreDuenio', 'cl.direccion', 'cl.numero', 'cl.correo', 'cl.rut', 'cl.created_at as fechaIngresoDuenio', 'tm.descripcion as tipoMascota', 'u.name as nombreVeterinario')
             ->where('c.id_estado', '=', '2')
             ->where('m.id', '=', $id)
             ->get();
@@ -74,7 +130,7 @@ class ConsultaController extends Controller
             $anio = intval(Carbon::parse($busqueda[0]->fechaNacimientoMascota)->format('Y'));
             $dia =  intval(Carbon::parse($busqueda[0]->fechaNacimientoMascota)->format('d'));
             $mes = intval(Carbon::parse($busqueda[0]->fechaNacimientoMascota)->format('m'));
-            $edad = Carbon::createFromDate($anio, $mes, $dia)->age;
+            $edad = Carbon::createFromDate($anio, $mes, $dia)->diff(Carbon::now())->format('%y Año/s %m Mes/es y %d Dia/s');
             foreach ($busqueda as $key) {
                 setlocale(LC_TIME, 'es');
                 $key->created_at = Carbon::parse($key->created_at)->formatLocalized('%d %B del %Y');
@@ -89,30 +145,41 @@ class ConsultaController extends Controller
 
     public function setProcedimientoConsulta(Request $request)
     {
-        $consulta = Consulta::find($request->id);
-        if (!is_null($consulta)) {
-            $consulta->peso = $request->peso;
-            $consulta->procedimiento = $request->procedimiento;
-            if ($consulta->save()) {
-                if ($request->checkHospitalizacion == 'true') {
-                    $hosp = new Hospitalizacion();
-                    $hosp->motivo = $request->motivoHospitalizacion;
-                    $hosp->id_estado = '1';
-                    $hosp->id_mascota = $request->idMascota;
-                    $hosp->id_usuario = '1';
-                    if ($hosp->save()){
-                        return ['estado' => 'success', 'mensaje' => 'Procedimiento con Hospitalizacion agregado correctamente.'];
-                    }else{
-                        return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar el procedimiento con hospitalizacion.'];
+        $validador = $this->validarDatos($request, 2);
+        if ($validador['estado'] == 'success') {
+            $consulta = Consulta::find($request->id);
+            if (!is_null($consulta)) {
+                $consulta->peso = $request->peso;
+                $consulta->procedimiento = $request->procedimiento;
+                if ($consulta->save()) {
+                    if ($request->checkHospitalizacion == 'true') {
+                        $validador = $this->validarDatos($request, 3);
+                        if ($validador['estado'] == 'success') {
+                            $hosp = new Hospitalizacion();
+                            $hosp->motivo = $request->motivoHospitalizacion;
+                            $hosp->id_estado = '1';
+                            $hosp->id_mascota = $request->idMascota;
+                            $hosp->id_usuario = Auth::user()->id;
+                            if ($hosp->save()) {
+                                $this->setConsultaFinalizada($request);
+                                return ['estado' => 'success', 'mensaje' => 'Procedimiento con Hospitalizacion agregado correctamente.'];
+                            } else {
+                                return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar el procedimiento con hospitalizacion.'];
+                            }
+                        } else {
+                            return $validador;
+                        }
+                    } else {
+                        return ['estado' => 'success', 'mensaje' => 'procedimiento agregado correctamente.'];
                     }
                 } else {
-                    return ['estado' => 'success', 'mensaje' => 'procedimiento agregado correctamente.'];
+                    return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar el procedimiento.'];
                 }
             } else {
-                return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar el procedimiento.'];
+                return ['estado' => 'failed', 'mensaje' => 'No se ha encontrado al consulta solicitada.'];
             }
         } else {
-            return ['estado' => 'failed', 'mensaje' => 'No se ha encontrado al consulta solicitada.'];
+            return $validador;
         }
     }
 

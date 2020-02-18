@@ -47,8 +47,7 @@ export class NuevaConsultaComponent implements OnInit {
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
-          position: 'centerCenter'
+          position: 'rightTop'
         });
       }
     }, error => {
@@ -61,26 +60,28 @@ export class NuevaConsultaComponent implements OnInit {
   }
 
   setConsulta() {
-    console.log(this.datosConsulta, this.datosMascota);
     this._consultasService.setConsulta(this.datosConsulta, this.datosMascota).subscribe(response => {
       if (response.estado == 'success') {
+        this.limpiarCampos();
+        document.getElementById("closeButton").click();
+        this.step = 0;
         this._snotify.success(response.mensaje, {
           timeout: 2000,
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
           position: 'rightTop'
         });
       } else {
-        this._snotify.error(response.mensaje, {
-          timeout: 5000,
-          showProgressBar: true,
-          closeOnClick: false,
-          pauseOnHover: true,
-          backdrop: 0.5,
-          position: 'centerCenter'
-        });
+        for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+          this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
+        }
       }
     }, error => {
       console.log(error);
@@ -95,9 +96,7 @@ export class NuevaConsultaComponent implements OnInit {
 
       case 1:
         if (this.step == 1) {
-          document.getElementById("closeButton").click();
           this.setConsulta();
-          this.step = 0;
         } else {
           this.step++;
         }
@@ -110,6 +109,11 @@ export class NuevaConsultaComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  limpiarCampos(){
+    this.datosConsulta.fechaConsulta = '';
+    this.datosConsulta.motivoTextarea = '';
   }
 
 }

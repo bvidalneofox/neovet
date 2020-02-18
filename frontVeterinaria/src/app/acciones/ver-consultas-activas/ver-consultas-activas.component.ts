@@ -47,7 +47,6 @@ export class VerConsultasActivasComponent implements OnInit {
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
           position: 'rightTop'
         });
       }
@@ -66,8 +65,7 @@ export class VerConsultasActivasComponent implements OnInit {
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
-          position: 'centerCenter'
+          position: 'rightTop'
         });
       }
     }, error => {
@@ -83,23 +81,24 @@ export class VerConsultasActivasComponent implements OnInit {
     this._consultasService.setProcedimientoConsulta(this.idConsultaProcedimiento, this.procedimientoConsulta, this.pesoMascota, this.hospitalizacionCheckBox, this.motivoHospitalizacion, this.idMascotaHospitalizacion).subscribe(response => {
       if (response.estado == 'success') {
         this.getConsultasActivas();
+        document.getElementById('close-modal-procedimiento').click();
         this._snotify.success(response.mensaje, {
           timeout: 2000,
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
           position: 'rightTop'
         });
       } else {
-        this._snotify.error(response.mensaje, {
-          timeout: 5000,
-          showProgressBar: true,
-          closeOnClick: false,
-          pauseOnHover: true,
-          backdrop: 0.5,
-          position: 'centerCenter'
-        });
+        for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+          this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
+        }
       }
     }, error => {
       console.log(error);
@@ -125,7 +124,6 @@ export class VerConsultasActivasComponent implements OnInit {
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
           position: 'rightTop'
         });
       } else {
@@ -134,8 +132,7 @@ export class VerConsultasActivasComponent implements OnInit {
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
-          position: 'centerCenter'
+          position: 'rightTop'
         });
       }
     }, error => {

@@ -38,12 +38,12 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          <img src="assets/user.png" width="20" height="20"> Bryan Vidal Díaz
+          <img src="assets/user.png" width="20" height="20">{{nombreUser}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" routerLink="/miPerfil"><img src="assets/info.png" width="20" height="20"> Ver Mis Datos</a>
           <a class="dropdown-item" routerLink="/configuracion"><img src="assets/gear.png" width="20" height="20"> Configuración</a>
-          <a class="dropdown-item" href="#"><img src="assets/off.png" width="20" height="20"> Cerrar Sesión</a>
+          <a class="dropdown-item" (click)="logout()"><img src="assets/off.png" width="20" height="20" style="cursor: pointer;"> Cerrar Sesión</a>
         </div>
       </li>
     </ul>

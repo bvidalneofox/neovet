@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class APIController extends Controller
 {
@@ -28,12 +28,13 @@ public function login(Request $request)
             return response()->json([
                 'success' => false,
                 'message' => 'Invalid Email or Password',
-            ], 401);
+            ]);
         }
 
         return response()->json([
             'success' => true,
             'token' => $token,
+            'nameUser' => Auth::user()->name,
         ]);
     }
 

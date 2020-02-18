@@ -48,10 +48,10 @@
                                         <tr>
                                             <th scope="col">Nombre Mascota</th>
                                             <th scope="col">Nombre Dueño</th>
-                                            <th scope="col">Fecha Nacimiento</th>
+                                            <!-- <th scope="col">Fecha Nacimiento</th> -->
                                             <th scope="col">Tipo Mascota</th>
-                                            <th scope="col">Raza de la Mascota</th>
-                                            <th scope="col">Color</th>                                            
+                                            <!-- <th scope="col">Raza de la Mascota</th>
+                                            <th scope="col">Color</th>-->
                                             <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
@@ -59,10 +59,10 @@
                                         <tr *ngFor="let itemResultados of resultadosBusqueda">
                                             <td>{{itemResultados?.nombre}}</td>
                                             <td>{{itemResultados?.nombreDuenio}}</td>
-                                            <td>{{itemResultados?.fecha_nacimiento}}</td>
+                                            <!-- <td>{{itemResultados?.fecha_nacimiento}}</td> -->
                                             <td>{{itemResultados?.tipoMascota}}</td>
-                                            <td>{{itemResultados?.raza}}</td>
-                                            <td>{{itemResultados?.color}}</td>
+                                            <!-- <td>{{itemResultados?.raza}}</td>
+                                            <td>{{itemResultados?.color}}</td> -->
                                             <td><button class="btn btn-sm btn-secondary" data-dismiss="modal"
                                                 (click)="cargarMascotaSeleccionada(itemResultados); controlSteps(1)">Seleccionar</button></td>
                                         </tr>
@@ -74,17 +74,13 @@
                     <!-- PASO NUMERO 2 -->
                     <div *ngIf="step == 1">
                         <div class="row my-4 text-center">
-                            <div class="h5 col-xl-4 form-group">
+                            <div class="h5 col-xl-6 form-group">
                                 <label for="nombreMascota">Nombre Mascota</label>
                                 <input type="text" name="nombreMascota" class="form-control" [(ngModel)]="datosMascota.nombre" disabled>
                             </div>
-                            <div class="h5 col-xl-4 form-group">
+                            <div class="h5 col-xl-6 form-group">
                                 <label for="nombreDuenio">Dueño</label>
                                 <input type="text" name="nombreDuenio" class="form-control" [(ngModel)]="datosMascota.nombreDuenio" disabled>
-                            </div>
-                            <div class="h5 col-xl-4 form-group">
-                                <label for="fechaConsulta">Fecha Consulta (Seleccione)</label>
-                                <input type="date" name="fechaConsulta" class="form-control" [(ngModel)]="datosConsulta.fechaConsulta">
                             </div>
                         </div>
                         <div class="mt-4">

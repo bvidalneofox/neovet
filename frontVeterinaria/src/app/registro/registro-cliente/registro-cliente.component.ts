@@ -33,18 +33,18 @@ export class RegistroClienteComponent implements OnInit {
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
           position: 'rightTop'
         });
       } else {
-        this._snotify.error(response.mensaje, {
-          timeout: 5000,
-          showProgressBar: true,
-          closeOnClick: false,
-          pauseOnHover: true,
-          backdrop: 0.5,
-          position: 'centerCenter'
-        });
+        for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+          this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
+        }
       }
     }, error => {
       console.log(error);

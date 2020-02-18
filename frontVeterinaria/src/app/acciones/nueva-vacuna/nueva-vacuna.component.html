@@ -51,10 +51,10 @@
                                         <tr>
                                             <th scope="col">Nombre Mascota</th>
                                             <th scope="col">Nombre Dueño</th>
-                                            <th scope="col">Fecha Nacimiento</th>
+                                            <!-- <th scope="col">Fecha Nacimiento</th> -->
                                             <th scope="col">Tipo Mascota</th>
-                                            <th scope="col">Raza de la Mascota</th>
-                                            <th scope="col">Color</th>
+                                            <!-- <th scope="col">Raza de la Mascota</th>
+                                            <th scope="col">Color</th> -->
                                             <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
@@ -62,10 +62,10 @@
                                         <tr *ngFor="let itemResultados of resultadosBusqueda">
                                             <td>{{itemResultados?.nombre}}</td>
                                             <td>{{itemResultados?.nombreDuenio}}</td>
-                                            <td>{{itemResultados?.fecha_nacimiento}}</td>
+                                            <!-- <td>{{itemResultados?.fecha_nacimiento}}</td> -->
                                             <td>{{itemResultados?.tipoMascota}}</td>
-                                            <td>{{itemResultados?.raza}}</td>
-                                            <td>{{itemResultados?.color}}</td>
+                                            <!-- <td>{{itemResultados?.raza}}</td>
+                                            <td>{{itemResultados?.color}}</td> -->
                                             <td><button class="btn btn-sm btn-secondary" data-dismiss="modal"
                                                     (click)="cargarMascotaSeleccionada(itemResultados); getVacunas(itemResultados?.id); nombreTemporal = itemResultados?.nombre; controlSteps(1)">Seleccionar</button>
                                             </td>

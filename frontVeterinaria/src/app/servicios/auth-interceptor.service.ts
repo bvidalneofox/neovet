@@ -13,7 +13,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
   
-    const token: string = localStorage.getItem('token').replace(/['"]+/g, '');
+    const token: string = localStorage.getItem('token');
 
     let request = req;
 
@@ -29,7 +29,7 @@ export class AuthInterceptorService implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
 
         if (err.status === 401) {
-          this.router.navigateByUrl('/Login');
+          this.router.navigateByUrl('');
         }
 
         return throwError( err );

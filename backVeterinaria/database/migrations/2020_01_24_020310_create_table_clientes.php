@@ -17,7 +17,7 @@ class CreateTableClientes extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('rut');
-            $table->string('correo');
+            $table->string('correo')->nullable();
             $table->string('direccion');
             $table->string('numero');
             $table->string('password');

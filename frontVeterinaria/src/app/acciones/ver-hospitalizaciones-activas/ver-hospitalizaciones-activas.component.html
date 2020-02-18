@@ -38,7 +38,7 @@ data-target=".modal-hosp-activas" (click)="getHospitalizacionesActivas()">
                                     <td>{{itemHospitalizacionesActivas?.tipoMascota}}</td>
                                     <td>{{itemHospitalizacionesActivas?.created_at}}</td>
                                     <td>{{itemHospitalizacionesActivas?.nombreDuenio}}</td>
-                                    <td class="text-center"><button class="btn btn-sm btn-secondary m-1" data-dismiss="modal" aria-label="Close" routerLink="/fichaHospitalizacion/{{itemHospitalizacionesActivas?.id}}">Ver</button>
+                                    <td class="text-center"><button class="btn btn-sm btn-secondary m-1" data-dismiss="modal" aria-label="Close" routerLink="fichaHospitalizacion/{{itemHospitalizacionesActivas?.id}}">Visualizar</button>
                                 </tr>
                             </tbody>
                         </table>

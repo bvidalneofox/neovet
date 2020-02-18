@@ -5,14 +5,14 @@
                 <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
                     <h1 class="display-6 py-2">Formulario de Ingreso NeoVet</h1>
                     <div class="px-2">
-                        <form action="" class="justify-content-center">
+                        <form class="justify-content-center" #formLogin="ngForm" (ngSubmit)="loginNeoVet()">
                             <div class="form-group">
                                 <label class="sr-only">Correo</label>
-                                <input type="text" class="form-control" placeholder="Correo">
+                                <input name="correo" type="text" class="form-control" placeholder="Correo" [(ngModel)]="datosForm.correo">
                             </div>
                             <div class="form-group">
                                 <label class="sr-only">Contraseña</label>
-                                <input type="password" class="form-control" placeholder="Contraseña">
+                                <input name="pass" type="password" class="form-control" placeholder="Contraseña" [(ngModel)]="datosForm.password">
                             </div>
                             <button type="submit" class="btn btn-primary btn-lg">Ingresar</button>
                         </form>
