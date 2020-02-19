@@ -18,6 +18,14 @@ export class HospitalizacionesService {
     return this._http.get(this.url + "getHospitalizacionesActivas");
   }
 
+  getHospitalizacionesInactivas(): Observable<any> {
+    return this._http.get(this.url + "getHospitalizacionesInactivas");
+  }
+
+  getHospitalizacionesInactivasPorFechas(fechaInicio, fechaFin): Observable<any> {
+    return this._http.get(this.url + "getHospitalizacionesInactivasPorRangoFecha/" + fechaInicio + '/' + fechaFin);
+  }
+
   getHospitalizacionPorId(id): Observable<any> {
     return this._http.get(this.url + "getHospitalizacionPorId/" + id);
   }

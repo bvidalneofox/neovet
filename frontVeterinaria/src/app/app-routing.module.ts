@@ -17,6 +17,7 @@ import { LoginComponent } from './public/login/login.component';
 import { PublicMasterComponent } from './public/public-master/public-master.component';
 import { AuthMasterComponent } from './auth/auth-master/auth-master.component';
 import { GuardianService } from './servicios/guardian.service';
+import { FichaConsultaComponent } from './documentos/ficha-consulta/ficha-consulta.component';
 
 const routes: Routes = [
 
@@ -43,6 +44,7 @@ const routes: Routes = [
         { path: 'hojaVacunas', component: HojaVacunasComponent },
         { path: 'verCalendario', component: VerCalendarioComponent },
         { path: 'miPerfil', component: InformacionComponent },
+        { path: 'fichaConsulta/:idConsulta', component: FichaConsultaComponent },
         { path: 'fichaHospitalizacion/:idHospitalizacion', component: FichaHospitalizacionComponent },
         { path: 'configuracion', component: ConfiguracionComponent }
       ]

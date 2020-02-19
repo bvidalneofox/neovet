@@ -33,6 +33,9 @@ import { RegisterComponent } from './public/register/register.component';
 import { PublicMasterComponent } from './public/public-master/public-master.component';
 import { AuthMasterComponent } from './auth/auth-master/auth-master.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { BuscadorMascotasComponent } from './acciones/buscador-mascotas/buscador-mascotas.component';
+import { VerHistorialHospitalizacionesComponent } from './acciones/ver-historial-hospitalizaciones/ver-historial-hospitalizaciones.component';
+import { FichaConsultaComponent } from './documentos/ficha-consulta/ficha-consulta.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,10 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     LoginComponent,
     RegisterComponent,
     PublicMasterComponent,
-    AuthMasterComponent
+    AuthMasterComponent,
+    BuscadorMascotasComponent,
+    VerHistorialHospitalizacionesComponent,
+    FichaConsultaComponent
   ],
   imports: [
     BrowserModule,

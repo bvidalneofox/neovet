@@ -15,6 +15,8 @@ export class FichaHospitalizacionComponent implements OnInit {
   idHosp = '';
   //Datos de la hospitalizacion obtenida
   datosHospitalizacion = [];
+  //Comprobar si al hospitalizacion se encuentra finalizada
+  estadoHospitalizacion = 2;
   //Ngmodel del FOrmulario Seguimiento
   archivo: null;
   descripcion = '';
@@ -38,7 +40,7 @@ export class FichaHospitalizacionComponent implements OnInit {
     this._hospitalizacionService.getHospitalizacionPorId(this.idHosp).subscribe(response =>{
       if(response.estado == 'success'){
         this.datosHospitalizacion = response.hospitalizacion;
-        console.log(this.datosHospitalizacion);
+        this.estadoHospitalizacion = response.hospitalizacion.id_estado;
       }else{
         alert(response);
       }

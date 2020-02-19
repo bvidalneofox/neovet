@@ -22,7 +22,7 @@
                     <!-- PASO NUMERO 1 -->
                     <div *ngIf="step == 0">
                         <div class="mt-2">
-                            <h4 class="text-center font-weight-bold">Ingrese el nombre de la mascota la cual será atendida</h4>
+                            <h4 class="text-center font-weight-bold">Ingrese el nombre de la mascota o el dueño de la mascota la cual será atendida</h4>
                         </div>
 
                         <div class="mt-4">
@@ -48,10 +48,7 @@
                                         <tr>
                                             <th scope="col">Nombre Mascota</th>
                                             <th scope="col">Nombre Dueño</th>
-                                            <!-- <th scope="col">Fecha Nacimiento</th> -->
                                             <th scope="col">Tipo Mascota</th>
-                                            <!-- <th scope="col">Raza de la Mascota</th>
-                                            <th scope="col">Color</th>-->
                                             <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
@@ -59,10 +56,7 @@
                                         <tr *ngFor="let itemResultados of resultadosBusqueda">
                                             <td>{{itemResultados?.nombre}}</td>
                                             <td>{{itemResultados?.nombreDuenio}}</td>
-                                            <!-- <td>{{itemResultados?.fecha_nacimiento}}</td> -->
                                             <td>{{itemResultados?.tipoMascota}}</td>
-                                            <!-- <td>{{itemResultados?.raza}}</td>
-                                            <td>{{itemResultados?.color}}</td> -->
                                             <td><button class="btn btn-sm btn-secondary" data-dismiss="modal"
                                                 (click)="cargarMascotaSeleccionada(itemResultados); controlSteps(1)">Seleccionar</button></td>
                                         </tr>

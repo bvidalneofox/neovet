@@ -1,0 +1,125 @@
+<div class="container-fluid mt-4 mb-4">
+    <div class="card formularios">
+        <div class="container-fluid mt- mb-4">
+            <h3 class="text-center font-weight-bold mt-4">Estado Consulta</h3>
+            <div class="card-body card-datos">
+                <h4 class="font-weight-bold">Datos Paciente</h4>
+                <div class="row">
+                    <div class="col-6">
+                        <p><b>Nombre:</b> {{datosConsulta?.nombreMascota}}</p>
+                        <p><b>Especie:</b> {{datosConsulta?.tipoMascota}}</p>
+                        <p><b>Edad:</b> {{datosConsulta?.fecha_nacimiento}}</p>
+                    </div>
+                    <div class="col-6">
+                        <p><b>Dueño:</b> {{datosConsulta?.nombreDuenio}}</p>
+                        <p><b>Rut:</b> {{datosConsulta?.rut}}</p>
+                        <p><b>Contacto Dueño:</b> {{datosConsulta?.numero}}</p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-body card-datos">
+                        <h4 class="font-weight-bold">Motivo Consulta</h4>
+                        <p>{{datosConsulta?.motivo}}</p>
+                        <p><b>Ingresado Por: </b>{{datosConsulta?.nombreVetHosp}}</p>
+                        <p><b>Fecha Ingreso: </b>{{datosConsulta?.created_at}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <div *ngIf="estadoConsulta == 2">
+                <div class="card-body card-datos">
+                <h3 class="font-weight-bold">Procedimiento Realizado</h3>
+                <form #formSeguimiento="ngForm" (ngSubmit)="setProcedimientoConsulta()" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>{{procedimientoConsulta}}</p>
+                            <p><b>Revisado Por: </b>Colocar Nombre del usuario</p>
+                            <p><b>Peso de la mascota al momento de la revisión: </b>{{pesoMascota}}Kg.</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            </div>
+            <div *ngIf="estadoConsulta == 1">
+            <h3 class="text-center font-weight-bold mt-4">Formulario Procedimiento de la Mascota</h3>
+            <form #formSeguimiento="ngForm" (ngSubmit)="setProcedimientoConsulta()" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <textarea name="obervaciones" [(ngModel)]="procedimientoConsulta" cols="30" rows="5" class="form-control mt-4"
+                                placeholder="Ingrese el procedimiento realizado" style="resize: none;"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-3 my-auto">
+                        <div class="form-group">
+                            <label>Peso de la mascota en Kg. (opcional)</label>
+                            <input type="number" class="form-control" name="pesoMascota" [(ngModel)]="pesoMascota">
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" class="custom-control-input" id="customControlValidation1" name="checkBoxH" [(ngModel)]="hospitalizacionCheckBox"
+                        required>
+                    <label class="custom-control-label" for="customControlValidation1">Marque la casilla solo si
+                        la mascota será hospitalizada (Se finalizara la consulta y será derivado a hospitalizaciones activas)</label>
+                </div>
+                <div class="form-group col-md-12" *ngIf="hospitalizacionCheckBox">
+                    <label for="text-area-moti-hos">Motivo de hospitalización</label>
+                    <textarea name="text-area-moti-hos" class="form-control" cols="30" rows="10" [(ngModel)]="motivoHospitalizacion"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block">Ingresar Procedimiento Realizado</button>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-danger btn-block"  data-toggle="modal" data-target=".modal-confirmacion-activa">Finalizar Consulta</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL CONFIRMAR -->
+<div class="modal fade modal-confirmacion-activa" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Confirmar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row my-4">
+                    <div class="col-md-12 text-center">
+                        <p class="h4">¿Esta Seguro?</p>
+                        <p class="h5">Confirme solo si ya se termino de atender a la mascota</p>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-md-6 text-center">
+                        <div class="btn btn-success btn-block btn-rounded" data-dismiss="modal"
+                            (click)="setConsultaFinalizada()">
+                            Sí, dar por finalizada
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <div class="btn btn-danger btn-block" data-dismiss="modal">
+                            No, no finalizar
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

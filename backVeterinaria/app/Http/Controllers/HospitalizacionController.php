@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -16,6 +17,7 @@ class HospitalizacionController extends Controller
             ->join('tipo_mascota as tm', 'tm.id', '=', 'm.id_tipo_mascota')
             ->select('h.id', 'h.created_at', 'm.nombre as nombreMascota', 'cl.nombre as nombreDuenio', 'tm.descripcion as tipoMascota')
             ->where('h.id_estado', '1')
+            ->orderBy('created_at', 'desc')
             ->get();
         if (!$busqueda->isEmpty()) {
             return ['estado' => 'success', 'hospitalizaciones' => $busqueda];
@@ -24,13 +26,53 @@ class HospitalizacionController extends Controller
         }
     }
 
-    public function getHospitalizacionPorId($id){
+    public function getHospitalizacionesInactivas()
+    {
+        $busqueda = DB::table('hospitalizaciones as h')
+            ->join('mascotas as m', 'm.id', '=', 'h.id_mascota')
+            ->join('clientes as cl', 'cl.id', '=', 'm.id_cliente')
+            ->join('tipo_mascota as tm', 'tm.id', '=', 'm.id_tipo_mascota')
+            ->select('h.id', 'h.created_at', 'm.nombre as nombreMascota', 'cl.nombre as nombreDuenio', 'tm.descripcion as tipoMascota')
+            ->where('h.id_estado', '2')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        if (!$busqueda->isEmpty()) {
+            return ['estado' => 'success', 'hospitalizaciones' => $busqueda];
+        } else {
+            return ['estado' => 'failed_unr', 'mensaje' => 'No hay hospitalizaciones Inactivas de momento.'];
+        }
+    }
+
+    public function getHospitalizacionesInactivasPorRangoFecha($fechaIni = '',$fechaFini = '')
+    {
+        if (isset($fechaIni) && isset($fechaFini)) {
+            $busqueda = DB::table('hospitalizaciones as h')
+                ->join('mascotas as m', 'm.id', '=', 'h.id_mascota')
+                ->join('clientes as cl', 'cl.id', '=', 'm.id_cliente')
+                ->join('tipo_mascota as tm', 'tm.id', '=', 'm.id_tipo_mascota')
+                ->select('h.id', 'h.created_at', 'm.nombre as nombreMascota', 'cl.nombre as nombreDuenio', 'tm.descripcion as tipoMascota')
+                ->whereBetween('h.created_at', [$fechaIni . ' 00:00:00', $fechaFini . ' 23:59:59'])
+                ->where('h.id_estado', '2')
+                ->orderBy('created_at', 'desc')
+                ->get();
+            if (!$busqueda->isEmpty()) {
+                return ['estado' => 'success', 'hospitalizaciones' => $busqueda];
+            } else {
+                return ['estado' => 'failed_unr', 'mensaje' => 'No hay hospitalizaciones Inactivas en el rango seleccionado.'];
+            }
+        } else {
+            return ['estado' => 'failed_unr', 'mensaje' => 'Debe de seleccionar una fecha de Inicio y fecha de termino para filtrar.'];
+        }
+    }
+
+    public function getHospitalizacionPorId($id)
+    {
         $busqueda = DB::table('hospitalizaciones as h')
             ->join('mascotas as m', 'm.id', '=', 'h.id_mascota')
             ->join('clientes as cl', 'cl.id', '=', 'm.id_cliente')
             ->join('tipo_mascota as tm', 'tm.id', '=', 'm.id_tipo_mascota')
             ->join('users as u', 'u.id', '=', 'h.id_usuario')
-            ->select('h.id', 'h.created_at', 'h.motivo', 'm.nombre as nombreMascota', 'u.name as nombreVetHosp', 'm.fecha_nacimiento', 'cl.nombre as nombreDuenio', 'cl.rut', 'cl.numero', 'tm.descripcion as tipoMascota')
+            ->select('h.id', 'h.created_at', 'h.motivo', 'h.id_estado', 'm.nombre as nombreMascota', 'u.name as nombreVetHosp', 'm.fecha_nacimiento', 'cl.nombre as nombreDuenio', 'cl.rut', 'cl.numero', 'tm.descripcion as tipoMascota')
             ->where('h.id', $id)
             ->get();
         if (!$busqueda->isEmpty()) {

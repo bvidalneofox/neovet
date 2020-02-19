@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConsultasServiceService } from 'src/app/servicios/consultas-service.service';
 import { SnotifyService } from 'ng-snotify';
-import { MascotasService } from 'src/app/servicios/mascotas.service';
 
 @Component({
   selector: 'app-ver-historial-consultas',
@@ -11,15 +10,9 @@ import { MascotasService } from 'src/app/servicios/mascotas.service';
 export class VerHistorialConsultasComponent implements OnInit {
 
   //CONSULTAS INACATIVAS
-  consultasInactivas = '';
-  //DATOS MASCOTA
-  datosMascota = '';
-  //MOTIVO CONSULTA
-  motivoConsulta = '';
-  //PROCEDIMIENTO CONSULTA
-  procedimientoConsulta = '';
+  consultasInactivas = [];
 
-  constructor(private _snotify: SnotifyService, private _consultasController: ConsultasServiceService, private _mascotasService: MascotasService) { }
+  constructor(private _snotify: SnotifyService, private _consultasController: ConsultasServiceService) { }
 
   ngOnInit() {
   }
@@ -34,7 +27,6 @@ export class VerHistorialConsultasComponent implements OnInit {
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
           position: 'rightTop'
         });
       }
@@ -43,31 +35,23 @@ export class VerHistorialConsultasComponent implements OnInit {
     });
   }
 
-  getMascotaPorId(id) {
-    this._mascotasService.getMascotaPorId(id).subscribe(response => {
-      if (response.estado == 'success') {
-        this.datosMascota = response.mascota;
-      } else {
-        this._snotify.error(response.mensaje, {
-          timeout: 5000,
+  getHospitalizacionesInactivasPorFecha(fechaInicio, fechaFin){
+    this.consultasInactivas = [];
+    this._consultasController.getConsultasInactivasPorFechas(fechaInicio, fechaFin).subscribe(response =>{
+      if(response.estado == 'success'){
+        this.consultasInactivas = response.consultas;
+      }else{
+        this._snotify.warning(response.mensaje, {
+          timeout: 2000,
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
-          position: 'centerCenter'
+          position: 'rightTop'
         });
       }
-    }, error => {
+    }, error=>{
       console.log(error);
     });
-  }
-
-  getMotivoConsulta(motivo) {
-    this.motivoConsulta = motivo;
-  }
-
-  getProcedimientoConsulta(procedimiento) {
-    this.procedimientoConsulta = procedimiento;
   }
 
 }

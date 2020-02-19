@@ -30,6 +30,14 @@ export class ConsultasServiceService {
     return this._http.get(this.url + "getConsultasInactivas");
   }
 
+  getConsultaPorId(id): Observable<any> {
+    return this._http.get(this.url + "getConsultaPorId/" + id);
+  }
+
+  getConsultasInactivasPorFechas(fechaInicio, fechaFin): Observable<any> {
+    return this._http.get(this.url + "getConsultasInactivaPorRangoFecha/" + fechaInicio + '/' + fechaFin);
+  }
+
   //OBTENER CONSULTAS PARA LA FICHA CLINICA
   getFichaClinica(id): Observable<any>{
     return this._http.get(this.url + "getConsultasInactivaPorIdMascota/" + id);

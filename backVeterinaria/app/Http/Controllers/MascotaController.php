@@ -88,6 +88,7 @@ class MascotaController extends Controller
                 ->join('tipo_mascota as tm', 'tm.id', '=', 'm.id_tipo_mascota')
                 ->select('m.*', 'c.nombre as nombreDuenio', 'tm.descripcion as tipoMascota')
                 ->where('m.nombre', 'LIKE', '%' . $nombre . '%')
+                ->orWhere('c.nombre', 'LIKE', '%' . $nombre . '%')
                 ->get();
             if (!$busqueda->isEmpty()) {
                 return ['estado' => 'success', 'mascotas' => $busqueda];

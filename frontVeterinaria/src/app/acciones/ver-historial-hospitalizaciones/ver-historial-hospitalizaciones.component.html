@@ -1,21 +1,20 @@
-<!-- BOTON MENU INICIO -->
-<div class="card but-card text-center" style="cursor: pointer;" data-toggle="modal"
-    data-target=".modal-historial-consultas" (click)="getConsultasInactivas()">
+<div class="card yellow but-card text-center" style="cursor: pointer;" data-toggle="modal"
+    data-target=".modal-historial-hospitalizaciones" (click)="getHospitalizacionesInactivas()">
     <div class="card-body">
         <img src="assets/history.png" width="70" height="70" alt="">
-        <h4 class="card-text font-weight-bold">Historial de Consultas</h4>
-        <p class="font-weight-bold">Pacientes atendidos anteriormente</p>
+        <h4 class="card-text font-weight-bold">Historial Hospitalizaciones</h4>
+        <p class="font-weight-bold">Hospitalizaciones Realizadas Anteriormente</p>
     </div>
 </div>
 
 <!-- MODAL PRINCIPAL -->
-<div class="modal fade modal-historial-consultas" data-backdrop="static" tabindex="-1" role="dialog"
+<div class="modal fade modal-historial-hospitalizaciones" data-backdrop="static" tabindex="-1" role="dialog"
     aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Historial de
-                    Consultas</h3>
+                    Hospitalizaciones</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -26,27 +25,27 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="anio">Seleccione el Fecha Inicio</label>
-                            <input #fechaInicioCons type="date" class="form-control">
+                            <input #fechaInicio type="date" class="form-control">
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="mes">Seleccione Fecha Termino</label>
-                            <input #fechaTerminoCons type="date" class="form-control">
+                            <input #fechaTermino type="date" class="form-control">
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Filtrar Busqueda</label>
                             <button class="btn btn-primary btn-block"
-                                (click)="getHospitalizacionesInactivasPorFecha(fechaInicioCons.value, fechaTerminoCons.value)">Filtrar</button>
+                                (click)="getHospitalizacionesInactivasPorFecha(fechaInicio.value, fechaTermino.value)">Filtrar</button>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <label>Reinicar Filtrador</label>
+                            <label>Reiniciar Filtrador</label>
                             <button class="btn btn-secondary btn-block"
-                                (click)="getConsultasInactivas()">Reiniciar</button>
+                                (click)="getHospitalizacionesInactivas()">Reiniciar</button>
                         </div>
                     </div>
                 </div>
@@ -64,27 +63,20 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center font-weight-bold">
-                                <tr *ngFor="let itemConsultasInactivas of consultasInactivas">
-                                    <td>{{itemConsultasInactivas?.nombreMascota}}</td>
-                                    <td>{{itemConsultasInactivas?.tipoMascota}}</td>
-                                    <td>{{itemConsultasInactivas?.created_at}}</td>
-                                    <td>{{itemConsultasInactivas?.nombreDuenio}}</td>
+                                <tr *ngFor="let itemHospInactivas of hospitalizacionesInactivas">
+                                    <td>{{itemHospInactivas?.nombreMascota}}</td>
+                                    <td>{{itemHospInactivas?.tipoMascota}}</td>
+                                    <td>{{itemHospInactivas?.created_at}}</td>
+                                    <td>{{itemHospInactivas?.nombreDuenio}}</td>
                                     <td class="text-center"><button class="btn btn-sm btn-secondary m-1"
-                                        data-dismiss="modal" aria-label="Close"
-                                        routerLink="fichaConsulta/{{itemConsultasInactivas?.id}}">Ver
-                                        Consulta</button></td>
+                                            data-dismiss="modal" aria-label="Close"
+                                            routerLink="fichaHospitalizacion/{{itemHospInactivas?.id}}">Ver
+                                            Hospitalizacion</button></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer" *ngIf="step > 0">
-                <button type="button" class="btn btn-secondary" (click)="controlSteps(2)"><i><img
-                            src="assets/arrow-back.png" width="20" height="20" alt=""></i> Regresar</button>
-                <button type="button" class="btn btn-primary" (click)="controlSteps(1)"><span *ngIf="step!=1">Continuar
-                    </span><span *ngIf="step==1">Generar </span><i><img src="assets/arrow-next.png" width="20"
-                            height="20" alt=""></i></button>
             </div>
         </div>
     </div>

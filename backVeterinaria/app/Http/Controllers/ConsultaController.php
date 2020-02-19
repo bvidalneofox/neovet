@@ -105,11 +105,55 @@ class ConsultaController extends Controller
             ->join('tipo_mascota as tm', 'tm.id', '=', 'm.id_tipo_mascota')
             ->select('c.*', 'm.nombre as nombreMascota', 'm.id as idMascota', 'cl.nombre as nombreDuenio', 'tm.descripcion as tipoMascota')
             ->where('c.id_estado', '=', '2')
+            ->orderBy('created_at', 'desc')
             ->get();
         if (!$busqueda->isEmpty()) {
             return ['estado' => 'success', 'consultas' => $busqueda];
         } else {
             return ['estado' => 'failed_unr', 'mensaje' => 'No hay Consultas Inactivas de momento.'];
+        }
+    }
+
+    public function getConsultaPorId($id)
+    {
+        $busqueda = DB::table('consultas as c')
+            ->join('mascotas as m', 'm.id', '=', 'c.id_mascota')
+            ->join('clientes as cl', 'cl.id', '=', 'm.id_cliente')
+            ->join('tipo_mascota as tm', 'tm.id', '=', 'm.id_tipo_mascota')
+            ->join('users as u', 'u.id', '=', 'c.id_usuario')
+            ->select('c.*', 'm.nombre as nombreMascota', 'm.id as idMascota', 'm.fecha_nacimiento', 'cl.nombre as nombreDuenio', 'cl.numero', 'cl.rut', 'tm.descripcion as tipoMascota', 'u.name as nombreVetHosp')
+            ->where('c.id', '=', $id)
+            ->get();
+        if (!$busqueda->isEmpty()) {
+            $anio = intval(Carbon::parse($busqueda[0]->fecha_nacimiento)->format('Y'));
+            $dia =  intval(Carbon::parse($busqueda[0]->fecha_nacimiento)->format('d'));
+            $mes = intval(Carbon::parse($busqueda[0]->fecha_nacimiento)->format('m'));
+            $busqueda[0]->fecha_nacimiento = Carbon::createFromDate($anio, $mes, $dia)->diff(Carbon::now())->format('%y Año/s %m Mes/es y %d Dia/s');
+            return ['estado' => 'success', 'consultas' => $busqueda[0]];
+        } else {
+            return ['estado' => 'failed_unr', 'mensaje' => 'No hay Consultas Inactivas de momento.'];
+        }
+    }
+
+    public function getConsultasInactivasPorRangoFecha($fechaIni = '', $fechaFini = '')
+    {
+        if ($fechaIni != '' && $fechaFini != '') {
+            $busqueda = DB::table('consultas as c')
+                ->join('mascotas as m', 'm.id', '=', 'c.id_mascota')
+                ->join('clientes as cl', 'cl.id', '=', 'm.id_cliente')
+                ->join('tipo_mascota as tm', 'tm.id', '=', 'm.id_tipo_mascota')
+                ->select('c.*', 'm.nombre as nombreMascota', 'm.id as idMascota', 'cl.nombre as nombreDuenio', 'tm.descripcion as tipoMascota')
+                ->whereBetween('c.created_at', [$fechaIni . ' 00:00:00', $fechaFini . ' 23:59:59'])
+                ->where('c.id_estado', '=', '2')
+                ->orderBy('created_at', 'desc')
+                ->get();
+            if (!$busqueda->isEmpty()) {
+                return ['estado' => 'success', 'consultas' => $busqueda];
+            } else {
+                return ['estado' => 'failed_unr', 'mensaje' => 'No hay Consultas Inactivas de momento.'];
+            }
+        } else {
+            return ['estado' => 'failed_unr', 'mensaje' => 'Debe de seleccionar una fecha de Inicio y fecha de termino para filtrar.'];
         }
     }
 
@@ -162,7 +206,7 @@ class ConsultaController extends Controller
                             $hosp->id_usuario = Auth::user()->id;
                             if ($hosp->save()) {
                                 $this->setConsultaFinalizada($request);
-                                return ['estado' => 'success', 'mensaje' => 'Procedimiento con Hospitalizacion agregado correctamente.'];
+                                return ['estado' => 'successDerivacion', 'mensaje' => 'Procedimiento con Hospitalizacion agregado correctamente.'];
                             } else {
                                 return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar el procedimiento con hospitalizacion.'];
                             }

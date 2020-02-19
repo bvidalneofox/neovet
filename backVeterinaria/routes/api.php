@@ -43,6 +43,8 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('setConsulta', 'ConsultaController@setConsulta');
     Route::get('getConsultasActivas', 'ConsultaController@getConsultasActivas');
     Route::get('getConsultasInactivas', 'ConsultaController@getConsultasInactivas');
+    Route::get('getConsultaPorId/{id}', 'ConsultaController@getConsultaPorId');
+    Route::get('getConsultasInactivaPorRangoFecha/{fechaInicio?}/{fechaFin?}', 'ConsultaController@getConsultasInactivasPorRangoFecha');
     Route::post('setProcedimientoConsulta', 'ConsultaController@setProcedimientoConsulta');
     Route::get('getProcedimientoConsulta/{id}', 'ConsultaController@getProcedimientoConsulta');
     Route::post('setConsultaFinalizada', 'ConsultaController@setConsultaFinalizada');
@@ -60,7 +62,9 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
     //Ruta para las hospitalizaciones
     Route::get('getHospitalizacionesActivas', 'HospitalizacionController@getHospitalizacionesActivas');
+    Route::get('getHospitalizacionesInactivas', 'HospitalizacionController@getHospitalizacionesInactivas');
     Route::get('getHospitalizacionPorId/{id}', 'HospitalizacionController@getHospitalizacionPorId');
+    Route::get('getHospitalizacionesInactivasPorRangoFecha/{fechaInicio?}/{fechaFin?}', 'HospitalizacionController@getHospitalizacionesInactivasPorRangoFecha');
     Route::post('setHospitalizacionFinalizada', 'HospitalizacionController@setHospitalizacionFinalizada');
 
     //Rutas para el seguimiento de las hospitalizaciones
