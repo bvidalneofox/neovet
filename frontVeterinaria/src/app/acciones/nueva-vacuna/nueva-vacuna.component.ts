@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { SnotifyService } from 'ng-snotify';
 import { MascotasService } from 'src/app/servicios/mascotas.service';
 import { VacunasService } from 'src/app/servicios/vacunas.service';
-import * as jsPDF from 'jspdf';
-import * as html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-nueva-vacuna',
@@ -35,21 +33,6 @@ export class NuevaVacunaComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  // generarPDF(){
-  //   html2canvas(document.getElementById('contenido'), {
-  //     // Opciones
-  //     allowTaint: true,
-  //     useCORS: false,
-  //     // Calidad del PDF
-  //     scale: 1
-  //   }).then(function(canvas) {
-  //     var img = canvas.toDataURL("image/png");
-  //     var doc = new jsPDF();
-  //     doc.addImage(img,'PNG',7, 20, 195, 105);
-  //     doc.save('postres.pdf');
-  //   });
-  // }
 
   setNuevaVacuna(form){
     this._vacunasService.setVacuna(this.datosMascota, this.formVacuna).subscribe(response=>{
@@ -93,7 +76,6 @@ export class NuevaVacunaComponent implements OnInit {
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
           position: 'rightTop'
         });
       }

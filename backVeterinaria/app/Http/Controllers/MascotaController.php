@@ -6,6 +6,7 @@ use App\Mascota;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class MascotaController extends Controller
 {
@@ -63,6 +64,33 @@ class MascotaController extends Controller
         }
     }
 
+    public function updateMascota(Request $request)
+    {
+        $validador = $this->validarDatos($request);
+        $mascota = Mascota::find($request->id);
+        if ($validador['estado'] == 'success') {
+            if (!is_null($mascota)) {
+                $mascota->nombre = $request->nombre;
+                $mascota->genero = $request->genero;
+                $mascota->raza = $request->raza;
+                $mascota->color = $request->color;
+                $mascota->fecha_nacimiento = $request->fecha_nacimiento;
+                $mascota->fecha_ingreso = $request->fecha_ingreso;
+                $mascota->estado_chip = $request->estado_chip;
+                $mascota->estado_esterilizado = $request->estado_esterilizado;
+                $mascota->id_tipo_mascota = $request->id_tipo_mascota;
+                $mascota->id_cliente = $request->id_cliente;
+                if ($mascota->save()) {
+                    return ['estado' => 'success', 'mensaje' => 'mascota agregada correctamente.'];
+                } else {
+                    return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar la mascota.'];
+                }
+            }
+        } else {
+            return $validador;
+        }
+    }
+
     public function getMascotaPorId($id)
     {
         $busqueda = DB::table('mascotas as m')
@@ -70,10 +98,15 @@ class MascotaController extends Controller
             ->join('genero_mascota as gm', 'gm.id', '=', 'm.genero')
             ->join('estado_chip as ec', 'ec.id', '=', 'm.estado_chip')
             ->join('estado_esterilizacion as ee', 'ee.id', '=', 'm.estado_esterilizado')
-            ->select('m.*', 'tm.descripcion as tipoMascota', 'ec.descripcion as estadoChip', 'ee.descripcion as estadoEsterilizacion', 'gm.descripcion as sexo')
+            ->join('clientes as c', 'c.id', '=', 'm.id_cliente')
+            ->select('m.*', 'tm.descripcion as tipoMascota', 'ec.descripcion as estadoChip', 'ee.descripcion as estadoEsterilizacion', 'gm.descripcion as sexo', 'c.nombre as nombreDuenio', 'c.numero as contactoDuenio', 'c.direccion as direccionDuenio', 'c.correo as correoDuenio', 'c.rut as rutDuenio', 'c.created_at as registroDuenio')
             ->where('m.id', $id)
             ->get();
         if (count($busqueda) > 0) {
+            $anio = intval(Carbon::parse($busqueda[0]->fecha_nacimiento)->format('Y'));
+            $dia =  intval(Carbon::parse($busqueda[0]->fecha_nacimiento)->format('d'));
+            $mes = intval(Carbon::parse($busqueda[0]->fecha_nacimiento)->format('m'));
+            $busqueda[0]->fecha_nacimiento = Carbon::createFromDate($anio, $mes, $dia)->diff(Carbon::now())->format('%y Año/s %m Mes/es y %d Dia/s');
             return ['estado' => 'success', 'mascota' => $busqueda[0]];
         } else {
             return ['estado' => 'failed_unr', 'mensaje' => 'No se ha encontrado el id de la mascota.'];

@@ -22,6 +22,10 @@ export class ConsultasServiceService {
     return this._http.post(this.url + "setConsulta", form);
   }
 
+  getUltimasConsultasPorIdMascota(id): Observable<any> {
+    return this._http.get(this.url + "getUltimasConsultasPorIdMascota/" + id);
+  }
+
   getConsultasActivas(): Observable<any> {
     return this._http.get(this.url + "getConsultasActivas");
   }

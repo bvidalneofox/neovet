@@ -81,6 +81,24 @@ class ConsultaController extends Controller
         }
     }
 
+    public function getUltimasConsultasPorIdMascota($id)
+    {
+        $busqueda = DB::table('consultas as c')
+            ->join('mascotas as m', 'm.id', '=', 'c.id_mascota')
+            ->join('clientes as cl', 'cl.id', '=', 'm.id_cliente')
+            ->join('tipo_mascota as tm', 'tm.id', '=', 'm.id_tipo_mascota')
+            ->join('users as u', 'u.id', '=', 'c.id_usuario')
+            ->select('c.*', 'm.nombre as nombreMascota', 'm.id as idMascota', 'cl.nombre as nombreDuenio', 'tm.descripcion as tipoMascota', 'u.name as nombreEncargado')
+            ->where('c.id_mascota', '=', $id)
+            ->take(5)
+            ->get();
+        if (!$busqueda->isEmpty()) {
+            return ['estado' => 'success', 'consultas' => $busqueda];
+        } else {
+            return ['estado' => 'failed_unr', 'mensaje' => 'No hay Consultas activas de momento.'];
+        }
+    }
+
     public function getConsultasActivas()
     {
         $busqueda = DB::table('consultas as c')

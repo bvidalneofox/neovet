@@ -1,87 +1,109 @@
-<!-- MODAL DE DATOS MASCOTA -->
-<div class="modal fade modal-buscar-datos-mascotas" data-backdrop="static" tabindex="-1" role="dialog"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">
-                    Datos Mascota</h5>
-                <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
+<div class="container-fluid mt-4 mb-4">
+    <div class="card formularios">
+        <div class="container-fluid mt- mb-4">
+            <h3 class="text-center font-weight-bold mt-4">Perfil de Mascota</h3>
+            <div class="card-body card-datos">
+                <h4 class="font-weight-bold">Datos Basicos</h4>
                 <div class="row">
-                    <div class="col-xl-6">
-                        <div class="row">
-                            <!-- <div class="col-md-4 my-auto text-center">
-                                <img class="img-mascot"
-                                    src="https://i.pinimg.com/736x/d4/c5/f7/d4c5f7f131d36a447c8baec15b083a32.jpg" alt=""
-                                    height="200" width="200">
-                            </div> -->
-                            <div class="col-md-12">
-                                <ul class="list-group">
-                                    <li class="list-group-item"><b>Nombre Mascota:</b>
-                                        {{datosMascota?.nombre}}</li>
-                                    <li class="list-group-item"><b>Fecha Nacimiento:</b>
-                                        {{datosMascota?.fecha_nacimiento}}</li>
-                                    <li class="list-group-item"><b>Tipo Mascota:</b> {{datosMascota?.tipoMascota}}
-                                    </li>
-                                    <li class="list-group-item"><b>Sexo:</b> {{datosMascota?.sexo}}</li>
-                                    <li class="list-group-item"><b>Raza:</b> {{datosMascota?.raza}}</li>
-                                    <li class="list-group-item"><b>Color:</b> {{datosMascota?.color}}</li>
-                                    <li class="list-group-item"><b>¿Esterilizado?:</b>
-                                        {{datosMascota?.estadoEsterilizacion}}
-                                    </li>
-                                    <li class="list-group-item"><b>¿Tiene Chip?:</b> {{datosMascota?.estadoChip}}</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="col-6">
+                        <p><b>Nombre:</b> {{datosMascota?.nombre}}</p>
+                        <p><b>Especie:</b> {{datosMascota?.tipoMascota}}</p>
+                        <p><b>Edad:</b> {{datosMascota?.fecha_nacimiento}}</p>
+                        <p><b>Raza:</b> {{datosMascota?.raza}}</p>
                     </div>
-                    <div class="col-xl-6">
-                        <div class="row mt-4">
-                            <div class="col-lg-6 mt-4 mx-auto" data-toggle="modal" data-target=".modal-ficha-clinica"
-                                (click)="referenciaFichaClinica.getFichaClinica(datosMascota.id)">
-                                <div class="card but-card bg-success text-white text-center" style="cursor: pointer;">
-                                    <div class="card-body">
-                                        <img src="assets/medical-history.png" width="70" height="70" alt="">
-                                        <h4 class="card-text">Ver Ficha Clinica</h4>
-                                    </div>
-                                </div>
+                    <div class="col-6">
+                        <p><b>¿Esterilizado?:</b> {{datosMascota?.estadoEsterilizacion}}</p>
+                        <p><b>¿Chip?:</b> {{datosMascota?.estadoChip}}</p>
+                        <p><b>Fecha Ingreso al Sistema:</b> {{datosMascota?.created_at}}</p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-body card-datos">
+                        <h4 class="font-weight-bold">Datos Propietario</h4>
+                        <div class="row">
+                            <div class="col-6">
+                                <p><b>Nombre:</b> {{datosMascota?.nombreDuenio}}</p>
+                                <p><b>Dirección:</b> {{datosMascota?.direccionDuenio}}</p>
+                                <p><b>Telefono:</b> {{datosMascota?.contactoDuenio}}</p>
                             </div>
-                            <div class="col-lg-6 mt-4 mx-auto">
-                                <div class="card but-card bg-info text-white text-center" style="cursor: pointer;">
-                                    <div class="card-body">
-                                        <img src="assets/vacuna.png" width="70" height="70" alt="">
-                                        <h4 class="card-text">Hoja de Vacunas</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mt-4 mx-auto">
-                                <div class="card but-card bg-secondary text-white text-center" style="cursor: pointer;">
-                                    <div class="card-body">
-                                        <img src="assets/vacuna.png" width="70" height="70" alt="">
-                                        <h4 class="card-text">Dar en Adopción</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mt-4 mx-auto">
-                                <div class="card but-card bg-danger text-white text-center" style="cursor: pointer;">
-                                    <div class="card-body">
-                                        <img src="assets/vacuna.png" width="70" height="70" alt="">
-                                        <h4 class="card-text">Editar Datos</h4>
-                                    </div>
-                                </div>
+                            <div class="col-6">
+                                <p><b>Correo:</b> {{datosMascota?.correoDuenio}}</p>
+                                <p><b>Rut:</b> {{datosMascota?.rutDuenio}}</p>
+                                <p><b>Fecha Ingreso:</b> {{datosMascota?.registroDuenio}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Ok</button>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="text-center font-weight-bold mt-4">Historial de Vacunas {{nombreTemporal}}</h3>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover">
+                            <thead class="text-center">
+                                <tr>
+                                    <th scope="col">Vacuna</th>
+                                    <th scope="col">Fecha de Aplicación</th>
+                                </tr>
+                            </thead>
+                            <tbody class="font-weight-bold text-center">
+                                <tr *ngFor="let itemVacunas of datosVacunas">
+                                    <td>{{itemVacunas?.nombreVacuna}}</td>
+                                    <td>{{itemVacunas?.fecha}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="text-center font-weight-bold mt-4">Ultimas 5 Consultas</h3>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr class="text-center">
+                                    <th style="width: 15%;">Fecha</th>
+                                    <th style="width: 20%;">Revisado Por</th>
+                                    <th style="width: 65%;">Descripcion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let itemSeguimiento of datosConsulta">
+                                    <td class="text-center">{{itemSeguimiento?.created_at}}</td>
+                                    <td class="text-center">{{itemSeguimiento?.nombreEncargado}}</td>
+                                    <td>{{itemSeguimiento?.motivo}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <h3 class="text-center font-weight-bold mt-4">Historial de Peso</h3>
+            <div class="row">
+                <div style="border: 1px solid black;" class="mx-auto">
+                    <p>Aquí va el grafico con el historial de peso de la mascota</p>
+                </div>
+            </div>
+            <hr>
+            <h3 class="text-center font-weight-bold mt-4">Acciones</h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-primary btn-block">Ver Ficha Clinica</button>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-danger btn-block">Cambiar Dueño (Adopción)</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-success btn-block">Editar Datos Basicos de la
+                        Mascota</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<app-ficha-clinica #referenciaFichaClinica></app-ficha-clinica>

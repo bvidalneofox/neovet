@@ -56,8 +56,7 @@
                                             <td>{{itemResultados?.nombre}}</td>
                                             <td>{{itemResultados?.nombreDuenio}}</td>
                                             <td>{{itemResultados?.tipoMascota}}</td>
-                                            <td><button class="btn btn-sm btn-success" data-toggle="modal"
-                                                data-target=".modal-buscar-datos-mascotas" (click)="fichaMascotaR.getMascotaPorId(itemResultados?.id)">Ver Perfil</button>
+                                            <td><button class="btn btn-sm btn-success" data-dismiss="modal" routerLink="perfilMascota/{{itemResultados?.id}}">Ver Perfil</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -69,5 +68,3 @@
         </div>
     </div>
 </div>
-
-<app-ficha-mascota #fichaMascotaR></app-ficha-mascota>

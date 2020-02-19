@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
     //Rutas para las mascotas
     Route::post('setMascota', 'MascotaController@setMascota');
+    Route::post('updateMascota', 'MascotaController@updateMascota');
     Route::get('getMascotasClientePorRut/{rut?}', 'ClienteController@getMascotasClientePorRut');
     Route::get('getMascotasPorNombre/{nombre?}', 'MascotaController@getMascotasPorNombre');
     Route::get('getMascotaPorId/{id}', 'MascotaController@getMascotaPorId');
@@ -41,6 +42,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
     //Ruta para las consultas
     Route::post('setConsulta', 'ConsultaController@setConsulta');
+    Route::get('getUltimasConsultasPorIdMascota/{id}','ConsultaController@getUltimasConsultasPorIdMascota');
     Route::get('getConsultasActivas', 'ConsultaController@getConsultasActivas');
     Route::get('getConsultasInactivas', 'ConsultaController@getConsultasInactivas');
     Route::get('getConsultaPorId/{id}', 'ConsultaController@getConsultaPorId');
