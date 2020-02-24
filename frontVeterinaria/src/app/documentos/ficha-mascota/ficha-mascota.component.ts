@@ -166,6 +166,30 @@ export class FichaMascotaComponent implements OnInit {
     });
   }
 
+  updateNumeroChip(numeroChip){
+    this._mascotasService.updateNumeroChip(this.idMascota, numeroChip).subscribe(response=>{
+      if(response.estado == 'success'){
+        this._snotify.success(response.mensaje, {
+          timeout: 2000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
+      }else{
+        this._snotify.warning(response.mensaje, {
+          timeout: 2000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
+      }
+    }, error=>{
+      console.log(error);
+    });
+  }
+
   updateDuenioMascota(){
     this._mascotasService.updateDuenioMascota(this.idMascota, this.datosCliente).subscribe(response => {
       if(response.estado == 'success'){

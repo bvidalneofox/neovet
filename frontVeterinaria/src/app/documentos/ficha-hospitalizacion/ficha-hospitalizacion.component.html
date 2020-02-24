@@ -51,6 +51,12 @@
                                     documento</button>
                                 <input id="file-test" type="file" (change)="updateFile($event)" hidden>
                             </div>
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" id="customControlValidation1" name="checkBoxH" [(ngModel)]="esterilizacionCheckBox"
+                                    required>
+                                <label class="custom-control-label" for="customControlValidation1">Marque la casilla solo si
+                                    la mascota fue esterilizada para actualizar automaticamente los datos</label>
+                            </div>
                         </div>
                     </div>
                     <div class="row">

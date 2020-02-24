@@ -19,6 +19,7 @@ export class MascotasService {
     form.append("fecha_nacimiento", formMascota.fecha_nacimiento);
     form.append("estado_esterilizado", formMascota.esterilizado);
     form.append("estado_chip", formMascota.chip);
+    form.append("numero_chip", formMascota.numero_chip);
     form.append("genero", formMascota.genero);
     form.append("id_tipo_mascota", formMascota.tipo);
     form.append("raza", formMascota.raza);
@@ -52,6 +53,13 @@ export class MascotasService {
     form.append("raza", formMascota.raza);
     form.append("color", formMascota.color);
     return this._http.post(this.url + "updateMascota", formMascota);
+  }
+
+  updateNumeroChip(idMascota, numeroChip): Observable<any>{
+    let form = new FormData();
+    form.append("id", idMascota);
+    form.append("numero_chip", numeroChip);
+    return this._http.post(this.url + "updateNumeroChip", form);
   }
 
   updateDuenioMascota(idMascota, idDuenio): Observable<any>{

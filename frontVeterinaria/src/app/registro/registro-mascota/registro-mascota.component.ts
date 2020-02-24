@@ -20,6 +20,7 @@ export class RegistroMascotaComponent implements OnInit {
     fecha_nacimiento: '',
     esterilizado: '',
     chip: '',
+    numero_chip: '',
     genero: '',
     tipo: '',
     raza: '',
@@ -43,7 +44,6 @@ export class RegistroMascotaComponent implements OnInit {
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
           position: 'rightTop'
         });
       }
@@ -62,7 +62,6 @@ export class RegistroMascotaComponent implements OnInit {
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
           position: 'rightTop'
         });
       }else{
@@ -71,7 +70,6 @@ export class RegistroMascotaComponent implements OnInit {
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
           position: 'centerCenter'
         });
       }

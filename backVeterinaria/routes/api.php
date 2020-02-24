@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     //Rutas para las mascotas
     Route::post('setMascota', 'MascotaController@setMascota');
     Route::post('updateMascota', 'MascotaController@updateMascota');
+    Route::post('updateNumeroChip', 'MascotaController@updateNumeroChip');
     Route::post('updateDuenioMascota', 'MascotaController@updateDuenioMascota');
     Route::get('getMascotasClientePorRut/{rut?}', 'ClienteController@getMascotasClientePorRut');
     Route::get('getMascotasPorNombre/{nombre?}', 'MascotaController@getMascotasPorNombre');

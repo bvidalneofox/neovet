@@ -15,7 +15,7 @@ class CreateTableHistorialVacunas extends Migration
     {
         Schema::create('historial_vacunas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('fecha');
+            $table->date('fecha')->nullable();
             $table->integer('id_mascota');
             $table->integer('id_vacuna');
             $table->softDeletes();

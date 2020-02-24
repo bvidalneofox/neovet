@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Mascota;
 
 class SeguimientoControlller extends Controller
 {
@@ -22,7 +23,7 @@ class SeguimientoControlller extends Controller
             [
                 'descripcion.required' => 'Debe de ingresar un nombre',
                 'archivo.mimes' => 'Solo se admiten archivos con formato .pdf, .png, .jpeg'
-                
+
             ]
         );
 
@@ -48,6 +49,17 @@ class SeguimientoControlller extends Controller
                 $seguimiento->ruta_archivo = 'images/' . $nombreImagen;
             }
             if ($seguimiento->save()) {
+                if ($request->esterilizacion == 'true') {
+                    $mascota = Mascota::find($request->id_mascota);
+                    if (!is_null($mascota)) {
+                        $mascota->estado_esterilizado = 1;
+                        if ($mascota->save()) {
+                            return ['estado' => 'success', 'mensaje' => 'Mascota Actualizada con esterilizacion.'];
+                        } else {
+                            return ['estado' => 'failed', 'mensaje' => 'Error al actualizar el estado esterilizacion de la mascota.'];
+                        }
+                    }
+                }
                 return ['estado' => 'success', 'mensaje' => 'Seguimiento agregado correctamente.'];
             } else {
                 return ['estado' => 'failed', 'mensaje' => 'Se ha agregado un error al ingresar el seguimiento.'];

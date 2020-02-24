@@ -72,7 +72,7 @@ class HospitalizacionController extends Controller
             ->join('clientes as cl', 'cl.id', '=', 'm.id_cliente')
             ->join('tipo_mascota as tm', 'tm.id', '=', 'm.id_tipo_mascota')
             ->join('users as u', 'u.id', '=', 'h.id_usuario')
-            ->select('h.id', 'h.created_at', 'h.motivo', 'h.id_estado', 'm.nombre as nombreMascota', 'u.name as nombreVetHosp', 'm.fecha_nacimiento', 'cl.nombre as nombreDuenio', 'cl.rut', 'cl.numero', 'tm.descripcion as tipoMascota')
+            ->select('h.id', 'h.created_at', 'h.motivo', 'h.id_estado', 'm.nombre as nombreMascota', 'm.id as id_mascota', 'u.name as nombreVetHosp', 'm.fecha_nacimiento', 'cl.nombre as nombreDuenio', 'cl.rut', 'cl.numero', 'tm.descripcion as tipoMascota')
             ->where('h.id', $id)
             ->get();
         if (!$busqueda->isEmpty()) {

@@ -22,6 +22,8 @@ export class FichaHospitalizacionComponent implements OnInit {
   descripcion = '';
   //Datos del seguimiento realizados
   datosSeguimiento = [];
+  //checkbox de esterilizacion
+  esterilizacionCheckBox = false;
 
   constructor(private _snotify: SnotifyService, private router: Router, private rutaActiva: ActivatedRoute, private _hospitalizacionService: HospitalizacionesService) {
     this.rutaActiva.params.subscribe(
@@ -50,7 +52,7 @@ export class FichaHospitalizacionComponent implements OnInit {
   }
 
   setSeguimiento(form){
-    this._hospitalizacionService.setSeguimiento(this.descripcion, this.archivo, this.idHosp).subscribe(response=>{
+    this._hospitalizacionService.setSeguimiento(this.descripcion, this.archivo, this.idHosp, this.esterilizacionCheckBox, this.datosHospitalizacion).subscribe(response=>{
       if(response.estado == 'success'){
         form.reset();
         this.nombreArchivo = '';

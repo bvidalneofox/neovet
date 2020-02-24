@@ -30,11 +30,13 @@ export class HospitalizacionesService {
     return this._http.get(this.url + "getHospitalizacionPorId/" + id);
   }
 
-  setSeguimiento(descripcion, archivo, id): Observable<any> {
+  setSeguimiento(descripcion, archivo, id, estadoEsterilizacion, idMascota): Observable<any> {
     let form = new FormData();
     form.append("descripcion", descripcion);
     form.append("archivo", archivo);
     form.append("id_hospitalizacion", id);
+    form.append("esterilizacion", estadoEsterilizacion);
+    form.append("id_mascota", idMascota.id_mascota);
     return this._http.post(this.url + "setSeguimiento", form);
   }
 

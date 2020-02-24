@@ -51,6 +51,7 @@ class MascotaController extends Controller
             $mascota->fecha_nacimiento = $request->fecha_nacimiento;
             $mascota->fecha_ingreso = $request->fecha_ingreso;
             $mascota->estado_chip = $request->estado_chip;
+            $mascota->numero_chip = $request->numero_chip;
             $mascota->estado_esterilizado = $request->estado_esterilizado;
             $mascota->id_tipo_mascota = $request->id_tipo_mascota;
             $mascota->id_cliente = $request->id_cliente;
@@ -91,9 +92,22 @@ class MascotaController extends Controller
         }
     }
 
+    public function updateNumeroChip(Request $request)
+    {
+        $mascota = Mascota::find($request->id);
+            if (!is_null($mascota)) {
+                $mascota->estado_chip = 1;
+                $mascota->numero_chip = $request->numero_chip;
+                if ($mascota->save()) {
+                    return ['estado' => 'success', 'mensaje' => 'Chip Ingresado/Actualizado correctamente.'];
+                } else {
+                    return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar el chip.'];
+                }
+            }
+    }
+
     public function updateDuenioMascota(Request $request)
     {
-        $validador = $this->validarDatos($request);
         $mascota = Mascota::find($request->id);
             if (!is_null($mascota)) {
                 $mascota->id_cliente = $request->id_cliente;
