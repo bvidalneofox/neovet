@@ -1,8 +1,8 @@
 <div class="card but-card text-center" style="cursor: pointer;" data-toggle="modal" data-target=".modal-nueva-vacuna">
     <div class="card-body">
         <img src="assets/dog.png" width="70" height="70" alt="">
-        <h4 class="card-text font-weight-bold">Nueva Vacuna</h4>
-        <p class="font-weight-bold">Registrar una nueva vacuna</p>
+        <h4 class="card-text font-weight-bold">Aplicar Vacuna/Antiparasitario</h4>
+        <p class="font-weight-bold">Registrar una nueva vacuna o antiparasitario</p>
     </div>
 </div>
 
@@ -11,7 +11,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Registrar Vacuna
+                <h3 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Registrar Vacuna o antiparasitario
                 </h3>
                 <button id="closeButton" type="button" class="close" data-dismiss="modal" aria-label="Close"
                     (click)="controlSteps(0)">
@@ -24,7 +24,7 @@
                     <div *ngIf="step == 0">
                         <div class="mt-2">
                             <h4 class="text-center font-weight-bold">Ingrese el nombre de la mascota o el dueño de la mascota la cual se le
-                                aplicará la vacuna</h4>
+                                aplicará la vacuna o antiparasitario</h4>
                         </div>
 
                         <div class="mt-4">
@@ -37,7 +37,7 @@
                                             aria-describedby="button-addon2" name="inputBusqueda"
                                             [(ngModel)]="inputBusqueda" autocomplete="off">
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-dark" type="submit">Buscar Mascota</button>
+                                            <button class="btn btn-outline-dark" type="submit" [disabled]="loading">Buscar Mascota <i *ngIf="loading"><img src="assets/loading.gif" style="width: 1.3rem;"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -51,23 +51,17 @@
                                         <tr>
                                             <th scope="col">Nombre Mascota</th>
                                             <th scope="col">Nombre Dueño</th>
-                                            <!-- <th scope="col">Fecha Nacimiento</th> -->
                                             <th scope="col">Tipo Mascota</th>
-                                            <!-- <th scope="col">Raza de la Mascota</th>
-                                            <th scope="col">Color</th> -->
                                             <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody class="font-weight-bold text-center">
                                         <tr *ngFor="let itemResultados of resultadosBusqueda">
-                                            <td>{{itemResultados?.nombre}}</td>
+                                            <td style="background: rgba(66, 135, 245, 0.52);">{{itemResultados?.nombre}}</td>
                                             <td>{{itemResultados?.nombreDuenio}}</td>
-                                            <!-- <td>{{itemResultados?.fecha_nacimiento}}</td> -->
                                             <td>{{itemResultados?.tipoMascota}}</td>
-                                            <!-- <td>{{itemResultados?.raza}}</td>
-                                            <td>{{itemResultados?.color}}</td> -->
                                             <td><button class="btn btn-sm btn-secondary" data-dismiss="modal"
-                                                    (click)="cargarMascotaSeleccionada(itemResultados); getVacunas(itemResultados?.id); nombreTemporal = itemResultados?.nombre; controlSteps(1)">Seleccionar</button>
+                                                    (click)="cargarMascotaSeleccionada(itemResultados); getAntiparasitario(itemResultados?.id); getVacunas(itemResultados?.id); nombreTemporal = itemResultados?.nombre; controlSteps(1)">Seleccionar</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -91,7 +85,7 @@
                                         <tbody class="font-weight-bold text-center">
                                             <tr *ngFor="let itemVacunas of datosVacunas">
                                                 <td>{{itemVacunas?.nombreVacuna}}</td>
-                                                <td>{{itemVacunas?.fecha}}</td>
+                                                <td>{{itemVacunas?.created_at}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -102,9 +96,9 @@
                                 <h4 class="text-center font-weight-bold">Aplicar Vacuna</h4>
                                 <form #nuevaVacunaForm="ngForm" (ngSubmit)="setNuevaVacuna(nuevaVacunaForm)">
                                 <div class="row">
-                                    <div class="col-6 form-group">
+                                    <div class="col-12 form-group">
                                         <label for="nombreMascota">Seleccione el Tipo de Vacuna</label>
-                                        <select name="tipoVacuna" class="form-control" required [(ngModel)]="formVacuna.tipoVacuna" required>
+                                        <select name="tipoVacuna" class="form-control" [(ngModel)]="formVacuna.tipoVacuna" required>
                                             <option value="">--Seleccione--</option>
                                             <option value="1">Trivalente Felina</option>
                                             <option value="2">Leucemia Felina</option>
@@ -113,11 +107,42 @@
                                             <option value="5">Renovación Leucemia</option>
                                         </select>
                                     </div>
-                                    <div class="col-6 form-group">
-                                        <label for="nombreDuenio">Seleccione Fecha de aplicación</label>
-                                        <input type="date" name="fechaVacuna" class="form-control" [(ngModel)]="formVacuna.fechaVacuna" required>
-                                    </div>
                                     <button type="submit" class="btn btn-success mx-auto" [disabled]="nuevaVacunaForm.invalid">Registrar Nueva Vacuna</button>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                        <hr class="mt-4">
+                        <div class="row mt-4">
+                            <div class="col-lg-6">
+                                <h4 class="text-center font-weight-bold">Historial de Antiparasitario {{nombreTemporal}}</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-hover">
+                                        <thead class="text-center">
+                                            <tr>
+                                                <th scope="col">Nombre Antiparasitario</th>
+                                                <th scope="col">Fecha de Aplicación</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="font-weight-bold text-center">
+                                            <tr *ngFor="let itemAnti of datosAntiparasitarios">
+                                                <td>{{itemAnti?.nombre_antiparasitario}}</td>
+                                                <td>{{itemAnti?.created_at}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <span class="vl"></span>
+                            <div class="col-lg-6">
+                                <h4 class="text-center font-weight-bold">Aplicar Antiparasitario</h4>
+                                <form #nuevoAntiparasitarioForm="ngForm" (ngSubmit)="setAntiparasitario(nuevoAntiparasitarioForm)">
+                                <div class="row">
+                                    <div class="col-12 form-group">
+                                        <label for="nombreAnti">Ingrese Nombre Antiparasitario</label>
+                                        <input type="text" name="nombreAnti" class="form-control"  [(ngModel)]="nombreAntiparasitario" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-success mx-auto" [disabled]="nuevoAntiparasitarioForm.invalid">Registrar Nueva Vacuna</button>
                                 </div>
                             </form>
                             </div>

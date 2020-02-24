@@ -34,7 +34,7 @@ data-target=".modal-hosp-activas" (click)="getHospitalizacionesActivas()">
                             </thead>
                             <tbody class="text-center font-weight-bold">
                                 <tr *ngFor="let itemHospitalizacionesActivas of hospitalizacionesActivas">
-                                    <td>{{itemHospitalizacionesActivas?.nombreMascota}}</td>
+                                    <td style="background: rgba(66, 135, 245, 0.52);">{{itemHospitalizacionesActivas?.nombreMascota}}</td>
                                     <td>{{itemHospitalizacionesActivas?.tipoMascota}}</td>
                                     <td>{{itemHospitalizacionesActivas?.created_at}}</td>
                                     <td>{{itemHospitalizacionesActivas?.nombreDuenio}}</td>

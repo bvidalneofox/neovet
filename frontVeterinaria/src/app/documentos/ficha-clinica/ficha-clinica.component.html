@@ -1,5 +1,95 @@
+<div class="container">
+<div class="row mt-4">
+    <div class="col-md-12">
+        <button (click)="generarPDF()" class="btn btn-info btn-block">Exportar a PDF</button>
+    </div>
+</div>
+</div>
+
+<div class="container-fluid mt-4 mb-4">
+    <div class="card formularios">
+        <div class="container-fluid mt-4 mb-4" id="contenido">
+            <div class="row text-center">
+                <div class="col-1">
+                    <img src="assets/neofox-nav.png" style="width: 10rem;">
+                </div>
+                <div class="col-11">
+                    <p class="h4 font-weight-bold mr-5">Clinica Veterinaria NeoVet</p>
+                    <p class="h5 font-weight-bold mr-5">Calle Rio Yaqui #1094, Los Ángeles</p>
+                    <p class="font-weight-bold mr-5">+569 7850 4418</p>
+                </div>
+            </div>
+            <!-- DATOS CLIENTE -->
+            <div class="row">
+                <div class="col-12 text-center header-test">
+                    <p class="font-weight-bold">Datos del Cliente</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="ml-5">
+                        <p><b>Nombre:</b> {{datosBasicos?.nombreDuenio}}</p>
+                        <p><b>Dirección:</b> {{datosBasicos?.direccion}}</p>
+                        <p><b>Telefonos:</b> {{datosBasicos?.numero}}</p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="test">
+                        <p><b>Correo:</b> {{datosBasicos?.correo}}</p>
+                        <p><b>Rut:</b> {{datosBasicos?.rut}}</p>
+                        <p><b>Fecha ingreso:</b> {{datosBasicos?.fechaIngresoDuenio}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- DATOS MASCOTA -->
+            <div class="row">
+                <div class="col-12 text-center header-test">
+                    <p class="font-weight-bold">Datos del Paciente</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <p class="font-weight-bold">Fotografia Mascota</p>
+                    <img src="assets/cat-profile-pic.jpeg" style="width: 5rem;">
+                </div>
+                <div class="col-md-4">
+                    <p><b>Nombre:</b> {{datosBasicos?.nombreMascota}}</p>
+                    <p><b>Especie:</b> {{datosBasicos?.tipoMascota}}</p>
+                    <p><b>Fecha Nacimiento:</b> {{datosBasicos?.fechaNacimientoMascota}}</p>
+                    <p><b>Edad:</b> {{edadMascota}}</p>
+                </div>
+                <div class="col-md-4">
+                    <p><b>Raza:</b> {{datosBasicos?.raza}}</p>
+                    <p><b>Sexo:</b> {{datosBasicos?.generoMascota}}</p>
+                    <p><b>Color:</b> {{datosBasicos?.color}}o</p>
+                    <p><b>Fecha Ingreso:</b> {{datosBasicos?.fechaIngresoMascota}}</p>
+                </div>
+            </div>
+            <!-- HISTORIAL CLINICO -->
+            <div class="row">
+                <div class="col-12 text-center header-test">
+                    <p class="font-weight-bold">Historial Clinico</p>
+                </div>
+            </div>
+            <div class="row consulta" *ngFor="let itemConsultas of consultasMascota">
+                <div class="col-2">
+                    <p class="font-weight-bold">{{itemConsultas?.created_at}}</p>
+                </div>
+                <div class="col-3">
+                    <p><b>Atendido Por:</b> {{itemConsultas?.nombreVeterinario}}</p>
+                </div>
+                <div class="col-7">
+                    <p> <b>Motivo:</b> {{itemConsultas?.motivo}}</p>
+                    <p> <b>Procedimiento:</b> {{itemConsultas?.procedimiento}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- MODAL DE DATOS MASCOTA -->
-<div class="modal fade modal-ficha-clinica" data-backdrop="static" tabindex="-1" role="dialog"
+<!-- <div class="modal fade modal-ficha-clinica" data-backdrop="static" tabindex="-1" role="dialog"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -11,76 +101,7 @@
                 </button>
             </div>
             <div class="modal-body" id="contenido">
-                <div class="row text-center">
-                    <div class="col-1">
-                        <img src="assets/neofox-nav.png" style="width: 10rem;">
-                    </div>
-                    <div class="col-11">
-                        <p class="h4 font-weight-bold mr-5">Clinica Veterinaria NeoVet</p>
-                        <p class="h5 font-weight-bold mr-5">Calle Rio Yaqui #1094, Los Ángeles</p>
-                        <p class="font-weight-bold mr-5">+569 7850 4418</p>
-                    </div>
-                </div>
-                <!-- DATOS CLIENTE -->
-                <div class="row">
-                    <div class="col-12 text-center header-test">
-                        <p class="font-weight-bold">Datos del Cliente</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="ml-5"><p><b>Nombre:</b> {{datosBasicos?.nombreDuenio}}</p>
-                        <p><b>Dirección:</b> {{datosBasicos?.direccion}}</p>
-                        <p><b>Telefonos:</b> {{datosBasicos?.numero}}</p></div>
-                    </div>
-                    <div class="col-6">
-                        <div class="test"><p><b>Correo:</b> {{datosBasicos?.correo}}</p>
-                        <p><b>Rut:</b> {{datosBasicos?.rut}}</p>
-                        <p><b>Fecha ingreso:</b> {{datosBasicos?.fechaIngresoDuenio}}</p></div>
-                    </div>
-                </div>
-                <!-- DATOS MASCOTA -->
-                <div class="row">
-                    <div class="col-12 text-center header-test">
-                        <p class="font-weight-bold">Datos del Paciente</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 text-center">
-                        <p class="font-weight-bold">Fotografia Mascota</p>
-                        <img src="assets/cat-profile-pic.jpeg" style="width: 5rem;">
-                    </div>
-                    <div class="col-md-4">
-                        <p><b>Nombre:</b> {{datosBasicos?.nombreMascota}}</p>
-                        <p><b>Especie:</b> {{datosBasicos?.tipoMascota}}</p>
-                        <p><b>Fecha Nacimiento:</b> {{datosBasicos?.fechaNacimientoMascota}}</p>
-                        <p><b>Edad:</b> {{edadMascota}}</p>
-                    </div>
-                    <div class="col-md-4">
-                        <p><b>Raza:</b> {{datosBasicos?.raza}}</p>
-                        <p><b>Sexo:</b> {{datosBasicos?.generoMascota}}</p>
-                        <p><b>Color:</b> {{datosBasicos?.color}}o</p>
-                        <p><b>Fecha Ingreso:</b> {{datosBasicos?.fechaIngresoMascota}}</p>
-                    </div>
-                </div>
-                <!-- HISTORIAL CLINICO -->
-                <div class="row">
-                    <div class="col-12 text-center header-test">
-                        <p class="font-weight-bold">Historial Clinico</p>
-                    </div>
-                </div>
-                <div class="row consulta" *ngFor="let itemConsultas of consultasMascota">
-                    <div class="col-2">
-                        <p class="font-weight-bold">{{itemConsultas?.created_at}}</p>
-                    </div>
-                    <div class="col-3">
-                        <p><b>Atendido Por:</b> {{itemConsultas?.nombreVeterinario}}</p>
-                    </div>
-                    <div class="col-7">
-                        <p> <b>Motivo:</b> {{itemConsultas?.motivo}}</p>
-                        <p> <b>Procedimiento:</b> {{itemConsultas?.procedimiento}}</p>
-                    </div>
-                </div>
+                
             </div>
             <div class="modal-footer">
                 <button (click)="generarPDF()" class="btn btn-info">Crear PDF</button>
@@ -88,4 +109,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

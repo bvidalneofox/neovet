@@ -41,7 +41,7 @@
                                     <td>{{itemdatosBusqueda?.nombreDuenio}}</td>
                                     <td><button class="btn btn-sm btn-secondary" data-toggle="modal"
                                             data-target=".modal-buscar-datos-mascotas"
-                                            (click)="fichaMascota.getMascotaPorId(itemdatosBusqueda?.mascotaId);">Ver Datos</button>
+                                            routerLink="../perfilMascota/{{itemdatosBusqueda?.mascotaId}}">Ver Datos</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -54,5 +54,3 @@
         </div>
     </div>
 </div>
-
-<app-ficha-mascota #fichaMascota></app-ficha-mascota>

@@ -35,14 +35,13 @@
                             </thead>
                             <tbody class="text-center font-weight-bold">
                                 <tr *ngFor="let itemConsultasActivas of consultasActivas">
-                                    <td>{{itemConsultasActivas?.nombreMascota}}</td>
+                                    <td style="background: rgba(66, 135, 245, 0.52);">{{itemConsultasActivas?.nombreMascota}}</td>
                                     <td>{{itemConsultasActivas?.tipoMascota}}</td>
                                     <td>{{itemConsultasActivas?.created_at}}</td>
                                     <td>{{itemConsultasActivas?.nombreDuenio}}</td>
                                     <td class="text-center"><button class="btn btn-sm btn-secondary m-1"
                                             data-dismiss="modal" aria-label="Close"
-                                            routerLink="fichaConsulta/{{itemConsultasActivas?.id}}">Ver
-                                            Consulta</button></td>
+                                            routerLink="fichaConsulta/{{itemConsultasActivas?.id}}">Atender</button></td>
                                 </tr>
                             </tbody>
                         </table>

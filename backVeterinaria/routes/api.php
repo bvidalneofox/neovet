@@ -35,10 +35,12 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     //Rutas para las mascotas
     Route::post('setMascota', 'MascotaController@setMascota');
     Route::post('updateMascota', 'MascotaController@updateMascota');
+    Route::post('updateDuenioMascota', 'MascotaController@updateDuenioMascota');
     Route::get('getMascotasClientePorRut/{rut?}', 'ClienteController@getMascotasClientePorRut');
     Route::get('getMascotasPorNombre/{nombre?}', 'MascotaController@getMascotasPorNombre');
     Route::get('getMascotaPorId/{id}', 'MascotaController@getMascotaPorId');
     Route::get('getMascotasPorIdCliente/{id}', 'ClienteController@getMascotasPorIdCliente');
+    Route::get('getPesoMascotaUltimosControles/{id}', 'MascotaController@getPesoMascotaUltimosControles');
 
     //Ruta para las consultas
     Route::post('setConsulta', 'ConsultaController@setConsulta');
@@ -55,6 +57,10 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     //Ruta para las vacunas
     Route::post('setVacuna', 'HistorialVacunaController@setVacuna');
     Route::get('getVacunasPorIdMascota/{id}', 'HistorialVacunaController@getVacunasPorIdMascota');
+
+    //Ruta para los antiarasitarios
+    Route::post('setAntiparasitario','HistorialAntiparasitarioController@setAntiparasitario');
+    Route::get('getAntiparasitarioPorIdMascota/{id}','HistorialAntiparasitarioController@getAntiparasitarioPorIdMascota');
 
     //Ruta para los eventos
     Route::post('setEvento', 'EventoController@setEvento');

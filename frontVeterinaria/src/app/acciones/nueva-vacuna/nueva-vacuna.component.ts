@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SnotifyService } from 'ng-snotify';
 import { MascotasService } from 'src/app/servicios/mascotas.service';
 import { VacunasService } from 'src/app/servicios/vacunas.service';
+import { AntiparasitariosService } from 'src/app/servicios/antiparasitarios.service';
 
 @Component({
   selector: 'app-nueva-vacuna',
@@ -17,6 +18,8 @@ export class NuevaVacunaComponent implements OnInit {
   datosMascota = '';
   //Datos Vacuna de la mascota
   datosVacunas = [];
+  //Datos Vacuna de la mascota
+  datosAntiparasitarios = [];
   //Set Nombre Temporal de mascota
   nombreTemporal = '';
   //Set ID Temporal de mascota
@@ -26,10 +29,14 @@ export class NuevaVacunaComponent implements OnInit {
     tipoVacuna: '',
     fechaVacuna: ''
   }
+  //Variable para los antiparasitarios
+  nombreAntiparasitario = '';
+  //Variable del gif loading
+  loading = false;
   //Variable para los steps del Modal
   step = 0;
 
-  constructor(private _snotify: SnotifyService, private _mascotasService: MascotasService, private _vacunasService: VacunasService) { }
+  constructor(private _snotify: SnotifyService, private _mascotasService: MascotasService, private _vacunasService: VacunasService, private _antiparasitarioService: AntiparasitariosService) { }
 
   ngOnInit() {
   }
@@ -44,7 +51,6 @@ export class NuevaVacunaComponent implements OnInit {
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
           position: 'rightTop'
         });
         this.getVacunas(this.idTemporal);
@@ -54,8 +60,7 @@ export class NuevaVacunaComponent implements OnInit {
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
-          position: 'centerCenter'
+          position: 'rightTop'
         });
       }
     }, error =>{
@@ -64,12 +69,49 @@ export class NuevaVacunaComponent implements OnInit {
   }
 
   getVacunas(id){
-    //guardar id al hacer click para no hacer un nuevo servicio
     this.idTemporal = id;
     this.limpiarTablaVacunas();
     this._vacunasService.getVacunasPorIdMascota(id).subscribe(response=>{
       if(response.estado == 'success'){
         this.datosVacunas = response.vacunas;
+      }else{
+        this._snotify.warning(response.mensaje, {
+          timeout: 2000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
+      }
+    }, error=>{
+      console.log(error);
+    });
+  }
+
+  setAntiparasitario(form){
+    this._antiparasitarioService.setAntiparasitario(this.datosMascota, this.nombreAntiparasitario).subscribe(response=>{
+      form.reset();
+        this.formVacuna.tipoVacuna = '';
+        this._snotify.success(response.mensaje, {
+          timeout: 2000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
+        this.getAntiparasitario(this.idTemporal);
+    }, error=>{
+      console.log(error);
+    });
+  }
+
+  getAntiparasitario(id){
+    //guardar id al hacer click para no hacer un nuevo servicio
+    this.idTemporal = id;
+    this.limpiarTablaVacunas();
+    this._antiparasitarioService.getAntiparasitarioPorIdMascota(id).subscribe(response=>{
+      if(response.estado == 'success'){
+        this.datosAntiparasitarios = response.antiparasitarios;
       }else{
         this._snotify.warning(response.mensaje, {
           timeout: 2000,
@@ -90,22 +132,24 @@ export class NuevaVacunaComponent implements OnInit {
 
   // FUNCIONES PARA OBTENER DATOS DE LA MASCOTA
   getMascotasPorNombre(form) {
-    console.log(this.inputBusqueda);
+    this.loading = true;
     this._mascotasService.getMascotaPorNombre(this.inputBusqueda).subscribe(response => {
       if (response.estado == 'success') {
+        this.loading = false;
         form.reset();
         this.resultadosBusqueda = response.mascotas;
       } else {
+        this.loading = false;
         this._snotify.error(response.mensaje, {
           timeout: 5000,
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
-          position: 'centerCenter'
+          position: 'rightTop'
         });
       }
     }, error => {
+      this.loading = false;
       console.log(error);
     });
   }

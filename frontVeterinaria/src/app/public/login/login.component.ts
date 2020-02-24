@@ -14,22 +14,27 @@ export class LoginComponent implements OnInit {
     password: ''
   }
 
+  loading = false;
+
   constructor(private _loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
   }
 
   loginNeoVet(){
-    console.log(this.datosForm);
+    this.loading = true;
     this._loginService.login(this.datosForm).subscribe(response=>{
       if(response.success){
+        this.loading = false;
         localStorage.setItem('token', response.token);
         localStorage.setItem('nameUser', response.nameUser);
         this.router.navigateByUrl('/Inicio');
       }else{
+        this.loading = false;
         alert('Usuario No Encontrado');
       }
     }, error=>{
+      this.loading = false;
       console.log(error);
     });
   }

@@ -36,7 +36,7 @@
                         <td>{{itemResultados?.nombre}}</td>
                         <td>{{itemResultados?.tipoMascota}}</td>
                         <td>{{itemResultados?.nombreDuenio}}</td>
-                        <td><button class="btn btn-sm btn-secondary" data-toggle="modal" data-target=".modal-buscar-datos-mascotas" (click)="fichaMascota.getMascotaPorId(itemResultados?.id)">Ver Datos</button></td>
+                        <td><button class="btn btn-sm btn-secondary" routerLink="../perfilMascota/{{itemResultados?.id}}">Ver Datos</button></td>
                       </tr>
                     </tbody>
                   </table>

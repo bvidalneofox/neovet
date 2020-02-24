@@ -41,7 +41,7 @@ const routes: Routes = [
         { path: 'mostrarClientes', component: TodosClientesComponent },
         { path: 'buscarMascota', component: ListarMascotasComponent },
         { path: 'mostrarMascotas', component: TodosMascotasComponent },
-        { path: 'fichaClinica', component: FichaClinicaComponent },
+        { path: 'fichaClinica/:idMascota', component: FichaClinicaComponent },
         { path: 'hojaVacunas', component: HojaVacunasComponent },
         { path: 'verCalendario', component: VerCalendarioComponent },
         { path: 'miPerfil', component: InformacionComponent },

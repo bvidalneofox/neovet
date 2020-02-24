@@ -33,7 +33,7 @@
                                             aria-describedby="button-addon2" name="inputBusqueda"
                                             [(ngModel)]="inputBusqueda" autocomplete="off">
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-dark" type="submit">Buscar Mascota</button>
+                                            <button class="btn btn-outline-dark" type="submit" [disabled]="loading">Buscar Mascota <i *ngIf="loading"><img src="assets/loading.gif" style="width: 1.3rem;"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -53,7 +53,7 @@
                                     </thead>
                                     <tbody class="font-weight-bold text-center">
                                         <tr *ngFor="let itemResultados of resultadosBusqueda">
-                                            <td>{{itemResultados?.nombre}}</td>
+                                            <td style="background: rgba(66, 135, 245, 0.52);">{{itemResultados?.nombre}}</td>
                                             <td>{{itemResultados?.nombreDuenio}}</td>
                                             <td>{{itemResultados?.tipoMascota}}</td>
                                             <td><button class="btn btn-sm btn-success" data-dismiss="modal" routerLink="perfilMascota/{{itemResultados?.id}}">Ver Perfil</button>

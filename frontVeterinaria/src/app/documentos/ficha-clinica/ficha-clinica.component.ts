@@ -4,6 +4,7 @@ import html2canvas from 'html2canvas';
 import { ConsultasServiceService } from 'src/app/servicios/consultas-service.service';
 import { SnotifyService } from 'ng-snotify';
 import { LocationStrategy } from "@angular/common";
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-ficha-clinica',
@@ -12,25 +13,33 @@ import { LocationStrategy } from "@angular/common";
 })
 export class FichaClinicaComponent implements OnInit {
 
+  //Variable para rescatar el id de la ruta
+  idMascota = '';
   //Variable para los datos basicos
   datosBasicos = '';
   //Variable para las consultas
   consultasMascota = '';
   //edad mascota
   edadMascota = '';
-  constructor(private _snotify: SnotifyService, private _consultasService: ConsultasServiceService, location: LocationStrategy) {
+  constructor(private _snotify: SnotifyService, private _consultasService: ConsultasServiceService, location: LocationStrategy, private rutaActiva: ActivatedRoute) {
     location.onPopState(() => {
       if (document.getElementById('close2') != null) {
         document.getElementById('close2').click();
       }
     });
+    this.rutaActiva.params.subscribe(
+      (params: Params) => {
+        this.idMascota = params.idMascota;
+      }
+    );
   }
 
   ngOnInit() {
+    this.getFichaClinica();
   }
 
-  getFichaClinica(id) {
-    this._consultasService.getFichaClinica(id).subscribe(response => {
+  getFichaClinica() {
+    this._consultasService.getFichaClinica(this.idMascota).subscribe(response => {
       if (response.estado == 'success') {
         this.datosBasicos = response.datosBasicos;
         this.consultasMascota = response.consultas;
@@ -41,8 +50,7 @@ export class FichaClinicaComponent implements OnInit {
           showProgressBar: true,
           closeOnClick: false,
           pauseOnHover: true,
-          backdrop: 0.5,
-          position: 'centerCenter'
+          position: 'rightTop'
         });
       }
     }, error => {

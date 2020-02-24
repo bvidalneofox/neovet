@@ -81,14 +81,28 @@ class MascotaController extends Controller
                 $mascota->id_tipo_mascota = $request->id_tipo_mascota;
                 $mascota->id_cliente = $request->id_cliente;
                 if ($mascota->save()) {
-                    return ['estado' => 'success', 'mensaje' => 'mascota agregada correctamente.'];
+                    return ['estado' => 'success', 'mensaje' => 'mascota actualizada correctamente.'];
                 } else {
-                    return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar la mascota.'];
+                    return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al actualizar la mascota.'];
                 }
             }
         } else {
             return $validador;
         }
+    }
+
+    public function updateDuenioMascota(Request $request)
+    {
+        $validador = $this->validarDatos($request);
+        $mascota = Mascota::find($request->id);
+            if (!is_null($mascota)) {
+                $mascota->id_cliente = $request->id_cliente;
+                if ($mascota->save()) {
+                    return ['estado' => 'success', 'mensaje' => 'Dueño cambiado correctamente.'];
+                } else {
+                    return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al cambiar de dueño.'];
+                }
+            }
     }
 
     public function getMascotaPorId($id)
@@ -106,7 +120,7 @@ class MascotaController extends Controller
             $anio = intval(Carbon::parse($busqueda[0]->fecha_nacimiento)->format('Y'));
             $dia =  intval(Carbon::parse($busqueda[0]->fecha_nacimiento)->format('d'));
             $mes = intval(Carbon::parse($busqueda[0]->fecha_nacimiento)->format('m'));
-            $busqueda[0]->fecha_nacimiento = Carbon::createFromDate($anio, $mes, $dia)->diff(Carbon::now())->format('%y Año/s %m Mes/es y %d Dia/s');
+            $busqueda[0]->edad = Carbon::createFromDate($anio, $mes, $dia)->diff(Carbon::now())->format('%y Año/s %m Mes/es y %d Dia/s');
             return ['estado' => 'success', 'mascota' => $busqueda[0]];
         } else {
             return ['estado' => 'failed_unr', 'mensaje' => 'No se ha encontrado el id de la mascota.'];
@@ -136,5 +150,19 @@ class MascotaController extends Controller
     public function getAllMascotas()
     {
         return Mascota::all();
+    }
+
+    public function getPesoMascotaUltimosControles($id){
+        $busqueda = DB::table('consultas as c')
+                ->select('c.peso', 'c.created_at')
+                ->where('c.id_mascota', $id)
+                ->orderBy('c.created_at', 'asc')
+                ->take(6)
+                ->get();
+            if (!$busqueda->isEmpty()) {
+                return ['estado' => 'success', 'peso' => $busqueda];
+            } else {
+                return ['estado' => 'failed_unr', 'mensaje' => 'El Cliente no cuenta con mascotas registradas, revise el rut i cree que se trata de un error.'];
+            }
     }
 }

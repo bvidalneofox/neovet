@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -74,7 +75,8 @@ import { FichaConsultaComponent } from './documentos/ficha-consulta/ficha-consul
     HttpClientModule,
     FormsModule,
     SnotifyModule,
-    FullCalendarModule
+    FullCalendarModule,
+    ChartsModule
   ],
   providers: [
     {
