@@ -19,6 +19,7 @@ import { AuthMasterComponent } from './auth/auth-master/auth-master.component';
 import { GuardianService } from './servicios/guardian.service';
 import { FichaConsultaComponent } from './documentos/ficha-consulta/ficha-consulta.component';
 import { FichaMascotaComponent } from './documentos/ficha-mascota/ficha-mascota.component';
+import { FichaClienteComponent } from './documentos/ficha-cliente/ficha-cliente.component';
 
 const routes: Routes = [
 
@@ -48,6 +49,7 @@ const routes: Routes = [
         { path: 'fichaConsulta/:idConsulta', component: FichaConsultaComponent },
         { path: 'fichaHospitalizacion/:idHospitalizacion', component: FichaHospitalizacionComponent },
         { path: 'perfilMascota/:idMascota', component: FichaMascotaComponent },
+        { path: 'perfilCliente/:idCliente', component: FichaClienteComponent },
         { path: 'configuracion', component: ConfiguracionComponent }
       ]
   }

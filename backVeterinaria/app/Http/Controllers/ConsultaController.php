@@ -139,7 +139,8 @@ class ConsultaController extends Controller
             ->join('clientes as cl', 'cl.id', '=', 'm.id_cliente')
             ->join('tipo_mascota as tm', 'tm.id', '=', 'm.id_tipo_mascota')
             ->join('users as u', 'u.id', '=', 'c.id_usuario')
-            ->select('c.*', 'm.nombre as nombreMascota', 'm.id as idMascota', 'm.fecha_nacimiento', 'cl.nombre as nombreDuenio', 'cl.numero', 'cl.rut', 'tm.descripcion as tipoMascota', 'u.name as nombreVetHosp')
+            ->leftJoin('users as u2', 'u2.id', '=', 'c.id_usuario_procedimiento')
+            ->select('c.*', 'm.nombre as nombreMascota', 'm.id as idMascota', 'm.fecha_nacimiento', 'cl.nombre as nombreDuenio', 'cl.numero', 'cl.rut', 'tm.descripcion as tipoMascota', 'u.name as nombreVetHosp', 'u2.name as nombreVetProcedimiento')
             ->where('c.id', '=', $id)
             ->get();
         if (!$busqueda->isEmpty()) {
@@ -213,6 +214,7 @@ class ConsultaController extends Controller
             if (!is_null($consulta)) {
                 $consulta->peso = $request->peso;
                 $consulta->procedimiento = $request->procedimiento;
+                $consulta->id_usuario_procedimiento = Auth::user()->id;
                 if ($consulta->save()) {
                     if ($request->checkHospitalizacion == 'true') {
                         $validador = $this->validarDatos($request, 3);

@@ -1,0 +1,107 @@
+<div class="container-fluid mt-4 mb-4">
+    <div class="card formularios">
+        <div class="container-fluid mb-4">
+            <h3 class="text-center font-weight-bold mt-4">Perfil de Cliente</h3>
+            <div class="card-body card-datos">
+                <h4 class="font-weight-bold">Datos Basicos</h4>
+                <div class="row">
+                    <div class="col-6">
+                        <p><b>Nombre:</b> {{datosCliente?.nombre}}</p>
+                        <p><b>Rut:</b> {{datosCliente?.rut}}</p>
+                        <p><b>Correo:</b> {{datosCliente?.correo}}</p>
+                    </div>
+                    <div class="col-6">
+                        <p><b>Direccion:</b> {{datosCliente?.direccion}}</p>
+                        <p><b>Numero:</b> {{datosCliente?.numero}}</p>
+                        <p><b>Fecha Ingreso:</b> {{datosCliente?.created_at}}</p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="text-center font-weight-bold mt-4">Mascotas Registradas</h3>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr class="text-center font-weight-bold">
+                                    <th scope="col">Nombre Mascota</th>
+                                    <th scope="col">Tipo Mascota</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center font-weight-bold">
+                                <tr *ngFor="let itemMascotas of datosMascota">
+                                    <td>{{itemMascotas?.nombreMascota}}</td>
+                                    <td>{{itemMascotas?.tipoMascota}}</td>
+                                    <td><button class="btn btn-sm btn-success" data-dismiss="modal" routerLink="../../perfilMascota/{{itemMascotas?.mascotaId}}">Ver Datos
+                                            Mascota</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <h3 class="text-center font-weight-bold mt-4">Acciones</h3>
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-success btn-block" data-toggle="modal"
+                        data-target=".modal-editar-datos-basicos-cliente">Editar Datos Basicos del Cliente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar Datos -->
+<div class="modal fade modal-editar-datos-basicos-cliente" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Editar Datos
+                    Bassicos Mascota
+                </h3>
+                <button id="closeButton" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="mt-4">
+                        <form #registroClienteForm="ngForm" (ngSubmit)="setClienteForm(registroClienteForm)">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputNombre">Nombre de Cliente *</label>
+                                    <input type="text" class="form-control" id="inputNombre" placeholder="Nombre Completo" name="nombre" autocomplete="off" [(ngModel)]="datosCliente.nombre" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputRut">Rut del Cliente *</label>
+                                    <input type="text" class="form-control" id="inputRut" placeholder="Rut" name="rut" autocomplete="off" [(ngModel)]="datosCliente.rut" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputCorreo">Correo</label>
+                                <input type="email" class="form-control" id="inputCorreo" placeholder="Correo Electronico del cliente" name="correo" autocomplete="off" [(ngModel)]="datosCliente.correo">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputDireccion">Dirección *</label>
+                                <input type="text" class="form-control" id="inputDireccion" placeholder="Residencia del Cliente" name="direccion" autocomplete="off" [(ngModel)]="datosCliente.direccion" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputNumero">Numero de Telefono/Celular *</label>
+                                <input type="text" class="form-control" id="inputNumero"
+                                    placeholder="Puede ingresar uno o muchos celulares" name="numero" autocomplete="off" [(ngModel)]="datosCliente.numero" required>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" (click)="updateDatosCliente()">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

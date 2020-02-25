@@ -98,13 +98,22 @@
                                 <div class="row">
                                     <div class="col-12 form-group">
                                         <label for="nombreMascota">Seleccione el Tipo de Vacuna</label>
-                                        <select name="tipoVacuna" class="form-control" [(ngModel)]="formVacuna.tipoVacuna" required>
+                                        <!-- VACUNAS FELINAS -->
+                                        <select *ngIf="datosMascota.id_tipo_mascota == 2" name="tipoVacuna" class="form-control" [(ngModel)]="formVacuna.tipoVacuna" required>
                                             <option value="">--Seleccione--</option>
                                             <option value="1">Trivalente Felina</option>
                                             <option value="2">Leucemia Felina</option>
                                             <option value="3">Antirrabica</option>
                                             <option value="4">Renovación Trivalente</option>
                                             <option value="5">Renovación Leucemia</option>
+                                        </select>
+                                        <!-- VACUNAS CANINAS -->
+                                        <select *ngIf="datosMascota.id_tipo_mascota == 1" name="tipoVacuna" class="form-control" [(ngModel)]="formVacuna.tipoVacuna" required>
+                                            <option value="">--Seleccione--</option>
+                                            <option value="6">Especial Cachorro</option>
+                                            <option value="7">Polivalente Canina</option>
+                                            <option value="8">Traqueobronquitis</option>
+                                            <option value="9">Antirrabica Canina</option>
                                         </select>
                                     </div>
                                     <button type="submit" class="btn btn-success mx-auto" [disabled]="nuevaVacunaForm.invalid">Registrar Nueva Vacuna</button>

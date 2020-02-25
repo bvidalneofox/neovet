@@ -58,6 +58,23 @@ class ClienteController extends Controller
         }
     }
 
+    public function updateCliente(Request $request)
+    {
+        $cliente = Cliente::find($request->id);
+            if (!is_null($cliente)) {
+                $cliente->nombre = $request->nombre;
+                $cliente->rut = $request->rut;
+                $cliente->correo = $request->correo;
+                $cliente->direccion = $request->direccion;
+                $cliente->numero = $request->numero;
+                if ($cliente->save()) {
+                    return ['estado' => 'success', 'mensaje' => 'Cliente actualizado correctamente.'];
+                } else {
+                    return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al actualizar el nuevo cliente.'];
+                }
+            }
+    }
+
     //FUNCION PARA OBTENER UN CLIENTE EN ESPECIFICO
     public function getClientePorRut($rut = '')
     {
@@ -71,7 +88,6 @@ class ClienteController extends Controller
                 'correo',
                 'direccion',
                 'numero',
-                'password',
                 'fecha_ingreso'
             ])
                 ->where('rut', $rut)
@@ -81,6 +97,19 @@ class ClienteController extends Controller
             } else {
                 return ['estado' => 'failed_unr', 'mensaje' => 'El rut ingresado no existe en nuestros registros.'];
             }
+        }
+    }
+
+    public function getClientePorId($id)
+    {
+        $busqueda = DB::table('clientes as c')
+            ->select('c.*')
+            ->where('c.id', $id)
+            ->get();
+        if (!$busqueda->isEmpty()) {
+            return ['estado' => 'success', 'cliente' => $busqueda[0]];
+        } else {
+            return ['estado' => 'failed_unr', 'mensaje' => 'No se ha encontrado al cliente solicitado'];
         }
     }
 

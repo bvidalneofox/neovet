@@ -22,6 +22,7 @@ class CreateTableConsultas extends Migration
             $table->integer('id_estado');
             $table->integer('id_mascota');
             $table->integer('id_usuario');
+            $table->integer('id_usuario_procedimiento')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

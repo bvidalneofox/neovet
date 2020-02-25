@@ -28,7 +28,9 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
     //Rutas para los clientes
     Route::post('setCliente', 'ClienteController@setCliente');
+    Route::post('updateCliente', 'ClienteController@updateCliente');
     Route::get('getClientePorRut/{rut?}', 'ClienteController@getClientePorRut');
+    Route::get('getClientePorId/{id?}', 'ClienteController@getClientePorId');
     Route::get('getClientesPorNombre/{nombre?}', 'ClienteController@getClientesPorNombre');
     Route::get('getAllClientes', 'ClienteController@getAllClientes');
 

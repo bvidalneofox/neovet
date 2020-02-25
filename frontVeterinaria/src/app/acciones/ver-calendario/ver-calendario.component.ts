@@ -19,6 +19,7 @@ export class VerCalendarioComponent implements OnInit {
     id: '',
     titulo: '',
     descripcion: '',
+    nombreCreador: '',
     colorFondo: '#7aa9eb',
     colorTexto: '#000000',
     horaInicio: '',
@@ -60,6 +61,7 @@ export class VerCalendarioComponent implements OnInit {
     this.nuevoEventoForm.id = evento.event.id;
     this.nuevoEventoForm.titulo = evento.event.title;
     this.nuevoEventoForm.descripcion = evento.event.extendedProps.descripcion;
+    this.nuevoEventoForm.nombreCreador = evento.event.extendedProps.nombreCreador;
     this.nuevoEventoForm.colorFondo = evento.event.backgroundColor;
     this.nuevoEventoForm.colorTexto = evento.event.textColor;
     this.nuevoEventoForm.horaInicio = evento.event.start.getFullYear() + "-" + ("0" + (evento.event.start.getMonth() + 1)).slice(-2) + "-" + ("0" + evento.event.start.getDate()).slice(-2) + "T" + ("0" + evento.event.start.getHours()).slice(-2) + ":" + ("0" + evento.event.start.getMinutes()).slice(-2);
@@ -100,7 +102,7 @@ export class VerCalendarioComponent implements OnInit {
 
   getEventos() {
     this._eventosService.getEventos().subscribe(response => {
-      this.data = response;
+      this.data = response.eventos;
       console.log(response);
     }, error => {
       console.log(error);

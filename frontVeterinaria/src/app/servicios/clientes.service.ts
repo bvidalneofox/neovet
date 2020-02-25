@@ -24,12 +24,27 @@ export class ClientesService {
     return this._http.post(this.url + "setCliente", form);
   }
 
+  updateCliente(formCliente): Observable<any> {
+    let form = new FormData();
+    form.append("id", formCliente.id);
+    form.append("nombre", formCliente.nombre);
+    form.append("rut", formCliente.rut);
+    form.append("correo", formCliente.correo);
+    form.append("direccion", formCliente.direccion);
+    form.append("numero", formCliente.numero);
+    return this._http.post(this.url + "updateCliente", form);
+  }
+
   getMascotasPorRut(rut): Observable<any>{
     return this._http.get(this.url + "getMascotasClientePorRut/" + rut);
   }
 
   getClientePorRut(rut): Observable<any> {
     return this._http.get(this.url + "getClientePorRut/" + rut);
+  }
+
+  getClientePorId(id): Observable<any> {
+    return this._http.get(this.url + "getClientePorId/" + id);
   }
 
   getClientesPorNombre(nombre): Observable<any>{

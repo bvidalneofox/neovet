@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Evento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class EventoController extends Controller
 {
@@ -16,6 +18,7 @@ class EventoController extends Controller
         $evento->textColor = $request->textColor;
         $evento->start = $request->start;
         $evento->end = $request->end;
+        $evento->id_usuario = Auth::user()->id;
         if ($evento->save()) {
             return ['estado' => 'success', 'mensaje' => 'Evento agregado correctamente.'];
         } else {
@@ -45,10 +48,24 @@ class EventoController extends Controller
 
     public function getEventos()
     {
-        return Evento::all();
+        $busqueda = DB::table('eventos as e')
+            ->select('e.*', 'u.name as nombreCreador')
+            ->leftJoin('users as u', 'u.id', '=', 'e.id_usuario')
+            ->get();
+        if (!$busqueda->isEmpty()) {
+            return ['estado' => 'success', 'eventos' => $busqueda];
+        } else {
+            return ['estado' => 'failed_unr', 'mensaje' => 'No hay eventos activas de momento.'];
+        }
     }
 
-    public function deleteEvento(Request $request){
+    // public function getEventos()
+    // {
+    //     return Evento::all();
+    // }
+
+    public function deleteEvento(Request $request)
+    {
         $evento = Evento::find($request->id)->delete();
         if ($evento) {
             return ['estado' => 'success', 'mensaje' => 'Evento Eliminado Correctamente.'];

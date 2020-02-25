@@ -21,6 +21,7 @@ class CreateTableEventos extends Migration
             $table->string('textColor');
             $table->dateTime('start');
             $table->dateTime('end');
+            $table->integer('id_usuario');
             $table->softDeletes();
             $table->timestamps();
         });
