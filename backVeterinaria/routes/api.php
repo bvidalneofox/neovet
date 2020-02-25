@@ -26,6 +26,10 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     //DESLOGUEARSE
     Route::get('logout', 'ApiController@logout');
 
+    //Rutas para los usuarios del sistema
+    Route::get('getDatosUsuarioSistema', 'UsuarioController@getDatosUsuarioSistema');
+    Route::post('updateUsuarioSistema', 'UsuarioController@updateUsuarioSistema');
+
     //Rutas para los clientes
     Route::post('setCliente', 'ClienteController@setCliente');
     Route::post('updateCliente', 'ClienteController@updateCliente');

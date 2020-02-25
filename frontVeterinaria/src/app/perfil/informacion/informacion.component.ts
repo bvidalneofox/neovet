@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 @Component({
   selector: 'app-informacion',
@@ -7,9 +8,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InformacionComponent implements OnInit {
 
-  constructor() { }
+  //Variable para almacenar los datos del ususario del sistema
+  datosUsuario = [];
+
+  constructor(private _usuariosService: UsuariosService) { }
 
   ngOnInit() {
+    this.getDatosUsuarioSistema();
+  }
+
+  getDatosUsuarioSistema(){
+    this._usuariosService.getDatosUsuarioSistema().subscribe(response=>{
+      if(response.estado == 'success'){
+        this.datosUsuario = response.usuario;
+      }else{
+        alert(response.mensaje);
+      }
+    }, error=>{
+      console.log(error);
+    });
+  }
+
+  updateDatosCliente(){
+    this._usuariosService.updateCliente(this.datosUsuario).subscribe(response=>{
+      if(response.estado == 'success'){
+        alert(response.mensaje);
+      }else{
+        alert(response.mensaje);
+      }
+    },error=>{
+      console.log(error);
+    });
   }
 
 }
