@@ -1,0 +1,60 @@
+<div class="container-fluid mt-4 mb-4">
+    <div class="card formularios">
+        <div class="container-fluid mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card but-card text-center">
+                        <div class="card-body">
+                            <!-- <img src="assets/estetoscopio.png" width="70" height="70" alt=""> -->
+                            <h3 class="card-text font-weight-bold">{{numeroClientes}}</h3>
+                            <p class="font-weight-bold h5">Clientes Activos</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card but-card text-center">
+                        <div class="card-body">
+                            <!-- <img src="assets/estetoscopio.png" width="70" height="70" alt=""> -->
+                            <h3 class="card-text font-weight-bold">{{numeroMascotas}}</h3>
+                            <p class="font-weight-bold h5">Mascotas Registradas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card but-card text-center">
+                        <div class="card-body">
+                            <!-- <img src="assets/estetoscopio.png" width="70" height="70" alt=""> -->
+                            <h3 class="card-text font-weight-bold">{{numeroUsuarios}}</h3>
+                            <p class="font-weight-bold h5">Usuarios Activos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col"></div>
+                <div class="col-md-10 text-center">
+                    <h3>Consultas realizadas en los ultimos 5 años</h3>
+                    <canvas baseChart height="100px" [datasets]="lineChartData" [labels]="lineChartLabels"
+                        [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                        [chartType]="lineChartType"></canvas>
+                    <button class="btn btn-primary mb-4" (click)="cambiarGrafico('cons')">Cambiar Estilo
+                        Grafico</button>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row mt-4">
+                <div class="col"></div>
+                <div class="col-md-10 text-center">
+                    <h3>Hospitalizaciones realizadas en los ultimos 5 años</h3>
+                    <canvas baseChart height="100px" [datasets]="lineChartDataHospitalizaciones"
+                        [labels]="lineChartLabelsHospitalizaciones" [options]="lineChartOptionsHospitalizaciones"
+                        [colors]="lineChartColorsHospitalizaciones" [legend]="lineChartLegendHospitalizaciones"
+                        [chartType]="lineChartTypeHospitalizaciones"></canvas>
+                    <button class="btn btn-primary mb-4" (click)="cambiarGrafico('hosp')">Cambiar Estilo
+                        Grafico</button>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+    </div>
+</div>

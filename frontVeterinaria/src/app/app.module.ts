@@ -38,6 +38,7 @@ import { BuscadorMascotasComponent } from './acciones/buscador-mascotas/buscador
 import { VerHistorialHospitalizacionesComponent } from './acciones/ver-historial-hospitalizaciones/ver-historial-hospitalizaciones.component';
 import { FichaConsultaComponent } from './documentos/ficha-consulta/ficha-consulta.component';
 import { FichaClienteComponent } from './documentos/ficha-cliente/ficha-cliente.component';
+import { InicioEstadisticasComponent } from './estadisticas/inicio-estadisticas/inicio-estadisticas.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { FichaClienteComponent } from './documentos/ficha-cliente/ficha-cliente.
     BuscadorMascotasComponent,
     VerHistorialHospitalizacionesComponent,
     FichaConsultaComponent,
-    FichaClienteComponent
+    FichaClienteComponent,
+    InicioEstadisticasComponent
   ],
   imports: [
     BrowserModule,
