@@ -19,7 +19,8 @@
                         data-target=".modal-cambio-logo">Subir Logo de Veterinaria</button>
                 </div>
                 <div class="col-md-6">
-                    <button class="btn btn-secondary btn-block">Cambiar Nombre de Veterinaria</button>
+                    <button class="btn btn-secondary btn-block" data-toggle="modal"
+                    data-target=".modal-cambio-nombre-veterinaria">Cambiar Nombre de Veterinaria</button>
                 </div>
             </div>
             <div class="row mt-4">
@@ -201,6 +202,54 @@
                                 <label for="archivoSubir">Logo Actual</label>
                                 <br>
                                 <img src="assets/neofox-nav.png" style="width: 10rem;">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Subir</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cambio Nombre Empresa-->
+<div class="modal fade modal-cambio-nombre-veterinaria" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Cambiar Nombre/Dirección de
+                    Veterinaria
+                </h3>
+                <button id="closeButton" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="alert alert-warning" role="alert">
+                        El nombre y dirección que asignara sera visible en el sistema administrativo tanto como en los documentos
+                        emitidos es decir Ficha Clinica, Recetas entre otros. Puede cambiar de dirección tantas veces como
+                        quiera.
+                    </div>
+                    <form #formNombreEmpresa="ngForm" (ngSubmit)="setNombreDireccion(formNombreEmpresa.value)">
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="inputNombreEmpresa">Nombre Veterinaria</label>
+                                <input type="text" class="form-control" name="nombreEmpresaLogo" autocomplete="off" [(ngModel)]="nombreVeterinaria" required>
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="inputRut">Dirección Veterinaria</label>
+                                <input type="text" class="form-control" name="direccionVeterinaria" autocomplete="off" [(ngModel)]="direccionVeterinaria" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label for="inputNombreEmpresa">Numero Contacto</label>
+                                <input type="text" class="form-control" name="numeroVeterinaria" autocomplete="off" [(ngModel)]="numero" required>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-success btn-block">Subir</button>

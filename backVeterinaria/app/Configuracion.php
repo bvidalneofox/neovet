@@ -9,6 +9,6 @@ class Configuracion extends Model
 {
     use SoftDeletes;
     protected $table = "configuraciones";
-    protected $fillable = ['nombre_veterinaria', 'ruta_imagen'];
+    protected $fillable = ['nombre_veterinaria', 'ruta_imagen', 'direccion'];
     protected $dates = ['deleted_at'];
 }

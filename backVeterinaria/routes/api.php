@@ -93,4 +93,5 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     //Ruta para las configuraciones
     Route::post('setLogoVeterinaria', 'ConfiguracionController@setLogoVeterinaria');
     Route::get('getConfiguraciones', 'ConfiguracionController@getConfiguraciones');
+    Route::post('setNombreDireccion', 'ConfiguracionController@setNombreDireccion');
 });

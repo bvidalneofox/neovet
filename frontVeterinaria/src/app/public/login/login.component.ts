@@ -45,7 +45,8 @@ export class LoginComponent implements OnInit {
     this._configuracionesSercice.getConfiguraciones().subscribe(response=>{
         localStorage.setItem('nombreVeterinaria', response.nombre_veterinaria);
         localStorage.setItem('rutaLogo', response.ruta_imagen);
-        console.log("Hola");
+        localStorage.setItem('direccion', response.direccion);
+        localStorage.setItem('numero', response.numero);
     }, error=>{
       console.log(error);
     });

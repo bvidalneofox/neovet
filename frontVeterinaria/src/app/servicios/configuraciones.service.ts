@@ -24,4 +24,12 @@ export class ConfiguracionesService {
     return this._http.get(this.url + "getConfiguraciones");
   }
 
+  setNombreDireccion(datos): Observable<any>{
+    let form = new FormData();
+    form.append("nombre", datos.nombreEmpresaLogo);
+    form.append("direccion", datos.direccionVeterinaria);
+    form.append("numero", datos.numeroVeterinaria);
+    return this._http.post(this.url + "setNombreDireccion", form);
+  }
+
 }

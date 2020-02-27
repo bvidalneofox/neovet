@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { ConfiguracionesService } from 'src/app/servicios/configuraciones.service';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-configuracion',
@@ -15,6 +16,11 @@ export class ConfiguracionComponent implements OnInit {
   nombreArchivo = '';
   //Ngmodel del FOrmulario Seguimiento
   archivo: null;
+
+  //Configuración
+  nombreVeterinaria = localStorage.getItem('nombreVeterinaria');
+  direccionVeterinaria = localStorage.getItem('direccion');
+  numero = localStorage.getItem('numero');
 
   constructor(private _usuariosService : UsuariosService, private _configuracionService: ConfiguracionesService) { }
 
@@ -72,6 +78,21 @@ export class ConfiguracionComponent implements OnInit {
         alert(response.mensaje);
       }
     },error=>{
+      console.log(error);
+    });
+  }
+
+  setNombreDireccion(form){
+    this._configuracionService.setNombreDireccion(form).subscribe(response=>{
+      if(response.estado == 'success'){
+        alert(response.mensaje);
+        localStorage.setItem('nombreVeterinaria', form.nombreEmpresaLogo);
+        localStorage.setItem('direccion', form.direccionVeterinaria);
+        localStorage.setItem('numero', form.numeroVeterinaria);
+      }else{
+        alert(response.mensaje);
+      }
+    }, error=>{
       console.log(error);
     });
   }

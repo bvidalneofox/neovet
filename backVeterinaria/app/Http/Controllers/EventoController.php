@@ -52,7 +52,10 @@ class EventoController extends Controller
         //     ->select('e.*', 'u.name as nombreCreador')
         //     ->leftJoin('users as u', 'u.id', '=', 'e.id_usuario')
         //     ->get();
-        $busqueda = Evento::all();
+        // $busqueda = Evento::all();
+        $busqueda = Evento::select('eventos.*', 'users.name as nombreCreador')
+        ->leftJoin('users', 'users.id', '=', 'eventos.id_usuario')
+        ->get();
         if (!$busqueda->isEmpty()) {
             return ['estado' => 'success', 'eventos' => $busqueda];
         } else {

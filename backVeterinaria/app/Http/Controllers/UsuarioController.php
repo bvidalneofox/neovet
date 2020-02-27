@@ -56,7 +56,7 @@ class UsuarioController extends Controller
             $cliente->direccion = $request->direccion;
             $cliente->email = $request->correo;
             if ($cliente->save()) {
-                return ['estado' => 'success', 'mensaje' => 'Usuario actualizado correctamente.'];
+                return ['estado' => 'success', 'mensaje' => 'Usuario actualizado correctamente, si desea que los cambios se apliquen en el sistema debe de cerrar e iniciar sesión nuevamente.'];
             } else {
                 return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al actualizar el Usuario.'];
             }

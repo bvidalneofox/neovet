@@ -16,7 +16,9 @@ class CreateConfiguraciones extends Migration
         Schema::create('configuraciones', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre_veterinaria')->nullable();
+            $table->string('direccion')->nullable();
             $table->text('ruta_imagen')->nullable();
+            $table->text('numero')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

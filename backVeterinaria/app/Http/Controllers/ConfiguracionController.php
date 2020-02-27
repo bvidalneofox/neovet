@@ -25,6 +25,20 @@ class ConfiguracionController extends Controller
         }
     }
 
+    public function setNombreDireccion(Request $request){
+        $configuracion = Configuracion::find('1');
+        if(!is_null($configuracion)){
+            $configuracion->nombre_veterinaria = $request->nombre;
+            $configuracion->direccion = $request->direccion;
+            $configuracion->numero = $request->numero;
+            if ($configuracion->save()) {
+                return ['estado' => 'success', 'mensaje' => 'Nombre/Direccion Actualizado Correctamente.'];
+            } else {
+                return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al actualizar el Nombre/Direccion.'];
+            }
+        }
+    }
+
     public function getConfiguraciones(){
         return Configuracion::all()->first();
     }
