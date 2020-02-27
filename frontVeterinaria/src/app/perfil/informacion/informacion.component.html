@@ -22,13 +22,14 @@
             <div class="row mt-2">
                 <div class="col-md-12">
                     <button type="button" class="btn btn-success btn-block" data-toggle="modal"
-                        data-target=".modal-editar-datos-basicos-perfil-usuario">Editar Datos Basicos del Cliente</button>
+                        data-target=".modal-editar-datos-basicos-perfil-usuario">Editar Datos Basicos del
+                        Cliente</button>
                 </div>
             </div>
             <div class="row mt-2">
                 <div class="col-md-12">
                     <button type="button" class="btn btn-danger btn-block" data-toggle="modal"
-                        data-target=".modal-editar-datos-basicos-perfil-usuario">Cambiar de Contraseña</button>
+                        data-target=".modal-editar-contrasenia-usuario">Cambiar de Contraseña</button>
                 </div>
             </div>
         </div>
@@ -55,25 +56,33 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputNombre">Nombre de Cliente *</label>
-                                    <input type="text" class="form-control" id="inputNombre" placeholder="Nombre Completo" name="nombre" autocomplete="off" [(ngModel)]="datosUsuario.name" required>
+                                    <input type="text" class="form-control" id="inputNombre"
+                                        placeholder="Nombre Completo" name="nombre" autocomplete="off"
+                                        [(ngModel)]="datosUsuario.name" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputRut">Rut del Cliente *</label>
-                                    <input type="text" class="form-control" id="inputRut" placeholder="Rut" name="rut" autocomplete="off" [(ngModel)]="datosUsuario.rut" required>
+                                    <input type="text" class="form-control" id="inputRut" placeholder="Rut" name="rut"
+                                        autocomplete="off" [(ngModel)]="datosUsuario.rut" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputCorreo">Correo</label>
-                                <input type="email" class="form-control" id="inputCorreo" placeholder="Correo Electronico del cliente" name="correo" autocomplete="off" [(ngModel)]="datosUsuario.email">
+                                <input type="email" class="form-control" id="inputCorreo"
+                                    placeholder="Correo Electronico del cliente" name="correo" autocomplete="off"
+                                    [(ngModel)]="datosUsuario.email">
                             </div>
                             <div class="form-group">
                                 <label for="inputDireccion">Dirección *</label>
-                                <input type="text" class="form-control" id="inputDireccion" placeholder="Residencia del Cliente" name="direccion" autocomplete="off" [(ngModel)]="datosUsuario.direccion" required>
+                                <input type="text" class="form-control" id="inputDireccion"
+                                    placeholder="Residencia del Cliente" name="direccion" autocomplete="off"
+                                    [(ngModel)]="datosUsuario.direccion" required>
                             </div>
                             <div class="form-group">
                                 <label for="inputNumero">Numero de Telefono/Celular *</label>
                                 <input type="text" class="form-control" id="inputNumero"
-                                    placeholder="Puede ingresar uno o muchos celulares" name="numero" autocomplete="off" [(ngModel)]="datosUsuario.numero" required>
+                                    placeholder="Puede ingresar uno o muchos celulares" name="numero" autocomplete="off"
+                                    [(ngModel)]="datosUsuario.numero" required>
                             </div>
                         </form>
                     </div>
@@ -82,6 +91,49 @@
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-secondary" (click)="updateDatosCliente()">Actualizar</button>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cambiar Contraseña -->
+<div class="modal fade modal-editar-contrasenia-usuario" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Cambiar Contraseña
+                </h3>
+                <button id="closeButton" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="mt-4">
+                        <form #passwordClienteForm="ngForm" (ngSubmit)="changePasswordUser(passwordClienteForm.value)">
+                            <div class="form-group col-12">
+                                <label for="inputNombre">Contraseña Actual</label>
+                                <input type="password" class="form-control" id="pass" name="passActual" autocomplete="off"
+                                    ngModel required>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="inputRut">Nueva Contraseña</label>
+                                <input type="password" class="form-control" id="newpass" name="nuevaPass1" autocomplete="off"
+                                    ngModel required>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="inputCorreo">Repetir Nueva Contraseña</label>
+                                <input type="password" class="form-control" id="newpasstwo" name="nuevaPass2"
+                                    autocomplete="off" ngModel required>
+                            </div>
+                            <button type="submit" class="btn btn-secondary btn-block">Cambiar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
     </div>

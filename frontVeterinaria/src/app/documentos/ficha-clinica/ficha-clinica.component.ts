@@ -13,6 +13,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class FichaClinicaComponent implements OnInit {
 
+  rutaLogo = localStorage.getItem('rutaLogo');
+
   //Variable para rescatar el id de la ruta
   idMascota = '';
   //Variable para los datos basicos

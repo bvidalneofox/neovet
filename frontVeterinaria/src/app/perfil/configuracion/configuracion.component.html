@@ -3,27 +3,212 @@
         <div class="container-fluid mb-4">
             <div class="row mt-4">
                 <div class="col-md-6">
-                    <button class="btn btn-primary btn-block">Crear Nuevo Usuario (Veterinario, Secretaria, Administrador)</button>
+                    <button class="btn btn-primary btn-block" data-toggle="modal"
+                        data-target=".modal-crear-nuevo-usuario">Crear Nuevo Usuario (Veterinario, Secretaria,
+                        Administrador)</button>
                 </div>
                 <div class="col-md-6">
-                    <button class="btn btn-primary btn-block">Desactivar Usuario (Veterinario, Secretaria, Administrador) del Sistema</button>
+                    <button class="btn btn-primary btn-block" data-toggle="modal" data-target=".modal-bloquear-usuarios"
+                        (click)="getUsuariosSistema()">Desactivar Usuario (Veterinario, Secretaria,
+                        Administrador) del Sistema</button>
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col-md-6">
-                    <button class="btn btn-secondary btn-block">Subir Logo de Veterinaria</button>
+                    <button class="btn btn-secondary btn-block" data-toggle="modal"
+                        data-target=".modal-cambio-logo">Subir Logo de Veterinaria</button>
                 </div>
                 <div class="col-md-6">
-                    <button class="btn btn-secondary btn-block">Bloquear Acceso Al Sistema Para un Cliente</button>
+                    <button class="btn btn-secondary btn-block">Cambiar Nombre de Veterinaria</button>
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col-md-6">
-                    <button class="btn btn-success btn-block">Placeholder Text</button>
+                    <button class="btn btn-success btn-block">Bloquear Acceso Al Sistema Para un Cliente</button>
                 </div>
                 <div class="col-md-6">
                     <button class="btn btn-success btn-block">Placeholder Text</button>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cambiar Contraseña -->
+<div class="modal fade modal-crear-nuevo-usuario" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Crear Nuevo Usuario
+                </h3>
+                <button id="closeButton" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="mt-4">
+                        <p>Se creara un usuario para que pueda interactuar de manera directa con el sistema, su
+                            contraseña por defecto correspondera a los primeros 4 digitos de su rut</p>
+                        <form #nuevoUsuarioForm="ngForm" (ngSubmit)="setNuevoUsuario(nuevoUsuarioForm.value)">
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="inputNombre">Nombre del Usuario</label>
+                                    <input type="text" class="form-control" name="nombreUsuario" autocomplete="off"
+                                        placeholder="Nombre Completo" ngModel required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="inputRut">Rut del Usuario</label>
+                                    <input type="text" class="form-control" name="rutUsuario" autocomplete="off"
+                                        placeholder="rut" ngModel required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <label for="inputCorreo">Numero Contacto</label>
+                                    <input type="text" class="form-control" name="numeroUsuario" autocomplete="off"
+                                        placeholder="Puede ingresar uno o muchos" ngModel required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <label for="inputNombre">Dirección</label>
+                                    <input type="text" class="form-control" name="direccionUsuario" autocomplete="off"
+                                        placeholder="Residencia del Usuario" ngModel required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <label for="inputRut">Correo</label>
+                                    <input type="email" class="form-control" name="correoUsuario" autocomplete="off"
+                                        placeholder="Correo Electronico del Usuario" ngModel required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <label for="inputCorreo">Tipo Usuario</label>
+                                    <select class="form-control" name="tipoUsuario" ngModel required>
+                                        <option value="">--Seleccione--</option>
+                                        <option value="1">Veterinario</option>
+                                        <option value="2">Recepcionista</option>
+                                        <option value="3">Administrador</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-block">Registrar Usuario</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Bloquear Usuarios -->
+<div class="modal fade modal-bloquear-usuarios" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Crear Nuevo Usuario
+                </h3>
+                <button id="closeButton" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="mt-4">
+                        <div class="alert alert-warning" role="alert">
+                            Si desea bloquear a un usuario del sistema este no podra acceder más al sistema, sin embargo
+                            los registros historicos realizados por ese usuario seguiran intactos. Si desea desbloquear
+                            a un usuario puede hacerlo sin problemas.
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th scope="col">Nombre Usuario</th>
+                                        <th scope="col">Rut Usuario</th>
+                                        <th scope="col">Fecha Incorporación</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    <tr *ngFor="let itemUsuarios of datosUsuarios">
+                                        <td>{{itemUsuarios?.name}}</td>
+                                        <td>{{itemUsuarios?.rut}}</td>
+                                        <td>{{itemUsuarios?.created_at}}</td>
+                                        <td>
+                                            <button *ngIf="!itemUsuarios.deleted_at" class="btn btn-primary"
+                                                (click)="deleteUsuario(true, itemUsuarios?.id)">Bloquear del
+                                                Sistema</button>
+                                            <button *ngIf="itemUsuarios.deleted_at" class="btn btn-danger"
+                                                (click)="deleteUsuario(false, itemUsuarios?.id)">Desbloquear del
+                                                Sistema</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Cambio Logo Empresa-->
+<div class="modal fade modal-cambio-logo" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Subir Logo de
+                    Empresa
+                </h3>
+                <button id="closeButton" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="alert alert-warning" role="alert">
+                        El logo que subira sera visible en el sistema administrativo tanto como en los documentos
+                        emitidos es decir Ficha Clinica, Recetas entre otros. Puede cambiar la imagen tantas veces como
+                        quiera.
+                    </div>
+                    <form #formLogo="ngForm" (ngSubmit)="setLogotest(formLogo)" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label for="archivoSubir">Seleccione la imagen a subir</label>
+                                <button type="button" class="btn btn-primary btn-block form-control" (click)="fileClick()">Presione
+                                    para seleccionar imagen</button>
+                                {{nombreArchivo}}
+                                <input id="testArchivoLogo" type="file" name="ArchivoSubir"
+                                    (change)="updateFile($event)" hidden>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label for="archivoSubir">Logo Actual</label>
+                                <br>
+                                <img src="assets/neofox-nav.png" style="width: 10rem;">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Subir</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
     </div>

@@ -29,6 +29,10 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     //Rutas para los usuarios del sistema
     Route::get('getDatosUsuarioSistema', 'UsuarioController@getDatosUsuarioSistema');
     Route::post('updateUsuarioSistema', 'UsuarioController@updateUsuarioSistema');
+    Route::post('changePasswordUser','UsuarioController@changePasswordUser');
+    Route::post('setUsuario','UsuarioController@setUsuario');
+    Route::get('getUsuariosSistema', 'UsuarioController@getUsuariosSistema');
+    Route::post('deleteUsuario','UsuarioController@deleteUsuario');
 
     //Rutas para los clientes
     Route::post('setCliente', 'ClienteController@setCliente');
@@ -85,4 +89,8 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     //Rutas para el seguimiento de las hospitalizaciones
     Route::post('setSeguimiento', 'SeguimientoControlller@setSeguimiento');
     Route::get('getSeguimientoPorId/{id}', 'SeguimientoControlller@getSeguimientoPorId');
+
+    //Ruta para las configuraciones
+    Route::post('setLogoVeterinaria', 'ConfiguracionController@setLogoVeterinaria');
+    Route::get('getConfiguraciones', 'ConfiguracionController@getConfiguraciones');
 });

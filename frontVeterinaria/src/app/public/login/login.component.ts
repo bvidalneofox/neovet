@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/servicios/login.service';
 import { Router } from '@angular/router';
+import { ConfiguracionesService } from 'src/app/servicios/configuraciones.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   loading = false;
 
-  constructor(private _loginService: LoginService, private router: Router) { }
+  constructor(private _loginService: LoginService, private router: Router, private _configuracionesSercice: ConfiguracionesService) { }
 
   ngOnInit() {
   }
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         localStorage.setItem('token', response.token);
         localStorage.setItem('nameUser', response.nameUser);
+        this.getDatosConfiguraciones();
         this.router.navigateByUrl('/Inicio');
       }else{
         this.loading = false;
@@ -35,6 +37,16 @@ export class LoginComponent implements OnInit {
       }
     }, error=>{
       this.loading = false;
+      console.log(error);
+    });
+  }
+
+  getDatosConfiguraciones(){
+    this._configuracionesSercice.getConfiguraciones().subscribe(response=>{
+        localStorage.setItem('nombreVeterinaria', response.nombre_veterinaria);
+        localStorage.setItem('rutaLogo', response.ruta_imagen);
+        console.log("Hola");
+    }, error=>{
       console.log(error);
     });
   }
