@@ -1,0 +1,102 @@
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <button (click)="generarPDF()" class="btn btn-info btn-block">Exportar Receta a PDF</button>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt-4 mb-4">
+    <div class="card formularios">
+        <div class="container-fluid mt-4">
+            <h3 class="text-center font-weight-bold">Generador de Recetas</h3>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <label>Nombre Paciente</label>
+                    <input type="text" class="form-control" [(ngModel)]="nombreMascota"
+                        placeholder="Ingrese nombre del paciente">
+                </div>
+            </div>
+            <form #nuevaRecetaForm="ngForm" (ngSubmit)="agregarMedicamento(nuevaRecetaForm.value)">
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Medicamento</label>
+                            <input type="text" class="form-control" name="nombreMedicamento" ngModel
+                                placeholder="Ingrese nombre del Medicamento" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Indicaciones</label>
+                            <input type="text" class="form-control" name="indicacionesMedicamento" ngModel
+                                placeholder="Ingrese Indicaciones" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" [disabled]="nuevaRecetaForm.invalid"
+                            class="btn btn-primary btn-block mb-4">Ingresar Medicamento</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt-4 mb-4">
+    <div class="card formularios">
+        <div id="contenido">
+            <div class="container-fluid mt-4">
+                <!-- DATOS VETERINARIA -->
+                <div class="row text-center">
+                    <div class="col-1">
+                        <img src="http://127.0.0.1:8000/{{rutaLogo}}" style="width: 10rem;">
+                    </div>
+                    <div class="col-11">
+                        <p class="h4 font-weight-bold mr-5">Clinica Veterinaria {{nombreVeterinaria}}</p>
+                        <p class="h5 font-weight-bold mr-5">{{direccionVeterinaria}}</p>
+                        <p class="font-weight-bold mr-5">{{numero}}</p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="container">
+                <div class="row mt-4">
+                    <div class="col-md-12 text-center">
+                        <h4><b>Nombre Paciente:</b> {{nombreMascota}}</h4>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h3 class="font-weight-bold">Indicaciones</h3>
+                        <div *ngFor="let itemReceta of receta;let indice=index">
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><b>Nombre Medicamento: </b>{{itemReceta.nombreMedicamento}}</p>
+                                    <p><b>Indicación: </b>{{itemReceta.indicacionesMedicamento}}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-sm btn-danger"
+                                        (click)="deleteElementoReceta(indice)">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row margin-firmas mb-4">
+                    <div class="col-md-6">
+                        <p class="firmas text-center h5 font-weight-bold">Fecha Emisión Receta</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="firmas text-center h5 font-weight-bold">Firma Veterinario Encargado</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

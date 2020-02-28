@@ -94,4 +94,11 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('setLogoVeterinaria', 'ConfiguracionController@setLogoVeterinaria');
     Route::get('getConfiguraciones', 'ConfiguracionController@getConfiguraciones');
     Route::post('setNombreDireccion', 'ConfiguracionController@setNombreDireccion');
+
+    //Ruta para las estadisticas
+    Route::get('getEstadisticasConsultas','EstadisticasController@getEstadisticasConsultas');
+    Route::get('getEstadisticasHospitalizaciones','EstadisticasController@getEstadisticasHospitalizaciones');
+    Route::get('getClientesSistema','EstadisticasController@getClientesSistema');
+    Route::get('getUsuariosSistema','EstadisticasController@getUsuariosSistema');
+    Route::get('getMascotasSistema','EstadisticasController@getMascotasSistema');
 });

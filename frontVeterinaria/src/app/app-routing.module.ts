@@ -21,6 +21,7 @@ import { FichaConsultaComponent } from './documentos/ficha-consulta/ficha-consul
 import { FichaMascotaComponent } from './documentos/ficha-mascota/ficha-mascota.component';
 import { FichaClienteComponent } from './documentos/ficha-cliente/ficha-cliente.component';
 import { InicioEstadisticasComponent } from './estadisticas/inicio-estadisticas/inicio-estadisticas.component';
+import { NuevaRecetaComponent } from './acciones/nueva-receta/nueva-receta.component';
 
 const routes: Routes = [
 
@@ -52,7 +53,8 @@ const routes: Routes = [
         { path: 'perfilMascota/:idMascota', component: FichaMascotaComponent },
         { path: 'perfilCliente/:idCliente', component: FichaClienteComponent },
         { path: 'configuracion', component: ConfiguracionComponent },
-        { path: 'estadisticas', component: InicioEstadisticasComponent }
+        { path: 'estadisticas', component: InicioEstadisticasComponent },
+        { path: 'nuevaReceta', component: NuevaRecetaComponent }
       ]
   }
 ];

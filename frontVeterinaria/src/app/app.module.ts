@@ -39,6 +39,7 @@ import { VerHistorialHospitalizacionesComponent } from './acciones/ver-historial
 import { FichaConsultaComponent } from './documentos/ficha-consulta/ficha-consulta.component';
 import { FichaClienteComponent } from './documentos/ficha-cliente/ficha-cliente.component';
 import { InicioEstadisticasComponent } from './estadisticas/inicio-estadisticas/inicio-estadisticas.component';
+import { NuevaRecetaComponent } from './acciones/nueva-receta/nueva-receta.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { InicioEstadisticasComponent } from './estadisticas/inicio-estadisticas/
     VerHistorialHospitalizacionesComponent,
     FichaConsultaComponent,
     FichaClienteComponent,
-    InicioEstadisticasComponent
+    InicioEstadisticasComponent,
+    NuevaRecetaComponent
   ],
   imports: [
     BrowserModule,
