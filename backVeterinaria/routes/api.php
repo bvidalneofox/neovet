@@ -101,4 +101,6 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('getClientesSistema','EstadisticasController@getClientesSistema');
     Route::get('getUsuariosSistema','EstadisticasController@getUsuariosSistema');
     Route::get('getMascotasSistema','EstadisticasController@getMascotasSistema');
+    Route::get('getusuariosConMasProcedimientos','EstadisticasController@getusuariosConMasProcedimientos');
+    Route::get('getEstadisticasClientes','EstadisticasController@getEstadisticasClientes');
 });

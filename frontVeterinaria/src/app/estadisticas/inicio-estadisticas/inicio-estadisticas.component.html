@@ -30,10 +30,11 @@
                     </div>
                 </div>
             </div>
+            <hr>
             <div class="row mt-4">
                 <div class="col"></div>
                 <div class="col-md-10 text-center">
-                    <h3>Consultas realizadas en los ultimos 5 años</h3>
+                    <h3 class="font-weight-bold">Consultas realizadas en los ultimos 5 años</h3>
                     <canvas baseChart height="100px" [datasets]="lineChartData" [labels]="lineChartLabels"
                         [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
                         [chartType]="lineChartType"></canvas>
@@ -42,10 +43,11 @@
                 </div>
                 <div class="col"></div>
             </div>
+            <hr>
             <div class="row mt-4">
                 <div class="col"></div>
                 <div class="col-md-10 text-center">
-                    <h3>Hospitalizaciones realizadas en los ultimos 5 años</h3>
+                    <h3 class="font-weight-bold">Hospitalizaciones realizadas en los ultimos 5 años</h3>
                     <canvas baseChart height="100px" [datasets]="lineChartDataHospitalizaciones"
                         [labels]="lineChartLabelsHospitalizaciones" [options]="lineChartOptionsHospitalizaciones"
                         [colors]="lineChartColorsHospitalizaciones" [legend]="lineChartLegendHospitalizaciones"
@@ -54,6 +56,32 @@
                         Grafico</button>
                 </div>
                 <div class="col"></div>
+            </div>
+            <hr>
+            <div class="row mt-4">
+                <div class="col"></div>
+                <div class="col-md-10 text-center">
+                    <h3 class="font-weight-bold">Nuevos Clientes Registrados en los ultimos 5 años</h3>
+                    <canvas baseChart height="100px" [datasets]="lineChartDataClientes"
+                        [labels]="lineChartLabelsClientes" [options]="lineChartOptionsClientes"
+                        [colors]="lineChartColorsClientes" [legend]="lineChartLegendClientes"
+                        [chartType]="lineChartTypeClientes"></canvas>
+                    <button class="btn btn-primary mb-4" (click)="cambiarGrafico('clie')">Cambiar Estilo
+                        Grafico</button>
+                </div>
+                <div class="col"></div>
+            </div>
+            <hr>
+            <div class="row mt-4 mb-4">
+                <div class="col-1"></div>
+                <div class="col-md-10 text-center">
+                    <h3 class="font-weight-bold">Usuarios Con el Mayor Numero de Atenciones</h3>
+                    <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+                        [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors"
+                        [legend]="pieChartLegend">
+                    </canvas>
+                </div>
+                <div class="col-1"></div>
             </div>
         </div>
     </div>

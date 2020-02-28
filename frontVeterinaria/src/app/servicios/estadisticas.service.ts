@@ -34,4 +34,12 @@ export class EstadisticasService {
     return this._http.get(this.url + "getMascotasSistema");
   }
 
+  getEstadisticasClientes(): Observable<any>{
+    return this._http.get(this.url + "getEstadisticasClientes");
+  }
+
+  getUsuariosConMasProcedimientos(): Observable<any>{
+    return this._http.get(this.url + "getusuariosConMasProcedimientos");
+  }
+
 }

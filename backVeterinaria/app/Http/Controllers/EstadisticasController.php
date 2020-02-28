@@ -63,5 +63,31 @@ class EstadisticasController extends Controller
             return ['estado' => 'failed_unr', 'mensaje' => 'No hay registro de hospitalizaciones'];
         }
     }
+
+    public function getusuariosConMasProcedimientos(){
+        $consultas = DB::table('consultas as c')
+        ->select(DB::raw('COUNT(c.id) as numeroAtenciones, c.id_usuario_procedimiento, u.name'))
+        ->leftJoin('users as u','u.id','c.id_usuario_procedimiento')
+        ->groupBy('c.id_usuario_procedimiento', 'u.name')
+        ->get();
+        return $consultas;
+        if (!$consultas->isEmpty()) {
+            return ['estado' => 'success', 'consultas' => $consultas];
+        } else {
+            return ['estado' => 'failed_unr', 'mensaje' => 'No hay registro de consultas'];
+        }
+    }
+
+    public function getEstadisticasClientes(){
+        $clientes = DB::table('clientes')
+        ->select(DB::raw('Year(created_at) anio, COUNT(id) numeroClientes'))
+        ->groupBy('anio')
+        ->get();
+        if (!$clientes->isEmpty()) {
+            return ['estado' => 'success', 'clientes' => $clientes];
+        } else {
+            return ['estado' => 'failed_unr', 'mensaje' => 'No hay registro de clientes'];
+        }
+    }
     
 }
