@@ -18,6 +18,8 @@ export class ConsultasServiceService {
     let form = new FormData();
     form.append("motivo", datosConsulta.motivoTextarea);
     form.append("fecha_consulta", datosConsulta.fechaConsulta);
+    form.append("nivel_emergencia", datosConsulta.nivelUrgencia);
+    form.append("nombre_cliente_solicita", datosMascota.nombreDuenio);
     form.append("id_mascota", datosMascota.id);
     return this._http.post(this.url + "setConsulta", form);
   }
@@ -26,8 +28,8 @@ export class ConsultasServiceService {
     return this._http.get(this.url + "getUltimasConsultasPorIdMascota/" + id);
   }
 
-  getConsultasActivas(): Observable<any> {
-    return this._http.get(this.url + "getConsultasActivas");
+  getConsultasActivas(estado): Observable<any> {
+    return this._http.get(this.url + "getConsultasActivas/" + estado);
   }
 
   getConsultasInactivas(): Observable<any> {
@@ -47,12 +49,13 @@ export class ConsultasServiceService {
     return this._http.get(this.url + "getConsultasInactivaPorIdMascota/" + id);
   }
 
-  setProcedimientoConsulta(idConsulta, procedimientoConsulta, peso, checkHosp, motivoHospitalizacion, idMascota):Observable<any>{
+  setProcedimientoConsulta(idConsulta, procedimientoConsulta, peso, checkHosp, numeroCamilla, motivoHospitalizacion, idMascota):Observable<any>{
     let form = new FormData();
     form.append("id", idConsulta);
     form.append("peso", peso);
     form.append("procedimiento", procedimientoConsulta);
     form.append("checkHospitalizacion", checkHosp);
+    form.append("numero_camilla", numeroCamilla);
     form.append("motivoHospitalizacion", motivoHospitalizacion);
     form.append("idMascota", idMascota)
     return this._http.post(this.url + "setProcedimientoConsulta", form);

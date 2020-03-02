@@ -12,17 +12,25 @@ export class VerConsultasActivasComponent implements OnInit {
 
   //datos con las consultas activas
   consultasActivas = [];
+  //prioridad orden tabla
+  prioridadOrden = '';
+
 
   constructor(private _snotify: SnotifyService, private _consultasService: ConsultasServiceService) { }
 
   ngOnInit() {
   }
 
-  getConsultasActivas() {
+  getConsultasActivas(estado) {
     this.consultasActivas = [];
-    this._consultasService.getConsultasActivas().subscribe(response => {
+    this._consultasService.getConsultasActivas(estado).subscribe(response => {
       if (response.estado == 'success') {
         this.consultasActivas = response.consultas;
+        if(estado == 1){
+          this.prioridadOrden = 'urgencia';
+        }else{
+          this.prioridadOrden = 'llegada';
+        }
       } else {
         this._snotify.warning(response.mensaje, {
           timeout: 2000,

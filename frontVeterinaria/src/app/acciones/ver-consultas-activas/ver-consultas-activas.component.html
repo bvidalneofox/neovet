@@ -1,6 +1,6 @@
 <!-- BOTON INICIO MENU -->
 <div class="card but-card text-center" style="cursor: pointer;" data-toggle="modal"
-    data-target=".modal-consultas-activas" (click)="getConsultasActivas()">
+    data-target=".modal-consultas-activas" (click)="getConsultasActivas(0)">
     <div class="card-body">
         <img src="assets/estetoscopio.png" width="70" height="70" alt="">
         <h4 class="card-text font-weight-bold">Consultas Activas</h4>
@@ -14,22 +14,35 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Consultas Activas
+                <h3 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Consultas Activas <span *ngIf="prioridadOrden == 'llegada'">(Orden de Llegada)</span> <span *ngIf="prioridadOrden == 'urgencia'">(Orden Nivel Emergencia)</span>
                 </h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="mt-4">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <button class="btn btn-secondary btn-block" (click)="getConsultasActivas(1)">Ordenar Por Nivel de Emergencia</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <button class="btn btn-secondary btn-block" (click)="getConsultasActivas(0)">Ordenar Por Orden de Llegada</button>
+                        </div>
+                    </div>
+                </div>
+                <div>
                     <div class="table-responsive">
                         <table class="table table-sm table-hover">
                             <thead>
                                 <tr class="text-center">
                                     <th scope="col">Paciente</th>
                                     <th scope="col">Tipo Mascota</th>
-                                    <th scope="col">Fecha Atención</th>
+                                    <th scope="col">Fecha Solicitud</th>
                                     <th scope="col">Dueño</th>
+                                    <th scope="col">Nivel Emergencia</th>
                                     <th scope="col" class="text-center">Acciones</th>
                                 </tr>
                             </thead>
@@ -39,6 +52,7 @@
                                     <td>{{itemConsultasActivas?.tipoMascota}}</td>
                                     <td>{{itemConsultasActivas?.created_at}}</td>
                                     <td>{{itemConsultasActivas?.nombreDuenio}}</td>
+                                    <td [ngClass]="{'resucitacion': itemConsultasActivas?.nivel_emergencia == '1', 'emergencia': itemConsultasActivas?.nivel_emergencia == '2', 'urgencia': itemConsultasActivas?.nivel_emergencia == '3', 'urgenciaMenor': itemConsultasActivas?.nivel_emergencia == '4', 'sinUrgencia': itemConsultasActivas?.nivel_emergencia == '5'}">{{itemConsultasActivas?.nivel_emergencia}}</td>
                                     <td class="text-center"><button class="btn btn-sm btn-secondary m-1"
                                             data-dismiss="modal" aria-label="Close"
                                             routerLink="fichaConsulta/{{itemConsultasActivas?.id}}">Atender</button></td>

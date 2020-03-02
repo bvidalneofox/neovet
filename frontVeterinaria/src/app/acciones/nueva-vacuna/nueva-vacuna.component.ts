@@ -70,7 +70,7 @@ export class NuevaVacunaComponent implements OnInit {
 
   getVacunas(id){
     this.idTemporal = id;
-    this.limpiarTablaVacunas();
+    //this.limpiarTablaVacunas();
     this._vacunasService.getVacunasPorIdMascota(id).subscribe(response=>{
       if(response.estado == 'success'){
         this.datosVacunas = response.vacunas;
@@ -108,7 +108,7 @@ export class NuevaVacunaComponent implements OnInit {
   getAntiparasitario(id){
     //guardar id al hacer click para no hacer un nuevo servicio
     this.idTemporal = id;
-    this.limpiarTablaVacunas();
+    //this.limpiarTablaVacunas();
     this._antiparasitarioService.getAntiparasitarioPorIdMascota(id).subscribe(response=>{
       if(response.estado == 'success'){
         this.datosAntiparasitarios = response.antiparasitarios;
@@ -128,6 +128,7 @@ export class NuevaVacunaComponent implements OnInit {
 
   limpiarTablaVacunas(){
     this.datosVacunas = [];
+    this.datosAntiparasitarios = [];
   }
 
   // FUNCIONES PARA OBTENER DATOS DE LA MASCOTA

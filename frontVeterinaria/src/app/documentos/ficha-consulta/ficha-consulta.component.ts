@@ -19,6 +19,8 @@ export class FichaConsultaComponent implements OnInit {
   procedimientoConsulta = '';
   //checkbox hospitalizacion
   hospitalizacionCheckBox = false;
+  //Numero de Camilla
+  numeroCamilla = '';
   //motivo hospitalizacion
   motivoHospitalizacion = '';
   //Comprobar si la consulta se encuentra finalizada
@@ -57,7 +59,7 @@ export class FichaConsultaComponent implements OnInit {
   }
 
   setProcedimientoConsulta() {
-    this._consultasService.setProcedimientoConsulta(this.idConsulta, this.procedimientoConsulta, this.pesoMascota, this.hospitalizacionCheckBox, this.motivoHospitalizacion, this.idMascotaHospitalizacion).subscribe(response => {
+    this._consultasService.setProcedimientoConsulta(this.idConsulta, this.procedimientoConsulta, this.pesoMascota, this.hospitalizacionCheckBox, this.numeroCamilla, this.motivoHospitalizacion, this.idMascotaHospitalizacion).subscribe(response => {
       if (response.estado == 'success') {
         this._snotify.success(response.mensaje, {
           timeout: 2000,

@@ -61,7 +61,7 @@
                                             <td>{{itemResultados?.nombreDuenio}}</td>
                                             <td>{{itemResultados?.tipoMascota}}</td>
                                             <td><button class="btn btn-sm btn-secondary" data-dismiss="modal"
-                                                    (click)="cargarMascotaSeleccionada(itemResultados); getAntiparasitario(itemResultados?.id); getVacunas(itemResultados?.id); nombreTemporal = itemResultados?.nombre; controlSteps(1)">Seleccionar</button>
+                                                    (click)="cargarMascotaSeleccionada(itemResultados); limpiarTablaVacunas(); getAntiparasitario(itemResultados?.id); getVacunas(itemResultados?.id); nombreTemporal = itemResultados?.nombre; controlSteps(1)">Seleccionar</button>
                                             </td>
                                         </tr>
                                     </tbody>

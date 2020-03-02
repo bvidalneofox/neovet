@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { EstadisticasService } from 'src/app/servicios/estadisticas.service';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
-import { fontStyle } from 'html2canvas/dist/types/css/property-descriptors/font-style';
 
 @Component({
   selector: 'app-inicio-estadisticas',

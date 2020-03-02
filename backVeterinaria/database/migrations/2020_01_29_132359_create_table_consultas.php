@@ -19,6 +19,8 @@ class CreateTableConsultas extends Migration
             $table->string('motivo');
             $table->string('procedimiento')->nullable();
             $table->date('fecha_consulta')->nullable();
+            $table->integer('nivel_emergencia');
+            $table->string('nombre_cliente_solicita');
             $table->integer('id_estado');
             $table->integer('id_mascota');
             $table->integer('id_usuario');

@@ -60,6 +60,7 @@
                                     <th scope="col">Tipo Mascota</th>
                                     <th scope="col">Fecha Atención</th>
                                     <th scope="col">Dueño</th>
+                                    <th scope="col">Nivel Emergencia</th>
                                     <th scope="col" class="text-center">Acciones</th>
                                 </tr>
                             </thead>
@@ -69,6 +70,7 @@
                                     <td>{{itemConsultasInactivas?.tipoMascota}}</td>
                                     <td>{{itemConsultasInactivas?.created_at}}</td>
                                     <td>{{itemConsultasInactivas?.nombreDuenio}}</td>
+                                    <td>{{itemConsultasInactivas?.nivel_emergencia}}</td>
                                     <td class="text-center"><button class="btn btn-sm btn-secondary m-1"
                                         data-dismiss="modal" aria-label="Close"
                                         routerLink="fichaConsulta/{{itemConsultasInactivas?.id}}">Ver

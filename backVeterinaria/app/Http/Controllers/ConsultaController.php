@@ -20,9 +20,11 @@ class ConsultaController extends Controller
                     $request->all(),
                     [
                         'motivo' => 'required|min:1',
+                        'nivel_emergencia' => 'required|min:1'
                     ],
                     [
                         'motivo.required' => 'Debe de ingresar un motivo',
+                        'nivel_emergencia.required' => 'Debe de seleccionar un nivel de Emergencia',
                     ]
                 );
                 break;
@@ -42,9 +44,11 @@ class ConsultaController extends Controller
                     $request->all(),
                     [
                         'motivoHospitalizacion' => 'required|min:1',
+                        'numero_camilla' => 'required|min:1'
                     ],
                     [
                         'motivoHospitalizacion.required' => 'Debe de ingresar un motivo de hospitalización',
+                        'numero_camilla.required' => 'Debe de ingresar en que camilla quedara hospitalizado el paciente',
                     ]
                 );
                 break;
@@ -68,6 +72,8 @@ class ConsultaController extends Controller
             $consulta->motivo = $request->motivo;
             $consulta->procedimiento = '';
             $consulta->fecha_consulta = $request->fecha_consulta;
+            $consulta->nivel_emergencia = $request->nivel_emergencia;
+            $consulta->nombre_cliente_solicita = $request->nombre_cliente_solicita;
             $consulta->id_estado = '1';
             $consulta->id_mascota = $request->id_mascota;
             $consulta->id_usuario = Auth::user()->id;
@@ -99,14 +105,20 @@ class ConsultaController extends Controller
         }
     }
 
-    public function getConsultasActivas()
+    public function getConsultasActivas($estado)
     {
+        if($estado == '1'){
+            $orderBy = 'nivel_emergencia';
+        }else{
+            $orderBy = 'created_at';
+        }
         $busqueda = DB::table('consultas as c')
             ->join('mascotas as m', 'm.id', '=', 'c.id_mascota')
             ->join('clientes as cl', 'cl.id', '=', 'm.id_cliente')
             ->join('tipo_mascota as tm', 'tm.id', '=', 'm.id_tipo_mascota')
             ->select('c.*', 'm.nombre as nombreMascota', 'm.id as idMascota', 'cl.nombre as nombreDuenio', 'tm.descripcion as tipoMascota')
             ->where('c.id_estado', '=', '1')
+            ->orderBy($orderBy, 'asc')
             ->get();
         if (!$busqueda->isEmpty()) {
             return ['estado' => 'success', 'consultas' => $busqueda];
@@ -220,6 +232,7 @@ class ConsultaController extends Controller
                         $validador = $this->validarDatos($request, 3);
                         if ($validador['estado'] == 'success') {
                             $hosp = new Hospitalizacion();
+                            $hosp->numero_camilla = $request->numero_camilla;
                             $hosp->motivo = $request->motivoHospitalizacion;
                             $hosp->id_estado = '1';
                             $hosp->id_mascota = $request->idMascota;

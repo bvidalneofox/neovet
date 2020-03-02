@@ -23,6 +23,8 @@
                     <div class="card-body card-datos">
                         <h4 class="font-weight-bold">Motivo Consulta</h4>
                         <p>{{datosConsulta?.motivo}}</p>
+                        <p><b>Nivel de Emergencia: </b>{{datosConsulta?.nivel_emergencia}}</p>
+                        <p><b>Solicitado Por: </b>{{datosConsulta?.nombre_cliente_solicita}}</p>
                         <p><b>Ingresado Por: </b>{{datosConsulta?.nombreVetHosp}}</p>
                         <p><b>Fecha Ingreso: </b>{{datosConsulta?.created_at}}</p>
                     </div>
@@ -32,58 +34,71 @@
             <hr>
             <div *ngIf="estadoConsulta == 2">
                 <div class="card-body card-datos">
-                <h3 class="font-weight-bold">Procedimiento Realizado</h3>
+                    <h3 class="font-weight-bold">Procedimiento Realizado</h3>
+                    <form #formSeguimiento="ngForm" (ngSubmit)="setProcedimientoConsulta()"
+                        enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>{{procedimientoConsulta}}</p>
+                                <p><b>Revisado Por: </b>{{datosConsulta?.nombreVetProcedimiento}}</p>
+                                <p><b>Peso de la mascota al momento de la revisión: </b>{{pesoMascota}}Kg.</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div *ngIf="estadoConsulta == 1">
+                <h3 class="text-center font-weight-bold mt-4">Formulario Procedimiento de la Mascota</h3>
                 <form #formSeguimiento="ngForm" (ngSubmit)="setProcedimientoConsulta()" enctype="multipart/form-data">
                     <div class="row">
-                        <div class="col-md-12">
-                            <p>{{procedimientoConsulta}}</p>
-                            <p><b>Revisado Por: </b>{{datosConsulta?.nombreVetProcedimiento}}</p>
-                            <p><b>Peso de la mascota al momento de la revisión: </b>{{pesoMascota}}Kg.</p>
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <textarea name="obervaciones" [(ngModel)]="procedimientoConsulta" cols="30" rows="5"
+                                    class="form-control mt-4" placeholder="Ingrese el procedimiento realizado"
+                                    style="resize: none;"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-3 my-auto">
+                            <div class="form-group">
+                                <label>Peso de la mascota en Kg. (opcional)</label>
+                                <input type="number" class="form-control" name="pesoMascota" [(ngModel)]="pesoMascota">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" class="custom-control-input" id="customControlValidation1"
+                            name="checkBoxH" [(ngModel)]="hospitalizacionCheckBox" required>
+                        <label class="custom-control-label" for="customControlValidation1">Marque la casilla solo si
+                            la mascota será hospitalizada (Se finalizara la consulta y será derivado a hospitalizaciones
+                            activas)</label>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-3 my-auto" *ngIf="hospitalizacionCheckBox">
+                            <label for="numeroCamilla">N° Camilla Hospitalizacion</label>
+                            <input type="text" class="form-control" name="numeroCamilla" [(ngModel)]="numeroCamilla">
+                        </div>
+                        <div class="form-group col-md-9" *ngIf="hospitalizacionCheckBox">
+                            <label for="text-area-moti-hos">Motivo de hospitalización</label>
+                            <textarea name="text-area-moti-hos" class="form-control" cols="30" rows="5" placeholder="Indique por qué motivo la mascota sera hospitalizada"
+                                [(ngModel)]="motivoHospitalizacion"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success btn-block">Ingresar Procedimiento
+                                    Realizado</button>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-danger btn-block" data-toggle="modal"
+                                    data-target=".modal-confirmacion-activa" *ngIf="!hospitalizacionCheckBox">Finalizar
+                                    Consulta</button>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
-            </div>
-            <div *ngIf="estadoConsulta == 1">
-            <h3 class="text-center font-weight-bold mt-4">Formulario Procedimiento de la Mascota</h3>
-            <form #formSeguimiento="ngForm" (ngSubmit)="setProcedimientoConsulta()" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="col-md-9">
-                        <div class="form-group">
-                            <textarea name="obervaciones" [(ngModel)]="procedimientoConsulta" cols="30" rows="5" class="form-control mt-4"
-                                placeholder="Ingrese el procedimiento realizado" style="resize: none;"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-3 my-auto">
-                        <div class="form-group">
-                            <label>Peso de la mascota en Kg. (opcional)</label>
-                            <input type="number" class="form-control" name="pesoMascota" [(ngModel)]="pesoMascota">
-                        </div>
-                    </div>
-                </div>
-                <div class="custom-control custom-checkbox mb-3">
-                    <input type="checkbox" class="custom-control-input" id="customControlValidation1" name="checkBoxH" [(ngModel)]="hospitalizacionCheckBox"
-                        required>
-                    <label class="custom-control-label" for="customControlValidation1">Marque la casilla solo si
-                        la mascota será hospitalizada (Se finalizara la consulta y será derivado a hospitalizaciones activas)</label>
-                </div>
-                <div class="form-group col-md-12" *ngIf="hospitalizacionCheckBox">
-                    <label for="text-area-moti-hos">Motivo de hospitalización</label>
-                    <textarea name="text-area-moti-hos" class="form-control" cols="30" rows="10" [(ngModel)]="motivoHospitalizacion"></textarea>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success btn-block">Ingresar Procedimiento Realizado</button>
-                        </div>
-                        <hr>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-danger btn-block"  data-toggle="modal" data-target=".modal-confirmacion-activa" *ngIf="!hospitalizacionCheckBox">Finalizar Consulta</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
         </div>
     </div>
 </div>

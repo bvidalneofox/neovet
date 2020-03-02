@@ -17,6 +17,7 @@ class CreateTableHospitalizaciones extends Migration
             $table->bigIncrements('id');
             $table->text('motivo');
             $table->text('seguimiento')->nullable();
+            $table->string('numero_camilla');
             $table->integer('id_estado');
             $table->integer('id_mascota');
             $table->integer('id_usuario');

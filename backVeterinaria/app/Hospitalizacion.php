@@ -10,6 +10,6 @@ class Hospitalizacion extends Model
 {
     use SoftDeletes;
     protected $table = "hospitalizaciones";
-    protected $fillable = ['seguimiento', 'estado', 'id_mascota', 'id_usuario'];
+    protected $fillable = ['seguimiento', 'estado', 'id_mascota', 'id_usuario', 'numero_camilla'];
     protected $dates = ['deleted_at'];
 }

@@ -31,7 +31,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('updateUsuarioSistema', 'UsuarioController@updateUsuarioSistema');
     Route::post('changePasswordUser','UsuarioController@changePasswordUser');
     Route::post('setUsuario','UsuarioController@setUsuario');
-    Route::get('getUsuariosSistema', 'UsuarioController@getUsuariosSistema');
+    Route::get('getUsuariosSistemaControl', 'UsuarioController@getUsuariosSistema');
     Route::post('deleteUsuario','UsuarioController@deleteUsuario');
 
     //Rutas para los clientes
@@ -56,7 +56,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     //Ruta para las consultas
     Route::post('setConsulta', 'ConsultaController@setConsulta');
     Route::get('getUltimasConsultasPorIdMascota/{id}','ConsultaController@getUltimasConsultasPorIdMascota');
-    Route::get('getConsultasActivas', 'ConsultaController@getConsultasActivas');
+    Route::get('getConsultasActivas/{estado}', 'ConsultaController@getConsultasActivas');
     Route::get('getConsultasInactivas', 'ConsultaController@getConsultasInactivas');
     Route::get('getConsultaPorId/{id}', 'ConsultaController@getConsultaPorId');
     Route::get('getConsultasInactivaPorRangoFecha/{fechaInicio?}/{fechaFin?}', 'ConsultaController@getConsultasInactivasPorRangoFecha');

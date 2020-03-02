@@ -19,7 +19,8 @@ export class NuevaConsultaComponent implements OnInit {
   //formConsulta
   datosConsulta = {
     fechaConsulta: '',
-    motivoTextarea: ''
+    motivoTextarea: '',
+    nivelUrgencia: ''
   }
   //Variable del gif loading
   loading = false;

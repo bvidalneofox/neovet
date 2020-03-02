@@ -29,7 +29,7 @@ export class UsuariosService {
   }
 
   getUsuariosSistema(): Observable<any>{
-    return this._http.get(this.url + "getUsuariosSistema");
+    return this._http.get(this.url + "getUsuariosSistemaControl");
   }
 
   updateCliente(formCliente): Observable<any> {
