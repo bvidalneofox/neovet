@@ -27,8 +27,9 @@ export class NuevaRecetaComponent implements OnInit {
   }
 
   agregarMedicamento(datos) {
-    this.receta.push(datos);
+    this.receta.push(datos.value);
     console.log(this.receta);
+    datos.reset();
     this._snotify.success('Item Incorporado Correctamente', {
       timeout: 3000,
       showProgressBar: true,

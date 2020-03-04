@@ -59,6 +59,7 @@
                                     <th scope="col">Tipo Mascota</th>
                                     <th scope="col">Fecha Atención</th>
                                     <th scope="col">Dueño</th>
+                                    <th scope="col">Estado</th>
                                     <th scope="col" class="text-center">Acciones</th>
                                 </tr>
                             </thead>
@@ -68,6 +69,7 @@
                                     <td>{{itemHospInactivas?.tipoMascota}}</td>
                                     <td>{{itemHospInactivas?.created_at}}</td>
                                     <td>{{itemHospInactivas?.nombreDuenio}}</td>
+                                    <td [ngClass]="{'finalizada': itemHospInactivas?.id_estado == '2', 'cancelada': itemHospInactivas?.id_estado == '3'}"><span *ngIf="itemHospInactivas?.id_estado == '2'">Finalizada</span><span *ngIf="itemHospInactivas?.id_estado == '3'">Cancelada</span></td>
                                     <td class="text-center"><button class="btn btn-sm btn-secondary m-1"
                                             data-dismiss="modal" aria-label="Close"
                                             routerLink="fichaHospitalizacion/{{itemHospInactivas?.id}}">Ver

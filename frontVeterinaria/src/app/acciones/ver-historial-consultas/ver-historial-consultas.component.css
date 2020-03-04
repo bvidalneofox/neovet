@@ -6,3 +6,31 @@
     ),
     url("https://ichef.bbci.co.uk/news/410/cpsprodpb/8536/production/_103520143_gettyimages-908714708.jpg");
 }
+
+.resucitacion{
+  background:rgba(235, 8, 8, 0.52);
+}
+
+.emergencia{
+  background:rgba(255, 128, 0, 0.52);
+}
+
+.urgencia{
+  background:rgba(255, 251, 0, 0.52);
+}
+
+.urgenciaMenor{
+  background:rgba(5, 155, 13, 0.52);
+}
+
+.sinUrgencia{
+  background:rgba(5, 57, 155, 0.52);
+}
+
+.cancelada{
+  background:rgba(235, 8, 8, 0.52);
+}
+
+.finalizada{
+  background:rgba(5, 155, 13, 0.52);
+}

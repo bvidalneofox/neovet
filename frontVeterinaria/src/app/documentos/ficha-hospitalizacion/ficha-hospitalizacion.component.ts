@@ -128,4 +128,17 @@ export class FichaHospitalizacionComponent implements OnInit {
     });
   }
 
+  deleteHospitalizacion(metodo){
+    this._hospitalizacionService.deleteHospitalizacion(this.idHosp, metodo).subscribe(response=>{
+      if(response.estado == 'success'){
+        alert(response.mensaje);
+        this.router.navigate(['Inicio']);
+      }else{
+        alert(response.mensaje);
+      }
+    },error=>{
+      console.log(error);
+    });
+  }
+
 }

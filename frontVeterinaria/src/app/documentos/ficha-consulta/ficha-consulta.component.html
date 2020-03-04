@@ -86,18 +86,29 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success btn-block">Ingresar Procedimiento
+                                <button type="submit" class="btn btn-primary btn-block">Ingresar Procedimiento
                                     Realizado</button>
                             </div>
                             <hr>
                             <div class="form-group">
-                                <button type="button" class="btn btn-danger btn-block" data-toggle="modal"
+                                <button type="button" class="btn btn-success btn-block" data-toggle="modal"
                                     data-target=".modal-confirmacion-activa" *ngIf="!hospitalizacionCheckBox">Finalizar
+                                    Consulta (Dar Por Finalizada la Atención del Paciente)</button>
+                                    <button type="button" class="btn btn-danger btn-block" data-toggle="modal"
+                                    data-target=".modal-confirmacion-cancelar" *ngIf="!hospitalizacionCheckBox">Cancelar
                                     Consulta</button>
                             </div>
                         </div>
                     </div>
                 </form>
+            </div>
+            <div *ngIf="estadoConsulta == 3">
+                <hr>
+                <div class="form-group">
+                        <button type="button" class="btn btn-danger btn-block" data-toggle="modal"
+                        data-target=".modal-confirmacion-restaurar-consulta">Restaurar
+                        Consulta</button>
+                </div>
             </div>
         </div>
     </div>
@@ -131,6 +142,78 @@
                     <div class="col-md-6 text-center">
                         <div class="btn btn-danger btn-block" data-dismiss="modal">
                             No, no finalizar
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL CONFIRMAR CANCELAR-->
+<div class="modal fade modal-confirmacion-cancelar" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Confirmar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row my-4">
+                    <div class="col-md-12 text-center">
+                        <p class="h4">¿Esta Seguro?</p>
+                        <p class="h5">Confirme solo si desea cancelar la consulta</p>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-md-6 text-center">
+                        <div class="btn btn-success btn-block btn-rounded" data-dismiss="modal"
+                            (click)="cambiarEstadoConsulta('cancelar')">
+                            Sí, dar por cancelada
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <div class="btn btn-danger btn-block" data-dismiss="modal">
+                            No, no cancelar
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL CONFIRMAR Restaurar -->
+<div class="modal fade modal-confirmacion-restaurar-consulta" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center font-weight-bold" id="staticBackdropLabel">Confirmar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row my-4">
+                    <div class="col-md-12 text-center">
+                        <p class="h4">¿Esta Seguro?</p>
+                        <p class="h5">Confirme solo si desea restaurar la consulta</p>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-md-6 text-center">
+                        <div class="btn btn-success btn-block btn-rounded" data-dismiss="modal"
+                            (click)="cambiarEstadoConsulta('restaurar')">
+                            Sí, deseo restaurarla
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <div class="btn btn-danger btn-block" data-dismiss="modal">
+                            No, no restaurar
                         </div>
                     </div>
                 </div>

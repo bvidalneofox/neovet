@@ -17,7 +17,7 @@
                         placeholder="Ingrese nombre del paciente">
                 </div>
             </div>
-            <form #nuevaRecetaForm="ngForm" (ngSubmit)="agregarMedicamento(nuevaRecetaForm.value)">
+            <form #nuevaRecetaForm="ngForm" (ngSubmit)="agregarMedicamento(nuevaRecetaForm)">
                 <div class="row mt-4">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -88,6 +88,7 @@
                     </div>
                 </div>
                 <hr>
+                <p><em>- Esta receta medica tiene una vigencia de 10 días desde la fecha de emisión</em></p>
                 <div class="row margin-firmas mb-4">
                     <div class="col-md-6">
                         <p class="firmas text-center h5 font-weight-bold">Fecha Emisión Receta</p>

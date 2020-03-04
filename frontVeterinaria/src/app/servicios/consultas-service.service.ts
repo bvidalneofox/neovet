@@ -67,4 +67,11 @@ export class ConsultasServiceService {
     return this._http.post(this.url + "setConsultaFinalizada", form);
   }
 
+  cambiarEstadoConsulta(id, metodo):Observable<any>{
+    let form = new FormData();
+    form.append("metodo", metodo);
+    form.append("id", id);
+    return this._http.post(this.url + "cambiarEstadoConsulta", form);
+  }
+
 }

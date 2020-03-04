@@ -118,4 +118,17 @@ export class FichaConsultaComponent implements OnInit {
     });
   }
 
+  cambiarEstadoConsulta(metodo){
+    this._consultasService.cambiarEstadoConsulta(this.idConsulta, metodo).subscribe(response=>{
+      if(response.estado == 'success'){
+        alert(response.mensaje);
+        this.router.navigate(['Inicio']);
+      }else{
+        alert(response.mensaje);
+      }
+    },error=>{
+      console.log(error);
+    });
+  }
+
 }

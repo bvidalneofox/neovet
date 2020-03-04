@@ -135,6 +135,7 @@ class ConsultaController extends Controller
             ->join('tipo_mascota as tm', 'tm.id', '=', 'm.id_tipo_mascota')
             ->select('c.*', 'm.nombre as nombreMascota', 'm.id as idMascota', 'cl.nombre as nombreDuenio', 'tm.descripcion as tipoMascota')
             ->where('c.id_estado', '=', '2')
+            ->orWhere('c.id_estado', '=', '3')
             ->orderBy('created_at', 'desc')
             ->get();
         if (!$busqueda->isEmpty()) {
@@ -176,6 +177,7 @@ class ConsultaController extends Controller
                 ->select('c.*', 'm.nombre as nombreMascota', 'm.id as idMascota', 'cl.nombre as nombreDuenio', 'tm.descripcion as tipoMascota')
                 ->whereBetween('c.created_at', [$fechaIni . ' 00:00:00', $fechaFini . ' 23:59:59'])
                 ->where('c.id_estado', '=', '2')
+                ->orWhere('c.id_estado', '=', '3')
                 ->orderBy('created_at', 'desc')
                 ->get();
             if (!$busqueda->isEmpty()) {
@@ -272,6 +274,25 @@ class ConsultaController extends Controller
             }
         } else {
             return ['estado' => 'failed', 'mensaje' => 'No se ha encontrado al consulta solicitada.'];
+        }
+    }
+
+    public function cambiarEstadoConsulta(Request $request)
+    {
+        $consulta = Consulta::find($request->id);
+        if (!is_null($consulta)) {
+            if ($request->metodo == 'cancelar') {
+                $consulta->id_estado = '3';
+            } else {
+                $consulta->id_estado = '1';
+            }
+            if ($consulta->save()) {
+                return ['estado' => 'success', 'mensaje' => 'Estado Consulta cambiado Correctamente.'];
+            } else {
+                return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al cambiar el estado de la consulta.'];
+            }
+        } else {
+            return ['estado' => 'failed', 'mensaje' => 'No se ha encontrado la consulta solicitada.'];
         }
     }
 }

@@ -50,4 +50,11 @@ export class HospitalizacionesService {
     return this._http.post(this.url + "setHospitalizacionFinalizada", form);
   }
 
+  deleteHospitalizacion(id, metodo):Observable<any>{
+    let form = new FormData();
+    form.append("metodo", metodo);
+    form.append("id", id);
+    return this._http.post(this.url + "deleteHospitalizacion", form);
+  }
+
 }

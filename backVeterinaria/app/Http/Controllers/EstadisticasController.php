@@ -42,8 +42,8 @@ class EstadisticasController extends Controller
 
     public function getEstadisticasConsultas(){
         $consultas = DB::table('consultas')
-                 ->select(DB::raw('Year(created_at) anio, COUNT(id) numeroConsultas'))
-                 ->groupBy('anio')
+                 ->select(DB::raw('Year(created_at) anio, Month(created_at) as mes, COUNT(id) numeroConsultas'))
+                 ->groupBy('anio','mes')
                  ->get();
         if (!$consultas->isEmpty()) {
             return ['estado' => 'success', 'consultas' => $consultas];
@@ -54,8 +54,8 @@ class EstadisticasController extends Controller
 
     public function getEstadisticasHospitalizaciones(){
         $hospitalizaciones = DB::table('hospitalizaciones')
-                 ->select(DB::raw('Year(created_at) anio, COUNT(id) numerohospitalizaciones'))
-                 ->groupBy('anio')
+                 ->select(DB::raw('Year(created_at) anio, Month(created_at) as mes, COUNT(id) numerohospitalizaciones'))
+                 ->groupBy('anio','mes')
                  ->get();
         if (!$hospitalizaciones->isEmpty()) {
             return ['estado' => 'success', 'hospitalizaciones' => $hospitalizaciones];
@@ -80,13 +80,25 @@ class EstadisticasController extends Controller
 
     public function getEstadisticasClientes(){
         $clientes = DB::table('clientes')
-        ->select(DB::raw('Year(created_at) anio, COUNT(id) numeroClientes'))
-        ->groupBy('anio')
+        ->select(DB::raw('Year(created_at) anio, Month(created_at) as mes, COUNT(id) numeroClientes'))
+        ->groupBy('anio','mes')
         ->get();
         if (!$clientes->isEmpty()) {
             return ['estado' => 'success', 'clientes' => $clientes];
         } else {
             return ['estado' => 'failed_unr', 'mensaje' => 'No hay registro de clientes'];
+        }
+    }
+
+    public function getEstadisticasMascotas(){
+        $mascotas = DB::table('mascotas')
+        ->select(DB::raw('Year(created_at) anio, Month(created_at) as mes, COUNT(id) numeroMascotas'))
+        ->groupBy('anio','mes')
+        ->get();
+        if(!$mascotas->isEmpty()){
+            return ['estado' => 'success', 'mascotas' => $mascotas];
+        }else{
+            return ['estado' => 'failed_unr', 'mensaje' => 'No hay registro de mascotas'];
         }
     }
     

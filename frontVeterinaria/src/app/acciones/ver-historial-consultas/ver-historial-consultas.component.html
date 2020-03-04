@@ -61,6 +61,7 @@
                                     <th scope="col">Fecha Atención</th>
                                     <th scope="col">Dueño</th>
                                     <th scope="col">Nivel Emergencia</th>
+                                    <th scope="col">Estado</th>
                                     <th scope="col" class="text-center">Acciones</th>
                                 </tr>
                             </thead>
@@ -70,7 +71,8 @@
                                     <td>{{itemConsultasInactivas?.tipoMascota}}</td>
                                     <td>{{itemConsultasInactivas?.created_at}}</td>
                                     <td>{{itemConsultasInactivas?.nombreDuenio}}</td>
-                                    <td>{{itemConsultasInactivas?.nivel_emergencia}}</td>
+                                    <td [ngClass]="{'resucitacion': itemConsultasInactivas?.nivel_emergencia == '1', 'emergencia': itemConsultasInactivas?.nivel_emergencia == '2', 'urgencia': itemConsultasInactivas?.nivel_emergencia == '3', 'urgenciaMenor': itemConsultasInactivas?.nivel_emergencia == '4', 'sinUrgencia': itemConsultasInactivas?.nivel_emergencia == '5'}">{{itemConsultasInactivas?.nivel_emergencia}}</td>
+                                    <td [ngClass]="{'finalizada': itemConsultasInactivas?.id_estado == '2', 'cancelada': itemConsultasInactivas?.id_estado == '3'}"><span *ngIf="itemConsultasInactivas?.id_estado == '2'">Finalizada</span><span *ngIf="itemConsultasInactivas?.id_estado == '3'">Cancelada</span></td>
                                     <td class="text-center"><button class="btn btn-sm btn-secondary m-1"
                                         data-dismiss="modal" aria-label="Close"
                                         routerLink="fichaConsulta/{{itemConsultasInactivas?.id}}">Ver

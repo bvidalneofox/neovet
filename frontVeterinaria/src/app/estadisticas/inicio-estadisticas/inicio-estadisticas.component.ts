@@ -132,6 +132,47 @@ export class InicioEstadisticasComponent implements OnInit {
   };
   public lineChartColorsClientes: Color[] = [
     { // red
+      backgroundColor: 'rgba(255,0,0,0.3)',
+      borderColor: 'red',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }
+  ];
+  public lineChartLegendClientes = false;
+  public lineChartTypeClientes = 'bar';
+
+  // GRAFICO DE MASCOTAS REGISTRADOS  
+  public lineChartDataMascotas: ChartDataSets[] = [
+    { data: [], label: 'Mascotas Nuevos' }
+  ];
+  public lineChartLabelsMascotas: Label[] = [];
+  public lineChartOptionsMascotas: (ChartOptions & { annotation: any }) = {
+    responsive: true,
+    scales: {
+      xAxes: [{
+        ticks: {
+          fontStyle: 'bold',
+          fontColor: 'black',
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          fontStyle: 'bold',
+          fontColor: 'black',
+        }
+      }]
+    },
+    annotation: {
+      annotations: [
+        {
+        },
+      ],
+    },
+  };
+  public lineChartColorsMascotas: Color[] = [
+    { // red
       backgroundColor: 'rgba(63,63,191,0.8)',
       borderColor: 'blue',
       pointBackgroundColor: 'rgba(63,63,177,1)',
@@ -140,8 +181,8 @@ export class InicioEstadisticasComponent implements OnInit {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
-  public lineChartLegendClientes = false;
-  public lineChartTypeClientes = 'bar';
+  public lineChartLegendMascotas = false;
+  public lineChartTypeMascotas = 'bar';
 
   // GRAFICO PIE DE USUARIOS CON MAYOR NUMERO DE CONSULTAS
   public pieChartOptions: ChartOptions = {
@@ -173,6 +214,8 @@ export class InicioEstadisticasComponent implements OnInit {
     },
   ];
 
+  //Array con nombre del mes
+  nombreMes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
   //Varriable para obtener los datos de las consultas
   estadisticasConsultas = [];
   //Varriable para obtener los datos de las hospitalizaciones
@@ -188,6 +231,7 @@ export class InicioEstadisticasComponent implements OnInit {
     this.getEstadisticasConsultas();
     this.getEstadisticasHospitalizaciones();
     this.getEstadisticasClientes();
+    this.getEstadisticasMascotas();
     this.getClientesSistema();
     this.getMascotasSistema();
     this.getUsuariosSistema();
@@ -229,7 +273,7 @@ export class InicioEstadisticasComponent implements OnInit {
       if (response.estado == 'success') {
         for (let index = 0; index < Object.keys(response.consultas).length; index++) {
           this.lineChartData[0].data.push(response.consultas[Object.keys(response.consultas)[index]].numeroConsultas);
-          this.lineChartLabels.push(response.consultas[Object.keys(response.consultas)[index]].anio);
+          this.lineChartLabels.push(this.nombreMes[response.consultas[Object.keys(response.consultas)[index]].mes - 1] + ' ' + response.consultas[Object.keys(response.consultas)[index]].anio);
         }
       }
     }, error => {
@@ -242,7 +286,7 @@ export class InicioEstadisticasComponent implements OnInit {
       if (response.estado == 'success') {
         for (let index = 0; index < Object.keys(response.hospitalizaciones).length; index++) {
           this.lineChartDataHospitalizaciones[0].data.push(response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].numerohospitalizaciones);
-          this.lineChartLabelsHospitalizaciones.push(response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].anio);
+          this.lineChartLabelsHospitalizaciones.push(this.nombreMes[response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].mes - 1] + ' ' + response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].anio);
         }
       }
     }, error => {
@@ -255,10 +299,23 @@ export class InicioEstadisticasComponent implements OnInit {
       if (response.estado == 'success') {
         for (let index = 0; index < Object.keys(response.clientes).length; index++) {
           this.lineChartDataClientes[0].data.push(response.clientes[Object.keys(response.clientes)[index]].numeroClientes);
-          this.lineChartLabelsClientes.push(response.clientes[Object.keys(response.clientes)[index]].anio);
+          this.lineChartLabelsClientes.push(this.nombreMes[response.clientes[Object.keys(response.clientes)[index]].mes - 1] + ' ' + response.clientes[Object.keys(response.clientes)[index]].anio);
         }
       }
     }, error => {
+      console.log(error);
+    });
+  }
+
+  getEstadisticasMascotas(){
+    this._estadisticasService.getEstadisticasMascotas().subscribe(response => {
+      if(response.estado == 'success'){
+        for (let index = 0; index < Object.keys(response.mascotas).length; index++) {
+          this.lineChartDataMascotas[0].data.push(response.mascotas[Object.keys(response.mascotas)[index]].numeroMascotas);
+          this.lineChartLabelsMascotas.push(this.nombreMes[response.mascotas[Object.keys(response.mascotas)[index]].mes - 1] + ' ' + response.mascotas[Object.keys(response.mascotas)[index]].anio);
+        }
+      }
+    },error=>{
       console.log(error);
     });
   }

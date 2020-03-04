@@ -32,8 +32,9 @@ class HospitalizacionController extends Controller
             ->join('mascotas as m', 'm.id', '=', 'h.id_mascota')
             ->join('clientes as cl', 'cl.id', '=', 'm.id_cliente')
             ->join('tipo_mascota as tm', 'tm.id', '=', 'm.id_tipo_mascota')
-            ->select('h.id', 'h.created_at', 'm.nombre as nombreMascota', 'cl.nombre as nombreDuenio', 'tm.descripcion as tipoMascota')
+            ->select('h.id', 'h.created_at', 'h.id_estado', 'm.nombre as nombreMascota', 'cl.nombre as nombreDuenio', 'tm.descripcion as tipoMascota')
             ->where('h.id_estado', '2')
+            ->orWhere('h.id_estado', '3')
             ->orderBy('created_at', 'desc')
             ->get();
         if (!$busqueda->isEmpty()) {
@@ -43,16 +44,17 @@ class HospitalizacionController extends Controller
         }
     }
 
-    public function getHospitalizacionesInactivasPorRangoFecha($fechaIni = '',$fechaFini = '')
+    public function getHospitalizacionesInactivasPorRangoFecha($fechaIni = '', $fechaFini = '')
     {
         if (isset($fechaIni) && isset($fechaFini)) {
             $busqueda = DB::table('hospitalizaciones as h')
                 ->join('mascotas as m', 'm.id', '=', 'h.id_mascota')
                 ->join('clientes as cl', 'cl.id', '=', 'm.id_cliente')
                 ->join('tipo_mascota as tm', 'tm.id', '=', 'm.id_tipo_mascota')
-                ->select('h.id', 'h.created_at', 'm.nombre as nombreMascota', 'cl.nombre as nombreDuenio', 'tm.descripcion as tipoMascota')
+                ->select('h.id', 'h.created_at', 'h.id_estado', 'm.nombre as nombreMascota', 'cl.nombre as nombreDuenio', 'tm.descripcion as tipoMascota')
                 ->whereBetween('h.created_at', [$fechaIni . ' 00:00:00', $fechaFini . ' 23:59:59'])
                 ->where('h.id_estado', '2')
+                ->orWhere('h.id_estado', '3')
                 ->orderBy('created_at', 'desc')
                 ->get();
             if (!$busqueda->isEmpty()) {
@@ -95,6 +97,25 @@ class HospitalizacionController extends Controller
                 return ['estado' => 'success', 'mensaje' => 'Hospitalización Finalizada Correctamente.'];
             } else {
                 return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al finalizar la hopitalización.'];
+            }
+        } else {
+            return ['estado' => 'failed', 'mensaje' => 'No se ha encontrado al hospitalizacion solicitada.'];
+        }
+    }
+
+    public function deleteHospitalizacion(Request $request)
+    {
+        $consulta = Hospitalizacion::find($request->id);
+        if (!is_null($consulta)) {
+            if ($request->metodo == 'cancelar') {
+                $consulta->id_estado = '3';
+            } else {
+                $consulta->id_estado = '1';
+            }
+            if ($consulta->save()) {
+                return ['estado' => 'success', 'mensaje' => 'Estado Hospitalizacion cambiado Correctamente.'];
+            } else {
+                return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al cambiar el estado de hopitalización.'];
             }
         } else {
             return ['estado' => 'failed', 'mensaje' => 'No se ha encontrado al hospitalizacion solicitada.'];

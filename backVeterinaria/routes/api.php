@@ -67,6 +67,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('getProcedimientoConsulta/{id}', 'ConsultaController@getProcedimientoConsulta');
     Route::post('setConsultaFinalizada', 'ConsultaController@setConsultaFinalizada');
     Route::get('getConsultasInactivaPorIdMascota/{id}', 'ConsultaController@getConsultasInactivaPorIdMascota');
+    Route::post('cambiarEstadoConsulta', 'ConsultaController@cambiarEstadoConsulta');
 
     //Ruta para las vacunas
     Route::post('setVacuna', 'HistorialVacunaController@setVacuna');
@@ -88,6 +89,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('getHospitalizacionPorId/{id}', 'HospitalizacionController@getHospitalizacionPorId');
     Route::get('getHospitalizacionesInactivasPorRangoFecha/{fechaInicio?}/{fechaFin?}', 'HospitalizacionController@getHospitalizacionesInactivasPorRangoFecha');
     Route::post('setHospitalizacionFinalizada', 'HospitalizacionController@setHospitalizacionFinalizada');
+    Route::post('deleteHospitalizacion', 'HospitalizacionController@deleteHospitalizacion');
 
     //Rutas para el seguimiento de las hospitalizaciones
     Route::post('setSeguimiento', 'SeguimientoControlller@setSeguimiento');
@@ -106,4 +108,5 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('getMascotasSistema','EstadisticasController@getMascotasSistema');
     Route::get('getusuariosConMasProcedimientos','EstadisticasController@getusuariosConMasProcedimientos');
     Route::get('getEstadisticasClientes','EstadisticasController@getEstadisticasClientes');
+    Route::get('getEstadisticasMascotas','EstadisticasController@getEstadisticasMascotas');
 });
