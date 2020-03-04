@@ -22,6 +22,8 @@ import { FichaMascotaComponent } from './documentos/ficha-mascota/ficha-mascota.
 import { FichaClienteComponent } from './documentos/ficha-cliente/ficha-cliente.component';
 import { InicioEstadisticasComponent } from './estadisticas/inicio-estadisticas/inicio-estadisticas.component';
 import { NuevaRecetaComponent } from './acciones/nueva-receta/nueva-receta.component';
+import { ResetPasswordComponent } from './public/reset-password/reset-password.component';
+import { NuevaPasswordComponent } from './public/nueva-password/nueva-password.component';
 
 const routes: Routes = [
 
@@ -30,6 +32,8 @@ const routes: Routes = [
     path: '', component: PublicMasterComponent, children:
       [
         { path: '', component: LoginComponent },
+        { path: 'olvidePassword', component: ResetPasswordComponent },
+        { path: 'cambiarPasswordOlvidada', component: NuevaPasswordComponent }
       ]
   },
 

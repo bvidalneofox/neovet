@@ -25,6 +25,18 @@ export class LoginService {
     return this._http.get(this.url + "logout");
   }
 
+  sendPasswordResetLink(data): Observable<any>{
+    return this._http.post(this.url + "sendEmail", data);
+  }
+
+  cambiarPassOlvidada(formDatos,token): Observable<any>{
+    let form = new FormData();
+    form.append("resetToken", token);
+    form.append("email", formDatos.correo);
+    form.append("password", formDatos.pass1);
+    return this._http.post(this.url + "resetPassword", form);
+  }
+
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
     // Check whether the token is expired and return

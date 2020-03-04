@@ -20,6 +20,9 @@ use Illuminate\Http\Request;
 //Login y Registro
 Route::post('login', 'ApiController@login');
 Route::post('register', 'ApiController@register');
+//Rutas para el reinicio de password
+Route::post('sendEmail','ResetPasswordController@sendEmail');
+Route::post('resetPassword','ResetPasswordController@process');
 
 //RUTAS PROTEGIDAS
 Route::group(['middleware' => 'auth.jwt'], function () {

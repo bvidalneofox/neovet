@@ -14,7 +14,8 @@
                                 <label class="sr-only">Contraseña</label>
                                 <input name="pass" type="password" class="form-control" placeholder="Contraseña" [(ngModel)]="datosForm.password">
                             </div>
-                            <button type="submit" class="btn btn-primary btn-lg" [disabled]="loading">Ingresar <i *ngIf="loading"><img src="assets/loading.gif" style="width: 1.3rem;"></i></button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="loading">Ingresar <i *ngIf="loading"><img src="assets/loading.gif" style="width: 1.3rem;"></i></button>
+                            <a routerLink="olvidePassword" class="float-left text-white mt-2">Olvide Mi Contraseña</a>
                         </form>
                     </div>
                 </div>

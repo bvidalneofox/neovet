@@ -40,6 +40,8 @@ import { FichaConsultaComponent } from './documentos/ficha-consulta/ficha-consul
 import { FichaClienteComponent } from './documentos/ficha-cliente/ficha-cliente.component';
 import { InicioEstadisticasComponent } from './estadisticas/inicio-estadisticas/inicio-estadisticas.component';
 import { NuevaRecetaComponent } from './acciones/nueva-receta/nueva-receta.component';
+import { ResetPasswordComponent } from './public/reset-password/reset-password.component';
+import { NuevaPasswordComponent } from './public/nueva-password/nueva-password.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,9 @@ import { NuevaRecetaComponent } from './acciones/nueva-receta/nueva-receta.compo
     FichaConsultaComponent,
     FichaClienteComponent,
     InicioEstadisticasComponent,
-    NuevaRecetaComponent
+    NuevaRecetaComponent,
+    ResetPasswordComponent,
+    NuevaPasswordComponent
   ],
   imports: [
     BrowserModule,
