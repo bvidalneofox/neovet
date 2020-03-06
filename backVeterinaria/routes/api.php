@@ -18,8 +18,8 @@ use Illuminate\Http\Request;
 // });
 
 //Login y Registro
-Route::post('login', 'ApiController@login');
-Route::post('register', 'ApiController@register');
+Route::post('login', 'APIController@login');
+Route::post('register', 'APIController@register');
 //Rutas para el reinicio de password
 Route::post('sendEmail','ResetPasswordController@sendEmail');
 Route::post('resetPassword','ResetPasswordController@process');
@@ -102,11 +102,19 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
     //Ruta para las estadisticas
     Route::get('getEstadisticasConsultas','EstadisticasController@getEstadisticasConsultas');
+    Route::get('getEstadisticasConsultasAnios','EstadisticasController@getEstadisticasConsultasAnios');
+    Route::get('getEstadisticasConsultasPorFecha/{fechaInicio?}/{fechaFin?}','EstadisticasController@getEstadisticasConsultasRangoFecha');
     Route::get('getEstadisticasHospitalizaciones','EstadisticasController@getEstadisticasHospitalizaciones');
+    Route::get('getEstadisticasHospitalizacionesAnios','EstadisticasController@getEstadisticasHospitalizacionesAnios');
+    Route::get('getEstadisticasHospitalizacionesPorFecha/{fechaInicio?}/{fechaFin?}','EstadisticasController@getEstadisticasHospitalizacionesPorRangoFecha');
     Route::get('getClientesSistema','EstadisticasController@getClientesSistema');
     Route::get('getUsuariosSistema','EstadisticasController@getUsuariosSistema');
     Route::get('getMascotasSistema','EstadisticasController@getMascotasSistema');
     Route::get('getusuariosConMasProcedimientos','EstadisticasController@getusuariosConMasProcedimientos');
     Route::get('getEstadisticasClientes','EstadisticasController@getEstadisticasClientes');
+    Route::get('getEstadisticasClientesAnios','EstadisticasController@getEstadisticasClientesAnios');
+    Route::get('getEstadisticasClientesPorFecha/{fechaInicio?}/{fechaFin?}','EstadisticasController@getEstadisticasClientesPorFecha');
     Route::get('getEstadisticasMascotas','EstadisticasController@getEstadisticasMascotas');
+    Route::get('getEstadisticasMascotasAnios','EstadisticasController@getEstadisticasMascotasAnios');
+    Route::get('getEstadisticasMascotasPorFecha/{fechaInicio?}/{fechaFin?}','EstadisticasController@getEstadisticasMascotasPorFecha');
 });

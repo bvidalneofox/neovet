@@ -271,6 +271,38 @@ export class InicioEstadisticasComponent implements OnInit {
   getEstadisticasConsultas() {
     this._estadisticasService.getEstadisticasConsultas().subscribe(response => {
       if (response.estado == 'success') {
+        this.lineChartData[0].data = [];
+        this.lineChartLabels = [];
+        for (let index = 0; index < Object.keys(response.consultas).length; index++) {
+          this.lineChartData[0].data.push(response.consultas[Object.keys(response.consultas)[index]].numeroConsultas);
+          this.lineChartLabels.push(this.nombreMes[response.consultas[Object.keys(response.consultas)[index]].mes - 1] + ' ' + response.consultas[Object.keys(response.consultas)[index]].anio);
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getEstadisticasConsultasAnios() {
+    this._estadisticasService.getEstadisticasConsultasAnios().subscribe(response => {
+      if (response.estado == 'success') {
+        this.lineChartData[0].data = [];
+        this.lineChartLabels = [];
+        for (let index = 0; index < Object.keys(response.consultas).length; index++) {
+          this.lineChartData[0].data.push(response.consultas[Object.keys(response.consultas)[index]].numeroConsultas);
+          this.lineChartLabels.push(response.consultas[Object.keys(response.consultas)[index]].anio);
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getEstadisticasConsultasPorFecha(form){
+    this._estadisticasService.getEstadisticasConsultasPorFecha(form.fechaIni,form.fechaFini).subscribe(response => {
+      if (response.estado == 'success') {
+        this.lineChartData[0].data = [];
+        this.lineChartLabels = [];
         for (let index = 0; index < Object.keys(response.consultas).length; index++) {
           this.lineChartData[0].data.push(response.consultas[Object.keys(response.consultas)[index]].numeroConsultas);
           this.lineChartLabels.push(this.nombreMes[response.consultas[Object.keys(response.consultas)[index]].mes - 1] + ' ' + response.consultas[Object.keys(response.consultas)[index]].anio);
@@ -284,6 +316,38 @@ export class InicioEstadisticasComponent implements OnInit {
   getEstadisticasHospitalizaciones() {
     this._estadisticasService.getEstadisticasHospitalizaciones().subscribe(response => {
       if (response.estado == 'success') {
+        this.lineChartDataHospitalizaciones[0].data = [];
+        this.lineChartLabelsHospitalizaciones = [];
+        for (let index = 0; index < Object.keys(response.hospitalizaciones).length; index++) {
+          this.lineChartDataHospitalizaciones[0].data.push(response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].numerohospitalizaciones);
+          this.lineChartLabelsHospitalizaciones.push(this.nombreMes[response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].mes - 1] + ' ' + response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].anio);
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getEstadisticasHospitalizacionesAnios() {
+    this._estadisticasService.getEstadisticasHospitalizacionesAnios().subscribe(response => {
+      if (response.estado == 'success') {
+        this.lineChartDataHospitalizaciones[0].data = [];
+        this.lineChartLabelsHospitalizaciones = [];
+        for (let index = 0; index < Object.keys(response.hospitalizaciones).length; index++) {
+          this.lineChartDataHospitalizaciones[0].data.push(response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].numerohospitalizaciones);
+          this.lineChartLabelsHospitalizaciones.push(response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].anio);
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getEstadisticasHospitalizacionesPorFecha(form) {
+    this._estadisticasService.getEstadisticasHospitalizacionesPorFecha(form.fechaIni,form.fechaFini).subscribe(response => {
+      if (response.estado == 'success') {
+        this.lineChartDataHospitalizaciones[0].data = [];
+        this.lineChartLabelsHospitalizaciones = [];
         for (let index = 0; index < Object.keys(response.hospitalizaciones).length; index++) {
           this.lineChartDataHospitalizaciones[0].data.push(response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].numerohospitalizaciones);
           this.lineChartLabelsHospitalizaciones.push(this.nombreMes[response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].mes - 1] + ' ' + response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].anio);
@@ -297,6 +361,38 @@ export class InicioEstadisticasComponent implements OnInit {
   getEstadisticasClientes() {
     this._estadisticasService.getEstadisticasClientes().subscribe(response => {
       if (response.estado == 'success') {
+        this.lineChartDataClientes[0].data = [];
+        this.lineChartLabelsClientes = [];
+        for (let index = 0; index < Object.keys(response.clientes).length; index++) {
+          this.lineChartDataClientes[0].data.push(response.clientes[Object.keys(response.clientes)[index]].numeroClientes);
+          this.lineChartLabelsClientes.push(this.nombreMes[response.clientes[Object.keys(response.clientes)[index]].mes - 1] + ' ' + response.clientes[Object.keys(response.clientes)[index]].anio);
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getEstadisticasClientesAnios() {
+    this._estadisticasService.getEstadisticasClientesAnios().subscribe(response => {
+      if (response.estado == 'success') {
+        this.lineChartDataClientes[0].data = [];
+        this.lineChartLabelsClientes = [];
+        for (let index = 0; index < Object.keys(response.clientes).length; index++) {
+          this.lineChartDataClientes[0].data.push(response.clientes[Object.keys(response.clientes)[index]].numeroClientes);
+          this.lineChartLabelsClientes.push(response.clientes[Object.keys(response.clientes)[index]].anio);
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getEstadisticasClientesporFecha(form) {
+    this._estadisticasService.getEstadisticasClientesPorFecha(form.fechaIni,form.fechaFini).subscribe(response => {
+      if (response.estado == 'success') {
+        this.lineChartDataClientes[0].data = [];
+        this.lineChartLabelsClientes = [];
         for (let index = 0; index < Object.keys(response.clientes).length; index++) {
           this.lineChartDataClientes[0].data.push(response.clientes[Object.keys(response.clientes)[index]].numeroClientes);
           this.lineChartLabelsClientes.push(this.nombreMes[response.clientes[Object.keys(response.clientes)[index]].mes - 1] + ' ' + response.clientes[Object.keys(response.clientes)[index]].anio);
@@ -310,6 +406,38 @@ export class InicioEstadisticasComponent implements OnInit {
   getEstadisticasMascotas(){
     this._estadisticasService.getEstadisticasMascotas().subscribe(response => {
       if(response.estado == 'success'){
+        this.lineChartDataMascotas[0].data = [];
+        this.lineChartLabelsMascotas = [];
+        for (let index = 0; index < Object.keys(response.mascotas).length; index++) {
+          this.lineChartDataMascotas[0].data.push(response.mascotas[Object.keys(response.mascotas)[index]].numeroMascotas);
+          this.lineChartLabelsMascotas.push(this.nombreMes[response.mascotas[Object.keys(response.mascotas)[index]].mes - 1] + ' ' + response.mascotas[Object.keys(response.mascotas)[index]].anio);
+        }
+      }
+    },error=>{
+      console.log(error);
+    });
+  }
+
+  getEstadisticasMascotasAnios(){
+    this._estadisticasService.getEstadisticasMascotasAnios().subscribe(response => {
+      if(response.estado == 'success'){
+        this.lineChartDataMascotas[0].data = [];
+        this.lineChartLabelsMascotas = [];
+        for (let index = 0; index < Object.keys(response.mascotas).length; index++) {
+          this.lineChartDataMascotas[0].data.push(response.mascotas[Object.keys(response.mascotas)[index]].numeroMascotas);
+          this.lineChartLabelsMascotas.push(response.mascotas[Object.keys(response.mascotas)[index]].anio);
+        }
+      }
+    },error=>{
+      console.log(error);
+    });
+  }
+
+  getEstadisticasMascotasPorFecha(form){
+    this._estadisticasService.getEstadisticasMascotasPorFecha(form.fechaIni,form.fechaFini).subscribe(response => {
+      if(response.estado == 'success'){
+        this.lineChartDataMascotas[0].data = [];
+        this.lineChartLabelsMascotas = [];
         for (let index = 0; index < Object.keys(response.mascotas).length; index++) {
           this.lineChartDataMascotas[0].data.push(response.mascotas[Object.keys(response.mascotas)[index]].numeroMascotas);
           this.lineChartLabelsMascotas.push(this.nombreMes[response.mascotas[Object.keys(response.mascotas)[index]].mes - 1] + ' ' + response.mascotas[Object.keys(response.mascotas)[index]].anio);
@@ -356,6 +484,14 @@ export class InicioEstadisticasComponent implements OnInit {
             this.lineChartTypeClientes = 'line';
           }
           break;
+
+          case 'masc':
+            if (this.lineChartTypeMascotas == 'line') {
+              this.lineChartTypeMascotas = 'bar';
+            } else {
+              this.lineChartTypeMascotas = 'line';
+            }
+            break;
 
       default:
         break;

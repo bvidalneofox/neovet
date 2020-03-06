@@ -18,8 +18,24 @@ export class EstadisticasService {
     return this._http.get(this.url + "getEstadisticasConsultas");
   }
 
+  getEstadisticasConsultasAnios(): Observable<any> {
+    return this._http.get(this.url + "getEstadisticasConsultasAnios");
+  }
+
+  getEstadisticasConsultasPorFecha(fechaIni, fechaFini): Observable<any>{
+    return this._http.get(this.url + "getEstadisticasConsultasPorFecha/" + fechaIni + "/" + fechaFini);
+  }
+
   getEstadisticasHospitalizaciones(): Observable<any> {
     return this._http.get(this.url + "getEstadisticasHospitalizaciones");
+  }
+
+  getEstadisticasHospitalizacionesAnios(): Observable<any> {
+    return this._http.get(this.url + "getEstadisticasHospitalizacionesAnios");
+  }
+
+  getEstadisticasHospitalizacionesPorFecha(fechaIni, fechaFini): Observable<any>{
+    return this._http.get(this.url + "getEstadisticasHospitalizacionesPorFecha/" + fechaIni + "/" + fechaFini);
   }
 
   getUsuariosSistema(): Observable<any> {
@@ -38,8 +54,24 @@ export class EstadisticasService {
     return this._http.get(this.url + "getEstadisticasClientes");
   }
 
+  getEstadisticasClientesAnios(): Observable<any>{
+    return this._http.get(this.url + "getEstadisticasClientesAnios");
+  }
+
+  getEstadisticasClientesPorFecha(fechaIni, fechaFini): Observable<any>{
+    return this._http.get(this.url + "getEstadisticasClientesPorFecha/" + fechaIni + "/" + fechaFini);
+  }
+
   getEstadisticasMascotas(): Observable<any>{
     return this._http.get(this.url + "getEstadisticasMascotas");
+  }
+
+  getEstadisticasMascotasAnios(): Observable<any>{
+    return this._http.get(this.url + "getEstadisticasMascotasAnios");
+  }
+
+  getEstadisticasMascotasPorFecha(fechaIni, fechaFini): Observable<any>{
+    return this._http.get(this.url + "getEstadisticasMascotasPorFecha/" + fechaIni + "/" + fechaFini);
   }
 
   getUsuariosConMasProcedimientos(): Observable<any>{

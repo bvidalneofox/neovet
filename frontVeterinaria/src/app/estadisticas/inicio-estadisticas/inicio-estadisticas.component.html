@@ -34,12 +34,46 @@
             <div class="row mt-4">
                 <div class="col"></div>
                 <div class="col-md-10 text-center">
-                    <h3 class="font-weight-bold">Consultas realizadas en los ultimos 5 Meses</h3>
+                    <h3 class="font-weight-bold">Consultas realizadas en los ultimos 6 Meses</h3>
+                    <form #filtrarConsultasForm="ngForm"
+                        (ngSubmit)="getEstadisticasConsultasPorFecha(filtrarConsultasForm.value)">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Seleccione Fecha Inicio</label>
+                                    <input type="date" name="fechaIni" ngModel class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Seleccione Fecha Termino</label>
+                                    <input type="date" name="fechaFini" ngModel class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Accion</label>
+                                    <button type="submit" [disabled]="filtrarConsultasForm.invalid"
+                                        class="btn btn-primary btn-block">Filtrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     <canvas baseChart height="100px" [datasets]="lineChartData" [labels]="lineChartLabels"
                         [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
                         [chartType]="lineChartType"></canvas>
-                    <button class="btn btn-primary mb-4" (click)="cambiarGrafico('cons')">Cambiar Estilo
-                        Grafico</button>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button class="btn btn-primary" (click)="cambiarGrafico('cons')">Cambiar Estilo
+                                Grafico</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-primary" (click)="getEstadisticasConsultasAnios()">Ver Por Años</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-primary" (click)="getEstadisticasConsultas()">Reiniciar Filtros</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col"></div>
             </div>
@@ -47,13 +81,46 @@
             <div class="row mt-4">
                 <div class="col"></div>
                 <div class="col-md-10 text-center">
-                    <h3 class="font-weight-bold">Hospitalizaciones realizadas en los ultimos 5 Meses</h3>
+                    <h3 class="font-weight-bold">Hospitalizaciones realizadas en los ultimos 6 Meses</h3>
+                    <form #filtrarHospitalizacionesForm="ngForm"
+                        (ngSubmit)="getEstadisticasHospitalizacionesPorFecha(filtrarHospitalizacionesForm.value)">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Seleccione Fecha Inicio</label>
+                                    <input type="date" name="fechaIni" ngModel class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Seleccione Fecha Termino</label>
+                                    <input type="date" name="fechaFini" ngModel class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Accion</label>
+                                    <button type="submit" [disabled]="filtrarHospitalizacionesForm.invalid" class="btn btn-primary btn-block">Filtrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     <canvas baseChart height="100px" [datasets]="lineChartDataHospitalizaciones"
                         [labels]="lineChartLabelsHospitalizaciones" [options]="lineChartOptionsHospitalizaciones"
                         [colors]="lineChartColorsHospitalizaciones" [legend]="lineChartLegendHospitalizaciones"
                         [chartType]="lineChartTypeHospitalizaciones"></canvas>
-                    <button class="btn btn-primary mb-4" (click)="cambiarGrafico('hosp')">Cambiar Estilo
-                        Grafico</button>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" (click)="cambiarGrafico('hosp')">Cambiar Estilo
+                                    Grafico</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" (click)="getEstadisticasHospitalizacionesAnios()">Ver Por Años</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" (click)="getEstadisticasHospitalizaciones()">Reiniciar Filtros</button>
+                            </div>
+                        </div>
                 </div>
                 <div class="col"></div>
             </div>
@@ -61,13 +128,46 @@
             <div class="row mt-4">
                 <div class="col"></div>
                 <div class="col-md-10 text-center">
-                    <h3 class="font-weight-bold">Nuevos Clientes Registrados en los ultimos 5 Meses</h3>
+                    <h3 class="font-weight-bold">Nuevos Clientes Registrados en los ultimos 6 Meses</h3>
+                    <form #filtrarClientesForm="ngForm"
+                        (ngSubmit)="getEstadisticasClientesporFecha(filtrarClientesForm.value)">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Seleccione Fecha Inicio</label>
+                                    <input type="date" name="fechaIni" ngModel class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Seleccione Fecha Termino</label>
+                                    <input type="date" name="fechaFini" ngModel class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Accion</label>
+                                    <button type="submit" [disabled]="filtrarClientesForm.invalid" class="btn btn-primary btn-block">Filtrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     <canvas baseChart height="100px" [datasets]="lineChartDataClientes"
                         [labels]="lineChartLabelsClientes" [options]="lineChartOptionsClientes"
                         [colors]="lineChartColorsClientes" [legend]="lineChartLegendClientes"
                         [chartType]="lineChartTypeClientes"></canvas>
-                    <button class="btn btn-primary mb-4" (click)="cambiarGrafico('clie')">Cambiar Estilo
-                        Grafico</button>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" (click)="cambiarGrafico('clie')">Cambiar Estilo
+                                    Grafico</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" (click)="getEstadisticasClientesAnios()">Ver Por Años</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" (click)="getEstadisticasClientes()">Reiniciar Filtros</button>
+                            </div>
+                        </div>
                 </div>
                 <div class="col"></div>
             </div>
@@ -75,13 +175,46 @@
             <div class="row mt-4">
                 <div class="col"></div>
                 <div class="col-md-10 text-center">
-                    <h3 class="font-weight-bold">Nuevas Mascotas Registrados en los ultimos 5 Meses</h3>
+                    <h3 class="font-weight-bold">Nuevas Mascotas Registrados en los ultimos 6 Meses</h3>
+                    <form #filtrarMascotasForm="ngForm"
+                        (ngSubmit)="getEstadisticasMascotasPorFecha(filtrarMascotasForm.value)">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Seleccione Fecha Inicio</label>
+                                    <input type="date" name="fechaIni" ngModel class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Seleccione Fecha Termino</label>
+                                    <input type="date" name="fechaFini" ngModel class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Accion</label>
+                                    <button type="submit" [disabled]="filtrarMascotasForm.invalid" class="btn btn-primary btn-block">Filtrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     <canvas baseChart height="100px" [datasets]="lineChartDataMascotas"
                         [labels]="lineChartLabelsMascotas" [options]="lineChartOptionsMascotas"
                         [colors]="lineChartColorsMascotas" [legend]="lineChartLegendMascotas"
                         [chartType]="lineChartTypeMascotas"></canvas>
-                    <button class="btn btn-primary mb-4" (click)="cambiarGrafico('clie')">Cambiar Estilo
-                        Grafico</button>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" (click)="cambiarGrafico('masc')">Cambiar Estilo
+                                    Grafico</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" (click)="getEstadisticasMascotasAnios()">Ver Por Años</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" (click)="getEstadisticasMascotas()">Reiniciar Filtros</button>
+                            </div>
+                        </div>
                 </div>
                 <div class="col"></div>
             </div>
