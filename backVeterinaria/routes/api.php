@@ -27,7 +27,7 @@ Route::post('resetPassword','ResetPasswordController@process');
 //RUTAS PROTEGIDAS
 Route::group(['middleware' => 'auth.jwt'], function () {
     //DESLOGUEARSE
-    Route::get('logout', 'ApiController@logout');
+    Route::get('logout', 'APIController@logout');
 
     //Rutas para los usuarios del sistema
     Route::get('getDatosUsuarioSistema', 'UsuarioController@getDatosUsuarioSistema');
