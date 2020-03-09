@@ -5,19 +5,43 @@ namespace App\Http\Controllers;
 use App\Historial_vacuna;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class HistorialVacunaController extends Controller
 {
+    public function validarDatos($request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'id_vacuna' => 'required',
+            ],
+            [
+                'id_vacuna.required' => 'Debe de seleccionar una vacuna',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return ['estado' => 'failed_v', 'mensaje' => $validator->errors()];
+        }
+        return ['estado' => 'success', 'mensaje' => 'success'];
+    }
+
     public function setVacuna(Request $request)
     {
-        $vacuna = new Historial_vacuna();
-        $vacuna->fecha = $request->fecha;
-        $vacuna->id_mascota = $request->id_mascota;
-        $vacuna->id_vacuna = $request->id_vacuna;
-        if ($vacuna->save()) {
-            return ['estado' => 'success', 'mensaje' => 'vacuna agregada correctamente.'];
+        $validador = $this->validarDatos($request);
+        if ($validador['estado'] == 'success') {
+            $vacuna = new Historial_vacuna();
+            $vacuna->fecha = $request->fecha;
+            $vacuna->id_mascota = $request->id_mascota;
+            $vacuna->id_vacuna = $request->id_vacuna;
+            if ($vacuna->save()) {
+                return ['estado' => 'success', 'mensaje' => 'vacuna agregada correctamente.'];
+            } else {
+                return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar la vacuna.'];
+            }
         } else {
-            return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar la vacuna.'];
+            return $validador;
         }
     }
 

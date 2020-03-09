@@ -11,27 +11,49 @@ use Carbon\Carbon;
 class MascotaController extends Controller
 {
 
-    public function validarDatos($request)
+    public function validarDatos($request, $idFuncion)
     {
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'nombre' => 'required|min:1',
-                'raza' => 'required|unique:clientes,rut',
-                'fecha_nacimiento' => 'required|min:1',
-                'genero' => 'required',
-                'estado_chip' => 'required',
-                'estado_esterilizado' => 'required',
-            ],
-            [
-                'nombre.required' => 'Debe de ingresar un nombre',
-                'raza.required' => 'El rut del cliente es necesario',
-                'fecha_nacimiento.required' => 'Es necesario un numero del cliente',
-                'genero.required' => 'Debe de seleccionar genero de la mascota',
-                'estado_chip.required' => 'Debe de seleccionar si la mascota esta esterilizada o no'
-            ]
-        );
+        switch ($idFuncion) {
+            case 1:
+                $validator = Validator::make(
+                    $request->all(),
+                    [
+                        'nombre' => 'required|min:1',
+                        'genero' => 'required',
+                        'estado_chip' => 'required',
+                        'estado_esterilizado' => 'required',
+                        'id_tipo_mascota' => 'required',
+                        'id_cliente' => 'integer',
+                        'fecha_nacimiento' => 'required'
+                    ],
+                    [
+                        'nombre.required' => 'Debe de ingresar un nombre',
+                        'genero.required' => 'Debe de seleccionar genero de la mascota',
+                        'estado_chip.required' => 'Debe de indicar si la mascota cuenta con chip',
+                        'estado_esterilizado.required' => 'Debe de indicar si la mascota esta esterilizada',
+                        'id_tipo_mascota.required' => 'Debe de seleccionar el tipo de mascota',
+                        'id_cliente.integer' => 'Debe de ingresar el rut del propietario',
+                        'fecha_nacimiento.required' => 'Debe de ingresar una fecha de nacimiento'
+                    ]
+                );
+                break;
 
+            case 2:
+                $validator = Validator::make(
+                    $request->all(),
+                    [
+                        'numero_chip' => 'required|min:1|unique:mascotas,numero_chip',
+                    ],
+                    [
+                        'numero_chip.required' => 'Debe de ingresar un numero de chip',
+                        'numero_chip.unique' => 'El numero de Chip ya se encuentra registrado por otra mascota',
+                    ]
+                );
+
+            default:
+                # code...
+                break;
+        }
 
         if ($validator->fails()) {
             return ['estado' => 'failed_v', 'mensaje' => $validator->errors()];
@@ -41,7 +63,7 @@ class MascotaController extends Controller
 
     public function setMascota(Request $request)
     {
-        $validador = $this->validarDatos($request);
+        $validador = $this->validarDatos($request, 1);
         if ($validador['estado'] == 'success') {
             $mascota = new Mascota();
             $mascota->nombre = $request->nombre;
@@ -49,7 +71,6 @@ class MascotaController extends Controller
             $mascota->raza = $request->raza;
             $mascota->color = $request->color;
             $mascota->fecha_nacimiento = $request->fecha_nacimiento;
-            $mascota->fecha_ingreso = $request->fecha_ingreso;
             $mascota->estado_chip = $request->estado_chip;
             $mascota->numero_chip = $request->numero_chip;
             $mascota->estado_esterilizado = $request->estado_esterilizado;
@@ -67,7 +88,7 @@ class MascotaController extends Controller
 
     public function updateMascota(Request $request)
     {
-        $validador = $this->validarDatos($request);
+        $validador = $this->validarDatos($request, 1);
         $mascota = Mascota::find($request->id);
         if ($validador['estado'] == 'success') {
             if (!is_null($mascota)) {
@@ -94,7 +115,9 @@ class MascotaController extends Controller
 
     public function updateNumeroChip(Request $request)
     {
-        $mascota = Mascota::find($request->id);
+        $validador = $this->validarDatos($request, 2);
+        if ($validador['estado'] == 'success') {
+            $mascota = Mascota::find($request->id);
             if (!is_null($mascota)) {
                 $mascota->estado_chip = 1;
                 $mascota->numero_chip = $request->numero_chip;
@@ -104,19 +127,22 @@ class MascotaController extends Controller
                     return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al ingresar el chip.'];
                 }
             }
+        } else {
+            return $validador;
+        }
     }
 
     public function updateDuenioMascota(Request $request)
     {
         $mascota = Mascota::find($request->id);
-            if (!is_null($mascota)) {
-                $mascota->id_cliente = $request->id_cliente;
-                if ($mascota->save()) {
-                    return ['estado' => 'success', 'mensaje' => 'Dueño cambiado correctamente.'];
-                } else {
-                    return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al cambiar de dueño.'];
-                }
+        if (!is_null($mascota)) {
+            $mascota->id_cliente = $request->id_cliente;
+            if ($mascota->save()) {
+                return ['estado' => 'success', 'mensaje' => 'Dueño cambiado correctamente.'];
+            } else {
+                return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al cambiar de dueño.'];
             }
+        }
     }
 
     public function getMascotaPorId($id)
@@ -154,7 +180,7 @@ class MascotaController extends Controller
             if (!$busqueda->isEmpty()) {
                 return ['estado' => 'success', 'mascotas' => $busqueda];
             } else {
-                return ['estado' => 'failed_unr', 'mensaje' => 'El Cliente no cuenta con mascotas registradas, revise el rut i cree que se trata de un error.'];
+                return ['estado' => 'failed_unr', 'mensaje' => 'No se han encontrado coincidencias con los caracteres solicitados.'];
             }
         } else {
             return ['estado' => 'failed_unr', 'mensaje' => 'Debe de ingresar un nombre en el buscador.'];
@@ -166,17 +192,18 @@ class MascotaController extends Controller
         return Mascota::all();
     }
 
-    public function getPesoMascotaUltimosControles($id){
+    public function getPesoMascotaUltimosControles($id)
+    {
         $busqueda = DB::table('consultas as c')
-                ->select('c.peso', 'c.created_at')
-                ->where('c.id_mascota', $id)
-                ->orderBy('c.created_at', 'asc')
-                ->take(6)
-                ->get();
-            if (!$busqueda->isEmpty()) {
-                return ['estado' => 'success', 'peso' => $busqueda];
-            } else {
-                return ['estado' => 'failed_unr', 'mensaje' => 'El Cliente no cuenta con mascotas registradas, revise el rut i cree que se trata de un error.'];
-            }
+            ->select('c.peso', 'c.created_at')
+            ->where('c.id_mascota', $id)
+            ->orderBy('c.created_at', 'asc')
+            ->take(6)
+            ->get();
+        if (!$busqueda->isEmpty()) {
+            return ['estado' => 'success', 'peso' => $busqueda];
+        } else {
+            return ['estado' => 'failed_unr', 'mensaje' => 'El Cliente no cuenta con mascotas registradas, revise el rut i cree que se trata de un error.'];
+        }
     }
 }

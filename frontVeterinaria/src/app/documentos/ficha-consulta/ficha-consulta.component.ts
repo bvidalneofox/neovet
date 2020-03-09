@@ -51,7 +51,13 @@ export class FichaConsultaComponent implements OnInit {
         this.idMascotaHospitalizacion = response.consultas.id_mascota;
         this.estadoConsulta = response.consultas.id_estado;
       } else {
-        alert(response.mensaje);
+        this._snotify.error(response.mensaje, {
+          timeout: 5000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
       }
     }, error => {
       console.log(error);
@@ -121,10 +127,22 @@ export class FichaConsultaComponent implements OnInit {
   cambiarEstadoConsulta(metodo){
     this._consultasService.cambiarEstadoConsulta(this.idConsulta, metodo).subscribe(response=>{
       if(response.estado == 'success'){
-        alert(response.mensaje);
+        this._snotify.success(response.mensaje, {
+          timeout: 2000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
         this.router.navigate(['Inicio']);
       }else{
-        alert(response.mensaje);
+        this._snotify.error(response.mensaje, {
+          timeout: 5000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
       }
     },error=>{
       console.log(error);

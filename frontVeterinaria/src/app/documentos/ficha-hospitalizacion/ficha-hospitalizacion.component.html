@@ -31,7 +31,7 @@
             </div>
 
             <hr>
-            <div *ngIf="estadoHospitalizacion != 2">
+            <div *ngIf="estadoHospitalizacion == 1">
                 <h3 class="text-center font-weight-bold mt-4">Formulario Seguimiento de la Mascota</h3>
                 <form #formSeguimiento="ngForm" (ngSubmit)="setSeguimiento(formSeguimiento)"
                     enctype="multipart/form-data">

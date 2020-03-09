@@ -177,13 +177,15 @@ export class FichaMascotaComponent implements OnInit {
           position: 'rightTop'
         });
       }else{
-        this._snotify.warning(response.mensaje, {
-          timeout: 2000,
-          showProgressBar: true,
-          closeOnClick: false,
-          pauseOnHover: true,
-          position: 'rightTop'
-        });
+        for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+          this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
+        }
       }
     }, error=>{
       console.log(error);
@@ -207,9 +209,23 @@ export class FichaMascotaComponent implements OnInit {
     this._mascotasService.updateMascota(this.datosMascota, this.idMascota).subscribe(response=>{
       if(response.estado == 'success'){
         this.getMascotaPorId(this.idMascota);
-        alert(response.mensaje);
+        this._snotify.success(response.mensaje, {
+          timeout: 2000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
       }else{
-        alert(response.mensaje);
+        for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+          this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
+        }
       }
     },error=>{
       console.log(error);

@@ -16,7 +16,6 @@ export class MascotasService {
   setMascota(formMascota, formCliente): Observable<any> {
     let form = new FormData();
     form.append("nombre", formMascota.nombre_mascota);
-    form.append("fecha_nacimiento", formMascota.fecha_nacimiento);
     form.append("estado_esterilizado", formMascota.esterilizado);
     form.append("estado_chip", formMascota.chip);
     form.append("numero_chip", formMascota.numero_chip);

@@ -41,9 +41,9 @@ export class NuevaVacunaComponent implements OnInit {
   ngOnInit() {
   }
 
-  setNuevaVacuna(form){
-    this._vacunasService.setVacuna(this.datosMascota, this.formVacuna).subscribe(response=>{
-      if(response.estado == 'success'){
+  setNuevaVacuna(form) {
+    this._vacunasService.setVacuna(this.datosMascota, this.formVacuna).subscribe(response => {
+      if (response.estado == 'success') {
         form.reset();
         this.formVacuna.tipoVacuna = '';
         this._snotify.success(response.mensaje, {
@@ -54,27 +54,28 @@ export class NuevaVacunaComponent implements OnInit {
           position: 'rightTop'
         });
         this.getVacunas(this.idTemporal);
-      }else{
-        this._snotify.error(response.mensaje, {
-          timeout: 5000,
-          showProgressBar: true,
-          closeOnClick: false,
-          pauseOnHover: true,
-          position: 'rightTop'
-        });
+      } else {
+        for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+          this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
+        }
       }
-    }, error =>{
+    }, error => {
       console.log(error);
     });
   }
 
-  getVacunas(id){
+  getVacunas(id) {
     this.idTemporal = id;
-    //this.limpiarTablaVacunas();
-    this._vacunasService.getVacunasPorIdMascota(id).subscribe(response=>{
-      if(response.estado == 'success'){
+    this._vacunasService.getVacunasPorIdMascota(id).subscribe(response => {
+      if (response.estado == 'success') {
         this.datosVacunas = response.vacunas;
-      }else{
+      } else {
         this._snotify.warning(response.mensaje, {
           timeout: 2000,
           showProgressBar: true,
@@ -83,14 +84,15 @@ export class NuevaVacunaComponent implements OnInit {
           position: 'rightTop'
         });
       }
-    }, error=>{
+    }, error => {
       console.log(error);
     });
   }
 
-  setAntiparasitario(form){
-    this._antiparasitarioService.setAntiparasitario(this.datosMascota, this.nombreAntiparasitario).subscribe(response=>{
-      form.reset();
+  setAntiparasitario(form) {
+    this._antiparasitarioService.setAntiparasitario(this.datosMascota, this.nombreAntiparasitario).subscribe(response => {
+      if (response.estado == 'success') {
+        form.reset();
         this.formVacuna.tipoVacuna = '';
         this._snotify.success(response.mensaje, {
           timeout: 2000,
@@ -100,19 +102,30 @@ export class NuevaVacunaComponent implements OnInit {
           position: 'rightTop'
         });
         this.getAntiparasitario(this.idTemporal);
-    }, error=>{
+      } else {
+        for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+          this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
+        }
+      }
+    }, error => {
       console.log(error);
     });
   }
 
-  getAntiparasitario(id){
+  getAntiparasitario(id) {
     //guardar id al hacer click para no hacer un nuevo servicio
     this.idTemporal = id;
     //this.limpiarTablaVacunas();
-    this._antiparasitarioService.getAntiparasitarioPorIdMascota(id).subscribe(response=>{
-      if(response.estado == 'success'){
+    this._antiparasitarioService.getAntiparasitarioPorIdMascota(id).subscribe(response => {
+      if (response.estado == 'success') {
         this.datosAntiparasitarios = response.antiparasitarios;
-      }else{
+      } else {
         this._snotify.warning(response.mensaje, {
           timeout: 2000,
           showProgressBar: true,
@@ -121,12 +134,12 @@ export class NuevaVacunaComponent implements OnInit {
           position: 'rightTop'
         });
       }
-    }, error=>{
+    }, error => {
       console.log(error);
     });
   }
 
-  limpiarTablaVacunas(){
+  limpiarTablaVacunas() {
     this.datosVacunas = [];
     this.datosAntiparasitarios = [];
   }

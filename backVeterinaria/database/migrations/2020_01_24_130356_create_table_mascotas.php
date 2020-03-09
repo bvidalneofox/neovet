@@ -17,9 +17,9 @@ class CreateTableMascotas extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('genero');
-            $table->string('raza');
-            $table->string('color');
-            $table->date('fecha_nacimiento');
+            $table->string('raza')->nullable();
+            $table->string('color')->nullable();
+            $table->date('fecha_nacimiento')->nullable();
             $table->date('fecha_ingreso');
             $table->text('numero_chip')->nullable();
             $table->string('estado_chip');

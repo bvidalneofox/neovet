@@ -50,13 +50,7 @@ export class FichaClinicaComponent implements OnInit {
         this.consultasMascota = response.consultas;
         this.edadMascota = response.edad;
       } else {
-        this._snotify.error(response.mensaje, {
-          timeout: 5000,
-          showProgressBar: true,
-          closeOnClick: false,
-          pauseOnHover: true,
-          position: 'rightTop'
-        });
+        console.log(response.mensaje);
       }
     }, error => {
       console.log(error);

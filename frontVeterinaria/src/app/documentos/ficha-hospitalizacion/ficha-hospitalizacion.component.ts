@@ -18,7 +18,7 @@ export class FichaHospitalizacionComponent implements OnInit {
   //Comprobar si al hospitalizacion se encuentra finalizada
   estadoHospitalizacion = 2;
   //Ngmodel del FOrmulario Seguimiento
-  archivo: null;
+  archivo: 'undefined';
   descripcion = '';
   //Datos del seguimiento realizados
   datosSeguimiento = [];
@@ -54,11 +54,13 @@ export class FichaHospitalizacionComponent implements OnInit {
   setSeguimiento(form){
     this._hospitalizacionService.setSeguimiento(this.descripcion, this.archivo, this.idHosp, this.esterilizacionCheckBox, this.datosHospitalizacion).subscribe(response=>{
       if(response.estado == 'success'){
-        form.reset();
+        this.archivo = 'undefined';
+        this.descripcion = '';
+        this.esterilizacionCheckBox = false;
         this.nombreArchivo = '';
         this.getSeguimientoPorId();
           this._snotify.success(response.mensaje, {
-            timeout: 5000,
+            timeout: 3000,
             showProgressBar: true,
             closeOnClick: false,
             pauseOnHover: true,

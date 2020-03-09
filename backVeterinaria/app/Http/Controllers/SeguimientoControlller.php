@@ -18,12 +18,9 @@ class SeguimientoControlller extends Controller
             $request->all(),
             [
                 'descripcion' => 'required|min:1',
-                'archivo' => 'required|file|mimes:pdf,jpeg,png',
             ],
             [
-                'descripcion.required' => 'Debe de ingresar un nombre',
-                'archivo.mimes' => 'Solo se admiten archivos con formato .pdf, .png, .jpeg'
-
+                'descripcion.required' => 'Debe de ingresar el estado de la mascota',
             ]
         );
 
@@ -43,7 +40,7 @@ class SeguimientoControlller extends Controller
             $seguimiento->ruta_archivo = $request->archivo;
             $seguimiento->id_usuario = Auth::user()->id;
             $seguimiento->id_hospitalizacion = $request->id_hospitalizacion;
-            if ($request->archivo != 'undefined') {
+            if ($request->archivo != 'undefined' && $request->archivo != 'null') {
                 $nombreImagen = $request->file('archivo')->getClientOriginalName();
                 $request->file('archivo')->move('images', $nombreImagen);
                 $seguimiento->ruta_archivo = 'images/' . $nombreImagen;

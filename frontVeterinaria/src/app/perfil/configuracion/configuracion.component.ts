@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { ConfiguracionesService } from 'src/app/servicios/configuraciones.service';
 import { error } from 'protractor';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-configuracion',
@@ -10,6 +11,8 @@ import { error } from 'protractor';
 })
 export class ConfiguracionComponent implements OnInit {
 
+  //Ruta de la imagen logo
+  rutaLogo = localStorage.getItem('rutaLogo');
   //Variable para almacenar los datos de los usuarios
   datosUsuarios = [];
   //Nombre del file cargado en el input
@@ -22,7 +25,7 @@ export class ConfiguracionComponent implements OnInit {
   direccionVeterinaria = localStorage.getItem('direccion');
   numero = localStorage.getItem('numero');
 
-  constructor(private _usuariosService : UsuariosService, private _configuracionService: ConfiguracionesService) { }
+  constructor(private _snotify: SnotifyService, private _usuariosService : UsuariosService, private _configuracionService: ConfiguracionesService) { }
 
   ngOnInit() {
   }
@@ -30,9 +33,23 @@ export class ConfiguracionComponent implements OnInit {
   setNuevoUsuario(form){
     this._usuariosService.setUsuario(form).subscribe(response=>{
       if(response.estado == 'success'){
-        alert(response.mensaje);
+        this._snotify.success(response.mensaje, {
+          timeout: 3000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
       }else{
-        alert(response.mensaje);
+        for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+          this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
+        }
       }
     }, error=>{
       console.log(error);
@@ -50,10 +67,22 @@ export class ConfiguracionComponent implements OnInit {
   deleteUsuario(metodo ,idUsuario){
     this._usuariosService.deleteUsuario(metodo, idUsuario).subscribe(response=>{
       if(response.estado == 'success'){
-        alert(response.mensaje);
+        this._snotify.success(response.mensaje, {
+          timeout: 3000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
         this.getUsuariosSistema();
       }else{
-        alert(response.mensaje);
+        this._snotify.error(response.mensaje, {
+          timeout: 3000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
       }
     },error=>{
       console.log(error);
@@ -85,12 +114,26 @@ export class ConfiguracionComponent implements OnInit {
   setNombreDireccion(form){
     this._configuracionService.setNombreDireccion(form).subscribe(response=>{
       if(response.estado == 'success'){
-        alert(response.mensaje);
+        this._snotify.success(response.mensaje, {
+          timeout: 3000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
         localStorage.setItem('nombreVeterinaria', form.nombreEmpresaLogo);
         localStorage.setItem('direccion', form.direccionVeterinaria);
         localStorage.setItem('numero', form.numeroVeterinaria);
       }else{
-        alert(response.mensaje);
+        for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+          this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
+        }
       }
     }, error=>{
       console.log(error);

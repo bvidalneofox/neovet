@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-informacion',
@@ -11,7 +12,7 @@ export class InformacionComponent implements OnInit {
   //Variable para almacenar los datos del ususario del sistema
   datosUsuario = [];
 
-  constructor(private _usuariosService: UsuariosService) { }
+  constructor(private _snotify: SnotifyService, private _usuariosService: UsuariosService) { }
 
   ngOnInit() {
     this.getDatosUsuarioSistema();
@@ -32,9 +33,23 @@ export class InformacionComponent implements OnInit {
   updateDatosCliente() {
     this._usuariosService.updateCliente(this.datosUsuario).subscribe(response => {
       if (response.estado == 'success') {
-        alert(response.mensaje);
+        this._snotify.success(response.mensaje, {
+          timeout: 3000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
       } else {
-        alert(response.mensaje);
+        for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+          this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
+        }
       }
     }, error => {
       console.log(error);
@@ -45,9 +60,21 @@ export class InformacionComponent implements OnInit {
     if (form.nuevaPass1 == form.nuevaPass2) {
       this._usuariosService.changePasswordUser(this.datosUsuario, form).subscribe(response => {
         if (response.estado == 'success') {
-          alert(response.mensaje);
+          this._snotify.success(response.mensaje, {
+            timeout: 3000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
         } else {
-          alert(response.mensaje);
+          this._snotify.error(response.mensaje, {
+            timeout: 3000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
         }
       }, error => {
         console.log(error);

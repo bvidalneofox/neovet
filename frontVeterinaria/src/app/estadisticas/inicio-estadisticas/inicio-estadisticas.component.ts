@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EstadisticasService } from 'src/app/servicios/estadisticas.service';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-inicio-estadisticas',
@@ -225,7 +226,7 @@ export class InicioEstadisticasComponent implements OnInit {
   numeroMascotas = '';
   numeroUsuarios = '';
 
-  constructor(private _estadisticasService: EstadisticasService) { }
+  constructor(private _snotify: SnotifyService, private _estadisticasService: EstadisticasService) { }
 
   ngOnInit() {
     this.getEstadisticasConsultas();
@@ -307,6 +308,14 @@ export class InicioEstadisticasComponent implements OnInit {
           this.lineChartData[0].data.push(response.consultas[Object.keys(response.consultas)[index]].numeroConsultas);
           this.lineChartLabels.push(this.nombreMes[response.consultas[Object.keys(response.consultas)[index]].mes - 1] + ' ' + response.consultas[Object.keys(response.consultas)[index]].anio);
         }
+      }else{
+          this._snotify.warning(response.mensaje, {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
       }
     }, error => {
       console.log(error);
@@ -352,6 +361,14 @@ export class InicioEstadisticasComponent implements OnInit {
           this.lineChartDataHospitalizaciones[0].data.push(response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].numerohospitalizaciones);
           this.lineChartLabelsHospitalizaciones.push(this.nombreMes[response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].mes - 1] + ' ' + response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].anio);
         }
+      }else{
+        this._snotify.warning(response.mensaje, {
+          timeout: 5000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
       }
     }, error => {
       console.log(error);
@@ -397,6 +414,14 @@ export class InicioEstadisticasComponent implements OnInit {
           this.lineChartDataClientes[0].data.push(response.clientes[Object.keys(response.clientes)[index]].numeroClientes);
           this.lineChartLabelsClientes.push(this.nombreMes[response.clientes[Object.keys(response.clientes)[index]].mes - 1] + ' ' + response.clientes[Object.keys(response.clientes)[index]].anio);
         }
+      }else{
+        this._snotify.warning(response.mensaje, {
+          timeout: 5000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
       }
     }, error => {
       console.log(error);
@@ -442,6 +467,14 @@ export class InicioEstadisticasComponent implements OnInit {
           this.lineChartDataMascotas[0].data.push(response.mascotas[Object.keys(response.mascotas)[index]].numeroMascotas);
           this.lineChartLabelsMascotas.push(this.nombreMes[response.mascotas[Object.keys(response.mascotas)[index]].mes - 1] + ' ' + response.mascotas[Object.keys(response.mascotas)[index]].anio);
         }
+      }else{
+        this._snotify.warning(response.mensaje, {
+          timeout: 5000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
       }
     },error=>{
       console.log(error);

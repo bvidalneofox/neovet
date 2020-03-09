@@ -5,6 +5,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
 import { EventosService } from 'src/app/servicios/eventos.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-ver-calendario',
@@ -41,7 +42,7 @@ export class VerCalendarioComponent implements OnInit {
     right: 'dayGridMonth,listWeek,dayGridWeek,timeGridWeek'
   }
 
-  constructor(private _eventosService: EventosService) { }
+  constructor(private _snotify: SnotifyService, private _eventosService: EventosService) { }
 
   ngOnInit() {
     this.getEventos();
@@ -90,10 +91,25 @@ export class VerCalendarioComponent implements OnInit {
     let datos = form.value;
     this._eventosService.setEvento(datos).subscribe(response => {
       if (response.estado == 'success') {
-        alert(response.mensaje);
+        this._snotify.success(response.mensaje, {
+          timeout: 2000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
+        document.getElementById('closeNuevaCita').click();
         this.getEventos();
       } else {
-        alert(response.mensaje);
+        for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+          this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
+        }
       }
     }, error => {
       console.log(error);
@@ -112,10 +128,25 @@ export class VerCalendarioComponent implements OnInit {
   updateEvento() {
     this._eventosService.updateEvento(this.nuevoEventoForm).subscribe(response => {
       if (response.estado == 'success') {
-        alert(response.mensaje);
+        this._snotify.success(response.mensaje, {
+          timeout: 2000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
+        document.getElementById('closeModalEventInfo').click();
         this.getEventos();
       } else {
-        alert(response.mensaje);
+        for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+          this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
+        }
       }
     }, error => {
       console.log(error);

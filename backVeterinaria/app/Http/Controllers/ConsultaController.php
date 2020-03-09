@@ -183,7 +183,7 @@ class ConsultaController extends Controller
             if (!$busqueda->isEmpty()) {
                 return ['estado' => 'success', 'consultas' => $busqueda];
             } else {
-                return ['estado' => 'failed_unr', 'mensaje' => 'No hay Consultas Inactivas de momento.'];
+                return ['estado' => 'failed_unr', 'mensaje' => 'No hay Consultas Inactivas en las fechas solicitadas.'];
             }
         } else {
             return ['estado' => 'failed_unr', 'mensaje' => 'Debe de seleccionar una fecha de Inicio y fecha de termino para filtrar.'];

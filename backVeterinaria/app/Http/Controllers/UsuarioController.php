@@ -7,24 +7,86 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UsuarioController extends Controller
 {
+
+    public function validarDatos($request, $idFuncion)
+    {
+        switch ($idFuncion) {
+            case 1:
+                $validator = Validator::make(
+                    $request->all(),
+                    [
+                        'nombre' => 'required',
+                        'rut' => 'required',
+                        'numero' => 'required',
+                        'direccion' => 'required',
+                        'correo' => 'required',
+                        'tipo_usuario' => 'required',
+                    ],
+                    [
+                        'nombre.required' => 'Debe de ingresar un nombre',
+                        'rut.required' => 'Debe de ingresar un rut',
+                        'numero.required' => 'Debe de ingresar un numero de contacto',
+                        'direccion.required' => 'Debe de ingresar una dirección',
+                        'correo.required' => 'Debe de ingresar un correo',
+                        'tipo_usuario.required' => 'Debe de seleccionar el tipo de usuario',
+                    ]
+                );
+                break;
+
+            case 2:
+                $validator = Validator::make(
+                    $request->all(),
+                    [
+                        'nombre' => 'required',
+                        'rut' => 'required',
+                        'numero' => 'required',
+                        'direccion' => 'required',
+                        'correo' => 'required',
+                    ],
+                    [
+                        'nombre.required' => 'Debe de ingresar un nombre',
+                        'rut.required' => 'Debe de ingresar un rut',
+                        'numero.required' => 'Debe de ingresar un numero de contacto',
+                        'direccion.required' => 'Debe de ingresar una dirección',
+                        'correo.required' => 'Debe de ingresar un correo',
+                    ]
+                );
+
+            default:
+                # code...
+                break;
+        }
+
+        if ($validator->fails()) {
+            return ['estado' => 'failed_v', 'mensaje' => $validator->errors()];
+        }
+        return ['estado' => 'success', 'mensaje' => 'success'];
+    }
+
     public function setUsuario(Request $request)
     {
-        $user = new User();
-        $user->name = $request->nombre;
-        $user->rut = $request->rut;
-        $user->numero = $request->numero;
-        $user->direccion = $request->direccion;
-        $user->email = $request->correo;
-        $user->password = bcrypt('123456');
-        $user->tipo_usuario = $request->tipo_usuario;
-        $user->save();
-        if ($user->save()) {
-            return ['estado' => 'success', 'mensaje' => 'Usuario creado correctamente.'];
+        $validador = $this->validarDatos($request, 1);
+        if ($validador['estado'] == 'success') {
+            $user = new User();
+            $user->name = $request->nombre;
+            $user->rut = $request->rut;
+            $user->numero = $request->numero;
+            $user->direccion = $request->direccion;
+            $user->email = $request->correo;
+            $user->password = bcrypt(substr($request->rut,0,4));
+            $user->tipo_usuario = $request->tipo_usuario;
+            $user->save();
+            if ($user->save()) {
+                return ['estado' => 'success', 'mensaje' => 'Usuario creado correctamente.'];
+            } else {
+                return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al crear el Usuario.'];
+            }
         } else {
-            return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al crear el Usuario.'];
+            return $validador;
         }
     }
 
@@ -48,18 +110,23 @@ class UsuarioController extends Controller
 
     public function updateUsuarioSistema(Request $request)
     {
-        $cliente = User::find($request->id);
-        if (!is_null($cliente)) {
-            $cliente->name = $request->nombre;
-            $cliente->rut = $request->rut;
-            $cliente->numero = $request->numero;
-            $cliente->direccion = $request->direccion;
-            $cliente->email = $request->correo;
-            if ($cliente->save()) {
-                return ['estado' => 'success', 'mensaje' => 'Usuario actualizado correctamente, si desea que los cambios se apliquen en el sistema debe de cerrar e iniciar sesión nuevamente.'];
-            } else {
-                return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al actualizar el Usuario.'];
+        $validador = $this->validarDatos($request, 2);
+        if ($validador['estado'] == 'success') {
+            $cliente = User::find($request->id);
+            if (!is_null($cliente)) {
+                $cliente->name = $request->nombre;
+                $cliente->rut = $request->rut;
+                $cliente->numero = $request->numero;
+                $cliente->direccion = $request->direccion;
+                $cliente->email = $request->correo;
+                if ($cliente->save()) {
+                    return ['estado' => 'success', 'mensaje' => 'Usuario actualizado correctamente, si desea que los cambios se apliquen en el sistema debe de cerrar e iniciar sesión nuevamente.'];
+                } else {
+                    return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al actualizar el Usuario.'];
+                }
             }
+        } else {
+            return $validador;
         }
     }
 

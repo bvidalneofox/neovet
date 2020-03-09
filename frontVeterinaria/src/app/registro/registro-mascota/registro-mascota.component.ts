@@ -25,7 +25,6 @@ export class RegistroMascotaComponent implements OnInit {
     tipo: '',
     raza: '',
     color: '',
-    fecha_ingreso: '2020-01-01 10:10:10'
   }
 
   constructor(private _snotify: SnotifyService, private _clientesService: ClientesService, private _mascotasService: MascotasService) { }
@@ -65,13 +64,15 @@ export class RegistroMascotaComponent implements OnInit {
           position: 'rightTop'
         });
       }else{
-        this._snotify.error(response.mensaje, {
-          timeout: 5000,
-          showProgressBar: true,
-          closeOnClick: false,
-          pauseOnHover: true,
-          position: 'centerCenter'
-        });
+        for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+          this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
+        }
       }
     }, error=>{
       console.log(error);
