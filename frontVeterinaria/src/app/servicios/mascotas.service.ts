@@ -23,6 +23,7 @@ export class MascotasService {
     form.append("id_tipo_mascota", formMascota.tipo);
     form.append("raza", formMascota.raza);
     form.append("color", formMascota.color);
+    form.append("fecha_nacimiento", formCliente.fecha_nacimiento);
     form.append("fecha_ingreso", formCliente.fecha_ingreso);
     form.append("id_cliente", formCliente.id);
     return this._http.post(this.url + "setMascota", form);
