@@ -5466,7 +5466,7 @@ EventosService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "global", function() { return global; });
 var global = {
-    url: 'http://127.0.0.1:8000/api/'
+    url: 'https://neovet.neofox.cl/api/'
     //urlLocal:'http://127.0.0.1:8000/api/',
     //urlProduccion:'https://neovet.neofox.cl/api/'
 };
