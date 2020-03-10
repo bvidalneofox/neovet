@@ -41,9 +41,12 @@ class SeguimientoControlller extends Controller
             $seguimiento->id_usuario = Auth::user()->id;
             $seguimiento->id_hospitalizacion = $request->id_hospitalizacion;
             if ($request->archivo != 'undefined' && $request->archivo != 'null') {
-                $nombreImagen = $request->file('archivo')->getClientOriginalName();
-                $request->file('archivo')->move('images', $nombreImagen);
-                $seguimiento->ruta_archivo = 'images/' . $nombreImagen;
+                $guardarArchivo = $this->guardarArchivo($request->archivo, 'ArchivosSeguimiento/');
+                if ($guardarArchivo['estado'] == "success") {
+                    $seguimiento->ruta_imagen = $guardarArchivo['archivo'];
+                } else {
+                    return $guardarArchivo;
+                }
             }
             if ($seguimiento->save()) {
                 if ($request->esterilizacion == 'true') {
@@ -77,6 +80,23 @@ class SeguimientoControlller extends Controller
             return ['estado' => 'success', 'seguimiento' => $busqueda];
         } else {
             return ['estado' => 'failed_unr', 'mensaje' => 'No se ha encontrado el id de la hospitalizacion.'];
+        }
+    }
+
+    public function guardarArchivo($archivo, $ruta)
+    {
+        $filenameext = $archivo->getClientOriginalName();
+        $filename = pathinfo($filenameext, PATHINFO_FILENAME);
+        $extension = $archivo->getClientOriginalExtension();
+        $nombreArchivo = $filename . '_' . time() . '.' . $extension;
+        $rutaDB = 'storage/' . $ruta . $nombreArchivo;
+
+        $guardar = Storage::put($ruta . $nombreArchivo, (string) file_get_contents($archivo), 'public');
+
+        if ($guardar) {
+            return ['estado' =>  'success', 'archivo' => $rutaDB];
+        } else {
+            return ['estado' =>  'failed', 'mensaje' => 'Error al intentar guardar el archivo.'];
         }
     }
 }
