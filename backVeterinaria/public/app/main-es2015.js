@@ -360,7 +360,7 @@ module.exports = "<div class=\"card but-card text-center\" style=\"cursor: point
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" style=\"margin-top: 1rem; margin-bottom: 1rem;\">\r\n    <full-calendar defaultView=\"dayGridMonth\" \r\n    [locales]=\"locales\" \r\n    [plugins]=\"calendarPlugins\" \r\n    [header]=\"header\"\r\n    [events]=\"data\" \r\n    [eventLimit]=\"3\"\r\n    (eventClick)=\"eventoClick($event)\" \r\n    (dateClick)=\"diaClick($event)\"\r\n    (eventRender)=\"eventRender($event)\">\r\n    </full-calendar>\r\n</div>\r\n\r\n<button hidden id=\"open-modal-nueva-cita\" data-toggle=\"modal\" data-target=\".modal-nueva-cita\"></button>\r\n\r\n<div class=\"modal fade modal-nueva-cita\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\" id=\"modal-nueva-cita\">\r\n    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Programar Nueva Cita\r\n                </h5>\r\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <form #formNuevoEvento=\"ngForm\" (ngSubmit)=\"setNuevoEvento(formNuevoEvento)\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-6\">\r\n                            <div class=\"form-group\">\r\n                                <label>Titulo</label>\r\n                                <input type=\"text\" class=\"form-control\" placeholder=\"Ingrese Titulo\" name=\"titulo\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.titulo\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label>Descripcion</label>\r\n                                <textarea name=\"textAreaNuevaConsulta\" cols=\"30\" rows=\"10\" class=\"form-control\"\r\n                                    name=\"descripcion\" [(ngModel)]=\"nuevoEventoForm.descripcion\"></textarea>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-6\">\r\n                            <div class=\"form-group\">\r\n                                <label>Hora Inicio</label>\r\n                                <input type=\"datetime-local\" class=\"form-control\" name=\"horaInicio\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.horaInicio\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label>Hora Termino</label>\r\n                                <input type=\"datetime-local\" class=\"form-control\" name=\"horaTermino\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.horaTermino\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label>Color Etiqueta</label>\r\n                                <input type=\"color\" class=\"form-control\" name=\"colorFondo\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.colorFondo\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label>Color Texto</label>\r\n                                <input type=\"color\" class=\"form-control\" name=\"colorTexto\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.colorTexto\">\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <button type=\"submit\" class=\"btn btn-success btn-block\">Ingresar</button>\r\n                </form>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Cerrar</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<button hidden id=\"open-modal-ver-cita\" data-toggle=\"modal\" data-target=\".modal-ver-cita\"></button>\r\n\r\n<div class=\"modal fade modal-ver-cita\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\" id=\"modal-nueva-cita\">\r\n    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">{{nuevoEventoForm.titulo}}</h5>\r\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" id=\"closeModalEventInfo\" (click)=\"controlSteps(0)\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div *ngIf=\"step == 0\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-12\">\r\n                            <div class=\"form-group\">\r\n                                <h5 class=\"font-weight-bold\">Creado Por</h5>\r\n                                <p>{{nuevoEventoForm.nombreCreador}}</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-12\">\r\n                        <div class=\"form-group\">\r\n                            <h5 class=\"font-weight-bold\">Descripcion</h5>\r\n                            <p>{{nuevoEventoForm.descripcion}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-12\">\r\n                        <div class=\"form-group\">\r\n                            <h5 class=\"font-weight-bold\">Hora Inicio</h5>\r\n                            <p>{{labelHoraInicio}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-12\">\r\n                        <div class=\"form-group\">\r\n                            <h5 class=\"font-weight-bold\">Hora Termino</h5>\r\n                            <p>{{labelHoraTermino}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div *ngIf=\"step == 1\">\r\n                <form #formEditarEvento=\"ngForm\" (ngSubmit)=\"updateEvento(formEditarEvento)\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-6\">\r\n                            <div class=\"form-group\">\r\n                                <label>Titulo</label>\r\n                                <input type=\"text\" class=\"form-control\" placeholder=\"Ingrese Titulo\" name=\"titulo\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.titulo\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label>Descripcion</label>\r\n                                <textarea name=\"textAreaNuevaConsulta\" cols=\"30\" rows=\"10\" class=\"form-control\"\r\n                                    name=\"descripcion\" [(ngModel)]=\"nuevoEventoForm.descripcion\"></textarea>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-6\">\r\n                            <div class=\"form-group\">\r\n                                <label>Hora Inicio</label>\r\n                                <input type=\"datetime-local\" class=\"form-control\" name=\"horaInicio\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.horaInicio\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label>Hora Termino</label>\r\n                                <input type=\"datetime-local\" class=\"form-control\" name=\"horaTermino\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.horaTermino\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label>Color Etiqueta</label>\r\n                                <input type=\"color\" class=\"form-control\" name=\"colorFondo\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.colorFondo\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label>Color Texto</label>\r\n                                <input type=\"color\" class=\"form-control\" name=\"colorTexto\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.colorTexto\">\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <button type=\"submit\" class=\"btn btn-success btn-block\">Actualizar</button>\r\n                </form>\r\n            </div>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"controlSteps(1)\" *ngIf=\"step==0\">Editar</button>\r\n                <button type=\"button\" class=\"btn btn-danger\" *ngIf=\"step==0\" data-toggle=\"modal\" data-target=\".modal-confirmacion-borrar-evento\">Eliminar</button>\r\n                <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"controlSteps(0)\">Cerrar</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- MODAL CONFIRMAR -->\r\n<div class=\"modal fade modal-confirmacion-borrar-evento\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Confirmar</h5>\r\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"row my-4\">\r\n                    <div class=\"col-md-12 text-center\">\r\n                        <p class=\"h4\">¿Esta Seguro?</p>\r\n                        <p class=\"h5\">Confirme solo si esta seguro/a</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row my-4\">\r\n                    <div class=\"col-md-6 text-center\">\r\n                        <div class=\"btn btn-success btn-block btn-rounded\" data-dismiss=\"modal\"\r\n                            (click)=\"deleteEvento()\">\r\n                            Sí, deseo borrar\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-md-6 text-center\">\r\n                        <div class=\"btn btn-danger btn-block\" data-dismiss=\"modal\">\r\n                            No, no borrar\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"container\" style=\"margin-top: 1rem; margin-bottom: 1rem;\">\r\n    <full-calendar defaultView=\"dayGridMonth\" \r\n    [locales]=\"locales\" \r\n    [plugins]=\"calendarPlugins\" \r\n    [header]=\"header\"\r\n    [events]=\"data\" \r\n    [eventLimit]=\"3\"\r\n    (eventClick)=\"eventoClick($event)\" \r\n    (dateClick)=\"diaClick($event)\"\r\n    (eventRender)=\"eventRender($event)\">\r\n    </full-calendar>\r\n</div>\r\n\r\n<button hidden id=\"open-modal-nueva-cita\" data-toggle=\"modal\" data-target=\".modal-nueva-cita\"></button>\r\n\r\n<div class=\"modal fade modal-nueva-cita\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\" id=\"modal-nueva-cita\">\r\n    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Programar Nueva Cita\r\n                </h5>\r\n                <button type=\"button\" id=\"closeNuevaCita\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <form #formNuevoEvento=\"ngForm\" (ngSubmit)=\"setNuevoEvento(formNuevoEvento)\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-6\">\r\n                            <div class=\"form-group\">\r\n                                <label>Titulo</label>\r\n                                <input type=\"text\" class=\"form-control\" placeholder=\"Ingrese Titulo\" name=\"titulo\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.titulo\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label>Descripcion</label>\r\n                                <textarea name=\"textAreaNuevaConsulta\" cols=\"30\" rows=\"10\" class=\"form-control\"\r\n                                    name=\"descripcion\" [(ngModel)]=\"nuevoEventoForm.descripcion\"></textarea>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-6\">\r\n                            <div class=\"form-group\">\r\n                                <label>Hora Inicio</label>\r\n                                <input type=\"datetime-local\" class=\"form-control\" name=\"horaInicio\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.horaInicio\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label>Hora Termino</label>\r\n                                <input type=\"datetime-local\" class=\"form-control\" name=\"horaTermino\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.horaTermino\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label>Color Etiqueta</label>\r\n                                <input type=\"color\" class=\"form-control\" name=\"colorFondo\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.colorFondo\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label>Color Texto</label>\r\n                                <input type=\"color\" class=\"form-control\" name=\"colorTexto\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.colorTexto\">\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <button type=\"submit\" class=\"btn btn-success btn-block\">Ingresar</button>\r\n                </form>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Cerrar</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<button hidden id=\"open-modal-ver-cita\" data-toggle=\"modal\" data-target=\".modal-ver-cita\"></button>\r\n\r\n<div class=\"modal fade modal-ver-cita\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\" id=\"modal-nueva-cita\">\r\n    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">{{nuevoEventoForm.titulo}}</h5>\r\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" id=\"closeModalEventInfo\" (click)=\"controlSteps(0)\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div *ngIf=\"step == 0\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-12\">\r\n                            <div class=\"form-group\">\r\n                                <h5 class=\"font-weight-bold\">Creado Por</h5>\r\n                                <p>{{nuevoEventoForm.nombreCreador}}</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-12\">\r\n                        <div class=\"form-group\">\r\n                            <h5 class=\"font-weight-bold\">Descripcion</h5>\r\n                            <p>{{nuevoEventoForm.descripcion}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-12\">\r\n                        <div class=\"form-group\">\r\n                            <h5 class=\"font-weight-bold\">Hora Inicio</h5>\r\n                            <p>{{labelHoraInicio}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-12\">\r\n                        <div class=\"form-group\">\r\n                            <h5 class=\"font-weight-bold\">Hora Termino</h5>\r\n                            <p>{{labelHoraTermino}}</p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div *ngIf=\"step == 1\">\r\n                <form #formEditarEvento=\"ngForm\" (ngSubmit)=\"updateEvento(formEditarEvento)\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-6\">\r\n                            <div class=\"form-group\">\r\n                                <label>Titulo</label>\r\n                                <input type=\"text\" class=\"form-control\" placeholder=\"Ingrese Titulo\" name=\"titulo\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.titulo\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label>Descripcion</label>\r\n                                <textarea name=\"textAreaNuevaConsulta\" cols=\"30\" rows=\"10\" class=\"form-control\"\r\n                                    name=\"descripcion\" [(ngModel)]=\"nuevoEventoForm.descripcion\"></textarea>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-6\">\r\n                            <div class=\"form-group\">\r\n                                <label>Hora Inicio</label>\r\n                                <input type=\"datetime-local\" class=\"form-control\" name=\"horaInicio\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.horaInicio\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label>Hora Termino</label>\r\n                                <input type=\"datetime-local\" class=\"form-control\" name=\"horaTermino\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.horaTermino\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label>Color Etiqueta</label>\r\n                                <input type=\"color\" class=\"form-control\" name=\"colorFondo\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.colorFondo\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label>Color Texto</label>\r\n                                <input type=\"color\" class=\"form-control\" name=\"colorTexto\"\r\n                                    [(ngModel)]=\"nuevoEventoForm.colorTexto\">\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <button type=\"submit\" class=\"btn btn-success btn-block\">Actualizar</button>\r\n                </form>\r\n            </div>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-secondary\" (click)=\"controlSteps(1)\" *ngIf=\"step==0\">Editar</button>\r\n                <button type=\"button\" class=\"btn btn-danger\" *ngIf=\"step==0\" data-toggle=\"modal\" data-target=\".modal-confirmacion-borrar-evento\">Eliminar</button>\r\n                <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" (click)=\"controlSteps(0)\">Cerrar</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- MODAL CONFIRMAR -->\r\n<div class=\"modal fade modal-confirmacion-borrar-evento\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Confirmar</h5>\r\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"row my-4\">\r\n                    <div class=\"col-md-12 text-center\">\r\n                        <p class=\"h4\">¿Esta Seguro?</p>\r\n                        <p class=\"h5\">Confirme solo si esta seguro/a</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row my-4\">\r\n                    <div class=\"col-md-6 text-center\">\r\n                        <div class=\"btn btn-success btn-block btn-rounded\" data-dismiss=\"modal\"\r\n                            (click)=\"deleteEvento()\">\r\n                            Sí, deseo borrar\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-md-6 text-center\">\r\n                        <div class=\"btn btn-danger btn-block\" data-dismiss=\"modal\">\r\n                            No, no borrar\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -448,7 +448,7 @@ module.exports = "<div class=\"container-fluid mt-4 mb-4\">\n    <div class=\"ca
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n<div class=\"row mt-4\">\r\n    <div class=\"col-md-12\">\r\n        <button (click)=\"generarPDF()\" class=\"btn btn-info btn-block\">Exportar a PDF</button>\r\n    </div>\r\n</div>\r\n</div>\r\n\r\n<div class=\"container-fluid mt-4 mb-4\">\r\n    <div class=\"card formularios\">\r\n        <div class=\"container-fluid mt-4 mb-4\" id=\"contenido\">\r\n            <div class=\"row text-center\">\r\n                <div class=\"col-1\">\r\n                    <img src=\"http://127.0.0.1:8000/{{rutaLogo}}\" style=\"width: 10rem;\">\r\n                </div>\r\n                <div class=\"col-11\">\r\n                    <p class=\"h4 font-weight-bold mr-5\">Clinica Veterinaria {{nombreVeterinaria}}</p>\r\n                    <p class=\"h5 font-weight-bold mr-5\">{{direccionVeterinaria}}</p>\r\n                    <p class=\"font-weight-bold mr-5\">{{numero}}</p>\r\n                </div>\r\n            </div>\r\n            <!-- DATOS CLIENTE -->\r\n            <div class=\"row\">\r\n                <div class=\"col-12 text-center header-test\">\r\n                    <p class=\"font-weight-bold\">Datos del Cliente</p>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-6\">\r\n                    <div class=\"ml-5\">\r\n                        <p><b>Nombre:</b> {{datosBasicos?.nombreDuenio}}</p>\r\n                        <p><b>Dirección:</b> {{datosBasicos?.direccion}}</p>\r\n                        <p><b>Telefonos:</b> {{datosBasicos?.numero}}</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                    <div class=\"test\">\r\n                        <p><b>Correo:</b> {{datosBasicos?.correo}}</p>\r\n                        <p><b>Rut:</b> {{datosBasicos?.rut}}</p>\r\n                        <p><b>Fecha ingreso:</b> {{datosBasicos?.fechaIngresoDuenio}}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <!-- DATOS MASCOTA -->\r\n            <div class=\"row\">\r\n                <div class=\"col-12 text-center header-test\">\r\n                    <p class=\"font-weight-bold\">Datos del Paciente</p>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-md-4 text-center\">\r\n                    <p class=\"font-weight-bold\">Fotografia Mascota</p>\r\n                    <img src=\"assets/cat-profile-pic.jpeg\" style=\"width: 5rem;\">\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <p><b>Nombre:</b> {{datosBasicos?.nombreMascota}}</p>\r\n                    <p><b>Especie:</b> {{datosBasicos?.tipoMascota}}</p>\r\n                    <p><b>Fecha Nacimiento:</b> {{datosBasicos?.fechaNacimientoMascota}}</p>\r\n                    <p><b>Edad:</b> {{edadMascota}}</p>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <p><b>Raza:</b> {{datosBasicos?.raza}}</p>\r\n                    <p><b>Sexo:</b> {{datosBasicos?.generoMascota}}</p>\r\n                    <p><b>Color:</b> {{datosBasicos?.color}}o</p>\r\n                    <p><b>Fecha Ingreso:</b> {{datosBasicos?.fechaIngresoMascota}}</p>\r\n                </div>\r\n            </div>\r\n            <!-- HISTORIAL CLINICO -->\r\n            <div class=\"row\">\r\n                <div class=\"col-12 text-center header-test\">\r\n                    <p class=\"font-weight-bold\">Historial Clinico</p>\r\n                </div>\r\n            </div>\r\n            <div class=\"row consulta\" *ngFor=\"let itemConsultas of consultasMascota\">\r\n                <div class=\"col-2\">\r\n                    <p class=\"font-weight-bold\">{{itemConsultas?.created_at}}</p>\r\n                </div>\r\n                <div class=\"col-3\">\r\n                    <p><b>Atendido Por:</b> {{itemConsultas?.nombreVeterinario}}</p>\r\n                </div>\r\n                <div class=\"col-7\">\r\n                    <p> <b>Motivo:</b> {{itemConsultas?.motivo}}</p>\r\n                    <p> <b>Procedimiento:</b> {{itemConsultas?.procedimiento}}</p>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<!-- MODAL DE DATOS MASCOTA -->\r\n<!-- <div class=\"modal fade modal-ficha-clinica\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-xl modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">\r\n                    Ficha Clinica Mascota</h5>\r\n                <button type=\"button\" id=\"close2\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\" id=\"contenido\">\r\n                \r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button (click)=\"generarPDF()\" class=\"btn btn-info\">Crear PDF</button>\r\n                <button type=\"button\" class=\"btn btn-primary btn-block\" data-dismiss=\"modal\">Ok</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div> -->"
+module.exports = "<div class=\"container\">\r\n<div class=\"row mt-4\">\r\n    <div class=\"col-md-12\">\r\n        <button (click)=\"generarPDF()\" class=\"btn btn-info btn-block\">Exportar a PDF</button>\r\n    </div>\r\n</div>\r\n</div>\r\n\r\n<div class=\"container-fluid mt-4 mb-4\">\r\n    <div class=\"card formularios\">\r\n        <div class=\"container-fluid mt-4 mb-4\" id=\"contenido\">\r\n            <div class=\"row text-center\">\r\n                <div class=\"col-1\">\r\n                    <img src=\"../{{rutaLogo}}\" style=\"width: 10rem;\">\r\n                </div>\r\n                <div class=\"col-11\">\r\n                    <p class=\"h4 font-weight-bold mr-5\">Clinica Veterinaria {{nombreVeterinaria}}</p>\r\n                    <p class=\"h5 font-weight-bold mr-5\">{{direccionVeterinaria}}</p>\r\n                    <p class=\"font-weight-bold mr-5\">{{numero}}</p>\r\n                </div>\r\n            </div>\r\n            <!-- DATOS CLIENTE -->\r\n            <div class=\"row\">\r\n                <div class=\"col-12 text-center header-test\">\r\n                    <p class=\"font-weight-bold\">Datos del Cliente</p>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-6\">\r\n                    <div class=\"ml-5\">\r\n                        <p><b>Nombre:</b> {{datosBasicos?.nombreDuenio}}</p>\r\n                        <p><b>Dirección:</b> {{datosBasicos?.direccion}}</p>\r\n                        <p><b>Telefonos:</b> {{datosBasicos?.numero}}</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-6\">\r\n                    <div class=\"test\">\r\n                        <p><b>Correo:</b> {{datosBasicos?.correo}}</p>\r\n                        <p><b>Rut:</b> {{datosBasicos?.rut}}</p>\r\n                        <p><b>Fecha ingreso:</b> {{datosBasicos?.fechaIngresoDuenio}}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <!-- DATOS MASCOTA -->\r\n            <div class=\"row\">\r\n                <div class=\"col-12 text-center header-test\">\r\n                    <p class=\"font-weight-bold\">Datos del Paciente</p>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-md-4 text-center\">\r\n                    <p class=\"font-weight-bold\">Fotografia Mascota</p>\r\n                    <img src=\"assets/cat-profile-pic.jpeg\" style=\"width: 5rem;\">\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <p><b>Nombre:</b> {{datosBasicos?.nombreMascota}}</p>\r\n                    <p><b>Especie:</b> {{datosBasicos?.tipoMascota}}</p>\r\n                    <p><b>Fecha Nacimiento:</b> {{datosBasicos?.fechaNacimientoMascota}}</p>\r\n                    <p><b>Edad:</b> {{edadMascota}}</p>\r\n                </div>\r\n                <div class=\"col-md-4\">\r\n                    <p><b>Raza:</b> {{datosBasicos?.raza}}</p>\r\n                    <p><b>Sexo:</b> {{datosBasicos?.generoMascota}}</p>\r\n                    <p><b>Color:</b> {{datosBasicos?.color}}o</p>\r\n                    <p><b>Fecha Ingreso:</b> {{datosBasicos?.fechaIngresoMascota}}</p>\r\n                </div>\r\n            </div>\r\n            <!-- HISTORIAL CLINICO -->\r\n            <div class=\"row\">\r\n                <div class=\"col-12 text-center header-test\">\r\n                    <p class=\"font-weight-bold\">Historial Clinico</p>\r\n                </div>\r\n            </div>\r\n            <div class=\"row consulta\" *ngFor=\"let itemConsultas of consultasMascota\">\r\n                <div class=\"col-2\">\r\n                    <p class=\"font-weight-bold\">{{itemConsultas?.created_at}}</p>\r\n                </div>\r\n                <div class=\"col-3\">\r\n                    <p><b>Atendido Por:</b> {{itemConsultas?.nombreVeterinario}}</p>\r\n                </div>\r\n                <div class=\"col-7\">\r\n                    <p> <b>Motivo:</b> {{itemConsultas?.motivo}}</p>\r\n                    <p> <b>Procedimiento:</b> {{itemConsultas?.procedimiento}}</p>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<!-- MODAL DE DATOS MASCOTA -->\r\n<!-- <div class=\"modal fade modal-ficha-clinica\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-xl modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">\r\n                    Ficha Clinica Mascota</h5>\r\n                <button type=\"button\" id=\"close2\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\" id=\"contenido\">\r\n                \r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button (click)=\"generarPDF()\" class=\"btn btn-info\">Crear PDF</button>\r\n                <button type=\"button\" class=\"btn btn-primary btn-block\" data-dismiss=\"modal\">Ok</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div> -->"
 
 /***/ }),
 
@@ -470,7 +470,7 @@ module.exports = "<div class=\"container-fluid mt-4 mb-4\">\n    <div class=\"ca
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid mt-4 mb-4\">\r\n    <div class=\"card formularios\">\r\n        <div class=\"container-fluid mt- mb-4\">\r\n            <h3 class=\"text-center font-weight-bold mt-4\">Estado Hospitalizacion</h3>\r\n            <div class=\"card-body card-datos\">\r\n                <h4 class=\"font-weight-bold\">Datos Paciente</h4>\r\n                <div class=\"row\">\r\n                    <div class=\"col-6\">\r\n                        <p><b>Nombre:</b> {{datosHospitalizacion?.nombreMascota}}</p>\r\n                        <p><b>Especie:</b> {{datosHospitalizacion?.tipoMascota}}</p>\r\n                        <p><b>Edad:</b> {{datosHospitalizacion?.fecha_nacimiento}}</p>\r\n                    </div>\r\n                    <div class=\"col-6\">\r\n                        <p><b>Dueño:</b> {{datosHospitalizacion?.nombreDuenio}}</p>\r\n                        <p><b>Rut:</b> {{datosHospitalizacion?.rut}}</p>\r\n                        <p><b>Contacto Dueño:</b> {{datosHospitalizacion?.numero}}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <hr>\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                    <div class=\"card-body card-datos\">\r\n                        <h4 class=\"font-weight-bold\">Motivo Hospitalizacion</h4>\r\n                        <p>{{datosHospitalizacion?.motivo}}</p>\r\n                        <p><b>Derivado Por: </b>{{datosHospitalizacion?.nombreVetHosp}}</p>\r\n                        <p><b>Hospitalizado El: </b>{{datosHospitalizacion?.created_at}}</p>\r\n                        <p><b>Camilla: </b>{{datosHospitalizacion?.numero_camilla}}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <hr>\r\n            <div *ngIf=\"estadoHospitalizacion != 2\">\r\n                <h3 class=\"text-center font-weight-bold mt-4\">Formulario Seguimiento de la Mascota</h3>\r\n                <form #formSeguimiento=\"ngForm\" (ngSubmit)=\"setSeguimiento(formSeguimiento)\"\r\n                    enctype=\"multipart/form-data\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-9\">\r\n                            <div class=\"form-group\">\r\n                                <textarea name=\"obervaciones\" [(ngModel)]=\"descripcion\" cols=\"30\" rows=\"5\"\r\n                                    class=\"form-control mt-4\" placeholder=\"Ingrese el estado de la mascota\"\r\n                                    style=\"resize: none;\"></textarea>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-md-3 my-auto\">\r\n                            <div class=\"form-group\">\r\n                                <label *ngIf=\"nombreArchivo != ''\">Archivo cargado: {{nombreArchivo}}</label>\r\n                                <label *ngIf=\"nombreArchivo == ''\"></label>\r\n                                <button type=\"button\" class=\"btn btn-primary btn-square btn-block\"\r\n                                    (click)=\"fileClick()\">Adjuntar un\r\n                                    documento</button>\r\n                                <input id=\"file-test\" type=\"file\" (change)=\"updateFile($event)\" hidden>\r\n                            </div>\r\n                            <div class=\"custom-control custom-checkbox mb-3\">\r\n                                <input type=\"checkbox\" class=\"custom-control-input\" id=\"customControlValidation1\" name=\"checkBoxH\" [(ngModel)]=\"esterilizacionCheckBox\"\r\n                                    required>\r\n                                <label class=\"custom-control-label\" for=\"customControlValidation1\">Marque la casilla solo si\r\n                                    la mascota fue esterilizada para actualizar automaticamente los datos</label>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-12\">\r\n                            <div class=\"form-group\">\r\n                                <button type=\"submit\" class=\"btn btn-success btn-block\">Ingresar Seguiminento</button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n\r\n                <hr>\r\n            </div>\r\n                <h3 class=\"text-center font-weight-bold mt-4\">Historial Seguimiento</h3>\r\n                <div class=\"table-responsive\">\r\n                    <table class=\"table table-sm\">\r\n                        <thead>\r\n                            <tr class=\"text-center\">\r\n                                <th style=\"width: 15%;\">Fecha</th>\r\n                                <th style=\"width: 20%;\">Revisado Por</th>\r\n                                <th style=\"width: 55%;\">Descripcion</th>\r\n                                <th style=\"width: 10%;\">Archivo Adjunto</th>\r\n                            </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                            <tr *ngFor=\"let itemSeguimiento of datosSeguimiento\">\r\n                                <td class=\"text-center\">{{itemSeguimiento?.created_at}}</td>\r\n                                <td class=\"text-center\">{{itemSeguimiento?.nombreVeterinario}}</td>\r\n                                <td>{{itemSeguimiento?.descripcion}}</td>\r\n                                <td class=\"text-center\"> <a\r\n                                        href=\"http://127.0.0.1:8000/{{itemSeguimiento?.ruta_archivo}}\" target=\"_blank\"\r\n                                        *ngIf=\"itemSeguimiento?.ruta_archivo != 'undefined'\"><img\r\n                                            src=\"https://img.icons8.com/pastel-glyph/2x/file.png\"\r\n                                            style=\"width: 2rem;\"></a>\r\n                                </td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                </div>\r\n                <div *ngIf=\"estadoHospitalizacion == 1\">\r\n                <hr>\r\n                <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                        <h3 class=\"text-center font-weight-bold mt-4\">Acciones</h3>\r\n                        <div class=\"form-group\">\r\n                            <button type=\"button\" class=\"btn btn-success btn-block mt-4\" data-toggle=\"modal\"\r\n                                data-target=\".modal-confirmacion-finalizar\">Dar de Alta (Dar Por Finalizada la\r\n                                Hospitalización)</button>\r\n                                <button type=\"button\" class=\"btn btn-danger btn-block\" data-toggle=\"modal\"\r\n                                data-target=\".modal-confirmacion-eliminar\">Cancelar Hospitalizacion</button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div *ngIf=\"estadoHospitalizacion == 3\">\r\n                <hr>\r\n                <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                        <h3 class=\"text-center font-weight-bold mt-4\">Acciones</h3>\r\n                        <div class=\"form-group\">\r\n                            <button type=\"button\" class=\"btn btn-danger btn-block mt-4\" data-toggle=\"modal\"\r\n                                data-target=\".modal-confirmacion-restaurar\">Restaurar (Dejar Activa)</button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- MODAL CONFIRMAR -->\r\n<div class=\"modal fade modal-confirmacion-finalizar\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Confirmar</h5>\r\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"row my-4\">\r\n                    <div class=\"col-md-12 text-center\">\r\n                        <p class=\"h4\">¿Esta Seguro?</p>\r\n                        <p class=\"h5\">Confirme solo si ya se termino de atender a la mascota</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row my-4\">\r\n                    <div class=\"col-md-6 text-center\">\r\n                        <div class=\"btn btn-success btn-block btn-rounded\" data-dismiss=\"modal\"\r\n                            (click)=\"finalizarHospitalizacion()\">\r\n                            Sí, dar por finalizada\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-md-6 text-center\">\r\n                        <div class=\"btn btn-danger btn-block\" data-dismiss=\"modal\">\r\n                            No, no finalizar\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- MODAL CONFIRMAR ELIMINAR -->\r\n<div class=\"modal fade modal-confirmacion-eliminar\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Confirmar</h5>\r\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"row my-4\">\r\n                    <div class=\"col-md-12 text-center\">\r\n                        <p class=\"h4\">¿Esta Seguro?</p>\r\n                        <p class=\"h5\">Confirme solo si desea cancelar la hospitalizacion</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row my-4\">\r\n                    <div class=\"col-md-6 text-center\">\r\n                        <div class=\"btn btn-success btn-block btn-rounded\" data-dismiss=\"modal\"\r\n                            (click)=\"deleteHospitalizacion('cancelar')\">\r\n                            Sí, dar por cancelada\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-md-6 text-center\">\r\n                        <div class=\"btn btn-danger btn-block\" data-dismiss=\"modal\">\r\n                            No, no cancelar\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- MODAL CONFIRMAR Restaurar -->\r\n<div class=\"modal fade modal-confirmacion-restaurar\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Confirmar</h5>\r\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"row my-4\">\r\n                    <div class=\"col-md-12 text-center\">\r\n                        <p class=\"h4\">¿Esta Seguro?</p>\r\n                        <p class=\"h5\">Confirme solo si desea restaurar la hospitalizacion</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row my-4\">\r\n                    <div class=\"col-md-6 text-center\">\r\n                        <div class=\"btn btn-success btn-block btn-rounded\" data-dismiss=\"modal\"\r\n                            (click)=\"deleteHospitalizacion('restaurar')\">\r\n                            Sí, deseo restaurarla\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-md-6 text-center\">\r\n                        <div class=\"btn btn-danger btn-block\" data-dismiss=\"modal\">\r\n                            No, no restaurar\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"container-fluid mt-4 mb-4\">\r\n    <div class=\"card formularios\">\r\n        <div class=\"container-fluid mt- mb-4\">\r\n            <h3 class=\"text-center font-weight-bold mt-4\">Estado Hospitalizacion</h3>\r\n            <div class=\"card-body card-datos\">\r\n                <h4 class=\"font-weight-bold\">Datos Paciente</h4>\r\n                <div class=\"row\">\r\n                    <div class=\"col-6\">\r\n                        <p><b>Nombre:</b> {{datosHospitalizacion?.nombreMascota}}</p>\r\n                        <p><b>Especie:</b> {{datosHospitalizacion?.tipoMascota}}</p>\r\n                        <p><b>Edad:</b> {{datosHospitalizacion?.fecha_nacimiento}}</p>\r\n                    </div>\r\n                    <div class=\"col-6\">\r\n                        <p><b>Dueño:</b> {{datosHospitalizacion?.nombreDuenio}}</p>\r\n                        <p><b>Rut:</b> {{datosHospitalizacion?.rut}}</p>\r\n                        <p><b>Contacto Dueño:</b> {{datosHospitalizacion?.numero}}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <hr>\r\n            <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                    <div class=\"card-body card-datos\">\r\n                        <h4 class=\"font-weight-bold\">Motivo Hospitalizacion</h4>\r\n                        <p>{{datosHospitalizacion?.motivo}}</p>\r\n                        <p><b>Derivado Por: </b>{{datosHospitalizacion?.nombreVetHosp}}</p>\r\n                        <p><b>Hospitalizado El: </b>{{datosHospitalizacion?.created_at}}</p>\r\n                        <p><b>Camilla: </b>{{datosHospitalizacion?.numero_camilla}}</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <hr>\r\n            <div *ngIf=\"estadoHospitalizacion == 1\">\r\n                <h3 class=\"text-center font-weight-bold mt-4\">Formulario Seguimiento de la Mascota</h3>\r\n                <form #formSeguimiento=\"ngForm\" (ngSubmit)=\"setSeguimiento(formSeguimiento)\"\r\n                    enctype=\"multipart/form-data\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-9\">\r\n                            <div class=\"form-group\">\r\n                                <textarea name=\"obervaciones\" [(ngModel)]=\"descripcion\" cols=\"30\" rows=\"5\"\r\n                                    class=\"form-control mt-4\" placeholder=\"Ingrese el estado de la mascota\"\r\n                                    style=\"resize: none;\"></textarea>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-md-3 my-auto\">\r\n                            <div class=\"form-group\">\r\n                                <label *ngIf=\"nombreArchivo != ''\">Archivo cargado: {{nombreArchivo}}</label>\r\n                                <label *ngIf=\"nombreArchivo == ''\"></label>\r\n                                <button type=\"button\" class=\"btn btn-primary btn-square btn-block\"\r\n                                    (click)=\"fileClick()\">Adjuntar un\r\n                                    documento</button>\r\n                                <input id=\"file-test\" type=\"file\" (change)=\"updateFile($event)\" hidden>\r\n                            </div>\r\n                            <div class=\"custom-control custom-checkbox mb-3\">\r\n                                <input type=\"checkbox\" class=\"custom-control-input\" id=\"customControlValidation1\" name=\"checkBoxH\" [(ngModel)]=\"esterilizacionCheckBox\"\r\n                                    required>\r\n                                <label class=\"custom-control-label\" for=\"customControlValidation1\">Marque la casilla solo si\r\n                                    la mascota fue esterilizada para actualizar automaticamente los datos</label>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-12\">\r\n                            <div class=\"form-group\">\r\n                                <button type=\"submit\" class=\"btn btn-success btn-block\">Ingresar Seguiminento</button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n\r\n                <hr>\r\n            </div>\r\n                <h3 class=\"text-center font-weight-bold mt-4\">Historial Seguimiento</h3>\r\n                <div class=\"table-responsive\">\r\n                    <table class=\"table table-sm\">\r\n                        <thead>\r\n                            <tr class=\"text-center\">\r\n                                <th style=\"width: 15%;\">Fecha</th>\r\n                                <th style=\"width: 20%;\">Revisado Por</th>\r\n                                <th style=\"width: 55%;\">Descripcion</th>\r\n                                <th style=\"width: 10%;\">Archivo Adjunto</th>\r\n                            </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                            <tr *ngFor=\"let itemSeguimiento of datosSeguimiento\">\r\n                                <td class=\"text-center\">{{itemSeguimiento?.created_at}}</td>\r\n                                <td class=\"text-center\">{{itemSeguimiento?.nombreVeterinario}}</td>\r\n                                <td>{{itemSeguimiento?.descripcion}}</td>\r\n                                <td class=\"text-center\"> <a\r\n                                        href=\"../{{itemSeguimiento?.ruta_archivo}}\" target=\"_blank\"\r\n                                        *ngIf=\"itemSeguimiento?.ruta_archivo != 'undefined'\"><img\r\n                                            src=\"https://img.icons8.com/pastel-glyph/2x/file.png\"\r\n                                            style=\"width: 2rem;\"></a>\r\n                                </td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                </div>\r\n                <div *ngIf=\"estadoHospitalizacion == 1\">\r\n                <hr>\r\n                <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                        <h3 class=\"text-center font-weight-bold mt-4\">Acciones</h3>\r\n                        <div class=\"form-group\">\r\n                            <button type=\"button\" class=\"btn btn-success btn-block mt-4\" data-toggle=\"modal\"\r\n                                data-target=\".modal-confirmacion-finalizar\">Dar de Alta (Dar Por Finalizada la\r\n                                Hospitalización)</button>\r\n                                <button type=\"button\" class=\"btn btn-danger btn-block\" data-toggle=\"modal\"\r\n                                data-target=\".modal-confirmacion-eliminar\">Cancelar Hospitalizacion</button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div *ngIf=\"estadoHospitalizacion == 3\">\r\n                <hr>\r\n                <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                        <h3 class=\"text-center font-weight-bold mt-4\">Acciones</h3>\r\n                        <div class=\"form-group\">\r\n                            <button type=\"button\" class=\"btn btn-danger btn-block mt-4\" data-toggle=\"modal\"\r\n                                data-target=\".modal-confirmacion-restaurar\">Restaurar (Dejar Activa)</button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- MODAL CONFIRMAR -->\r\n<div class=\"modal fade modal-confirmacion-finalizar\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Confirmar</h5>\r\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"row my-4\">\r\n                    <div class=\"col-md-12 text-center\">\r\n                        <p class=\"h4\">¿Esta Seguro?</p>\r\n                        <p class=\"h5\">Confirme solo si ya se termino de atender a la mascota</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row my-4\">\r\n                    <div class=\"col-md-6 text-center\">\r\n                        <div class=\"btn btn-success btn-block btn-rounded\" data-dismiss=\"modal\"\r\n                            (click)=\"finalizarHospitalizacion()\">\r\n                            Sí, dar por finalizada\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-md-6 text-center\">\r\n                        <div class=\"btn btn-danger btn-block\" data-dismiss=\"modal\">\r\n                            No, no finalizar\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- MODAL CONFIRMAR ELIMINAR -->\r\n<div class=\"modal fade modal-confirmacion-eliminar\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Confirmar</h5>\r\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"row my-4\">\r\n                    <div class=\"col-md-12 text-center\">\r\n                        <p class=\"h4\">¿Esta Seguro?</p>\r\n                        <p class=\"h5\">Confirme solo si desea cancelar la hospitalizacion</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row my-4\">\r\n                    <div class=\"col-md-6 text-center\">\r\n                        <div class=\"btn btn-success btn-block btn-rounded\" data-dismiss=\"modal\"\r\n                            (click)=\"deleteHospitalizacion('cancelar')\">\r\n                            Sí, dar por cancelada\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-md-6 text-center\">\r\n                        <div class=\"btn btn-danger btn-block\" data-dismiss=\"modal\">\r\n                            No, no cancelar\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- MODAL CONFIRMAR Restaurar -->\r\n<div class=\"modal fade modal-confirmacion-restaurar\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h5 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Confirmar</h5>\r\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"row my-4\">\r\n                    <div class=\"col-md-12 text-center\">\r\n                        <p class=\"h4\">¿Esta Seguro?</p>\r\n                        <p class=\"h5\">Confirme solo si desea restaurar la hospitalizacion</p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row my-4\">\r\n                    <div class=\"col-md-6 text-center\">\r\n                        <div class=\"btn btn-success btn-block btn-rounded\" data-dismiss=\"modal\"\r\n                            (click)=\"deleteHospitalizacion('restaurar')\">\r\n                            Sí, deseo restaurarla\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-md-6 text-center\">\r\n                        <div class=\"btn btn-danger btn-block\" data-dismiss=\"modal\">\r\n                            No, no restaurar\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -580,7 +580,7 @@ module.exports = "<div class=\"container-fluid\">\r\n    <div class=\"card formu
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid mt-4 mb-4\">\r\n    <div class=\"card formularios\">\r\n        <div class=\"container-fluid mb-4\">\r\n            <div class=\"row mt-4\">\r\n                <div class=\"col-md-6\">\r\n                    <button class=\"btn btn-primary btn-block\" data-toggle=\"modal\"\r\n                        data-target=\".modal-crear-nuevo-usuario\">Crear Nuevo Usuario (Veterinario, Secretaria,\r\n                        Administrador)</button>\r\n                </div>\r\n                <div class=\"col-md-6\">\r\n                    <button class=\"btn btn-primary btn-block\" data-toggle=\"modal\" data-target=\".modal-bloquear-usuarios\"\r\n                        (click)=\"getUsuariosSistema()\">Desactivar Usuario (Veterinario, Secretaria,\r\n                        Administrador) del Sistema</button>\r\n                </div>\r\n            </div>\r\n            <div class=\"row mt-4\">\r\n                <div class=\"col-md-6\">\r\n                    <button class=\"btn btn-secondary btn-block\" data-toggle=\"modal\"\r\n                        data-target=\".modal-cambio-logo\">Subir Logo de Veterinaria</button>\r\n                </div>\r\n                <div class=\"col-md-6\">\r\n                    <button class=\"btn btn-secondary btn-block\" data-toggle=\"modal\"\r\n                    data-target=\".modal-cambio-nombre-veterinaria\">Cambiar Datos Veterinaria</button>\r\n                </div>\r\n            </div>\r\n            <div class=\"row mt-4\">\r\n                <div class=\"col-md-6\">\r\n                    <button class=\"btn btn-success btn-block\">Bloquear Acceso Al Sistema Para un Cliente</button>\r\n                </div>\r\n                <div class=\"col-md-6\">\r\n                    <button class=\"btn btn-success btn-block\">Placeholder Text</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- Modal Cambiar Contraseña -->\r\n<div class=\"modal fade modal-crear-nuevo-usuario\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"myExtraLargeModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-xl modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h3 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Crear Nuevo Usuario\r\n                </h3>\r\n                <button id=\"closeButton\" type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"container\">\r\n                    <div class=\"mt-4\">\r\n                        <p>Se creara un usuario para que pueda interactuar de manera directa con el sistema, su\r\n                            contraseña por defecto correspondera a los primeros 4 digitos de su rut</p>\r\n                        <form #nuevoUsuarioForm=\"ngForm\" (ngSubmit)=\"setNuevoUsuario(nuevoUsuarioForm.value)\">\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-6\">\r\n                                    <label for=\"inputNombre\">Nombre del Usuario</label>\r\n                                    <input type=\"text\" class=\"form-control\" name=\"nombreUsuario\" autocomplete=\"off\"\r\n                                        placeholder=\"Nombre Completo\" ngModel required>\r\n                                </div>\r\n                                <div class=\"form-group col-6\">\r\n                                    <label for=\"inputRut\">Rut del Usuario</label>\r\n                                    <input type=\"text\" class=\"form-control\" name=\"rutUsuario\" autocomplete=\"off\"\r\n                                        placeholder=\"rut\" ngModel required>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-12\">\r\n                                    <label for=\"inputCorreo\">Numero Contacto</label>\r\n                                    <input type=\"text\" class=\"form-control\" name=\"numeroUsuario\" autocomplete=\"off\"\r\n                                        placeholder=\"Puede ingresar uno o muchos\" ngModel required>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-12\">\r\n                                    <label for=\"inputNombre\">Dirección</label>\r\n                                    <input type=\"text\" class=\"form-control\" name=\"direccionUsuario\" autocomplete=\"off\"\r\n                                        placeholder=\"Residencia del Usuario\" ngModel required>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-12\">\r\n                                    <label for=\"inputRut\">Correo</label>\r\n                                    <input type=\"email\" class=\"form-control\" name=\"correoUsuario\" autocomplete=\"off\"\r\n                                        placeholder=\"Correo Electronico del Usuario\" ngModel required>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-12\">\r\n                                    <label for=\"inputCorreo\">Tipo Usuario</label>\r\n                                    <select class=\"form-control\" name=\"tipoUsuario\" ngModel required>\r\n                                        <option value=\"\">--Seleccione--</option>\r\n                                        <option value=\"1\">Veterinario</option>\r\n                                        <option value=\"2\">Recepcionista</option>\r\n                                        <option value=\"3\">Administrador</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <button type=\"submit\" class=\"btn btn-success btn-block\">Registrar Usuario</button>\r\n                        </form>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\">Cancelar</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- Modal Bloquear Usuarios -->\r\n<div class=\"modal fade modal-bloquear-usuarios\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"myExtraLargeModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-xl modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h3 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Crear Nuevo Usuario\r\n                </h3>\r\n                <button id=\"closeButton\" type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"container\">\r\n                    <div class=\"mt-4\">\r\n                        <div class=\"alert alert-warning\" role=\"alert\">\r\n                            Si desea bloquear a un usuario del sistema este no podra acceder más al sistema, sin embargo\r\n                            los registros historicos realizados por ese usuario seguiran intactos. Si desea desbloquear\r\n                            a un usuario puede hacerlo sin problemas.\r\n                        </div>\r\n                        <div class=\"table-responsive\">\r\n                            <table class=\"table table-sm table-hover\">\r\n                                <thead class=\"text-center\">\r\n                                    <tr>\r\n                                        <th scope=\"col\">Nombre Usuario</th>\r\n                                        <th scope=\"col\">Rut Usuario</th>\r\n                                        <th scope=\"col\">Fecha Incorporación</th>\r\n                                        <th scope=\"col\">Acciones</th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody class=\"text-center\">\r\n                                    <tr *ngFor=\"let itemUsuarios of datosUsuarios\">\r\n                                        <td>{{itemUsuarios?.name}}</td>\r\n                                        <td>{{itemUsuarios?.rut}}</td>\r\n                                        <td>{{itemUsuarios?.created_at}}</td>\r\n                                        <td>\r\n                                            <button *ngIf=\"!itemUsuarios.deleted_at\" class=\"btn btn-primary\"\r\n                                                (click)=\"deleteUsuario(true, itemUsuarios?.id)\">Bloquear del\r\n                                                Sistema</button>\r\n                                            <button *ngIf=\"itemUsuarios.deleted_at\" class=\"btn btn-danger\"\r\n                                                (click)=\"deleteUsuario(false, itemUsuarios?.id)\">Desbloquear del\r\n                                                Sistema</button>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\">Cancelar</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- Modal Cambio Logo Empresa-->\r\n<div class=\"modal fade modal-cambio-logo\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"myExtraLargeModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-md modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h3 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Subir Logo de\r\n                    Empresa\r\n                </h3>\r\n                <button id=\"closeButton\" type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"container\">\r\n                    <div class=\"alert alert-warning\" role=\"alert\">\r\n                        El logo que subira sera visible en el sistema administrativo tanto como en los documentos\r\n                        emitidos es decir Ficha Clinica, Recetas entre otros. Puede cambiar la imagen tantas veces como\r\n                        quiera.\r\n                    </div>\r\n                    <form #formLogo=\"ngForm\" (ngSubmit)=\"setLogotest(formLogo)\" enctype=\"multipart/form-data\">\r\n                        <div class=\"row\">\r\n                            <div class=\"form-group col-12\">\r\n                                <label for=\"archivoSubir\">Seleccione la imagen a subir</label>\r\n                                <button type=\"button\" class=\"btn btn-primary btn-block form-control\" (click)=\"fileClick()\">Presione\r\n                                    para seleccionar imagen</button>\r\n                                {{nombreArchivo}}\r\n                                <input id=\"testArchivoLogo\" type=\"file\" name=\"ArchivoSubir\"\r\n                                    (change)=\"updateFile($event)\" hidden>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"form-group col-12\">\r\n                                <label for=\"archivoSubir\">Logo Actual</label>\r\n                                <br>\r\n                                <img src=\"assets/neofox-nav.png\" style=\"width: 10rem;\">\r\n                            </div>\r\n                        </div>\r\n                        <button type=\"submit\" class=\"btn btn-success btn-block\">Subir</button>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\">Cancelar</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- Modal Cambio Nombre Empresa-->\r\n<div class=\"modal fade modal-cambio-nombre-veterinaria\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"myExtraLargeModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-xl modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h3 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Cambiar Nombre/Dirección de\r\n                    Veterinaria\r\n                </h3>\r\n                <button id=\"closeButton\" type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"container\">\r\n                    <div class=\"alert alert-warning\" role=\"alert\">\r\n                        El nombre y dirección que asignara sera visible en el sistema administrativo tanto como en los documentos\r\n                        emitidos es decir Ficha Clinica, Recetas entre otros. Puede cambiar de dirección tantas veces como\r\n                        quiera.\r\n                    </div>\r\n                    <form #formNombreEmpresa=\"ngForm\" (ngSubmit)=\"setNombreDireccion(formNombreEmpresa.value)\">\r\n                        <div class=\"row\">\r\n                            <div class=\"form-group col-6\">\r\n                                <label for=\"inputNombreEmpresa\">Nombre Veterinaria</label>\r\n                                <input type=\"text\" class=\"form-control\" name=\"nombreEmpresaLogo\" autocomplete=\"off\" [(ngModel)]=\"nombreVeterinaria\" required>\r\n                            </div>\r\n                            <div class=\"form-group col-6\">\r\n                                <label for=\"inputRut\">Dirección Veterinaria</label>\r\n                                <input type=\"text\" class=\"form-control\" name=\"direccionVeterinaria\" autocomplete=\"off\" [(ngModel)]=\"direccionVeterinaria\" required>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"form-group col-12\">\r\n                                <label for=\"inputNombreEmpresa\">Numero Contacto</label>\r\n                                <input type=\"text\" class=\"form-control\" name=\"numeroVeterinaria\" autocomplete=\"off\" [(ngModel)]=\"numero\" required>\r\n                            </div>\r\n                        </div>\r\n                        <button type=\"submit\" class=\"btn btn-success btn-block\">Subir</button>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\">Cancelar</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"container-fluid mt-4 mb-4\">\r\n    <div class=\"card formularios\">\r\n        <div class=\"container-fluid mb-4\">\r\n            <div class=\"row mt-4\">\r\n                <div class=\"col-md-6\">\r\n                    <button class=\"btn btn-primary btn-block\" data-toggle=\"modal\"\r\n                        data-target=\".modal-crear-nuevo-usuario\">Crear Nuevo Usuario (Veterinario, Secretaria,\r\n                        Administrador)</button>\r\n                </div>\r\n                <div class=\"col-md-6\">\r\n                    <button class=\"btn btn-primary btn-block\" data-toggle=\"modal\" data-target=\".modal-bloquear-usuarios\"\r\n                        (click)=\"getUsuariosSistema()\">Desactivar Usuario (Veterinario, Secretaria,\r\n                        Administrador) del Sistema</button>\r\n                </div>\r\n            </div>\r\n            <div class=\"row mt-4\">\r\n                <div class=\"col-md-6\">\r\n                    <button class=\"btn btn-secondary btn-block\" data-toggle=\"modal\"\r\n                        data-target=\".modal-cambio-logo\">Subir Logo de Veterinaria</button>\r\n                </div>\r\n                <div class=\"col-md-6\">\r\n                    <button class=\"btn btn-secondary btn-block\" data-toggle=\"modal\"\r\n                    data-target=\".modal-cambio-nombre-veterinaria\">Cambiar Datos Veterinaria</button>\r\n                </div>\r\n            </div>\r\n            <!-- <div class=\"row mt-4\">\r\n                <div class=\"col-md-6\">\r\n                    <button class=\"btn btn-success btn-block\">Bloquear Acceso Al Sistema Para un Cliente</button>\r\n                </div>\r\n                <div class=\"col-md-6\">\r\n                    <button class=\"btn btn-success btn-block\">Placeholder Text</button>\r\n                </div>\r\n            </div> -->\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- Modal Cambiar Contraseña -->\r\n<div class=\"modal fade modal-crear-nuevo-usuario\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"myExtraLargeModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-xl modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h3 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Crear Nuevo Usuario\r\n                </h3>\r\n                <button id=\"closeButton\" type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"container\">\r\n                    <div class=\"mt-4\">\r\n                        <p>Se creara un usuario para que pueda interactuar de manera directa con el sistema, su\r\n                            contraseña por defecto correspondera a los primeros 4 digitos de su rut</p>\r\n                        <form #nuevoUsuarioForm=\"ngForm\" (ngSubmit)=\"setNuevoUsuario(nuevoUsuarioForm.value)\">\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-6\">\r\n                                    <label for=\"inputNombre\">Nombre del Usuario</label>\r\n                                    <input type=\"text\" class=\"form-control\" name=\"nombreUsuario\" autocomplete=\"off\"\r\n                                        placeholder=\"Nombre Completo\" ngModel required>\r\n                                </div>\r\n                                <div class=\"form-group col-6\">\r\n                                    <label for=\"inputRut\">Rut del Usuario</label>\r\n                                    <input type=\"text\" class=\"form-control\" name=\"rutUsuario\" autocomplete=\"off\"\r\n                                        placeholder=\"rut\" ngModel required>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-12\">\r\n                                    <label for=\"inputCorreo\">Numero Contacto</label>\r\n                                    <input type=\"text\" class=\"form-control\" name=\"numeroUsuario\" autocomplete=\"off\"\r\n                                        placeholder=\"Puede ingresar uno o muchos\" ngModel required>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-12\">\r\n                                    <label for=\"inputNombre\">Dirección</label>\r\n                                    <input type=\"text\" class=\"form-control\" name=\"direccionUsuario\" autocomplete=\"off\"\r\n                                        placeholder=\"Residencia del Usuario\" ngModel required>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-12\">\r\n                                    <label for=\"inputRut\">Correo</label>\r\n                                    <input type=\"email\" class=\"form-control\" name=\"correoUsuario\" autocomplete=\"off\"\r\n                                        placeholder=\"Correo Electronico del Usuario\" ngModel required>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"form-group col-12\">\r\n                                    <label for=\"inputCorreo\">Tipo Usuario</label>\r\n                                    <select class=\"form-control\" name=\"tipoUsuario\" ngModel required>\r\n                                        <option value=\"\">--Seleccione--</option>\r\n                                        <option value=\"1\">Veterinario</option>\r\n                                        <option value=\"2\">Recepcionista</option>\r\n                                        <option value=\"3\">Administrador</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <button type=\"submit\" class=\"btn btn-success btn-block\">Registrar Usuario</button>\r\n                        </form>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\">Cancelar</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- Modal Bloquear Usuarios -->\r\n<div class=\"modal fade modal-bloquear-usuarios\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"myExtraLargeModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-xl modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h3 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Crear Nuevo Usuario\r\n                </h3>\r\n                <button id=\"closeButton\" type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"container\">\r\n                    <div class=\"mt-4\">\r\n                        <div class=\"alert alert-warning\" role=\"alert\">\r\n                            Si desea bloquear a un usuario del sistema este no podra acceder más al sistema, sin embargo\r\n                            los registros historicos realizados por ese usuario seguiran intactos. Si desea desbloquear\r\n                            a un usuario puede hacerlo sin problemas.\r\n                        </div>\r\n                        <div class=\"table-responsive\">\r\n                            <table class=\"table table-sm table-hover\">\r\n                                <thead class=\"text-center\">\r\n                                    <tr>\r\n                                        <th scope=\"col\">Nombre Usuario</th>\r\n                                        <th scope=\"col\">Rut Usuario</th>\r\n                                        <th scope=\"col\">Fecha Incorporación</th>\r\n                                        <th scope=\"col\">Acciones</th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody class=\"text-center\">\r\n                                    <tr *ngFor=\"let itemUsuarios of datosUsuarios\">\r\n                                        <td>{{itemUsuarios?.name}}</td>\r\n                                        <td>{{itemUsuarios?.rut}}</td>\r\n                                        <td>{{itemUsuarios?.created_at}}</td>\r\n                                        <td>\r\n                                            <button *ngIf=\"!itemUsuarios.deleted_at\" class=\"btn btn-primary\"\r\n                                                (click)=\"deleteUsuario(true, itemUsuarios?.id)\">Bloquear del\r\n                                                Sistema</button>\r\n                                            <button *ngIf=\"itemUsuarios.deleted_at\" class=\"btn btn-danger\"\r\n                                                (click)=\"deleteUsuario(false, itemUsuarios?.id)\">Desbloquear del\r\n                                                Sistema</button>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\">Cancelar</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- Modal Cambio Logo Empresa-->\r\n<div class=\"modal fade modal-cambio-logo\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"myExtraLargeModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-md modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h3 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Subir Logo de\r\n                    Empresa\r\n                </h3>\r\n                <button id=\"closeButton\" type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"container\">\r\n                    <div class=\"alert alert-warning\" role=\"alert\">\r\n                        El logo que subira sera visible en el sistema administrativo tanto como en los documentos\r\n                        emitidos es decir Ficha Clinica, Recetas entre otros. Puede cambiar la imagen tantas veces como\r\n                        quiera.\r\n                    </div>\r\n                    <form #formLogo=\"ngForm\" (ngSubmit)=\"setLogotest(formLogo)\" enctype=\"multipart/form-data\">\r\n                        <div class=\"row\">\r\n                            <div class=\"form-group col-12\">\r\n                                <label for=\"archivoSubir\">Seleccione la imagen a subir</label>\r\n                                <button type=\"button\" class=\"btn btn-primary btn-block form-control\" (click)=\"fileClick()\">Presione\r\n                                    para seleccionar imagen</button>\r\n                                {{nombreArchivo}}\r\n                                <input id=\"testArchivoLogo\" type=\"file\" name=\"ArchivoSubir\"\r\n                                    (change)=\"updateFile($event)\" hidden>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"form-group col-12\">\r\n                                <label for=\"archivoSubir\">Logo Actual</label>\r\n                                <br>\r\n                                <img src=\"../{{rutaLogo}}\" style=\"width: 10rem;\">\r\n                            </div>\r\n                        </div>\r\n                        <button type=\"submit\" class=\"btn btn-success btn-block\">Subir</button>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\">Cancelar</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- Modal Cambio Nombre Empresa-->\r\n<div class=\"modal fade modal-cambio-nombre-veterinaria\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\"\r\n    aria-labelledby=\"myExtraLargeModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-xl modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header\">\r\n                <h3 class=\"modal-title w-100 text-center font-weight-bold\" id=\"staticBackdropLabel\">Cambiar Nombre/Dirección de\r\n                    Veterinaria\r\n                </h3>\r\n                <button id=\"closeButton\" type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n                    <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"container\">\r\n                    <div class=\"alert alert-warning\" role=\"alert\">\r\n                        El nombre y dirección que asignara sera visible en el sistema administrativo tanto como en los documentos\r\n                        emitidos es decir Ficha Clinica, Recetas entre otros. Puede cambiar de dirección tantas veces como\r\n                        quiera.\r\n                    </div>\r\n                    <form #formNombreEmpresa=\"ngForm\" (ngSubmit)=\"setNombreDireccion(formNombreEmpresa.value)\">\r\n                        <div class=\"row\">\r\n                            <div class=\"form-group col-6\">\r\n                                <label for=\"inputNombreEmpresa\">Nombre Veterinaria</label>\r\n                                <input type=\"text\" class=\"form-control\" name=\"nombreEmpresaLogo\" autocomplete=\"off\" [(ngModel)]=\"nombreVeterinaria\" required>\r\n                            </div>\r\n                            <div class=\"form-group col-6\">\r\n                                <label for=\"inputRut\">Dirección Veterinaria</label>\r\n                                <input type=\"text\" class=\"form-control\" name=\"direccionVeterinaria\" autocomplete=\"off\" [(ngModel)]=\"direccionVeterinaria\" required>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"form-group col-12\">\r\n                                <label for=\"inputNombreEmpresa\">Numero Contacto</label>\r\n                                <input type=\"text\" class=\"form-control\" name=\"numeroVeterinaria\" autocomplete=\"off\" [(ngModel)]=\"numero\" required>\r\n                            </div>\r\n                        </div>\r\n                        <button type=\"submit\" class=\"btn btn-success btn-block\">Subir</button>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\">Cancelar</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -668,7 +668,7 @@ module.exports = "<div class=\"container-fluid\">\r\n\r\n    <div class=\"card f
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\r\n\r\n    <div class=\"card formularios mt-4 mb-4\">\r\n        <div class=\"card-body\">\r\n            <div class=\"mt-4\">\r\n                <h3 class=\"text-center font-weight-bold\">Registro de Mascota</h3>\r\n            </div>\r\n\r\n            <div class=\"alert alert-danger mt-4\" role=\"alert\">\r\n                Recuerde que antes de registrar a una mascota, debe de registrar al Cliente en el sistema. Si aún no lo\r\n                registra haga <a routerLink=\"/registroCliente\">click aquí</a>\r\n            </div>\r\n\r\n            <div class=\"mt-4\">\r\n                <form #getClienteRutFormRm=\"ngForm\" (ngSubmit)=\"getClientePorRutRm(getClienteRutFormRm)\" autocomplete=\"off\">\r\n                    <div class=\"form-group\">\r\n                        <div class=\"input-group mb-3\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"Ingrese el rut del cliente\"\r\n                                aria-describedby=\"button-addon2\" name=\"rutRm\" [(ngModel)]=\"formRutRm\" required>\r\n                            <div class=\"input-group-append\">\r\n                                <button class=\"btn btn-outline-dark\" type=\"submit\" id=\"button-addon2\" [disabled]=\"getClienteRutFormRm.invalid\">Buscar\r\n                                    Cliente</button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n                <form #mascotaForm=\"ngForm\" (ngSubmit)=\"setMascota(mascotaForm)\" autocomplete=\"off\">\r\n                    <div class=\"form-row\">\r\n                        <div class=\"form-group col-md-6\">\r\n                            <label for=\"nombreCliente\">Nombre Cliente *</label>\r\n                            <input type=\"text\" class=\"form-control\" name=\"nombreCliente\" [(ngModel)]=\"datosCliente.nombre\" required disabled>\r\n                        </div>\r\n                        <div class=\"form-group col-md-6\">\r\n                            <label for=\"rutCliente\">Rut Cliente *</label>\r\n                            <input type=\"text\" class=\"form-control\" name=\"rutCliente\" [(ngModel)]=\"datosCliente.rut\" required disabled>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <hr>\r\n\r\n                    <div class=\"form-row\">\r\n                        <div class=\"form-group col-md-6\">\r\n                            <label for=\"nombreMascota\">Nombre de la Mascota *</label>\r\n                            <input type=\"text\" class=\"form-control\" name=\"nombreMascota\" placeholder=\"Nombre Completo\" [(ngModel)]=\"formMascota.nombre_mascota\" required>\r\n                        </div>\r\n                        <div class=\"form-group col-md-6\">\r\n                            <label for=\"fechaNacimiento\">Fecha de Nacimiento *</label>\r\n                            <input type=\"date\" class=\"form-control\" name=\"fechaNacimiento\" [(ngModel)]=\"formMascota.fecha_nacimiento\" required>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class=\"form-row\">\r\n                        <div class=\"form-group col-md-4\">\r\n                            <label for=\"esterilizado-select\">¿Esterilizado? *</label>\r\n                            <select class=\"form-control\" name=\"esterilizado-select\" [(ngModel)]=\"formMascota.esterilizado\" required>\r\n                                <option value=\"\">--Seleccione--</option>\r\n                                <option value=\"1\">Sí</option>\r\n                                <option value=\"2\">No</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"form-group col-md-4\">\r\n                            <label for=\"chip-select\">¿Tiene Chip? *</label>\r\n                            <select #test class=\"form-control\" name=\"chip-select\" [(ngModel)]=\"formMascota.chip\" required>\r\n                                <option value=\"\">--Seleccione--</option>\r\n                                <option value=\"1\">Sí</option>\r\n                                <option value=\"2\">No</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"form-group col-md-4\">\r\n                            <label for=\"sexo\">Genero *</label>\r\n                            <select class=\"form-control\" name=\"sexo-select\" [(ngModel)]=\"formMascota.genero\" required>\r\n                                <option value=\"\">--Seleccione--</option>\r\n                                <option value=\"1\">Macho</option>\r\n                                <option value=\"2\">Hembra</option>\r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class=\"form-row\" *ngIf=\"test.value == 1\">\r\n                        <div class=\"form-group col-md-12\">\r\n                            <label for=\"numero_chip\">Numero de Chip</label>\r\n                            <input type=\"text\" class=\"form-control\" id=\"numero_chip\" name=\"numero_chip\" [(ngModel)]=\"formMascota.numero_chip\" required>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class=\"form-row\">\r\n                        <div class=\"form-group col-md-4\">\r\n                            <label for=\"tipo-select\">Tipo de Mascota *</label>\r\n                            <select class=\"form-control\" name=\"tipo-select\" [(ngModel)]=\"formMascota.tipo\" required>\r\n                                <option value=\"\">--Seleccione--</option>\r\n                                <option value=\"1\">Perro</option>\r\n                                <option value=\"2\">Gato</option>\r\n                                <option value=\"2\">Otro</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"form-group col-md-4\">\r\n                            <label for=\"raza\">Raza de la Mascota</label>\r\n                            <input type=\"text\" class=\"form-control\" id=\"raza\" placeholder=\"Gato Siames, Pastor Aleman, etc...\" name=\"raza\" [(ngModel)]=\"formMascota.raza\" required>\r\n                        </div>\r\n                        <div class=\"form-group col-md-4\">\r\n                            <label for=\"color\">Color de la Mascota</label>\r\n                            <input type=\"text\" class=\"form-control\" id=\"color\"\r\n                                placeholder=\"Gris, Negro con Manchas, etc...\" name=\"color\" [(ngModel)]=\"formMascota.color\" required>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <p>Los campos marcados con * son obligatorios</p>\r\n\r\n                    <button type=\"submit\" class=\"btn btn-block btn-success\" [disabled]=\"mascotaForm.invalid\">Ingresar</button>\r\n                </form>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"container-fluid\">\r\n\r\n    <div class=\"card formularios mt-4 mb-4\">\r\n        <div class=\"card-body\">\r\n            <div class=\"mt-4\">\r\n                <h3 class=\"text-center font-weight-bold\">Registro de Mascota</h3>\r\n            </div>\r\n\r\n            <div class=\"alert alert-danger mt-4\" role=\"alert\">\r\n                Recuerde que antes de registrar a una mascota, debe de registrar al Cliente en el sistema. Si aún no lo\r\n                registra haga <a routerLink=\"/registroCliente\">click aquí</a>\r\n            </div>\r\n\r\n            <div class=\"mt-4\">\r\n                <form #getClienteRutFormRm=\"ngForm\" (ngSubmit)=\"getClientePorRutRm(getClienteRutFormRm)\" autocomplete=\"off\">\r\n                    <div class=\"form-group\">\r\n                        <div class=\"input-group mb-3\">\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"Ingrese el rut del cliente\"\r\n                                aria-describedby=\"button-addon2\" name=\"rutRm\" [(ngModel)]=\"formRutRm\" #holaTest (click)=\"checkRut(holaTest.value)\" required>\r\n                            <div class=\"input-group-append\">\r\n                                <button class=\"btn btn-outline-dark\" type=\"submit\" id=\"button-addon2\" [disabled]=\"getClienteRutFormRm.invalid\">Buscar\r\n                                    Cliente</button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n                <form #mascotaForm=\"ngForm\" (ngSubmit)=\"setMascota(mascotaForm)\" autocomplete=\"off\">\r\n                    <div class=\"form-row\">\r\n                        <div class=\"form-group col-md-6\">\r\n                            <label for=\"nombreCliente\">Nombre Cliente *</label>\r\n                            <input type=\"text\" class=\"form-control\" name=\"nombreCliente\" [(ngModel)]=\"datosCliente.nombre\" required disabled>\r\n                        </div>\r\n                        <div class=\"form-group col-md-6\">\r\n                            <label for=\"rutCliente\">Rut Cliente *</label>\r\n                            <input type=\"text\" class=\"form-control\" name=\"rutCliente\" [(ngModel)]=\"datosCliente.rut\" required disabled>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <hr>\r\n\r\n                    <div class=\"form-row\">\r\n                        <div class=\"form-group col-md-6\">\r\n                            <label for=\"nombreMascota\">Nombre de la Mascota *</label>\r\n                            <input type=\"text\" class=\"form-control\" name=\"nombreMascota\" placeholder=\"Nombre Completo\" [(ngModel)]=\"formMascota.nombre_mascota\" required>\r\n                        </div>\r\n                        <div class=\"form-group col-md-6\">\r\n                            <label for=\"fechaNacimiento\">Fecha de Nacimiento *</label>\r\n                            <input type=\"date\" class=\"form-control\" name=\"fechaNacimiento\" [(ngModel)]=\"formMascota.fecha_nacimiento\" required>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class=\"form-row\">\r\n                        <div class=\"form-group col-md-4\">\r\n                            <label for=\"esterilizado-select\">¿Esterilizado? *</label>\r\n                            <select class=\"form-control\" name=\"esterilizado-select\" [(ngModel)]=\"formMascota.esterilizado\" required>\r\n                                <option value=\"\">--Seleccione--</option>\r\n                                <option value=\"1\">Sí</option>\r\n                                <option value=\"2\">No</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"form-group col-md-4\">\r\n                            <label for=\"chip-select\">¿Tiene Chip? *</label>\r\n                            <select #test class=\"form-control\" name=\"chip-select\" [(ngModel)]=\"formMascota.chip\" required>\r\n                                <option value=\"\">--Seleccione--</option>\r\n                                <option value=\"1\">Sí</option>\r\n                                <option value=\"2\">No</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"form-group col-md-4\">\r\n                            <label for=\"sexo\">Genero *</label>\r\n                            <select class=\"form-control\" name=\"sexo-select\" [(ngModel)]=\"formMascota.genero\" required>\r\n                                <option value=\"\">--Seleccione--</option>\r\n                                <option value=\"1\">Macho</option>\r\n                                <option value=\"2\">Hembra</option>\r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class=\"form-row\" *ngIf=\"test.value == 1\">\r\n                        <div class=\"form-group col-md-12\">\r\n                            <label for=\"numero_chip\">Numero de Chip</label>\r\n                            <input type=\"text\" class=\"form-control\" id=\"numero_chip\" name=\"numero_chip\" [(ngModel)]=\"formMascota.numero_chip\" required>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class=\"form-row\">\r\n                        <div class=\"form-group col-md-4\">\r\n                            <label for=\"tipo-select\">Tipo de Mascota *</label>\r\n                            <select class=\"form-control\" name=\"tipo-select\" [(ngModel)]=\"formMascota.tipo\" required>\r\n                                <option value=\"\">--Seleccione--</option>\r\n                                <option value=\"1\">Perro</option>\r\n                                <option value=\"2\">Gato</option>\r\n                                <option value=\"2\">Otro</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"form-group col-md-4\">\r\n                            <label for=\"raza\">Raza de la Mascota</label>\r\n                            <input type=\"text\" class=\"form-control\" id=\"raza\" placeholder=\"Gato Siames, Pastor Aleman, etc...\" name=\"raza\" [(ngModel)]=\"formMascota.raza\" required>\r\n                        </div>\r\n                        <div class=\"form-group col-md-4\">\r\n                            <label for=\"color\">Color de la Mascota</label>\r\n                            <input type=\"text\" class=\"form-control\" id=\"color\"\r\n                                placeholder=\"Gris, Negro con Manchas, etc...\" name=\"color\" [(ngModel)]=\"formMascota.color\" required>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <p>Los campos marcados con * son obligatorios</p>\r\n\r\n                    <button type=\"submit\" class=\"btn btn-block btn-success\" [disabled]=\"mascotaForm.invalid\">Ingresar</button>\r\n                </form>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -1111,13 +1111,15 @@ let NuevaVacunaComponent = class NuevaVacunaComponent {
                 this.getVacunas(this.idTemporal);
             }
             else {
-                this._snotify.error(response.mensaje, {
-                    timeout: 5000,
-                    showProgressBar: true,
-                    closeOnClick: false,
-                    pauseOnHover: true,
-                    position: 'rightTop'
-                });
+                for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+                    this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+                        timeout: 5000,
+                        showProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        position: 'rightTop'
+                    });
+                }
             }
         }, error => {
             console.log(error);
@@ -1125,7 +1127,6 @@ let NuevaVacunaComponent = class NuevaVacunaComponent {
     }
     getVacunas(id) {
         this.idTemporal = id;
-        //this.limpiarTablaVacunas();
         this._vacunasService.getVacunasPorIdMascota(id).subscribe(response => {
             if (response.estado == 'success') {
                 this.datosVacunas = response.vacunas;
@@ -1145,16 +1146,29 @@ let NuevaVacunaComponent = class NuevaVacunaComponent {
     }
     setAntiparasitario(form) {
         this._antiparasitarioService.setAntiparasitario(this.datosMascota, this.nombreAntiparasitario).subscribe(response => {
-            form.reset();
-            this.formVacuna.tipoVacuna = '';
-            this._snotify.success(response.mensaje, {
-                timeout: 2000,
-                showProgressBar: true,
-                closeOnClick: false,
-                pauseOnHover: true,
-                position: 'rightTop'
-            });
-            this.getAntiparasitario(this.idTemporal);
+            if (response.estado == 'success') {
+                form.reset();
+                this.formVacuna.tipoVacuna = '';
+                this._snotify.success(response.mensaje, {
+                    timeout: 2000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
+                this.getAntiparasitario(this.idTemporal);
+            }
+            else {
+                for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+                    this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+                        timeout: 5000,
+                        showProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        position: 'rightTop'
+                    });
+                }
+            }
         }, error => {
             console.log(error);
         });
@@ -1283,6 +1297,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fullcalendar_core_locales_es__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fullcalendar/core/locales/es */ "./node_modules/@fullcalendar/core/locales/es.js");
 /* harmony import */ var _fullcalendar_core_locales_es__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_fullcalendar_core_locales_es__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var src_app_servicios_eventos_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/servicios/eventos.service */ "./src/app/servicios/eventos.service.ts");
+/* harmony import */ var ng_snotify__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ng-snotify */ "./node_modules/ng-snotify/index.js");
+
 
 
 
@@ -1292,7 +1308,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let VerCalendarioComponent = class VerCalendarioComponent {
-    constructor(_eventosService) {
+    constructor(_snotify, _eventosService) {
+        this._snotify = _snotify;
         this._eventosService = _eventosService;
         //Control de set
         this.step = 0;
@@ -1365,11 +1382,26 @@ let VerCalendarioComponent = class VerCalendarioComponent {
         let datos = form.value;
         this._eventosService.setEvento(datos).subscribe(response => {
             if (response.estado == 'success') {
-                alert(response.mensaje);
+                this._snotify.success(response.mensaje, {
+                    timeout: 2000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
+                document.getElementById('closeNuevaCita').click();
                 this.getEventos();
             }
             else {
-                alert(response.mensaje);
+                for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+                    this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+                        timeout: 5000,
+                        showProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        position: 'rightTop'
+                    });
+                }
             }
         }, error => {
             console.log(error);
@@ -1386,11 +1418,26 @@ let VerCalendarioComponent = class VerCalendarioComponent {
     updateEvento() {
         this._eventosService.updateEvento(this.nuevoEventoForm).subscribe(response => {
             if (response.estado == 'success') {
-                alert(response.mensaje);
+                this._snotify.success(response.mensaje, {
+                    timeout: 2000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
+                document.getElementById('closeModalEventInfo').click();
                 this.getEventos();
             }
             else {
-                alert(response.mensaje);
+                for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+                    this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+                        timeout: 5000,
+                        showProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        position: 'rightTop'
+                    });
+                }
             }
         }, error => {
             console.log(error);
@@ -1432,6 +1479,7 @@ let VerCalendarioComponent = class VerCalendarioComponent {
     }
 };
 VerCalendarioComponent.ctorParameters = () => [
+    { type: ng_snotify__WEBPACK_IMPORTED_MODULE_8__["SnotifyService"] },
     { type: src_app_servicios_eventos_service__WEBPACK_IMPORTED_MODULE_7__["EventosService"] }
 ];
 VerCalendarioComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1440,7 +1488,7 @@ VerCalendarioComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./ver-calendario.component.html */ "./node_modules/raw-loader/index.js!./src/app/acciones/ver-calendario/ver-calendario.component.html"),
         styles: [__webpack_require__(/*! ./ver-calendario.component.css */ "./src/app/acciones/ver-calendario/ver-calendario.component.css")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_servicios_eventos_service__WEBPACK_IMPORTED_MODULE_7__["EventosService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_snotify__WEBPACK_IMPORTED_MODULE_8__["SnotifyService"], src_app_servicios_eventos_service__WEBPACK_IMPORTED_MODULE_7__["EventosService"]])
 ], VerCalendarioComponent);
 
 
@@ -2329,13 +2377,7 @@ let FichaClinicaComponent = class FichaClinicaComponent {
                 this.edadMascota = response.edad;
             }
             else {
-                this._snotify.error(response.mensaje, {
-                    timeout: 5000,
-                    showProgressBar: true,
-                    closeOnClick: false,
-                    pauseOnHover: true,
-                    position: 'rightTop'
-                });
+                console.log(response.mensaje);
             }
         }, error => {
             console.log(error);
@@ -2461,7 +2503,13 @@ let FichaConsultaComponent = class FichaConsultaComponent {
                 this.estadoConsulta = response.consultas.id_estado;
             }
             else {
-                alert(response.mensaje);
+                this._snotify.error(response.mensaje, {
+                    timeout: 5000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
             }
         }, error => {
             console.log(error);
@@ -2531,11 +2579,23 @@ let FichaConsultaComponent = class FichaConsultaComponent {
     cambiarEstadoConsulta(metodo) {
         this._consultasService.cambiarEstadoConsulta(this.idConsulta, metodo).subscribe(response => {
             if (response.estado == 'success') {
-                alert(response.mensaje);
+                this._snotify.success(response.mensaje, {
+                    timeout: 2000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
                 this.router.navigate(['Inicio']);
             }
             else {
-                alert(response.mensaje);
+                this._snotify.error(response.mensaje, {
+                    timeout: 5000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
             }
         }, error => {
             console.log(error);
@@ -2635,11 +2695,13 @@ let FichaHospitalizacionComponent = class FichaHospitalizacionComponent {
     setSeguimiento(form) {
         this._hospitalizacionService.setSeguimiento(this.descripcion, this.archivo, this.idHosp, this.esterilizacionCheckBox, this.datosHospitalizacion).subscribe(response => {
             if (response.estado == 'success') {
-                form.reset();
+                this.archivo = 'undefined';
+                this.descripcion = '';
+                this.esterilizacionCheckBox = false;
                 this.nombreArchivo = '';
                 this.getSeguimientoPorId();
                 this._snotify.success(response.mensaje, {
-                    timeout: 5000,
+                    timeout: 3000,
                     showProgressBar: true,
                     closeOnClick: false,
                     pauseOnHover: true,
@@ -2912,6 +2974,7 @@ let FichaMascotaComponent = class FichaMascotaComponent {
         });
     }
     getClientePorRut(rut) {
+        rut = this.checkRut(rut);
         this._clientesService.getClientePorRut(rut).subscribe(response => {
             if (response.estado == 'success') {
                 this.datosCliente = response.cliente;
@@ -2929,6 +2992,12 @@ let FichaMascotaComponent = class FichaMascotaComponent {
             console.log(error);
         });
     }
+    checkRut(rut) {
+        // Despejar Puntos
+        let test = rut.replace(/\./g, "");
+        test = test.replace(/\-/g, "");
+        return test;
+    }
     updateNumeroChip(numeroChip) {
         this._mascotasService.updateNumeroChip(this.idMascota, numeroChip).subscribe(response => {
             if (response.estado == 'success') {
@@ -2941,13 +3010,15 @@ let FichaMascotaComponent = class FichaMascotaComponent {
                 });
             }
             else {
-                this._snotify.warning(response.mensaje, {
-                    timeout: 2000,
-                    showProgressBar: true,
-                    closeOnClick: false,
-                    pauseOnHover: true,
-                    position: 'rightTop'
-                });
+                for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+                    this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+                        timeout: 5000,
+                        showProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        position: 'rightTop'
+                    });
+                }
             }
         }, error => {
             console.log(error);
@@ -2970,10 +3041,24 @@ let FichaMascotaComponent = class FichaMascotaComponent {
         this._mascotasService.updateMascota(this.datosMascota, this.idMascota).subscribe(response => {
             if (response.estado == 'success') {
                 this.getMascotaPorId(this.idMascota);
-                alert(response.mensaje);
+                this._snotify.success(response.mensaje, {
+                    timeout: 2000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
             }
             else {
-                alert(response.mensaje);
+                for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+                    this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+                        timeout: 5000,
+                        showProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        position: 'rightTop'
+                    });
+                }
             }
         }, error => {
             console.log(error);
@@ -3070,11 +3155,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var src_app_servicios_estadisticas_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/servicios/estadisticas.service */ "./src/app/servicios/estadisticas.service.ts");
+/* harmony import */ var ng_snotify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ng-snotify */ "./node_modules/ng-snotify/index.js");
+
 
 
 
 let InicioEstadisticasComponent = class InicioEstadisticasComponent {
-    constructor(_estadisticasService) {
+    constructor(_snotify, _estadisticasService) {
+        this._snotify = _snotify;
         this._estadisticasService = _estadisticasService;
         // GRAFICO DE LAS CONSULTAS REALIZADAS
         this.lineChartData = [
@@ -3357,6 +3445,15 @@ let InicioEstadisticasComponent = class InicioEstadisticasComponent {
                     this.lineChartLabels.push(this.nombreMes[response.consultas[Object.keys(response.consultas)[index]].mes - 1] + ' ' + response.consultas[Object.keys(response.consultas)[index]].anio);
                 }
             }
+            else {
+                this._snotify.warning(response.mensaje, {
+                    timeout: 5000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
+            }
         }, error => {
             console.log(error);
         });
@@ -3398,6 +3495,15 @@ let InicioEstadisticasComponent = class InicioEstadisticasComponent {
                     this.lineChartDataHospitalizaciones[0].data.push(response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].numerohospitalizaciones);
                     this.lineChartLabelsHospitalizaciones.push(this.nombreMes[response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].mes - 1] + ' ' + response.hospitalizaciones[Object.keys(response.hospitalizaciones)[index]].anio);
                 }
+            }
+            else {
+                this._snotify.warning(response.mensaje, {
+                    timeout: 5000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
             }
         }, error => {
             console.log(error);
@@ -3441,6 +3547,15 @@ let InicioEstadisticasComponent = class InicioEstadisticasComponent {
                     this.lineChartLabelsClientes.push(this.nombreMes[response.clientes[Object.keys(response.clientes)[index]].mes - 1] + ' ' + response.clientes[Object.keys(response.clientes)[index]].anio);
                 }
             }
+            else {
+                this._snotify.warning(response.mensaje, {
+                    timeout: 5000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
+            }
         }, error => {
             console.log(error);
         });
@@ -3482,6 +3597,15 @@ let InicioEstadisticasComponent = class InicioEstadisticasComponent {
                     this.lineChartDataMascotas[0].data.push(response.mascotas[Object.keys(response.mascotas)[index]].numeroMascotas);
                     this.lineChartLabelsMascotas.push(this.nombreMes[response.mascotas[Object.keys(response.mascotas)[index]].mes - 1] + ' ' + response.mascotas[Object.keys(response.mascotas)[index]].anio);
                 }
+            }
+            else {
+                this._snotify.warning(response.mensaje, {
+                    timeout: 5000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
             }
         }, error => {
             console.log(error);
@@ -3537,6 +3661,7 @@ let InicioEstadisticasComponent = class InicioEstadisticasComponent {
     }
 };
 InicioEstadisticasComponent.ctorParameters = () => [
+    { type: ng_snotify__WEBPACK_IMPORTED_MODULE_3__["SnotifyService"] },
     { type: src_app_servicios_estadisticas_service__WEBPACK_IMPORTED_MODULE_2__["EstadisticasService"] }
 ];
 InicioEstadisticasComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -3545,7 +3670,7 @@ InicioEstadisticasComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./inicio-estadisticas.component.html */ "./node_modules/raw-loader/index.js!./src/app/estadisticas/inicio-estadisticas/inicio-estadisticas.component.html"),
         styles: [__webpack_require__(/*! ./inicio-estadisticas.component.css */ "./src/app/estadisticas/inicio-estadisticas/inicio-estadisticas.component.css")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_servicios_estadisticas_service__WEBPACK_IMPORTED_MODULE_2__["EstadisticasService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_snotify__WEBPACK_IMPORTED_MODULE_3__["SnotifyService"], src_app_servicios_estadisticas_service__WEBPACK_IMPORTED_MODULE_2__["EstadisticasService"]])
 ], InicioEstadisticasComponent);
 
 
@@ -4046,14 +4171,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/servicios/usuarios.service */ "./src/app/servicios/usuarios.service.ts");
 /* harmony import */ var src_app_servicios_configuraciones_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/servicios/configuraciones.service */ "./src/app/servicios/configuraciones.service.ts");
+/* harmony import */ var ng_snotify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ng-snotify */ "./node_modules/ng-snotify/index.js");
+
 
 
 
 
 let ConfiguracionComponent = class ConfiguracionComponent {
-    constructor(_usuariosService, _configuracionService) {
+    constructor(_snotify, _usuariosService, _configuracionService) {
+        this._snotify = _snotify;
         this._usuariosService = _usuariosService;
         this._configuracionService = _configuracionService;
+        //Ruta de la imagen logo
+        this.rutaLogo = localStorage.getItem('rutaLogo');
         //Variable para almacenar los datos de los usuarios
         this.datosUsuarios = [];
         //Nombre del file cargado en el input
@@ -4068,10 +4198,24 @@ let ConfiguracionComponent = class ConfiguracionComponent {
     setNuevoUsuario(form) {
         this._usuariosService.setUsuario(form).subscribe(response => {
             if (response.estado == 'success') {
-                alert(response.mensaje);
+                this._snotify.success(response.mensaje, {
+                    timeout: 3000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
             }
             else {
-                alert(response.mensaje);
+                for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+                    this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+                        timeout: 5000,
+                        showProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        position: 'rightTop'
+                    });
+                }
             }
         }, error => {
             console.log(error);
@@ -4087,11 +4231,23 @@ let ConfiguracionComponent = class ConfiguracionComponent {
     deleteUsuario(metodo, idUsuario) {
         this._usuariosService.deleteUsuario(metodo, idUsuario).subscribe(response => {
             if (response.estado == 'success') {
-                alert(response.mensaje);
+                this._snotify.success(response.mensaje, {
+                    timeout: 3000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
                 this.getUsuariosSistema();
             }
             else {
-                alert(response.mensaje);
+                this._snotify.error(response.mensaje, {
+                    timeout: 3000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
             }
         }, error => {
             console.log(error);
@@ -4120,13 +4276,27 @@ let ConfiguracionComponent = class ConfiguracionComponent {
     setNombreDireccion(form) {
         this._configuracionService.setNombreDireccion(form).subscribe(response => {
             if (response.estado == 'success') {
-                alert(response.mensaje);
+                this._snotify.success(response.mensaje, {
+                    timeout: 3000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
                 localStorage.setItem('nombreVeterinaria', form.nombreEmpresaLogo);
                 localStorage.setItem('direccion', form.direccionVeterinaria);
                 localStorage.setItem('numero', form.numeroVeterinaria);
             }
             else {
-                alert(response.mensaje);
+                for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+                    this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+                        timeout: 5000,
+                        showProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        position: 'rightTop'
+                    });
+                }
             }
         }, error => {
             console.log(error);
@@ -4134,6 +4304,7 @@ let ConfiguracionComponent = class ConfiguracionComponent {
     }
 };
 ConfiguracionComponent.ctorParameters = () => [
+    { type: ng_snotify__WEBPACK_IMPORTED_MODULE_4__["SnotifyService"] },
     { type: src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"] },
     { type: src_app_servicios_configuraciones_service__WEBPACK_IMPORTED_MODULE_3__["ConfiguracionesService"] }
 ];
@@ -4143,7 +4314,7 @@ ConfiguracionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./configuracion.component.html */ "./node_modules/raw-loader/index.js!./src/app/perfil/configuracion/configuracion.component.html"),
         styles: [__webpack_require__(/*! ./configuracion.component.css */ "./src/app/perfil/configuracion/configuracion.component.css")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"], src_app_servicios_configuraciones_service__WEBPACK_IMPORTED_MODULE_3__["ConfiguracionesService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_snotify__WEBPACK_IMPORTED_MODULE_4__["SnotifyService"], src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"], src_app_servicios_configuraciones_service__WEBPACK_IMPORTED_MODULE_3__["ConfiguracionesService"]])
 ], ConfiguracionComponent);
 
 
@@ -4174,11 +4345,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/servicios/usuarios.service */ "./src/app/servicios/usuarios.service.ts");
+/* harmony import */ var ng_snotify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ng-snotify */ "./node_modules/ng-snotify/index.js");
+
 
 
 
 let InformacionComponent = class InformacionComponent {
-    constructor(_usuariosService) {
+    constructor(_snotify, _usuariosService) {
+        this._snotify = _snotify;
         this._usuariosService = _usuariosService;
         //Variable para almacenar los datos del ususario del sistema
         this.datosUsuario = [];
@@ -4201,10 +4375,24 @@ let InformacionComponent = class InformacionComponent {
     updateDatosCliente() {
         this._usuariosService.updateCliente(this.datosUsuario).subscribe(response => {
             if (response.estado == 'success') {
-                alert(response.mensaje);
+                this._snotify.success(response.mensaje, {
+                    timeout: 3000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
             }
             else {
-                alert(response.mensaje);
+                for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+                    this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+                        timeout: 5000,
+                        showProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        position: 'rightTop'
+                    });
+                }
             }
         }, error => {
             console.log(error);
@@ -4214,10 +4402,22 @@ let InformacionComponent = class InformacionComponent {
         if (form.nuevaPass1 == form.nuevaPass2) {
             this._usuariosService.changePasswordUser(this.datosUsuario, form).subscribe(response => {
                 if (response.estado == 'success') {
-                    alert(response.mensaje);
+                    this._snotify.success(response.mensaje, {
+                        timeout: 3000,
+                        showProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        position: 'rightTop'
+                    });
                 }
                 else {
-                    alert(response.mensaje);
+                    this._snotify.error(response.mensaje, {
+                        timeout: 3000,
+                        showProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        position: 'rightTop'
+                    });
                 }
             }, error => {
                 console.log(error);
@@ -4229,6 +4429,7 @@ let InformacionComponent = class InformacionComponent {
     }
 };
 InformacionComponent.ctorParameters = () => [
+    { type: ng_snotify__WEBPACK_IMPORTED_MODULE_3__["SnotifyService"] },
     { type: src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"] }
 ];
 InformacionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -4237,7 +4438,7 @@ InformacionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./informacion.component.html */ "./node_modules/raw-loader/index.js!./src/app/perfil/informacion/informacion.component.html"),
         styles: [__webpack_require__(/*! ./informacion.component.css */ "./src/app/perfil/informacion/informacion.component.css")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_snotify__WEBPACK_IMPORTED_MODULE_3__["SnotifyService"], src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"]])
 ], InformacionComponent);
 
 
@@ -4600,7 +4801,7 @@ let RegistroClienteComponent = class RegistroClienteComponent {
     ngOnInit() {
     }
     setClienteForm(form) {
-        console.log(this.formClientes);
+        this.formClientes.rut = this.checkRut(this.formClientes.rut);
         this._clientesService.setCliente(this.formClientes).subscribe(response => {
             if (response.estado == 'success') {
                 form.reset();
@@ -4626,6 +4827,12 @@ let RegistroClienteComponent = class RegistroClienteComponent {
         }, error => {
             console.log(error);
         });
+    }
+    checkRut(rut) {
+        // Despejar Puntos
+        let test = rut.replace(/\./g, "");
+        test = test.replace(/\-/g, "");
+        return test;
     }
 };
 RegistroClienteComponent.ctorParameters = () => [
@@ -4695,12 +4902,12 @@ let RegistroMascotaComponent = class RegistroMascotaComponent {
             tipo: '',
             raza: '',
             color: '',
-            fecha_ingreso: '2020-01-01 10:10:10'
         };
     }
     ngOnInit() {
     }
     getClientePorRutRm(form) {
+        this.formRutRm = this.checkRut(this.formRutRm);
         this._clientesService.getClientePorRut(this.formRutRm).subscribe(response => {
             if (response.estado == 'success') {
                 form.reset();
@@ -4733,17 +4940,25 @@ let RegistroMascotaComponent = class RegistroMascotaComponent {
                 });
             }
             else {
-                this._snotify.error(response.mensaje, {
-                    timeout: 5000,
-                    showProgressBar: true,
-                    closeOnClick: false,
-                    pauseOnHover: true,
-                    position: 'centerCenter'
-                });
+                for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+                    this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+                        timeout: 5000,
+                        showProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        position: 'rightTop'
+                    });
+                }
             }
         }, error => {
             console.log(error);
         });
+    }
+    checkRut(rut) {
+        // Despejar Puntos
+        let test = rut.replace(/\./g, "");
+        test = test.replace(/\-/g, "");
+        return test;
     }
 };
 RegistroMascotaComponent.ctorParameters = () => [
@@ -5251,7 +5466,7 @@ EventosService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "global", function() { return global; });
 var global = {
-    url: 'http://134.122.30.166/api/'
+    url: 'http://127.0.0.1:8000/api/'
     //urlLocal:'http://127.0.0.1:8000/api/',
     //urlProduccion:'https://neovet.neofox.cl/api/'
 };
@@ -5475,7 +5690,6 @@ let MascotasService = class MascotasService {
     setMascota(formMascota, formCliente) {
         let form = new FormData();
         form.append("nombre", formMascota.nombre_mascota);
-        form.append("fecha_nacimiento", formMascota.fecha_nacimiento);
         form.append("estado_esterilizado", formMascota.esterilizado);
         form.append("estado_chip", formMascota.chip);
         form.append("numero_chip", formMascota.numero_chip);

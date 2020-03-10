@@ -149,6 +149,7 @@ export class FichaMascotaComponent implements OnInit {
   }
 
   getClientePorRut(rut){
+    rut = this.checkRut(rut);
     this._clientesService.getClientePorRut(rut).subscribe(response=>{
       if(response.estado == 'success'){
         this.datosCliente = response.cliente;
@@ -165,6 +166,13 @@ export class FichaMascotaComponent implements OnInit {
       console.log(error);
     });
   }
+
+  checkRut(rut) {
+    // Despejar Puntos
+    let test = rut.replace(/\./g, "");
+    test = test.replace(/\-/g, "");
+    return test;
+}
 
   updateNumeroChip(numeroChip){
     this._mascotasService.updateNumeroChip(this.idMascota, numeroChip).subscribe(response=>{

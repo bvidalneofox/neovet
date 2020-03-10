@@ -33,6 +33,7 @@ export class RegistroMascotaComponent implements OnInit {
   }
 
   getClientePorRutRm(form){
+    this.formRutRm = this.checkRut(this.formRutRm);
     this._clientesService.getClientePorRut(this.formRutRm).subscribe(response=>{
       if(response.estado == 'success'){
         form.reset();
@@ -78,5 +79,12 @@ export class RegistroMascotaComponent implements OnInit {
       console.log(error);
     });
   }
+
+  checkRut(rut) {
+    // Despejar Puntos
+    let test = rut.replace(/\./g, "");
+    test = test.replace(/\-/g, "");
+    return test;
+}
 
 }

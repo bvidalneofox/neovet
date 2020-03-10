@@ -20,7 +20,7 @@ class UsuarioController extends Controller
                     $request->all(),
                     [
                         'nombre' => 'required',
-                        'rut' => 'required',
+                        'rut' => 'required|unique:users,rut',
                         'numero' => 'required',
                         'direccion' => 'required',
                         'correo' => 'required',
@@ -29,6 +29,7 @@ class UsuarioController extends Controller
                     [
                         'nombre.required' => 'Debe de ingresar un nombre',
                         'rut.required' => 'Debe de ingresar un rut',
+                        'rut.unique' => 'El rut ingresado ya existe en nuestros registros',
                         'numero.required' => 'Debe de ingresar un numero de contacto',
                         'direccion.required' => 'Debe de ingresar una dirección',
                         'correo.required' => 'Debe de ingresar un correo',

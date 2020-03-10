@@ -24,7 +24,7 @@ export class RegistroClienteComponent implements OnInit {
   }
 
   setClienteForm(form : any) {
-    console.log(this.formClientes);
+    this.formClientes.rut = this.checkRut(this.formClientes.rut);
     this._clientesService.setCliente(this.formClientes).subscribe(response => {
       if (response.estado == 'success') {
         form.reset();
@@ -50,5 +50,12 @@ export class RegistroClienteComponent implements OnInit {
       console.log(error);
     });
   }
+
+  checkRut(rut) {
+    // Despejar Puntos
+    let test = rut.replace(/\./g, "");
+    test = test.replace(/\-/g, "");
+    return test;
+}
 
 }

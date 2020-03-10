@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Ingrese el rut del cliente"
-                                aria-describedby="button-addon2" name="rutRm" [(ngModel)]="formRutRm" required>
+                                aria-describedby="button-addon2" name="rutRm" [(ngModel)]="formRutRm" #holaTest (click)="checkRut(holaTest.value)" required>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-dark" type="submit" id="button-addon2" [disabled]="getClienteRutFormRm.invalid">Buscar
                                     Cliente</button>
