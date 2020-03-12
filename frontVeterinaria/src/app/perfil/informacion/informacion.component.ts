@@ -35,6 +35,7 @@ export class InformacionComponent implements OnInit {
   updateDatosCliente() {
     this._usuariosService.updateCliente(this.datosUsuario).subscribe(response => {
       if (response.estado == 'success') {
+        document.getElementById('closeButtonEditarMisDatos').click();
         this._snotify.success(response.mensaje, {
           timeout: 3000,
           showProgressBar: true,
@@ -63,6 +64,7 @@ export class InformacionComponent implements OnInit {
     if (form.nuevaPass1 == form.nuevaPass2) {
       this._usuariosService.changePasswordUser(this.datosUsuario, form).subscribe(response => {
         if (response.estado == 'success') {
+          document.getElementById('closeButtonCambiarPass').click();
           this._snotify.success(response.mensaje, {
             timeout: 3000,
             showProgressBar: true,

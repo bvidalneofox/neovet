@@ -104,6 +104,7 @@ export class ConfiguracionComponent implements OnInit {
   setLogotest(){
     this._configuracionService.setLogoService(this.archivo).subscribe(response=>{
       if(response.estado == 'success'){
+        document.getElementById('closeButtonLogoVeterinaria').click();
         this._snotify.success(response.mensaje, {
           timeout: 3000,
           showProgressBar: true,
@@ -131,6 +132,7 @@ export class ConfiguracionComponent implements OnInit {
   setNombreDireccion(form){
     this._configuracionService.setNombreDireccion(form).subscribe(response=>{
       if(response.estado == 'success'){
+        document.getElementById('closeButtonDatosVeterinaria').click();
         this._snotify.success(response.mensaje, {
           timeout: 3000,
           showProgressBar: true,
