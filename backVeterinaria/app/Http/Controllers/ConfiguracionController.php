@@ -71,7 +71,7 @@ class ConfiguracionController extends Controller
                     return $guardarArchivo;
                 }
                 if ($configuracion->save()) {
-                    return ['estado' => 'success', 'mensaje' => 'Logo Actualizado Correctamente.'];
+                    return ['estado' => 'success', 'mensaje' => 'Logo Actualizado Correctamente, se cerrara sesión para aplicar los cambios.'];
                 } else {
                     return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al actualizar el Logo.'];
                 }
@@ -91,7 +91,7 @@ class ConfiguracionController extends Controller
                 $configuracion->direccion = $request->direccion;
                 $configuracion->numero = $request->numero;
                 if ($configuracion->save()) {
-                    return ['estado' => 'success', 'mensaje' => 'Nombre/Direccion Actualizado Correctamente.'];
+                    return ['estado' => 'success', 'mensaje' => 'Nombre/Direccion Actualizado Correctamente, se cerrara sesión para apliocar los cambios'];
                 } else {
                     return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al actualizar el Nombre/Direccion.'];
                 }

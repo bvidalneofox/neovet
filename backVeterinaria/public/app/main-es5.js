@@ -426,7 +426,7 @@ module.exports = "<router-outlet></router-outlet>\r\n\r\n<ng-snotify>{{style}}</
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"wrapper\">\n    <!-- Sidebar  -->\n    <nav id=\"sidebar\" class=\"{{variabletest}}\">\n        <div class=\"sidebar-header\">\n            <h3 class=\"text-center\">NeoVet</h3>\n        </div>\n\n        <ul class=\"list-unstyled components\">\n            <!-- <p class=\"font-weight-bold\">Panel Administrativo</p> -->\n            <li>\n                <a routerLink=\"/Inicio\">Inicio</a>\n            </li>\n            <li>\n                <a href=\"#mascotaSubmenu\" data-toggle=\"collapse\" aria-expanded=\"false\" class=\"dropdown-toggle\">Mascotas</a>\n                <ul class=\"collapse list-unstyled\" id=\"mascotaSubmenu\">\n                    <li>\n                        <a routerLink=\"registroMascota\">Registrar Mascota</a>\n                    </li>\n                    <!-- <li>\n                        <a routerLink=\"buscarMascota\">Buscar Mascota por Rut Dueño</a>\n                    </li> -->\n                    <li>\n                        <a routerLink=\"mostrarMascotas\">Buscar Mascota por Nombre</a>\n                    </li>\n                </ul>\n            </li>\n            <li>\n                <a href=\"#pageSubmenu\" data-toggle=\"collapse\" aria-expanded=\"false\" class=\"dropdown-toggle\">Clientes</a>\n                <ul class=\"collapse list-unstyled\" id=\"pageSubmenu\">\n                    <li>\n                        <a routerLink=\"registroCliente\">Registrar Cliente</a>\n                    </li>\n                    <!-- <li>\n                        <a routerLink=\"buscarCliente\">Buscar Cliente por Rut</a>\n                    </li> -->\n                    <li>\n                        <a routerLink=\"mostrarClientes\">Buscar Cliente por Nombre</a>\n                    </li>\n                </ul>\n            </li>\n            <li>\n                <a routerLink=\"nuevaReceta\" class=\"font-weight-light\">Generar Receta</a>\n            </li>\n            <li>\n                <a routerLink=\"verCalendario\" class=\"font-weight-light\">Agenda</a>\n            </li>\n            <!-- <li>\n                <a href=\"#productosSubMenu\" data-toggle=\"collapse\" aria-expanded=\"false\" class=\"dropdown-toggle\">Proovedores</a>\n                <ul class=\"collapse list-unstyled\" id=\"productosSubMenu\">\n                    <li>\n                        <a routerLink=\"registroMascota\">Registrar Proovedor</a>\n                    </li>\n                    <li>\n                        <a routerLink=\"buscarMascota\">Listar Proveedores</a>\n                    </li>\n                    <li>\n                        <a routerLink=\"mostrarMascotas\">Realizar Nuevo Pedido</a>\n                    </li>\n                </ul>\n            </li> -->\n            <li>\n                <a routerLink=\"estadisticas\" class=\"font-weight-light\">Estadisticas</a>\n            </li>\n        </ul>\n\n        <!-- <ul class=\"list-unstyled CTAs\">\n            <li>\n                <a href=\"#\" class=\"download\">Contacto NeoFox</a>\n            </li>\n            <li>\n                <a href=\"#\" class=\"article\">Sección Clientes</a>\n            </li>\n        </ul> -->\n    </nav>\n    <div id=\"content\">\n\n        <app-navbar (abrirSidebarParent)=\"abrirSidebar()\"></app-navbar>\n        <!-- <button type=\"button\" id=\"sidebarCollapse\" class=\"btn btn-info\" (click)=\"test()\">\n            <span>Toggle Sidebar</span>\n        </button> -->\n        <router-outlet></router-outlet>\n\n    </div>\n\n</div>"
+module.exports = "<div class=\"wrapper\">\n    <!-- Sidebar  -->\n    <nav id=\"sidebar\" class=\"{{variabletest}}\">\n        <div class=\"sidebar-header\">\n            <h3 class=\"text-center\">{{nombreVeterinaria}}</h3>\n        </div>\n\n        <ul class=\"list-unstyled components\">\n            <!-- <p class=\"font-weight-bold\">Panel Administrativo</p> -->\n            <li>\n                <a routerLink=\"/Inicio\">Inicio</a>\n            </li>\n            <li>\n                <a href=\"#mascotaSubmenu\" data-toggle=\"collapse\" aria-expanded=\"false\" class=\"dropdown-toggle\">Mascotas</a>\n                <ul class=\"collapse list-unstyled\" id=\"mascotaSubmenu\">\n                    <li>\n                        <a routerLink=\"registroMascota\">Registrar Mascota</a>\n                    </li>\n                    <!-- <li>\n                        <a routerLink=\"buscarMascota\">Buscar Mascota por Rut Dueño</a>\n                    </li> -->\n                    <li>\n                        <a routerLink=\"mostrarMascotas\">Buscar Mascota por Nombre</a>\n                    </li>\n                </ul>\n            </li>\n            <li>\n                <a href=\"#pageSubmenu\" data-toggle=\"collapse\" aria-expanded=\"false\" class=\"dropdown-toggle\">Clientes</a>\n                <ul class=\"collapse list-unstyled\" id=\"pageSubmenu\">\n                    <li>\n                        <a routerLink=\"registroCliente\">Registrar Cliente</a>\n                    </li>\n                    <!-- <li>\n                        <a routerLink=\"buscarCliente\">Buscar Cliente por Rut</a>\n                    </li> -->\n                    <li>\n                        <a routerLink=\"mostrarClientes\">Buscar Cliente por Nombre</a>\n                    </li>\n                </ul>\n            </li>\n            <li>\n                <a routerLink=\"nuevaReceta\" class=\"font-weight-light\">Generar Receta</a>\n            </li>\n            <li>\n                <a routerLink=\"verCalendario\" class=\"font-weight-light\">Agenda</a>\n            </li>\n            <!-- <li>\n                <a href=\"#productosSubMenu\" data-toggle=\"collapse\" aria-expanded=\"false\" class=\"dropdown-toggle\">Proovedores</a>\n                <ul class=\"collapse list-unstyled\" id=\"productosSubMenu\">\n                    <li>\n                        <a routerLink=\"registroMascota\">Registrar Proovedor</a>\n                    </li>\n                    <li>\n                        <a routerLink=\"buscarMascota\">Listar Proveedores</a>\n                    </li>\n                    <li>\n                        <a routerLink=\"mostrarMascotas\">Realizar Nuevo Pedido</a>\n                    </li>\n                </ul>\n            </li> -->\n            <li>\n                <a routerLink=\"estadisticas\" class=\"font-weight-light\">Estadisticas</a>\n            </li>\n        </ul>\n\n        <!-- <ul class=\"list-unstyled CTAs\">\n            <li>\n                <a href=\"#\" class=\"download\">Contacto NeoFox</a>\n            </li>\n            <li>\n                <a href=\"#\" class=\"article\">Sección Clientes</a>\n            </li>\n        </ul> -->\n    </nav>\n    <div id=\"content\">\n\n        <app-navbar (abrirSidebarParent)=\"abrirSidebar()\"></app-navbar>\n        <!-- <button type=\"button\" id=\"sidebarCollapse\" class=\"btn btn-info\" (click)=\"test()\">\n            <span>Toggle Sidebar</span>\n        </button> -->\n        <router-outlet></router-outlet>\n\n    </div>\n\n</div>"
 
 /***/ }),
 
@@ -970,16 +970,27 @@ var NuevaRecetaComponent = /** @class */ (function () {
     NuevaRecetaComponent.prototype.ngOnInit = function () {
     };
     NuevaRecetaComponent.prototype.agregarMedicamento = function (datos) {
-        this.receta.push(datos.value);
-        console.log(this.receta);
-        datos.reset();
-        this._snotify.success('Item Incorporado Correctamente', {
-            timeout: 3000,
-            showProgressBar: true,
-            closeOnClick: false,
-            pauseOnHover: true,
-            position: 'rightTop'
-        });
+        if (!datos.value.nombreMedicamento || !datos.value.indicacionesMedicamento) {
+            this._snotify.warning('Debe de completar campo de medicamento e indicaciones', {
+                timeout: 3000,
+                showProgressBar: true,
+                closeOnClick: false,
+                pauseOnHover: true,
+                position: 'rightTop'
+            });
+        }
+        else {
+            console.log(datos.value);
+            this.receta.push(datos.value);
+            datos.reset();
+            this._snotify.success('Item Incorporado Correctamente', {
+                timeout: 3000,
+                showProgressBar: true,
+                closeOnClick: false,
+                pauseOnHover: true,
+                position: 'rightTop'
+            });
+        }
     };
     NuevaRecetaComponent.prototype.deleteElementoReceta = function (indice) {
         this.receta.splice(indice, 1);
@@ -2212,6 +2223,7 @@ var AuthMasterComponent = /** @class */ (function () {
     function AuthMasterComponent() {
         this.variabletest = 'lamasfacil';
         this.title = 'frontVeterinaria';
+        this.nombreVeterinaria = localStorage.getItem('nombreVeterinaria');
     }
     AuthMasterComponent.prototype.ngOnInit = function () {
     };
@@ -2828,11 +2840,23 @@ var FichaHospitalizacionComponent = /** @class */ (function () {
         var _this = this;
         this._hospitalizacionService.deleteHospitalizacion(this.idHosp, metodo).subscribe(function (response) {
             if (response.estado == 'success') {
-                alert(response.mensaje);
+                _this._snotify.success(response.mensaje, {
+                    timeout: 5000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
                 _this.router.navigate(['Inicio']);
             }
             else {
-                alert(response.mensaje);
+                _this._snotify.warning(response.mensaje, {
+                    timeout: 5000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
             }
         }, function (error) {
             console.log(error);
@@ -4272,16 +4296,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/servicios/usuarios.service */ "./src/app/servicios/usuarios.service.ts");
 /* harmony import */ var src_app_servicios_configuraciones_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/servicios/configuraciones.service */ "./src/app/servicios/configuraciones.service.ts");
 /* harmony import */ var ng_snotify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ng-snotify */ "./node_modules/ng-snotify/index.js");
+/* harmony import */ var src_app_servicios_login_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/servicios/login.service */ "./src/app/servicios/login.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
 
 
 
 
 
 var ConfiguracionComponent = /** @class */ (function () {
-    function ConfiguracionComponent(_snotify, _usuariosService, _configuracionService) {
+    function ConfiguracionComponent(_snotify, _usuariosService, _configuracionService, _loginService, router) {
         this._snotify = _snotify;
         this._usuariosService = _usuariosService;
         this._configuracionService = _configuracionService;
+        this._loginService = _loginService;
+        this.router = router;
         //Ruta de la imagen logo
         this.rutaLogo = localStorage.getItem('rutaLogo');
         //Variable para almacenar los datos de los usuarios
@@ -4365,20 +4395,8 @@ var ConfiguracionComponent = /** @class */ (function () {
         this.archivo = test.srcElement.files[0];
     };
     ConfiguracionComponent.prototype.setLogotest = function () {
-        this._configuracionService.setLogoService(this.archivo).subscribe(function (response) {
-            if (response.estado == 'success') {
-                alert(response.mensaje);
-            }
-            else {
-                alert(response.mensaje);
-            }
-        }, function (error) {
-            console.log(error);
-        });
-    };
-    ConfiguracionComponent.prototype.setNombreDireccion = function (form) {
         var _this = this;
-        this._configuracionService.setNombreDireccion(form).subscribe(function (response) {
+        this._configuracionService.setLogoService(this.archivo).subscribe(function (response) {
             if (response.estado == 'success') {
                 _this._snotify.success(response.mensaje, {
                     timeout: 3000,
@@ -4387,9 +4405,7 @@ var ConfiguracionComponent = /** @class */ (function () {
                     pauseOnHover: true,
                     position: 'rightTop'
                 });
-                localStorage.setItem('nombreVeterinaria', form.nombreEmpresaLogo);
-                localStorage.setItem('direccion', form.direccionVeterinaria);
-                localStorage.setItem('numero', form.numeroVeterinaria);
+                _this.logout();
             }
             else {
                 for (var index = 0; index < Object.keys(response.mensaje).length; index++) {
@@ -4406,10 +4422,54 @@ var ConfiguracionComponent = /** @class */ (function () {
             console.log(error);
         });
     };
+    ConfiguracionComponent.prototype.setNombreDireccion = function (form) {
+        var _this = this;
+        this._configuracionService.setNombreDireccion(form).subscribe(function (response) {
+            if (response.estado == 'success') {
+                _this._snotify.success(response.mensaje, {
+                    timeout: 3000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
+                _this.logout();
+            }
+            else {
+                for (var index = 0; index < Object.keys(response.mensaje).length; index++) {
+                    _this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+                        timeout: 5000,
+                        showProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        position: 'rightTop'
+                    });
+                }
+            }
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    ConfiguracionComponent.prototype.logout = function () {
+        var _this = this;
+        this._loginService.logout().subscribe(function (response) {
+            if (response.status == 'success') {
+                localStorage.removeItem('token');
+                _this.router.navigate(['']);
+            }
+            else {
+                alert(response.msg);
+            }
+        }, function (error) {
+            console.log(error);
+        });
+    };
     ConfiguracionComponent.ctorParameters = function () { return [
         { type: ng_snotify__WEBPACK_IMPORTED_MODULE_4__["SnotifyService"] },
         { type: src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"] },
-        { type: src_app_servicios_configuraciones_service__WEBPACK_IMPORTED_MODULE_3__["ConfiguracionesService"] }
+        { type: src_app_servicios_configuraciones_service__WEBPACK_IMPORTED_MODULE_3__["ConfiguracionesService"] },
+        { type: src_app_servicios_login_service__WEBPACK_IMPORTED_MODULE_5__["LoginService"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"] }
     ]; };
     ConfiguracionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -4417,7 +4477,7 @@ var ConfiguracionComponent = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./configuracion.component.html */ "./node_modules/raw-loader/index.js!./src/app/perfil/configuracion/configuracion.component.html"),
             styles: [__webpack_require__(/*! ./configuracion.component.css */ "./src/app/perfil/configuracion/configuracion.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_snotify__WEBPACK_IMPORTED_MODULE_4__["SnotifyService"], src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"], src_app_servicios_configuraciones_service__WEBPACK_IMPORTED_MODULE_3__["ConfiguracionesService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_snotify__WEBPACK_IMPORTED_MODULE_4__["SnotifyService"], src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"], src_app_servicios_configuraciones_service__WEBPACK_IMPORTED_MODULE_3__["ConfiguracionesService"], src_app_servicios_login_service__WEBPACK_IMPORTED_MODULE_5__["LoginService"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]])
     ], ConfiguracionComponent);
     return ConfiguracionComponent;
 }());
@@ -4451,14 +4511,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/servicios/usuarios.service */ "./src/app/servicios/usuarios.service.ts");
 /* harmony import */ var ng_snotify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ng-snotify */ "./node_modules/ng-snotify/index.js");
+/* harmony import */ var src_app_servicios_login_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/servicios/login.service */ "./src/app/servicios/login.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
 
 
 
 
 var InformacionComponent = /** @class */ (function () {
-    function InformacionComponent(_snotify, _usuariosService) {
+    function InformacionComponent(_snotify, _usuariosService, _loginService, router) {
         this._snotify = _snotify;
         this._usuariosService = _usuariosService;
+        this._loginService = _loginService;
+        this.router = router;
         //Variable para almacenar los datos del ususario del sistema
         this.datosUsuario = [];
     }
@@ -4489,6 +4555,7 @@ var InformacionComponent = /** @class */ (function () {
                     pauseOnHover: true,
                     position: 'rightTop'
                 });
+                _this.logout();
             }
             else {
                 for (var index = 0; index < Object.keys(response.mensaje).length; index++) {
@@ -4517,6 +4584,7 @@ var InformacionComponent = /** @class */ (function () {
                         pauseOnHover: true,
                         position: 'rightTop'
                     });
+                    _this.logout();
                 }
                 else {
                     _this._snotify.error(response.mensaje, {
@@ -4535,9 +4603,25 @@ var InformacionComponent = /** @class */ (function () {
             alert('Los campos de nueva contraseña no coinciden');
         }
     };
+    InformacionComponent.prototype.logout = function () {
+        var _this = this;
+        this._loginService.logout().subscribe(function (response) {
+            if (response.status == 'success') {
+                localStorage.removeItem('token');
+                _this.router.navigate(['']);
+            }
+            else {
+                alert(response.msg);
+            }
+        }, function (error) {
+            console.log(error);
+        });
+    };
     InformacionComponent.ctorParameters = function () { return [
         { type: ng_snotify__WEBPACK_IMPORTED_MODULE_3__["SnotifyService"] },
-        { type: src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"] }
+        { type: src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"] },
+        { type: src_app_servicios_login_service__WEBPACK_IMPORTED_MODULE_4__["LoginService"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] }
     ]; };
     InformacionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -4545,7 +4629,7 @@ var InformacionComponent = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./informacion.component.html */ "./node_modules/raw-loader/index.js!./src/app/perfil/informacion/informacion.component.html"),
             styles: [__webpack_require__(/*! ./informacion.component.css */ "./src/app/perfil/informacion/informacion.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_snotify__WEBPACK_IMPORTED_MODULE_3__["SnotifyService"], src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_snotify__WEBPACK_IMPORTED_MODULE_3__["SnotifyService"], src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"], src_app_servicios_login_service__WEBPACK_IMPORTED_MODULE_4__["LoginService"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
     ], InformacionComponent);
     return InformacionComponent;
 }());

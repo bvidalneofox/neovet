@@ -19,8 +19,8 @@ class CreateTableMascotas extends Migration
             $table->string('genero');
             $table->string('raza')->nullable();
             $table->string('color')->nullable();
-            $table->date('fecha_nacimiento')->nullable();
-            $table->date('fecha_ingreso');
+            $table->date('fecha_nacimiento');
+            $table->date('fecha_ingreso')->nullable();
             $table->text('numero_chip')->nullable();
             $table->string('estado_chip');
             $table->string('estado_esterilizado');

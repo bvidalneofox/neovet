@@ -27,8 +27,17 @@ export class NuevaRecetaComponent implements OnInit {
   }
 
   agregarMedicamento(datos) {
+    if(!datos.value.nombreMedicamento || !datos.value.indicacionesMedicamento){
+      this._snotify.warning('Debe de completar campo de medicamento e indicaciones', {
+        timeout: 3000,
+        showProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        position: 'rightTop'
+      });
+    }else{
+    console.log(datos.value);
     this.receta.push(datos.value);
-    console.log(this.receta);
     datos.reset();
     this._snotify.success('Item Incorporado Correctamente', {
       timeout: 3000,
@@ -37,6 +46,7 @@ export class NuevaRecetaComponent implements OnInit {
       pauseOnHover: true,
       position: 'rightTop'
     });
+  }
   }
 
   deleteElementoReceta(indice) {

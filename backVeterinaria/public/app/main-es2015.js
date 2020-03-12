@@ -426,7 +426,7 @@ module.exports = "<router-outlet></router-outlet>\r\n\r\n<ng-snotify>{{style}}</
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"wrapper\">\n    <!-- Sidebar  -->\n    <nav id=\"sidebar\" class=\"{{variabletest}}\">\n        <div class=\"sidebar-header\">\n            <h3 class=\"text-center\">NeoVet</h3>\n        </div>\n\n        <ul class=\"list-unstyled components\">\n            <!-- <p class=\"font-weight-bold\">Panel Administrativo</p> -->\n            <li>\n                <a routerLink=\"/Inicio\">Inicio</a>\n            </li>\n            <li>\n                <a href=\"#mascotaSubmenu\" data-toggle=\"collapse\" aria-expanded=\"false\" class=\"dropdown-toggle\">Mascotas</a>\n                <ul class=\"collapse list-unstyled\" id=\"mascotaSubmenu\">\n                    <li>\n                        <a routerLink=\"registroMascota\">Registrar Mascota</a>\n                    </li>\n                    <!-- <li>\n                        <a routerLink=\"buscarMascota\">Buscar Mascota por Rut Dueño</a>\n                    </li> -->\n                    <li>\n                        <a routerLink=\"mostrarMascotas\">Buscar Mascota por Nombre</a>\n                    </li>\n                </ul>\n            </li>\n            <li>\n                <a href=\"#pageSubmenu\" data-toggle=\"collapse\" aria-expanded=\"false\" class=\"dropdown-toggle\">Clientes</a>\n                <ul class=\"collapse list-unstyled\" id=\"pageSubmenu\">\n                    <li>\n                        <a routerLink=\"registroCliente\">Registrar Cliente</a>\n                    </li>\n                    <!-- <li>\n                        <a routerLink=\"buscarCliente\">Buscar Cliente por Rut</a>\n                    </li> -->\n                    <li>\n                        <a routerLink=\"mostrarClientes\">Buscar Cliente por Nombre</a>\n                    </li>\n                </ul>\n            </li>\n            <li>\n                <a routerLink=\"nuevaReceta\" class=\"font-weight-light\">Generar Receta</a>\n            </li>\n            <li>\n                <a routerLink=\"verCalendario\" class=\"font-weight-light\">Agenda</a>\n            </li>\n            <!-- <li>\n                <a href=\"#productosSubMenu\" data-toggle=\"collapse\" aria-expanded=\"false\" class=\"dropdown-toggle\">Proovedores</a>\n                <ul class=\"collapse list-unstyled\" id=\"productosSubMenu\">\n                    <li>\n                        <a routerLink=\"registroMascota\">Registrar Proovedor</a>\n                    </li>\n                    <li>\n                        <a routerLink=\"buscarMascota\">Listar Proveedores</a>\n                    </li>\n                    <li>\n                        <a routerLink=\"mostrarMascotas\">Realizar Nuevo Pedido</a>\n                    </li>\n                </ul>\n            </li> -->\n            <li>\n                <a routerLink=\"estadisticas\" class=\"font-weight-light\">Estadisticas</a>\n            </li>\n        </ul>\n\n        <!-- <ul class=\"list-unstyled CTAs\">\n            <li>\n                <a href=\"#\" class=\"download\">Contacto NeoFox</a>\n            </li>\n            <li>\n                <a href=\"#\" class=\"article\">Sección Clientes</a>\n            </li>\n        </ul> -->\n    </nav>\n    <div id=\"content\">\n\n        <app-navbar (abrirSidebarParent)=\"abrirSidebar()\"></app-navbar>\n        <!-- <button type=\"button\" id=\"sidebarCollapse\" class=\"btn btn-info\" (click)=\"test()\">\n            <span>Toggle Sidebar</span>\n        </button> -->\n        <router-outlet></router-outlet>\n\n    </div>\n\n</div>"
+module.exports = "<div class=\"wrapper\">\n    <!-- Sidebar  -->\n    <nav id=\"sidebar\" class=\"{{variabletest}}\">\n        <div class=\"sidebar-header\">\n            <h3 class=\"text-center\">{{nombreVeterinaria}}</h3>\n        </div>\n\n        <ul class=\"list-unstyled components\">\n            <!-- <p class=\"font-weight-bold\">Panel Administrativo</p> -->\n            <li>\n                <a routerLink=\"/Inicio\">Inicio</a>\n            </li>\n            <li>\n                <a href=\"#mascotaSubmenu\" data-toggle=\"collapse\" aria-expanded=\"false\" class=\"dropdown-toggle\">Mascotas</a>\n                <ul class=\"collapse list-unstyled\" id=\"mascotaSubmenu\">\n                    <li>\n                        <a routerLink=\"registroMascota\">Registrar Mascota</a>\n                    </li>\n                    <!-- <li>\n                        <a routerLink=\"buscarMascota\">Buscar Mascota por Rut Dueño</a>\n                    </li> -->\n                    <li>\n                        <a routerLink=\"mostrarMascotas\">Buscar Mascota por Nombre</a>\n                    </li>\n                </ul>\n            </li>\n            <li>\n                <a href=\"#pageSubmenu\" data-toggle=\"collapse\" aria-expanded=\"false\" class=\"dropdown-toggle\">Clientes</a>\n                <ul class=\"collapse list-unstyled\" id=\"pageSubmenu\">\n                    <li>\n                        <a routerLink=\"registroCliente\">Registrar Cliente</a>\n                    </li>\n                    <!-- <li>\n                        <a routerLink=\"buscarCliente\">Buscar Cliente por Rut</a>\n                    </li> -->\n                    <li>\n                        <a routerLink=\"mostrarClientes\">Buscar Cliente por Nombre</a>\n                    </li>\n                </ul>\n            </li>\n            <li>\n                <a routerLink=\"nuevaReceta\" class=\"font-weight-light\">Generar Receta</a>\n            </li>\n            <li>\n                <a routerLink=\"verCalendario\" class=\"font-weight-light\">Agenda</a>\n            </li>\n            <!-- <li>\n                <a href=\"#productosSubMenu\" data-toggle=\"collapse\" aria-expanded=\"false\" class=\"dropdown-toggle\">Proovedores</a>\n                <ul class=\"collapse list-unstyled\" id=\"productosSubMenu\">\n                    <li>\n                        <a routerLink=\"registroMascota\">Registrar Proovedor</a>\n                    </li>\n                    <li>\n                        <a routerLink=\"buscarMascota\">Listar Proveedores</a>\n                    </li>\n                    <li>\n                        <a routerLink=\"mostrarMascotas\">Realizar Nuevo Pedido</a>\n                    </li>\n                </ul>\n            </li> -->\n            <li>\n                <a routerLink=\"estadisticas\" class=\"font-weight-light\">Estadisticas</a>\n            </li>\n        </ul>\n\n        <!-- <ul class=\"list-unstyled CTAs\">\n            <li>\n                <a href=\"#\" class=\"download\">Contacto NeoFox</a>\n            </li>\n            <li>\n                <a href=\"#\" class=\"article\">Sección Clientes</a>\n            </li>\n        </ul> -->\n    </nav>\n    <div id=\"content\">\n\n        <app-navbar (abrirSidebarParent)=\"abrirSidebar()\"></app-navbar>\n        <!-- <button type=\"button\" id=\"sidebarCollapse\" class=\"btn btn-info\" (click)=\"test()\">\n            <span>Toggle Sidebar</span>\n        </button> -->\n        <router-outlet></router-outlet>\n\n    </div>\n\n</div>"
 
 /***/ }),
 
@@ -965,16 +965,27 @@ let NuevaRecetaComponent = class NuevaRecetaComponent {
     ngOnInit() {
     }
     agregarMedicamento(datos) {
-        this.receta.push(datos.value);
-        console.log(this.receta);
-        datos.reset();
-        this._snotify.success('Item Incorporado Correctamente', {
-            timeout: 3000,
-            showProgressBar: true,
-            closeOnClick: false,
-            pauseOnHover: true,
-            position: 'rightTop'
-        });
+        if (!datos.value.nombreMedicamento || !datos.value.indicacionesMedicamento) {
+            this._snotify.warning('Debe de completar campo de medicamento e indicaciones', {
+                timeout: 3000,
+                showProgressBar: true,
+                closeOnClick: false,
+                pauseOnHover: true,
+                position: 'rightTop'
+            });
+        }
+        else {
+            console.log(datos.value);
+            this.receta.push(datos.value);
+            datos.reset();
+            this._snotify.success('Item Incorporado Correctamente', {
+                timeout: 3000,
+                showProgressBar: true,
+                closeOnClick: false,
+                pauseOnHover: true,
+                position: 'rightTop'
+            });
+        }
     }
     deleteElementoReceta(indice) {
         this.receta.splice(indice, 1);
@@ -2176,6 +2187,7 @@ let AuthMasterComponent = class AuthMasterComponent {
     constructor() {
         this.variabletest = 'lamasfacil';
         this.title = 'frontVeterinaria';
+        this.nombreVeterinaria = localStorage.getItem('nombreVeterinaria');
     }
     ngOnInit() {
     }
@@ -2772,11 +2784,23 @@ let FichaHospitalizacionComponent = class FichaHospitalizacionComponent {
     deleteHospitalizacion(metodo) {
         this._hospitalizacionService.deleteHospitalizacion(this.idHosp, metodo).subscribe(response => {
             if (response.estado == 'success') {
-                alert(response.mensaje);
+                this._snotify.success(response.mensaje, {
+                    timeout: 5000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
                 this.router.navigate(['Inicio']);
             }
             else {
-                alert(response.mensaje);
+                this._snotify.warning(response.mensaje, {
+                    timeout: 5000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
             }
         }, error => {
             console.log(error);
@@ -4172,16 +4196,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/servicios/usuarios.service */ "./src/app/servicios/usuarios.service.ts");
 /* harmony import */ var src_app_servicios_configuraciones_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/servicios/configuraciones.service */ "./src/app/servicios/configuraciones.service.ts");
 /* harmony import */ var ng_snotify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ng-snotify */ "./node_modules/ng-snotify/index.js");
+/* harmony import */ var src_app_servicios_login_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/servicios/login.service */ "./src/app/servicios/login.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
+
 
 
 
 
 
 let ConfiguracionComponent = class ConfiguracionComponent {
-    constructor(_snotify, _usuariosService, _configuracionService) {
+    constructor(_snotify, _usuariosService, _configuracionService, _loginService, router) {
         this._snotify = _snotify;
         this._usuariosService = _usuariosService;
         this._configuracionService = _configuracionService;
+        this._loginService = _loginService;
+        this.router = router;
         //Ruta de la imagen logo
         this.rutaLogo = localStorage.getItem('rutaLogo');
         //Variable para almacenar los datos de los usuarios
@@ -4264,18 +4294,6 @@ let ConfiguracionComponent = class ConfiguracionComponent {
     setLogotest() {
         this._configuracionService.setLogoService(this.archivo).subscribe(response => {
             if (response.estado == 'success') {
-                alert(response.mensaje);
-            }
-            else {
-                alert(response.mensaje);
-            }
-        }, error => {
-            console.log(error);
-        });
-    }
-    setNombreDireccion(form) {
-        this._configuracionService.setNombreDireccion(form).subscribe(response => {
-            if (response.estado == 'success') {
                 this._snotify.success(response.mensaje, {
                     timeout: 3000,
                     showProgressBar: true,
@@ -4283,9 +4301,7 @@ let ConfiguracionComponent = class ConfiguracionComponent {
                     pauseOnHover: true,
                     position: 'rightTop'
                 });
-                localStorage.setItem('nombreVeterinaria', form.nombreEmpresaLogo);
-                localStorage.setItem('direccion', form.direccionVeterinaria);
-                localStorage.setItem('numero', form.numeroVeterinaria);
+                this.logout();
             }
             else {
                 for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
@@ -4302,11 +4318,53 @@ let ConfiguracionComponent = class ConfiguracionComponent {
             console.log(error);
         });
     }
+    setNombreDireccion(form) {
+        this._configuracionService.setNombreDireccion(form).subscribe(response => {
+            if (response.estado == 'success') {
+                this._snotify.success(response.mensaje, {
+                    timeout: 3000,
+                    showProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    position: 'rightTop'
+                });
+                this.logout();
+            }
+            else {
+                for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+                    this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+                        timeout: 5000,
+                        showProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        position: 'rightTop'
+                    });
+                }
+            }
+        }, error => {
+            console.log(error);
+        });
+    }
+    logout() {
+        this._loginService.logout().subscribe(response => {
+            if (response.status == 'success') {
+                localStorage.removeItem('token');
+                this.router.navigate(['']);
+            }
+            else {
+                alert(response.msg);
+            }
+        }, error => {
+            console.log(error);
+        });
+    }
 };
 ConfiguracionComponent.ctorParameters = () => [
     { type: ng_snotify__WEBPACK_IMPORTED_MODULE_4__["SnotifyService"] },
     { type: src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"] },
-    { type: src_app_servicios_configuraciones_service__WEBPACK_IMPORTED_MODULE_3__["ConfiguracionesService"] }
+    { type: src_app_servicios_configuraciones_service__WEBPACK_IMPORTED_MODULE_3__["ConfiguracionesService"] },
+    { type: src_app_servicios_login_service__WEBPACK_IMPORTED_MODULE_5__["LoginService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"] }
 ];
 ConfiguracionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -4314,7 +4372,7 @@ ConfiguracionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./configuracion.component.html */ "./node_modules/raw-loader/index.js!./src/app/perfil/configuracion/configuracion.component.html"),
         styles: [__webpack_require__(/*! ./configuracion.component.css */ "./src/app/perfil/configuracion/configuracion.component.css")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_snotify__WEBPACK_IMPORTED_MODULE_4__["SnotifyService"], src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"], src_app_servicios_configuraciones_service__WEBPACK_IMPORTED_MODULE_3__["ConfiguracionesService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_snotify__WEBPACK_IMPORTED_MODULE_4__["SnotifyService"], src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"], src_app_servicios_configuraciones_service__WEBPACK_IMPORTED_MODULE_3__["ConfiguracionesService"], src_app_servicios_login_service__WEBPACK_IMPORTED_MODULE_5__["LoginService"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]])
 ], ConfiguracionComponent);
 
 
@@ -4346,14 +4404,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/servicios/usuarios.service */ "./src/app/servicios/usuarios.service.ts");
 /* harmony import */ var ng_snotify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ng-snotify */ "./node_modules/ng-snotify/index.js");
+/* harmony import */ var src_app_servicios_login_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/servicios/login.service */ "./src/app/servicios/login.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
+
 
 
 
 
 let InformacionComponent = class InformacionComponent {
-    constructor(_snotify, _usuariosService) {
+    constructor(_snotify, _usuariosService, _loginService, router) {
         this._snotify = _snotify;
         this._usuariosService = _usuariosService;
+        this._loginService = _loginService;
+        this.router = router;
         //Variable para almacenar los datos del ususario del sistema
         this.datosUsuario = [];
     }
@@ -4382,6 +4446,7 @@ let InformacionComponent = class InformacionComponent {
                     pauseOnHover: true,
                     position: 'rightTop'
                 });
+                this.logout();
             }
             else {
                 for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
@@ -4409,6 +4474,7 @@ let InformacionComponent = class InformacionComponent {
                         pauseOnHover: true,
                         position: 'rightTop'
                     });
+                    this.logout();
                 }
                 else {
                     this._snotify.error(response.mensaje, {
@@ -4427,10 +4493,25 @@ let InformacionComponent = class InformacionComponent {
             alert('Los campos de nueva contraseña no coinciden');
         }
     }
+    logout() {
+        this._loginService.logout().subscribe(response => {
+            if (response.status == 'success') {
+                localStorage.removeItem('token');
+                this.router.navigate(['']);
+            }
+            else {
+                alert(response.msg);
+            }
+        }, error => {
+            console.log(error);
+        });
+    }
 };
 InformacionComponent.ctorParameters = () => [
     { type: ng_snotify__WEBPACK_IMPORTED_MODULE_3__["SnotifyService"] },
-    { type: src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"] }
+    { type: src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"] },
+    { type: src_app_servicios_login_service__WEBPACK_IMPORTED_MODULE_4__["LoginService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] }
 ];
 InformacionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -4438,7 +4519,7 @@ InformacionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./informacion.component.html */ "./node_modules/raw-loader/index.js!./src/app/perfil/informacion/informacion.component.html"),
         styles: [__webpack_require__(/*! ./informacion.component.css */ "./src/app/perfil/informacion/informacion.component.css")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_snotify__WEBPACK_IMPORTED_MODULE_3__["SnotifyService"], src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ng_snotify__WEBPACK_IMPORTED_MODULE_3__["SnotifyService"], src_app_servicios_usuarios_service__WEBPACK_IMPORTED_MODULE_2__["UsuariosService"], src_app_servicios_login_service__WEBPACK_IMPORTED_MODULE_4__["LoginService"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
 ], InformacionComponent);
 
 

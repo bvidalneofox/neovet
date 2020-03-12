@@ -9,6 +9,8 @@ export class AuthMasterComponent implements OnInit {
   variabletest = 'lamasfacil';
   title = 'frontVeterinaria';
 
+  nombreVeterinaria = localStorage.getItem('nombreVeterinaria');
+
   constructor() { }
 
   ngOnInit() {

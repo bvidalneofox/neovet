@@ -133,10 +133,22 @@ export class FichaHospitalizacionComponent implements OnInit {
   deleteHospitalizacion(metodo){
     this._hospitalizacionService.deleteHospitalizacion(this.idHosp, metodo).subscribe(response=>{
       if(response.estado == 'success'){
-        alert(response.mensaje);
+        this._snotify.success(response.mensaje, {
+          timeout: 5000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
         this.router.navigate(['Inicio']);
       }else{
-        alert(response.mensaje);
+        this._snotify.warning(response.mensaje, {
+          timeout: 5000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
       }
     },error=>{
       console.log(error);

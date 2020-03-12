@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { SnotifyService } from 'ng-snotify';
+import { LoginService } from 'src/app/servicios/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-informacion',
@@ -12,7 +14,7 @@ export class InformacionComponent implements OnInit {
   //Variable para almacenar los datos del ususario del sistema
   datosUsuario = [];
 
-  constructor(private _snotify: SnotifyService, private _usuariosService: UsuariosService) { }
+  constructor(private _snotify: SnotifyService, private _usuariosService: UsuariosService, private _loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
     this.getDatosUsuarioSistema();
@@ -40,6 +42,7 @@ export class InformacionComponent implements OnInit {
           pauseOnHover: true,
           position: 'rightTop'
         });
+        this.logout();
       } else {
         for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
           this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
@@ -67,6 +70,7 @@ export class InformacionComponent implements OnInit {
             pauseOnHover: true,
             position: 'rightTop'
           });
+          this.logout();
         } else {
           this._snotify.error(response.mensaje, {
             timeout: 3000,
@@ -83,5 +87,19 @@ export class InformacionComponent implements OnInit {
       alert('Los campos de nueva contraseña no coinciden');
     }
   }
+
+  logout(){
+    this._loginService.logout().subscribe(response =>{
+      if(response.status == 'success'){
+        localStorage.removeItem('token');
+        this.router.navigate(['']);
+      }else{
+        alert(response.msg);
+      }
+    }, error=>{
+      console.log(error);
+    });
+  }
+
 
 }

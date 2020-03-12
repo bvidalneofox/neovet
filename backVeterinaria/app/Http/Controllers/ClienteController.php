@@ -19,6 +19,7 @@ class ClienteController extends Controller
                 'rut' => 'required|unique:clientes,rut',
                 'direccion' => 'required|min:1',
                 'numero' => 'required|min:1',
+                'correo' => 'unique:clientes,correo'
             ],
             [
                 'nombre.required' => 'Debe de ingresar un nombre',
@@ -26,6 +27,7 @@ class ClienteController extends Controller
                 'rut.unique' => 'El rut ingresado ya existe en nuestros registros',
                 'direccion.required' => 'Debe de ingresar la dirección del cliente',
                 'numero.required' => 'Es necesario un numero del cliente',
+                'correo.unique' => 'El correo ingresado ya se encuentra en nuestros registros'
             ]
         );
 

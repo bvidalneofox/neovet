@@ -23,7 +23,7 @@ class UsuarioController extends Controller
                         'rut' => 'required|unique:users,rut',
                         'numero' => 'required',
                         'direccion' => 'required',
-                        'correo' => 'required',
+                        'correo' => 'required|unique:users,email',
                         'tipo_usuario' => 'required',
                     ],
                     [
@@ -72,13 +72,14 @@ class UsuarioController extends Controller
     {
         $validador = $this->validarDatos($request, 1);
         if ($validador['estado'] == 'success') {
+            $cuatroDigitos = substr($request->rut,0,4);
             $user = new User();
             $user->name = $request->nombre;
             $user->rut = $request->rut;
             $user->numero = $request->numero;
             $user->direccion = $request->direccion;
             $user->email = $request->correo;
-            $user->password = bcrypt(substr($request->rut,0,4));
+            $user->password = bcrypt($cuatroDigitos);
             $user->tipo_usuario = $request->tipo_usuario;
             $user->save();
             if ($user->save()) {
@@ -121,7 +122,7 @@ class UsuarioController extends Controller
                 $cliente->direccion = $request->direccion;
                 $cliente->email = $request->correo;
                 if ($cliente->save()) {
-                    return ['estado' => 'success', 'mensaje' => 'Usuario actualizado correctamente, si desea que los cambios se apliquen en el sistema debe de cerrar e iniciar sesión nuevamente.'];
+                    return ['estado' => 'success', 'mensaje' => 'Usuario actualizado correctamente, se cerrara la sesión para aplicar los cambios.'];
                 } else {
                     return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al actualizar el Usuario.'];
                 }
@@ -163,7 +164,7 @@ class UsuarioController extends Controller
             if (Hash::check($request->passwordActual, $cliente->password)) {
                 $cliente->password = bcrypt($request->passwordNueva);
                 if ($cliente->save()) {
-                    return ['estado' => 'success', 'mensaje' => 'Contraseña actualizada correctamente.'];
+                    return ['estado' => 'success', 'mensaje' => 'Contraseña actualizada correctamente, se cerarra sesión para aplicar los cambios'];
                 } else {
                     return ['estado' => 'failed', 'mensaje' => 'Se ha producido un error al actualizar la contraseña.'];
                 }

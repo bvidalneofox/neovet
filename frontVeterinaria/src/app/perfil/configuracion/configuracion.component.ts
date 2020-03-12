@@ -3,6 +3,8 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { ConfiguracionesService } from 'src/app/servicios/configuraciones.service';
 import { error } from 'protractor';
 import { SnotifyService } from 'ng-snotify';
+import { LoginService } from 'src/app/servicios/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-configuracion',
@@ -25,7 +27,7 @@ export class ConfiguracionComponent implements OnInit {
   direccionVeterinaria = localStorage.getItem('direccion');
   numero = localStorage.getItem('numero');
 
-  constructor(private _snotify: SnotifyService, private _usuariosService : UsuariosService, private _configuracionService: ConfiguracionesService) { }
+  constructor(private _snotify: SnotifyService, private _usuariosService : UsuariosService, private _configuracionService: ConfiguracionesService, private _loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -102,9 +104,24 @@ export class ConfiguracionComponent implements OnInit {
   setLogotest(){
     this._configuracionService.setLogoService(this.archivo).subscribe(response=>{
       if(response.estado == 'success'){
-        alert(response.mensaje);
+        this._snotify.success(response.mensaje, {
+          timeout: 3000,
+          showProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          position: 'rightTop'
+        });
+        this.logout();
       }else{
-        alert(response.mensaje);
+        for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
+          this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
+            timeout: 5000,
+            showProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            position: 'rightTop'
+          });
+        }
       }
     },error=>{
       console.log(error);
@@ -121,9 +138,7 @@ export class ConfiguracionComponent implements OnInit {
           pauseOnHover: true,
           position: 'rightTop'
         });
-        localStorage.setItem('nombreVeterinaria', form.nombreEmpresaLogo);
-        localStorage.setItem('direccion', form.direccionVeterinaria);
-        localStorage.setItem('numero', form.numeroVeterinaria);
+        this.logout();
       }else{
         for (let index = 0; index < Object.keys(response.mensaje).length; index++) {
           this._snotify.warning(response.mensaje[Object.keys(response.mensaje)[index]], {
@@ -134,6 +149,19 @@ export class ConfiguracionComponent implements OnInit {
             position: 'rightTop'
           });
         }
+      }
+    }, error=>{
+      console.log(error);
+    });
+  }
+
+  logout(){
+    this._loginService.logout().subscribe(response =>{
+      if(response.status == 'success'){
+        localStorage.removeItem('token');
+        this.router.navigate(['']);
+      }else{
+        alert(response.msg);
       }
     }, error=>{
       console.log(error);
