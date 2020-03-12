@@ -44,7 +44,7 @@ class SeguimientoControlller extends Controller
             if ($request->archivo != 'undefined' && $request->archivo != 'null') {
                 $guardarArchivo = $this->guardarArchivo($request->archivo, 'ArchivosSeguimiento/');
                 if ($guardarArchivo['estado'] == "success") {
-                    $seguimiento->ruta_imagen = $guardarArchivo['archivo'];
+                    $seguimiento->ruta_archivo = $guardarArchivo['archivo'];
                 } else {
                     return $guardarArchivo;
                 }
