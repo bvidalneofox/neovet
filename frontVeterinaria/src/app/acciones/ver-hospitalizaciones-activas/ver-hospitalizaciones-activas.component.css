@@ -6,3 +6,8 @@
       ),
       url("https://static.t13.cl/images/sizes/1200x675/1532388113-auno886072.jpg");
   }
+
+  a{
+    text-decoration: none;
+    color: black;
+   }

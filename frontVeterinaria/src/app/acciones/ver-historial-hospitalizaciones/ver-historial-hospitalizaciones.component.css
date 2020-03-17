@@ -14,3 +14,8 @@
   .finalizada{
     background:rgba(5, 155, 13, 0.52);
   }
+
+  a{
+    text-decoration: none;
+    color: black;
+   }

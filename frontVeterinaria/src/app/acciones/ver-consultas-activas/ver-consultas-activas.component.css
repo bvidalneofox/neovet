@@ -30,3 +30,8 @@ textarea {
   .sinUrgencia{
     background:rgba(5, 57, 155, 0.52);
   }
+
+  a{
+    text-decoration: none;
+    color: black;
+   }

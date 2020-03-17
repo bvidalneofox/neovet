@@ -6,3 +6,8 @@
       ),
       url("https://www.ngenespanol.com/wp-content/uploads/2018/08/%C2%BFQu%C3%A9-intentan-decirnos-los-gatos-La-ciencia-lo-explicar%C3%A1.jpg");
   }
+
+  a{
+    text-decoration: none;
+    color: black;
+   }

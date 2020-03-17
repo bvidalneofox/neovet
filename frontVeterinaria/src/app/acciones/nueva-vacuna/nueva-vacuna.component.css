@@ -21,6 +21,11 @@
     background-image: linear-gradient(to right, #ccc, #333, #ccc);
   }
 
+  a{
+    text-decoration: none;
+    color: black;
+   }
+
   /* // Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
     
